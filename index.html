@@ -1,0 +1,330 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PSI Construction — Kingston, PA</title>
+  <meta name="description" content="PSI Construction Services — Built With Attention. Managed With Precision. Kingston, PA.">
+  <link rel="icon" href="data:,">
+  <link rel="preload" as="image" href="assets/hero-sequence/frame-0001.webp">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+  <link rel="stylesheet" href="css/site.css?v=ba082d7b">
+</head>
+<body>
+
+  <nav class="nav" id="topNav" aria-label="Primary">
+    <a class="nav__brand" href="index.html" aria-label="PSI Construction — home">
+      <img class="nav__logo nav__logo--onhero" src="assets/logo/psi-logo-white.png"
+           alt="PSI Construction" width="900" height="456">
+      <img class="nav__logo nav__logo--onsolid" src="assets/logo/psi-logo.png"
+           alt="" aria-hidden="true" width="900" height="456">
+    </a>
+    <div class="nav__links">
+      <a href="#services">Services</a>
+      <a href="#projects">Previous Projects</a>
+      <a href="#reviews">Reviews</a>
+      <a href="tel:5703388774">570-338-8<span class="tel-psi">PSI</span> (774)</a>
+      <a class="nav__cta" href="contact.html">Get a Quote</a>
+    </div>
+  </nav>
+
+  <!-- ===================== SCROLL-DRIVEN HERO (existing implementation) ===================== -->
+  <section class="hero" id="hero" aria-label="Cinematic aerial introduction">
+    <div class="hero__viewport">
+      <img class="hero__poster" id="heroPoster"
+           src="assets/hero-sequence/frame-0001.webp"
+           alt="Aerial view of a modern white three-storey residence built by PSI on a landscaped corner lot"
+           decoding="async" fetchpriority="high">
+      <canvas class="hero__canvas" id="heroCanvas" aria-hidden="true"></canvas>
+
+      <div class="hero__overlay" id="heroOverlay">
+        <p class="hero__eyebrow">PSI Construction Services &mdash; Kingston, PA</p>
+        <h1 class="hero__title">Welcome to PSI</h1>
+        <p class="hero__tagline">Built With Attention. Managed With Precision.</p>
+        <div class="hero__scrollcue" aria-hidden="true">
+          <span class="hero__scrollcue-label">Scroll</span>
+          <span class="hero__scrollcue-line"></span>
+        </div>
+      </div>
+
+      <div class="hero__loader" id="heroLoader" aria-hidden="true">
+        <span class="hero__loader-bar" id="heroLoaderBar"></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== INTRODUCTION ===================== -->
+  <section class="section" id="about">
+    <div class="section__inner section__inner--narrow">
+      <p class="eyebrow eyebrow--accent">Introduction</p>
+      <h2 class="section__title">PSI Construction Services</h2>
+      <div class="body-copy">
+        <p>At PSI Construction Services, we approach every project with the understanding that we are
+        working on something valuable&mdash;your home, your property, or your business.</p>
+        <p>From a single bathroom renovation to a ground-up build, our standard remains the same:
+        thoughtful planning, reliable execution, quality materials, and an obsessive attention to the
+        details that determine how a project ultimately looks, feels, and lasts.</p>
+      </div>
+      <dl class="facts">
+        <div><dt>Office</dt><dd>190 Wyoming St<br>Wilkes-Barre, PA 18705<small style="display:block;font-weight:400;color:var(--muted);font-size:12.5px;margin-top:4px">Visits available upon request</small></dd></div>
+        <div><dt>Phone</dt><dd><a href="tel:5703388774">570-338-8<span class="tel-psi">PSI</span>&nbsp;(774)</a></dd></div>
+        <div><dt>Email</dt><dd><a href="mailto:info@psiconstructionpa.com">info@psiconstructionpa.com</a></dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <!-- ===================== SERVICES ===================== -->
+  <section class="section section--white" id="services">
+    <div class="section__inner">
+      <p class="eyebrow eyebrow--accent">Capabilities</p>
+      <h2 class="section__title">What We Build</h2>
+
+      <div class="build-grid">
+        <div class="build-grid__item"><h3>Ground-Up New Home Construction</h3><p>Single-family builds, foundation through final finishes.</p></div>
+        <div class="build-grid__item"><h3>Home Additions</h3><p>Full additions including plumbing and electrical.</p></div>
+        <div class="build-grid__item"><h3>Whole-Home Renovations &amp; Remodels</h3><p>Gut and finish work on existing houses.</p></div>
+        <div class="build-grid__item"><h3>Basement Build-Outs &amp; Finishing</h3><p>Converting unfinished lower levels into fully usable living space.</p></div>
+        <div class="build-grid__item"><h3>Concrete &amp; Foundation Work</h3><p>Footings, foundations, slabs, and flatwork.</p></div>
+        <div class="build-grid__item"><h3>Framing &amp; Structural Carpentry</h3><p>Including engineered floor and roof truss packages.</p></div>
+        <div class="build-grid__item"><h3>Bathroom &amp; Interior Room Remodels</h3><p>Complete renovations, relocations, and new builds within existing space.</p></div>
+        <div class="build-grid__item"><h3>Repairs &amp; Property Maintenance</h3><p>For landlords, property managers, and organizations with multiple properties.</p></div>
+        <div class="build-grid__item"><h3>Institutional &amp; Public Bid Work</h3><p>PennBid and county vendor-list projects, plus architect bid lists.</p></div>
+      </div>
+
+      <div style="margin-top:64px">
+        <p class="eyebrow eyebrow--accent">Services Overview</p>
+        <h2 class="section__title" style="font-size:clamp(24px,2.8vw,36px)">Built With Attention. Managed With Precision.</h2>
+
+        <details class="svc" open>
+          <summary class="svc__summary"><span class="svc__num">01</span><h3>Major Projects</h3></summary>
+          <div class="svc__body">
+            <h4>Home Renovations</h4>
+            <p class="lede">A successful renovation should make an existing home work better without losing what made it worth renovating in the first place.</p>
+            <p>PSI handles comprehensive home renovations involving multiple rooms, structural changes, new layouts, upgraded mechanical systems, finishes, and complete interior transformations.</p>
+            <p>We coordinate the different trades and phases of construction as one project, giving our clients a clear point of responsibility from planning through completion.</p>
+            <p>The result is a home that feels cohesive&mdash;not like a collection of separate renovations completed at different times.</p>
+            <p class="svc__pull">Full-home renovations. Thoughtfully planned. Properly executed.</p>
+
+            <h4>Home Additions</h4>
+            <p class="lede">Sometimes the right home simply needs more space.</p>
+            <p>PSI designs and builds additions that expand the functionality and value of an existing property while feeling like they were always part of the original home.</p>
+            <p>Whether you are adding bedrooms, expanding a kitchen, creating a family room, building another floor, or substantially increasing the home&rsquo;s footprint, we consider the entire property&mdash;not just the new square footage.</p>
+            <p>Structure, exterior architecture, interior flow, mechanical systems, natural light, and finishes are planned together so the transition between old and new feels intentional.</p>
+
+            <h4>New Construction</h4>
+            <p class="lede">Building from the ground up gives you an opportunity to get the details right from the beginning.</p>
+            <p>PSI manages new residential construction from early planning and site preparation through framing, systems, finishes, and final completion.</p>
+            <p>We work alongside architects, engineers, designers, subcontractors, suppliers, and owners to keep the many moving pieces of a new build organized and accountable.</p>
+            <p>Our goal is straightforward: build it correctly, communicate clearly, and deliver a finished property we are proud to put our name on.</p>
+
+            <h4>Large-Scale Home Remodels</h4>
+            <p class="lede">Large remodels require more than good craftsmanship. They require coordination.</p>
+            <p>When structural work, plumbing, electrical, HVAC, framing, millwork, flooring, finishes, and design are all happening within the same project, small communication failures become expensive problems.</p>
+            <p>PSI specializes in managing complex residential remodels as a unified construction process.</p>
+            <p>We maintain visibility across the project so that decisions made in one phase work with what comes next&mdash;reducing delays, unnecessary rework, and costly surprises.</p>
+
+            <h4>Basement Build-Outs &amp; Finishing</h4>
+            <p class="lede">A finished basement is one of the most cost-effective ways to add real, usable square footage to a home.</p>
+            <p>PSI builds out unfinished lower levels into living space that feels like part of the house rather than an afterthought&mdash;bedrooms, family rooms, home offices, gyms, playrooms, and full or half bathrooms.</p>
+            <p>Because basements introduce conditions the rest of the house does not, we address the fundamentals first: moisture control and waterproofing, insulation, ceiling height, egress requirements, mechanical and utility relocation, and code compliance.</p>
+            <p>Once the space is sound, we finish it to the same standard as any other floor of the home.</p>
+          </div>
+        </details>
+
+        <details class="svc">
+          <summary class="svc__summary"><span class="svc__num">02</span><h3>Structure, Concrete &amp; Framing</h3></summary>
+          <div class="svc__body">
+            <h4>Concrete &amp; Foundation Work</h4>
+            <p class="lede">Everything above the foundation depends on the foundation.</p>
+            <p>PSI performs concrete and foundation work including excavation coordination, footings, foundation walls, slabs, basement floors, garage pads, and exterior flatwork.</p>
+            <p>Elevations, drainage, waterproofing, reinforcement, and backfill are handled as part of the same scope rather than as separate afterthoughts, because problems at this stage are the most expensive problems to correct later.</p>
+            <p>We build foundations that are square, level, properly drained, and ready for the structure that goes on top of them.</p>
+
+            <h4>Framing &amp; Structural Carpentry</h4>
+            <p class="lede">Framing sets the accuracy of every trade that follows.</p>
+            <p>PSI provides framing and structural carpentry for new construction, additions, remodels, and structural alterations to existing buildings&mdash;including load-bearing modifications, beams, headers, and openings.</p>
+            <p>We work with engineered floor and roof truss packages, coordinating layout, ordering, delivery, and setting so that the structural package arrives correct and installs on schedule.</p>
+            <p>Straight walls, accurate dimensions, and correct rough openings are not details we leave to be corrected downstream.</p>
+            <p class="svc__pull">Get the structure right and everything after it goes easier.</p>
+          </div>
+        </details>
+
+        <details class="svc">
+          <summary class="svc__summary"><span class="svc__num">03</span><h3>Focused Renovations</h3></summary>
+          <div class="svc__body">
+            <h4>Bathroom Construction &amp; Remodeling</h4>
+            <p class="lede">Whether you have an outdated bathroom&mdash;or no bathroom at all&mdash;PSI can build the space around your needs.</p>
+            <p>We handle complete bathroom renovations as well as the creation and relocation of bathrooms, including plumbing relocation, framing, electrical, waterproofing, tile, fixtures, ventilation, cabinetry, and finishes.</p>
+            <p>Our team looks at the available space and determines how to use it intelligently rather than simply replacing what is already there.</p>
+            <p>From luxury primary bathrooms to compact powder rooms, office bathrooms, and commercial facilities, we focus on the same fundamentals: efficient layouts, durable construction, proper waterproofing, and clean finishes.</p>
+            <p>The same approach applies to individual interior rooms&mdash;bedrooms, offices, laundry rooms, closets, and living spaces&mdash;where a single well-executed room can change how the rest of the house functions.</p>
+            <p class="svc__pull">No bathroom? No problem. We can build one.</p>
+
+            <h4>Kitchen Renovations</h4>
+            <p class="lede">The kitchen is one of the most used and valuable spaces in a home. We take that responsibility seriously.</p>
+            <p>PSI approaches kitchen renovation around three priorities: layout, quality, and value.</p>
+            <p>We work with experienced designers to maximize available space, improve flow, increase useful storage, and create a kitchen that works for the way you actually live.</p>
+            <p>We source cabinetry, countertops, surfaces, fixtures, and finishes competitively so clients can invest their budget where it creates the greatest impact.</p>
+            <p>From practical family kitchens to complete luxury transformations, the objective is not simply to make the kitchen look better.</p>
+            <p class="svc__pull">It should work better, too.</p>
+          </div>
+        </details>
+
+        <details class="svc">
+          <summary class="svc__summary"><span class="svc__num">04</span><h3>Commercial Construction</h3></summary>
+          <div class="svc__body">
+            <h4>Commercial Framing</h4>
+            <p class="lede">Commercial construction depends on speed, organization, reliability, and the ability to coordinate work at scale.</p>
+            <p>PSI provides commercial framing with an emphasis on accurate execution, dependable scheduling, clear communication, and efficient coordination with the other trades operating on site.</p>
+            <p>We understand that on a large commercial project, our work is part of a much larger sequence. A contractor who falls behind or fails to communicate can affect everyone who follows.</p>
+            <p>Our teams are managed accordingly.</p>
+
+            <h4>Commercial Construction</h4>
+            <p class="lede">Commercial projects require a different level of coordination.</p>
+            <p>Multiple trades, changing conditions, deadlines, inspections, material deliveries, drawings, revisions, and client requirements all have to remain organized simultaneously.</p>
+            <p>PSI combines experienced construction management with custom technology that gives our team greater visibility into active projects.</p>
+            <p>We use technology to support the fundamentals of good construction&mdash;not replace them.</p>
+            <p>Project information, progress, outstanding items, documentation, and important details can be tracked and organized so our team knows what is happening and what needs to happen next.</p>
+            <p>This technology is integrated into the way we operate and comes at no additional cost to our clients.</p>
+            <p class="svc__pull">Better information. Better coordination. Better construction.</p>
+          </div>
+        </details>
+
+        <details class="svc">
+          <summary class="svc__summary"><span class="svc__num">05</span><h3>Multifamily Construction &amp; Renovation</h3></summary>
+          <div class="svc__body">
+            <p class="lede">Multifamily properties need to look good on day one&mdash;and continue performing long after the project is finished.</p>
+            <p>PSI builds and renovates multifamily properties with an emphasis on durability, efficient use of space, privacy, maintainability, and long-term ownership value.</p>
+            <p>We understand that rental properties experience significantly different wear than a private residence. Materials, fixtures, surfaces, layouts, and construction methods therefore need to be selected with real-world tenant use in mind.</p>
+            <p>At the same time, durability should not come at the expense of good design.</p>
+            <p>We work to create units that are attractive to tenants, efficient to maintain, resistant to unnecessary damage, and intelligently laid out to maximize usable square footage and privacy.</p>
+            <p>For owners and developers, that means thinking beyond construction cost alone.</p>
+            <p class="svc__pull">We build for the life of the property.</p>
+          </div>
+        </details>
+
+        <details class="svc">
+          <summary class="svc__summary"><span class="svc__num">06</span><h3>Repairs &amp; Property Maintenance</h3></summary>
+          <div class="svc__body">
+            <p class="lede">Owning property is not a one-time construction event. It is an ongoing responsibility.</p>
+            <p>PSI provides repair and maintenance services for landlords, property managers, and organizations responsible for multiple properties at once.</p>
+            <p>This includes turnover work between tenants, plumbing and electrical repairs, drywall and finish repair, flooring, doors and hardware, carpentry, bathroom and kitchen repairs, exterior work, and the recurring items that keep a building in good condition and in compliance.</p>
+            <p>Clients managing a portfolio need something different from a one-time contractor. They need a contractor who answers, shows up, understands the property, documents the work, and can handle a request today without a new introduction every time.</p>
+            <p>We have built our repair and maintenance operation around that expectation, and we support organizations with recurring needs across many locations&mdash;including residential group homes such as those operated by Keystone Human Services.</p>
+            <p class="svc__pull">One contractor. Many properties. Consistent standards.</p>
+          </div>
+        </details>
+
+        <details class="svc">
+          <summary class="svc__summary"><span class="svc__num">07</span><h3>Institutional &amp; Public Bid Work</h3></summary>
+          <div class="svc__body">
+            <p class="lede">Public and institutional work is held to a different standard&mdash;and it should be.</p>
+            <p>PSI participates in institutional and publicly bid construction, including projects issued through PennBid, county and municipal vendor lists, and architect-managed bid lists.</p>
+            <p>This work carries requirements that go well beyond price: complete and responsive bid submissions, prevailing wage and documentation compliance where applicable, insurance and bonding standards, defined schedules, inspection sequences, and formal reporting throughout the project.</p>
+            <p>We treat those requirements as part of the job rather than as an obstacle to it. Our project management and documentation practices are built to produce the paper trail these projects demand while the work itself stays on schedule.</p>
+            <p>For agencies, municipalities, institutions, and the architects representing them, that means a contractor who is straightforward to award, straightforward to administer, and accountable through closeout.</p>
+            <p class="svc__pull">Qualified. Responsive. Accountable through closeout.</p>
+          </div>
+        </details>
+
+        <details class="svc">
+          <summary class="svc__summary"><span class="svc__num">08</span><h3>Design &amp; Engineering</h3></summary>
+          <div class="svc__body">
+            <h4>Better Construction Starts Before Construction</h4>
+            <p class="lede">Many of the most expensive construction mistakes are decisions that should have been resolved before work began.</p>
+            <p>That is why PSI places significant emphasis on planning.</p>
+            <p>Depending on the project, we work with in-house resources as well as experienced engineers, architects, designers, and specialized professionals to develop the right solution before and during construction.</p>
+            <p>We are not interested in pushing unnecessary design costs onto our clients. We help determine where professional design and engineering create real value and then work to secure those services competitively.</p>
+            <p>The objective is simple:</p>
+            <p class="svc__pull">Make better decisions before they become expensive decisions.</p>
+          </div>
+        </details>
+
+        <details class="svc">
+          <summary class="svc__summary"><span class="svc__num">09</span><h3>Why PSI</h3></summary>
+          <div class="svc__body">
+            <h4>We Take Our Work Personally.</h4>
+            <p>Every PSI project is the product of a persistent attention to detail and a simple understanding:</p>
+            <p>To us, it is a construction project. To you, it may be your home, your investment, your business, or the property you depend on every day.</p>
+            <p>That distinction matters.</p>
+            <p>It is why we care about what is behind the walls as much as what is visible when the project is finished.</p>
+            <p>It is why we invest in planning, organization, engineering, design, technology, and experienced trades.</p>
+            <p>And it is why we are comfortable showing our work.</p>
+            <p>We take pride in what we build and show it at every opportunity because our finished projects are ultimately the strongest representation of PSI.</p>
+            <div class="why-banner">We take our work personally. And we build accordingly.</div>
+          </div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== PREVIOUS PROJECTS ===================== -->
+  <section class="section" id="projects">
+    <div class="section__inner">
+      <p class="eyebrow eyebrow--accent">Previous Projects</p>
+      <h2 class="section__title">Where We&rsquo;ve Built</h2>
+      <p class="lede">34 projects across Kingston, Wilkes-Barre, West Pittston, and Exeter, PA. Click a pin on the map, or any photograph, to open that job.</p>
+
+      <div class="projects__layout">
+        <div id="projectMap" aria-label="Interactive map of PSI project locations"></div>
+        <div class="shots-wrap">
+          <div class="shots" id="shotWall" aria-label="Project photographs"></div>
+          <button class="shots__arrow shots__arrow--prev" id="shotPrev" aria-label="Previous photograph">&larr;</button>
+          <button class="shots__arrow shots__arrow--next" id="shotNext" aria-label="Next photograph">&rarr;</button>
+        </div>
+      </div>
+      <p class="shots__hint" id="shotHint"></p>
+    </div>
+  </section>
+
+  <!-- ===================== GOOGLE REVIEWS ===================== -->
+  <section class="section section--white" id="reviews">
+    <div class="section__inner">
+      <p class="eyebrow eyebrow--accent">Google Reviews</p>
+      <h2 class="section__title">What Our Clients Say</h2>
+
+      <div class="reviews__track-wrap">
+        <div class="reviews__track" id="reviewsTrack"></div>
+      </div>
+
+      <div class="reviews__nav">
+        <div class="carousel__btns">
+          <button class="carousel__btn" id="reviewsPrev" aria-label="Previous reviews">&larr;</button>
+          <button class="carousel__btn" id="reviewsNext" aria-label="Next reviews">&rarr;</button>
+        </div>
+        <a class="btn" href="https://www.google.com/maps/search/PSI+Construction+190+Wyoming+St+Wilkes-Barre+PA+reviews" target="_blank" rel="noopener">View All Reviews on Google</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer class="footer" id="contact">
+    <div class="footer__inner">
+      <div>
+        <img class="footer__logo" src="assets/logo/psi-logo-white.png"
+             alt="PSI Construction" width="900" height="456">
+        <p class="footer__tagline">Built With Attention. Managed With Precision.</p>
+      </div>
+      <div class="footer__col">
+        <p class="eyebrow">Office</p>
+        190 Wyoming St, Wilkes-Barre, PA 18705<br>
+        Visits available upon request
+      </div>
+      <div class="footer__col">
+        <p class="eyebrow">Contact</p>
+        <a href="tel:5703388774">570-338-8<span class="tel-psi">PSI</span> (774)</a><br>
+        <a href="mailto:info@psiconstructionpa.com">info@psiconstructionpa.com</a><br>
+        <a href="contact.html">Get a Quote &rarr;</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/hero-sequence/frames-manifest.js"></script>
+  <script src="js/hero.js?v=cd66c788" defer></script>
+  <script src="data/projects.js?v=5f2c794e"></script>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+          integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  <script src="js/main.js?v=b1976ab2" defer></script>
+</body>
+</html>
