@@ -417,150 +417,6 @@ img {
 
 /* ---------------- Services ---------------- */
 
-.build-grid {
-  display: grid;
-  /* Nine cards, so three columns divides exactly. auto-fill was fitting four
-     across and leaving a 4 + 4 + 1 row, and the empty half-row showed the
-     grid's own hairline background through as a grey block. */
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1px;
-  background: var(--hairline);
-  border: 1px solid var(--hairline);
-  margin-top: 36px;
-}
-.build-grid__item {
-  background: #fff;
-  padding: 30px 26px;
-  min-height: 150px;
-}
-.build-grid__item h3 {
-  margin: 0 0 8px;
-  font-size: 16.5px;
-  letter-spacing: -0.01em;
-}
-.build-grid__item h3::before {
-  content: "";
-  display: inline-block;
-  width: 8px;
-  height: 8px;
-  background: var(--accent);
-  margin-right: 10px;
-  vertical-align: 2px;
-}
-.build-grid__item p {
-  margin: 0;
-  color: var(--muted);
-  font-size: 14.5px;
-  line-height: 1.55;
-}
-
-/* Narrower screens drop to two columns and then one. Nine into two leaves an
-   odd card, so the last one spans the full width rather than sitting beside
-   the same grey gap this change was meant to remove. */
-@media (max-width: 900px) {
-  .build-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  .build-grid__item:last-child {
-    grid-column: 1 / -1;
-  }
-}
-@media (max-width: 600px) {
-  .build-grid {
-    grid-template-columns: 1fr;
-  }
-  .build-grid__item {
-    min-height: 0;
-  }
-}
-
-.svc {
-  border-top: 1px solid var(--hairline);
-}
-.svc:last-of-type {
-  border-bottom: 1px solid var(--hairline);
-}
-
-.svc__summary {
-  display: flex;
-  align-items: baseline;
-  gap: 20px;
-  padding: 24px 8px;
-  cursor: pointer;
-  list-style: none;
-  user-select: none;
-}
-.svc__summary::-webkit-details-marker {
-  display: none;
-}
-.svc__num {
-  font-size: 12px;
-  letter-spacing: 0.2em;
-  color: var(--accent);
-  font-weight: 600;
-  min-width: 30px;
-}
-.svc__summary h3 {
-  margin: 0;
-  font-size: clamp(18px, 2vw, 24px);
-  font-weight: 600;
-  letter-spacing: -0.01em;
-  flex: 1;
-}
-.svc__summary::after {
-  content: "+";
-  font-size: 22px;
-  color: var(--muted);
-  font-weight: 400;
-  line-height: 1;
-}
-details[open] .svc__summary::after {
-  content: "\2212";
-}
-.svc__summary:hover h3 {
-  color: var(--accent);
-}
-
-.svc__body {
-  padding: 0 8px 34px 50px;
-  max-width: 820px;
-}
-.svc__body h4 {
-  margin: 26px 0 6px;
-  font-size: 17px;
-}
-.svc__body h4:first-child {
-  margin-top: 0;
-}
-.svc__body .lede {
-  font-size: 15.5px;
-  margin-bottom: 12px;
-}
-.svc__body p {
-  margin: 0 0 12px;
-  font-size: 15.5px;
-  line-height: 1.65;
-  color: #33383d;
-}
-.svc__pull {
-  margin: 16px 0 6px;
-  padding-left: 14px;
-  border-left: 3px solid var(--accent);
-  color: var(--accent);
-  font-weight: 600;
-  font-size: 15px;
-}
-
-.why-banner {
-  margin-top: 34px;
-  background: var(--navy);
-  color: #fff;
-  padding: 26px 30px;
-  font-size: clamp(16px, 1.6vw, 20px);
-  font-weight: 600;
-  letter-spacing: 0.01em;
-}
-
 /* ---------------- Projects: map + list + carousel ---------------- */
 
 .projects__layout {
@@ -2066,5 +1922,129 @@ body.viewer-lock {
   }
   .gbadge__cta {
     margin-left: 0;
+  }
+}
+
+/* ---------------- Capabilities: dark editorial index ---------------- */
+
+.caps {
+  background:
+    radial-gradient(
+      900px 420px at 85% -10%,
+      rgba(214, 0, 0, 0.14),
+      transparent 60%
+    ),
+    var(--navy);
+}
+
+.caps__head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 28px;
+  flex-wrap: wrap;
+}
+
+.caps__head .section__title {
+  margin-bottom: 0;
+}
+
+.caps__lede {
+  margin: 0;
+  max-width: 44ch;
+  color: rgba(255, 255, 255, 0.62);
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.caps__grid {
+  list-style: none;
+  margin: 46px 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  column-gap: clamp(28px, 4vw, 56px);
+}
+
+.cap {
+  position: relative;
+  display: flex;
+  gap: 18px;
+  align-items: flex-start;
+  padding: 26px 4px 30px;
+  border-top: 1px solid rgba(255, 255, 255, 0.14);
+  overflow: hidden;
+  transition: border-color 0.3s ease;
+}
+
+/* the red rule draws itself in on hover */
+.cap::before {
+  content: "";
+  position: absolute;
+  top: -1px;
+  left: 0;
+  height: 2px;
+  width: 100%;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.45s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.cap:hover::before {
+  transform: scaleX(1);
+}
+
+.cap__num {
+  flex: 0 0 auto;
+  font-size: 38px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: rgba(255, 255, 255, 0.16);
+  font-variant-numeric: tabular-nums;
+  transition: color 0.3s ease;
+  margin-top: 2px;
+}
+
+.cap:hover .cap__num {
+  color: var(--accent);
+}
+
+.cap__body h3 {
+  margin: 0 0 7px;
+  font-size: 16.5px;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+  color: #fff;
+}
+
+.cap__body p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.55);
+  transition: color 0.3s ease;
+}
+
+.cap:hover .cap__body p {
+  color: rgba(255, 255, 255, 0.75);
+}
+
+@media (max-width: 960px) {
+  .caps__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 620px) {
+  .caps__grid {
+    grid-template-columns: 1fr;
+  }
+  .cap {
+    padding: 20px 2px 22px;
+  }
+  .cap__num {
+    font-size: 30px;
   }
 }
