@@ -15,19 +15,19 @@
   // Configuration (kept in one place; frame data injected at build time)
   // ------------------------------------------------------------------
   const CONFIG = {
-    frameCount: window.HERO_FRAME_COUNT || 0,   // set by frames-manifest.js
+    frameCount: window.HERO_FRAME_COUNT || 0, // set by frames-manifest.js
     framePath: (i) =>
       `assets/hero-sequence/frame-${String(i + 1).padStart(4, "0")}.webp`,
-    scrollLengthVh: 340,        // virtual scroll runway for the pinned hero
-    settleTailPct: 0.06,        // last 6% of scroll holds the final frame
+    scrollLengthVh: 340, // virtual scroll runway for the pinned hero
+    settleTailPct: 0.06, // last 6% of scroll holds the final frame
     // Normalised focal point of the house in the source frames.
     // Cover-cropping keeps this point sensibly placed at any aspect.
-    focalX: 0.50,
+    focalX: 0.5,
     focalY: 0.42,
     // Frame-scrub smoothing: how quickly the drawn frame chases the
     // scroll-mapped target. High enough to feel direct, low enough to
     // absorb discrete wheel steps. (~0 lag at trackpad speeds)
-    smoothing: 14,              // higher = snappier (units: 1/s)
+    smoothing: 14, // higher = snappier (units: 1/s)
   };
 
   const hero = document.getElementById("hero");
@@ -56,14 +56,16 @@
 
   hero.style.setProperty("--hero-scroll-length", CONFIG.scrollLengthVh + "vh");
   document.documentElement.style.setProperty(
-    "--hero-scroll-length", CONFIG.scrollLengthVh + "vh");
+    "--hero-scroll-length",
+    CONFIG.scrollLengthVh + "vh",
+  );
 
   // ------------------------------------------------------------------
   // Frame store + progressive loader
   // ------------------------------------------------------------------
   const N = CONFIG.frameCount;
-  const frames = new Array(N).fill(null);      // ImageBitmap | HTMLImageElement
-  const loadState = new Array(N).fill(0);      // 0 idle, 1 loading, 2 ready
+  const frames = new Array(N).fill(null); // ImageBitmap | HTMLImageElement
+  const loadState = new Array(N).fill(0); // 0 idle, 1 loading, 2 ready
   let readyCount = 0;
   let firstFrameReady = false;
 
@@ -85,7 +87,7 @@
               img.onload = () => res(img);
               img.onerror = rej;
               img.src = URL.createObjectURL(blob);
-            })
+            }),
       )
       .then((bmp) => {
         frames[i] = bmp;
@@ -94,7 +96,9 @@
         if (i === 0) firstFrameReady = true;
         onFrameArrived(i);
       })
-      .catch(() => { loadState[i] = 0; }); // transient failure -> retryable
+      .catch(() => {
+        loadState[i] = 0;
+      }); // transient failure -> retryable
   }
 
   // Coarse-to-fine order: frame 0, last frame, then successive halvings.
@@ -103,8 +107,14 @@
   function coarseToFineOrder(n) {
     const order = [];
     const seen = new Uint8Array(n);
-    const push = (i) => { if (i >= 0 && i < n && !seen[i]) { seen[i] = 1; order.push(i); } };
-    push(0); push(n - 1);
+    const push = (i) => {
+      if (i >= 0 && i < n && !seen[i]) {
+        seen[i] = 1;
+        order.push(i);
+      }
+    };
+    push(0);
+    push(n - 1);
     let step = Math.max(1, Math.floor(n / 2));
     while (step >= 1) {
       for (let i = 0; i < n; i += step) push(i);
@@ -124,7 +134,10 @@
       const i = loadOrder[orderCursor++];
       if (loadState[i] !== 0) continue;
       inflight++;
-      loadFrame(i).finally(() => { inflight--; pump(); });
+      loadFrame(i).finally(() => {
+        inflight--;
+        pump();
+      });
     }
   }
 
@@ -141,7 +154,9 @@
   // ------------------------------------------------------------------
   // Canvas sizing (devicePixelRatio-aware, memory-capped)
   // ------------------------------------------------------------------
-  let cw = 0, ch = 0, dpr = 1;
+  let cw = 0,
+    ch = 0,
+    dpr = 1;
 
   function resize() {
     // Cap backing store: sequence frames are 1920px wide, so >2x their
@@ -162,12 +177,21 @@
   function draw(idx) {
     const img = frames[idx];
     if (!img) return;
-    const iw = img.width, ih = img.height;
+    const iw = img.width,
+      ih = img.height;
     const scale = Math.max((cw * dpr) / iw, (ch * dpr) / ih);
-    const dw = iw * scale, dh = ih * scale;
-    const maxX = dw - cw * dpr, maxY = dh - ch * dpr;
-    const dx = -Math.min(maxX, Math.max(0, CONFIG.focalX * dw - (cw * dpr) / 2));
-    const dy = -Math.min(maxY, Math.max(0, CONFIG.focalY * dh - (ch * dpr) / 2));
+    const dw = iw * scale,
+      dh = ih * scale;
+    const maxX = dw - cw * dpr,
+      maxY = dh - ch * dpr;
+    const dx = -Math.min(
+      maxX,
+      Math.max(0, CONFIG.focalX * dw - (cw * dpr) / 2),
+    );
+    const dy = -Math.min(
+      maxY,
+      Math.max(0, CONFIG.focalY * dh - (ch * dpr) / 2),
+    );
     ctx.imageSmoothingEnabled = true;
     ctx.imageSmoothingQuality = "high";
     ctx.drawImage(img, dx, dy, dw, dh);
@@ -176,8 +200,8 @@
   // ------------------------------------------------------------------
   // Scroll mapping + render loop
   // ------------------------------------------------------------------
-  let targetFloat = 0;   // scroll-mapped fractional frame
-  let currentFloat = 0;  // smoothed fractional frame actually drawn
+  let targetFloat = 0; // scroll-mapped fractional frame
+  let currentFloat = 0; // smoothed fractional frame actually drawn
   let drawnFrame = -1;
   let lastT = performance.now();
   let canvasLive = false;
@@ -252,18 +276,35 @@
   // Debug/QA hook (read-only introspection; no runtime cost).
   Object.defineProperty(window, "__hero", {
     value: {
-      get progress() { return scrollProgress(); },
-      get target() { return targetFloat; },
-      get current() { return currentFloat; },
-      get drawn() { return drawnFrame; },
-      get ready() { return readyCount; },
-      get total() { return N; },
-      step(dt) { stepOnce(dt || 1 / 60); },
+      get progress() {
+        return scrollProgress();
+      },
+      get target() {
+        return targetFloat;
+      },
+      get current() {
+        return currentFloat;
+      },
+      get drawn() {
+        return drawnFrame;
+      },
+      get ready() {
+        return readyCount;
+      },
+      get total() {
+        return N;
+      },
+      step(dt) {
+        stepOnce(dt || 1 / 60);
+      },
     },
   });
 
   window.addEventListener("resize", resize, { passive: true });
   resize();
   pump();
-  requestAnimationFrame((t) => { lastT = t; requestAnimationFrame(tick); });
+  requestAnimationFrame((t) => {
+    lastT = t;
+    requestAnimationFrame(tick);
+  });
 })();
