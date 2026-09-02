@@ -1367,3 +1367,539 @@ body.viewer-lock {
     transition: none;
   }
 }
+
+/* ============================================================
+   OUR PROCESS — horizontal, scroll-driven build sequence
+   The section owns a tall runway; the stage sticks to the
+   viewport while vertical scroll is translated into horizontal
+   travel across the ten stages. Art is inline SVG in the PSI
+   palette, with a slow float and a counter-phase shadow breathe
+   so the pieces read as clay resting above the page.
+   ============================================================ */
+
+.process {
+  padding: 0;
+  overflow: clip;
+}
+
+/* scroll distance the pinned stage consumes; set by JS to match
+   the real track width, with this as the pre-JS fallback */
+.pflow-runway {
+  position: relative;
+  height: 420vh;
+}
+
+.pflow-stage {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  min-height: 560px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: clamp(18px, 3vh, 34px);
+  padding: 84px clamp(20px, 4vw, 48px) 46px;
+  overflow: hidden;
+}
+
+.pflow-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 28px;
+  flex-wrap: wrap;
+  max-width: 1180px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.pflow-head .section__title {
+  margin-bottom: 0;
+}
+
+.pflow-head__lede {
+  margin: 0;
+  max-width: 46ch;
+  color: var(--muted);
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.pflow-viewport {
+  flex: 0 1 auto;
+  width: 100%;
+  overflow: hidden;
+}
+
+.pflow {
+  list-style: none;
+  margin: 0;
+  padding: 4px 0 10px;
+  display: flex;
+  align-items: stretch;
+  gap: clamp(18px, 2vw, 30px);
+  will-change: transform;
+}
+
+.pstep {
+  flex: 0 0 auto;
+  width: clamp(240px, 25vw, 330px);
+  display: flex;
+  flex-direction: column;
+  border-radius: 18px;
+  border: 1px solid rgba(16, 18, 20, 0.08);
+  background: #fff;
+  box-shadow: 0 18px 44px -34px rgba(16, 18, 20, 0.5);
+  overflow: hidden;
+  opacity: 0.55;
+  transform: translateY(10px) scale(0.97);
+  transition:
+    opacity 0.45s ease,
+    transform 0.45s cubic-bezier(0.2, 0.8, 0.2, 1),
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+/* the stage marks whichever cards are centred in the viewport */
+.pstep.is-active {
+  opacity: 1;
+  transform: none;
+  border-color: rgba(214, 0, 0, 0.28);
+  box-shadow: 0 30px 70px -45px rgba(16, 18, 20, 0.55);
+}
+
+.pstep__media {
+  background: #fff;
+  isolation: isolate;
+}
+
+.pstep__art {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 240 / 176;
+  transition: transform 0.5s ease;
+}
+
+.pstep.is-active .pstep__art {
+  transform: scale(1.02);
+}
+
+.pstep__text {
+  padding: 4px clamp(16px, 1.5vw, 22px) clamp(18px, 2vh, 24px);
+}
+
+.pstep__num {
+  margin: 0 0 6px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  color: var(--accent);
+}
+
+.pstep__text h3 {
+  margin: 0 0 8px;
+  font-size: clamp(16px, 1.35vw, 19px);
+  line-height: 1.22;
+  letter-spacing: -0.01em;
+}
+
+.pstep__text p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 14.5px;
+  line-height: 1.6;
+}
+
+/* ---------------- progress rail ---------------- */
+
+.pflow-rail {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  width: 100%;
+  max-width: 1180px;
+  margin: 0 auto;
+}
+
+.pflow-rail__line {
+  position: relative;
+  flex: 1 1 auto;
+  height: 2px;
+  background: rgba(16, 18, 20, 0.12);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.pflow-rail__fill {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 0%;
+  background: var(--accent);
+  border-radius: 2px;
+}
+
+.pflow-rail__count {
+  margin: 0;
+  flex: 0 0 auto;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  color: var(--muted);
+}
+
+.pflow-rail__count span {
+  color: var(--accent);
+}
+
+/* ---------------- clay material ---------------- */
+
+.clay-a {
+  fill: #edebe6;
+}
+.clay-b {
+  fill: #dedbd4;
+}
+.clay-c {
+  fill: #cfccc5;
+}
+.clay-hi {
+  fill: rgba(255, 255, 255, 0.62);
+}
+.clay-drop {
+  fill: rgba(16, 18, 20, 0.13);
+}
+.clay-ao {
+  fill: rgba(16, 18, 20, 0.14);
+}
+.clay-ao2 {
+  fill: rgba(16, 18, 20, 0.1);
+}
+.clay-red {
+  fill: var(--accent);
+}
+.clay-red-soft {
+  fill: rgba(214, 0, 0, 0.14);
+}
+.clay-red-dot {
+  fill: var(--accent);
+}
+.clay-glass {
+  fill: #b9c6cf;
+}
+.clay-dirt {
+  fill: #d8d2c6;
+}
+.clay-dirt2 {
+  fill: #cdc6b8;
+}
+.clay-batt {
+  fill: rgba(214, 0, 0, 0.16);
+}
+.clay-key-eye {
+  fill: #fff;
+}
+.clay-hi-dot {
+  fill: rgba(255, 255, 255, 0.85);
+}
+
+.clay-line {
+  fill: none;
+  stroke: rgba(16, 18, 20, 0.17);
+  stroke-width: 3;
+  stroke-linecap: round;
+}
+.clay-redline {
+  fill: none;
+  stroke: rgba(214, 0, 0, 0.45);
+  stroke-width: 3;
+  stroke-linecap: round;
+}
+.clay-pipe {
+  fill: none;
+  stroke: #cfccc5;
+  stroke-width: 7;
+  stroke-linecap: round;
+}
+.clay-wire {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 4;
+  stroke-linecap: round;
+  opacity: 0.55;
+}
+.clay-teeth {
+  fill: none;
+  stroke: rgba(16, 18, 20, 0.28);
+  stroke-width: 4;
+  stroke-linecap: round;
+}
+.clay-check {
+  fill: none;
+  stroke: #fff;
+  stroke-width: 4.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.clay-red-ring {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.5);
+  stroke-width: 2;
+}
+.clay-key-stem {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 7;
+  stroke-linecap: round;
+}
+
+/* ---------------- idle motion ---------------- */
+
+@keyframes psi-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+@keyframes psi-breathe {
+  0%,
+  100% {
+    transform: scaleX(1);
+    opacity: 0.9;
+  }
+  50% {
+    transform: scaleX(0.94);
+    opacity: 0.68;
+  }
+}
+
+/* the excavator actually digs: boom drops, bucket curls, both return */
+@keyframes psi-dig-boom {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  30% {
+    transform: rotate(11deg);
+  }
+  55% {
+    transform: rotate(9deg);
+  }
+  78% {
+    transform: rotate(-4deg);
+  }
+}
+
+@keyframes psi-dig-bucket {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  32% {
+    transform: rotate(-26deg);
+  }
+  60% {
+    transform: rotate(16deg);
+  }
+  80% {
+    transform: rotate(6deg);
+  }
+}
+
+.clay-float {
+  animation: psi-float 5s ease-in-out infinite;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.clay-ao,
+.clay-ao2 {
+  animation: psi-breathe 5s ease-in-out infinite;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.clay-boom {
+  animation: psi-dig-boom 4.6s ease-in-out infinite;
+  transform-box: fill-box;
+  transform-origin: 0% 40%;
+}
+
+.clay-bucket {
+  animation: psi-dig-bucket 4.6s ease-in-out infinite;
+  transform-box: fill-box;
+  transform-origin: 50% 0%;
+}
+
+/* ---------------- fallbacks ---------------- */
+
+/* No pinning on short or narrow screens, and none without JS:
+   the row becomes an ordinary horizontal swipe. */
+.pflow-runway:not(.is-pinned) {
+  height: auto;
+}
+
+.pflow-runway:not(.is-pinned) .pflow-stage {
+  position: static;
+  height: auto;
+  min-height: 0;
+  padding: clamp(56px, 8vh, 96px) clamp(20px, 4vw, 48px);
+}
+
+.pflow-runway:not(.is-pinned) .pflow-viewport {
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 6px;
+}
+
+.pflow-runway:not(.is-pinned) .pflow {
+  transform: none !important;
+  padding-right: 20px;
+}
+
+.pflow-runway:not(.is-pinned) .pstep {
+  opacity: 1;
+  transform: none;
+  scroll-snap-align: center;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pstep {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .clay-float,
+  .clay-ao,
+  .clay-ao2,
+  .clay-boom,
+  .clay-bucket {
+    animation: none !important;
+  }
+}
+
+@media (max-width: 720px) {
+  .pflow-head {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  .pstep {
+    width: min(78vw, 320px);
+  }
+}
+
+/* ---------------- Google reviews trust badge ---------------- */
+
+.gbadge {
+  display: flex;
+  align-items: center;
+  gap: clamp(20px, 3vw, 44px);
+  flex-wrap: wrap;
+  margin: 26px 0 30px;
+  padding: 18px 24px;
+  background: #fff;
+  border: 1px solid var(--hairline);
+  border-radius: 14px;
+  box-shadow: 0 14px 36px -30px rgba(16, 18, 20, 0.5);
+}
+
+.gbadge__brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.gbadge__g {
+  width: 40px;
+  height: 40px;
+  flex: 0 0 auto;
+}
+
+.gbadge__wordmark {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.gbadge__verified {
+  margin: 2px 0 0;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12.5px;
+  color: var(--muted);
+}
+
+.gbadge__tick {
+  width: 15px;
+  height: 15px;
+}
+
+.gbadge__score {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-left: clamp(20px, 3vw, 44px);
+  border-left: 1px solid var(--hairline);
+}
+
+.gbadge__num {
+  margin: 0;
+  font-size: 34px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.gbadge__stars {
+  color: #fbbc05;
+  font-size: 17px;
+  letter-spacing: 2px;
+  line-height: 1;
+}
+
+.gbadge__count {
+  margin: 4px 0 0;
+  font-size: 12.5px;
+  color: var(--muted);
+}
+
+.gbadge__cta {
+  margin-left: auto;
+  display: inline-block;
+  padding: 11px 20px;
+  border-radius: 24px;
+  background: #4285f4;
+  color: #fff;
+  text-decoration: none;
+  font-size: 13.5px;
+  font-weight: 600;
+  transition: background 160ms ease;
+}
+
+.gbadge__cta:hover {
+  background: #3367d6;
+}
+
+.review-card__gmark {
+  float: right;
+  width: 22px;
+  height: 22px;
+  margin: 2px 0 6px 10px;
+}
+
+@media (max-width: 720px) {
+  .gbadge__score {
+    border-left: 0;
+    padding-left: 0;
+  }
+  .gbadge__cta {
+    margin-left: 0;
+  }
+}
