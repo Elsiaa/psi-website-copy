@@ -1,29 +1,29 @@
 /* ============================================================
-   PSI Construction — process row
-   The section pins while vertical scroll is translated into
-   horizontal travel across the ten stages. Runway height is
-   derived from the real track width so the last card lands
-   exactly as the section releases.
+   PSI Construction — the build
+   The process section pins while vertical scroll assembles
+   55 Reynolds Street phase by phase: progress maps to phases
+   1-10, cumulative .on-N classes reveal each layer, and the
+   copy panel follows.
 
-   Fails open: without JS, on a narrow or short viewport, or
-   under reduced motion, the runway loses .is-pinned and the row
-   becomes an ordinary horizontal swipe.
+   Fails open: no JS, a short/narrow viewport, or reduced motion
+   drops the pin and shows the finished house over a step list.
    ============================================================ */
 (() => {
   "use strict";
 
   const runway = document.getElementById("processRunway");
-  const track = document.getElementById("processTrack");
+  const scene = document.getElementById("processScene");
   const fill = document.getElementById("processFill");
   const count = document.getElementById("processCount");
-  if (!runway || !track) return;
+  if (!runway || !scene) return;
 
-  const steps = Array.from(track.children);
+  const steps = Array.from(scene.querySelectorAll(".bstep"));
+  const PHASES = 10;
   const reduced = window.matchMedia("(prefers-reduced-motion: reduce)");
 
-  let travel = 0; // horizontal distance the track must cover
   let pinned = false;
   let ticking = false;
+  let lastPhase = -1;
 
   const canPin = () =>
     !reduced.matches && window.innerWidth >= 860 && window.innerHeight >= 560;
@@ -34,42 +34,40 @@
 
     if (!pinned) {
       runway.style.height = "";
-      track.style.transform = "";
-      watchSwipe();
+      for (let n = 1; n <= PHASES; n++) scene.classList.remove("on-" + n);
+      lastPhase = -1;
       return;
     }
 
-    const viewport = track.parentElement.clientWidth;
-    travel = Math.max(0, track.scrollWidth - viewport);
-
-    // One viewport of scroll to read the row, plus the distance it
-    // travels — so the pace stays the same whatever the card count.
-    runway.style.height = window.innerHeight + travel + "px";
+    // Roughly a viewport of scroll per phase keeps each stage readable
+    // without letting the section overstay.
+    runway.style.height = window.innerHeight * (PHASES * 0.72 + 1) + "px";
     render();
   };
 
   const render = () => {
     if (!pinned) return;
 
-    const box = runway.getBoundingClientRect();
     const distance = runway.offsetHeight - window.innerHeight;
     const progress =
-      distance <= 0 ? 0 : Math.min(1, Math.max(0, -box.top / distance));
+      distance <= 0
+        ? 1
+        : Math.min(
+            1,
+            Math.max(0, -runway.getBoundingClientRect().top / distance),
+          );
 
-    track.style.transform = "translate3d(" + -travel * progress + "px,0,0)";
+    // Phase 1 lights immediately; the last sliver holds phase 10.
+    const phase = Math.min(PHASES, 1 + Math.floor(progress * PHASES * 0.999));
+
+    if (phase !== lastPhase) {
+      for (let n = 1; n <= PHASES; n++)
+        scene.classList.toggle("on-" + n, n <= phase);
+      steps.forEach((el, i) => el.classList.toggle("is-on", i === phase - 1));
+      if (count) count.textContent = String(phase).padStart(2, "0");
+      lastPhase = phase;
+    }
     if (fill) fill.style.width = progress * 100 + "%";
-
-    // Mark whichever cards are sitting in the middle of the stage.
-    const mid = window.innerWidth / 2;
-    let active = 0;
-    steps.forEach((step, i) => {
-      const r = step.getBoundingClientRect();
-      const on =
-        r.left < mid + r.width * 0.75 && r.right > mid - r.width * 0.75;
-      step.classList.toggle("is-active", on);
-      if (r.left <= mid && r.right >= mid) active = i;
-    });
-    if (count) count.textContent = String(active + 1).padStart(2, "0");
   };
 
   const onScroll = () => {
@@ -79,23 +77,6 @@
       render();
       ticking = false;
     });
-  };
-
-  // Fallback swipe mode: cards animate only while on screen.
-  let swipeIO = null;
-  const watchSwipe = () => {
-    if (swipeIO || !("IntersectionObserver" in window)) {
-      if (!swipeIO) steps.forEach((s) => s.classList.add("is-active"));
-      return;
-    }
-    swipeIO = new IntersectionObserver(
-      (entries) =>
-        entries.forEach((e) =>
-          e.target.classList.toggle("is-active", e.isIntersecting),
-        ),
-      { root: track.parentElement, rootMargin: "25%" },
-    );
-    steps.forEach((s) => swipeIO.observe(s));
   };
 
   window.addEventListener("scroll", onScroll, { passive: true });
