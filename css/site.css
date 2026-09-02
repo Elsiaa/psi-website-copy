@@ -1903,3 +1903,359 @@ body.viewer-lock {
     margin-left: 0;
   }
 }
+
+/* ---------------- live process scenes ---------------- */
+/* Materials for the 55 Reynolds elevation */
+.lw {
+  fill: #23272c;
+  stroke: #101214;
+  stroke-width: 1.5;
+}
+.ldoor {
+  fill: #1b1f24;
+}
+.lp-tree {
+  fill: #7d8b74;
+}
+.lp-red,
+.lp-red2 {
+  fill: none;
+  stroke: rgba(214, 0, 0, 0.7);
+  stroke-width: 2.5;
+  stroke-linejoin: round;
+}
+.lp-red-thin,
+.lp-redline-thin {
+  fill: none;
+  stroke: rgba(214, 0, 0, 0.5);
+  stroke-width: 2;
+}
+.lp-ghost {
+  fill: none;
+  stroke: rgba(16, 18, 20, 0.25);
+  stroke-width: 2;
+  stroke-dasharray: 6 6;
+}
+.lp-cable {
+  fill: none;
+  stroke: rgba(16, 18, 20, 0.45);
+  stroke-width: 2.5;
+  stroke-linecap: round;
+}
+.lp-spark {
+  fill: rgba(214, 0, 0, 0.55);
+}
+
+/* 01 — elevation draws itself */
+@keyframes lp-draw {
+  0% {
+    stroke-dashoffset: 620;
+  }
+  55%,
+  82% {
+    stroke-dashoffset: 0;
+  }
+  100% {
+    stroke-dashoffset: 0;
+    opacity: 0;
+  }
+}
+.lp-draw path {
+  stroke-dasharray: 620;
+  animation: lp-draw 7s ease-in-out infinite;
+}
+.lp-draw .lp-red2 {
+  animation-delay: 0.6s;
+}
+@keyframes lp-pencil {
+  0%,
+  100% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+  25% {
+    transform: translate(-46px, -30px) rotate(-6deg);
+  }
+  55% {
+    transform: translate(-100px, 10px) rotate(5deg);
+  }
+  80% {
+    transform: translate(-30px, 22px) rotate(-3deg);
+  }
+}
+.lp-pencil {
+  animation: lp-pencil 7s ease-in-out infinite;
+}
+
+/* 02 — stamp drop */
+@keyframes lp-stamp {
+  0%,
+  55% {
+    transform: translateY(-70px) scale(1.15);
+    opacity: 0;
+  }
+  63% {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+  68% {
+    transform: translateY(-6px) scale(1.03);
+  }
+  73%,
+  92% {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 0;
+  }
+}
+.lp-stamp {
+  animation: lp-stamp 4.5s ease-in-out infinite;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+/* 04 — panel lowered on the crane line */
+@keyframes lp-lower {
+  0%,
+  10% {
+    transform: translateY(-64px);
+  }
+  55% {
+    transform: translateY(20px);
+  }
+  62% {
+    transform: translateY(17px);
+  }
+  68%,
+  86% {
+    transform: translateY(20px);
+  }
+  100% {
+    transform: translateY(-64px);
+  }
+}
+.lp-lower {
+  animation: lp-lower 6s ease-in-out infinite;
+}
+
+/* 05 — walls rise from their plate */
+@keyframes lp-rise {
+  0% {
+    transform: scaleY(0);
+  }
+  18%,
+  88% {
+    transform: scaleY(1);
+  }
+  100% {
+    transform: scaleY(0);
+  }
+}
+.lp-rise {
+  animation: lp-rise 6.5s cubic-bezier(0.2, 0.8, 0.2, 1) infinite both;
+  transform-box: fill-box;
+  transform-origin: center bottom;
+}
+
+/* 06 — stucco sweep + elements fading in */
+@keyframes lp-wipe {
+  0% {
+    clip-path: inset(0 100% 0 0);
+  }
+  40%,
+  90% {
+    clip-path: inset(0 0 0 0);
+  }
+  100% {
+    clip-path: inset(0 100% 0 0);
+  }
+}
+.lp-wipe {
+  animation: lp-wipe 7s ease-in-out infinite;
+}
+@keyframes lp-in {
+  0%,
+  35% {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  50%,
+  90% {
+    opacity: 1;
+    transform: none;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+.lp-in {
+  animation: lp-in 7s ease infinite both;
+  transform-box: fill-box;
+}
+
+/* 07 — services flow through the wall */
+@keyframes lp-flow {
+  0% {
+    stroke-dashoffset: 260;
+  }
+  45%,
+  85% {
+    stroke-dashoffset: 0;
+  }
+  100% {
+    stroke-dashoffset: 0;
+    opacity: 0;
+  }
+}
+.lp-flow {
+  stroke-dasharray: 260;
+  animation: lp-flow 5.5s ease-in-out infinite;
+}
+@keyframes lp-blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.25;
+  }
+}
+.lp-blink {
+  animation: lp-blink 1.6s ease-in-out infinite;
+}
+
+/* 08 — batts fill, sheet slides over */
+@keyframes lp-fill {
+  0%,
+  15% {
+    transform: scaleY(0);
+  }
+  35%,
+  90% {
+    transform: scaleY(1);
+  }
+  100% {
+    transform: scaleY(0);
+  }
+}
+.lp-fill {
+  animation: lp-fill 6s ease-in-out infinite both;
+  transform-box: fill-box;
+  transform-origin: center bottom;
+}
+@keyframes lp-sheet {
+  0%,
+  30% {
+    transform: translateX(90px);
+    opacity: 0;
+  }
+  55%,
+  90% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(90px);
+    opacity: 0;
+  }
+}
+.lp-sheet {
+  animation: lp-sheet 6s ease-in-out infinite;
+}
+
+/* 09 — pieces pop into place */
+@keyframes lp-pop {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  12% {
+    transform: scale(1.06);
+    opacity: 1;
+  }
+  18%,
+  88% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(0);
+    opacity: 0;
+  }
+}
+.lp-pop {
+  animation: lp-pop 6.5s cubic-bezier(0.2, 0.8, 0.2, 1) infinite both;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+/* 10 — the key swings, the spark glints */
+@keyframes lp-key {
+  0%,
+  100% {
+    transform: rotate(-6deg);
+  }
+  50% {
+    transform: rotate(7deg);
+  }
+}
+.lp-key {
+  animation: lp-key 3.4s ease-in-out infinite;
+  transform-box: fill-box;
+  transform-origin: 20% 20%;
+}
+@keyframes lp-spark {
+  0%,
+  70%,
+  100% {
+    opacity: 0;
+    transform: scale(0.5) rotate(0deg);
+  }
+  80% {
+    opacity: 1;
+    transform: scale(1.15) rotate(18deg);
+  }
+  90% {
+    opacity: 0.4;
+    transform: scale(0.9) rotate(30deg);
+  }
+}
+.lp-spark {
+  animation: lp-spark 4s ease-in-out infinite;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lp-draw path,
+  .lp-pencil,
+  .lp-stamp,
+  .lp-lower,
+  .lp-rise,
+  .lp-wipe,
+  .lp-in,
+  .lp-flow,
+  .lp-blink,
+  .lp-fill,
+  .lp-sheet,
+  .lp-pop,
+  .lp-key,
+  .lp-spark {
+    animation: none !important;
+  }
+  .lp-rise,
+  .lp-fill,
+  .lp-in,
+  .lp-pop {
+    transform: none;
+    opacity: 1;
+  }
+}
+
+/* Only the cards near the stage centre spend animation time; the
+   rest hold their pose until they arrive. */
+.pflow .pstep:not(.is-active) .pstep__art * {
+  animation-play-state: paused;
+}

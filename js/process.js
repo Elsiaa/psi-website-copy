@@ -35,6 +35,7 @@
     if (!pinned) {
       runway.style.height = "";
       track.style.transform = "";
+      watchSwipe();
       return;
     }
 
@@ -78,6 +79,23 @@
       render();
       ticking = false;
     });
+  };
+
+  // Fallback swipe mode: cards animate only while on screen.
+  let swipeIO = null;
+  const watchSwipe = () => {
+    if (swipeIO || !("IntersectionObserver" in window)) {
+      if (!swipeIO) steps.forEach((s) => s.classList.add("is-active"));
+      return;
+    }
+    swipeIO = new IntersectionObserver(
+      (entries) =>
+        entries.forEach((e) =>
+          e.target.classList.toggle("is-active", e.isIntersecting),
+        ),
+      { root: track.parentElement, rootMargin: "25%" },
+    );
+    steps.forEach((s) => swipeIO.observe(s));
   };
 
   window.addEventListener("scroll", onScroll, { passive: true });
