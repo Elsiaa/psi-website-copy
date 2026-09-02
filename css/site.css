@@ -1957,3 +1957,114 @@ body.viewer-lock {
 .on-5 .bdirt {
   transform: scale(0);
 }
+
+/* ---------------- Google reviews trust badge ---------------- */
+
+.gbadge {
+  display: flex;
+  align-items: center;
+  gap: clamp(20px, 3vw, 44px);
+  flex-wrap: wrap;
+  margin: 26px 0 30px;
+  padding: 18px 24px;
+  background: #fff;
+  border: 1px solid var(--hairline);
+  border-radius: 14px;
+  box-shadow: 0 14px 36px -30px rgba(16, 18, 20, 0.5);
+}
+
+.gbadge__brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.gbadge__g {
+  width: 40px;
+  height: 40px;
+  flex: 0 0 auto;
+}
+
+.gbadge__wordmark {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.gbadge__verified {
+  margin: 2px 0 0;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12.5px;
+  color: var(--muted);
+}
+
+.gbadge__tick {
+  width: 15px;
+  height: 15px;
+  flex: 0 0 auto;
+}
+
+.gbadge__score {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-left: clamp(20px, 3vw, 44px);
+  border-left: 1px solid var(--hairline);
+}
+
+.gbadge__num {
+  margin: 0;
+  font-size: 34px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.gbadge__stars {
+  color: #fbbc05;
+  font-size: 17px;
+  letter-spacing: 2px;
+  line-height: 1;
+}
+
+.gbadge__count {
+  margin: 4px 0 0;
+  font-size: 12.5px;
+  color: var(--muted);
+}
+
+.gbadge__cta {
+  margin-left: auto;
+  display: inline-block;
+  padding: 11px 20px;
+  border-radius: 24px;
+  background: #4285f4;
+  color: #fff;
+  text-decoration: none;
+  font-size: 13.5px;
+  font-weight: 600;
+  transition: background 160ms ease;
+}
+
+.gbadge__cta:hover {
+  background: #3367d6;
+}
+
+.review-card__gmark {
+  float: right;
+  width: 22px;
+  height: 22px;
+  margin: 2px 0 6px 10px;
+}
+
+@media (max-width: 720px) {
+  .gbadge__score {
+    border-left: 0;
+    padding-left: 0;
+  }
+  .gbadge__cta {
+    margin-left: 0;
+  }
+}
