@@ -19,7 +19,7 @@ window.PSI_QUOTE = {
       { label: "Garage or detached structure", flow: "garage" },
       { label: "Commercial buildout", flow: "commercial" },
       { label: "Multiple of the above", flow: null },
-      { label: "Not sure yet — I want to explore", flow: null },
+      { label: "Not sure yet, I want to explore", flow: null },
     ],
   },
 
@@ -77,7 +77,7 @@ window.PSI_QUOTE = {
             "Crawl space",
             "Full basement",
             "Match existing foundation",
-            "Not sure — need recommendation",
+            "Not sure, need recommendation",
           ],
         },
         {
@@ -86,7 +86,7 @@ window.PSI_QUOTE = {
             "Match existing pitch and shingles",
             "Flat / low-slope addition",
             "Different style (gable, shed, etc.)",
-            "Not sure — need design help",
+            "Not sure, need design help",
           ],
         },
         {
@@ -131,8 +131,8 @@ window.PSI_QUOTE = {
           opts: [
             "Yes, fully stamped/permit-ready",
             "Yes, conceptual drawings only",
-            "No — I'd need PSI to coordinate design",
-            "No — but I want to bring my own architect",
+            "No, I'd need PSI to coordinate design",
+            "No, but I want to bring my own architect",
           ],
         },
         {
@@ -140,7 +140,7 @@ window.PSI_QUOTE = {
           opts: [
             "Yes, fully confirmed",
             "I've checked informally",
-            "No — need help navigating this",
+            "No, need help navigating this",
             "Not sure what that means",
           ],
         },
@@ -296,7 +296,7 @@ window.PSI_QUOTE = {
             "Mid-range (most clients land here)",
             "High-end / designer",
             "Luxury / no expense spared",
-            "Mix — splurge on some areas, save on others",
+            "Mix: splurge on some areas, save on others",
           ],
         },
         {
@@ -374,10 +374,10 @@ window.PSI_QUOTE = {
         {
           q: "Island?",
           opts: [
-            "Yes — new island",
-            "Yes — modify or expand existing",
+            "Yes, new island",
+            "Yes, modify or expand existing",
             "No island",
-            "Not sure — need design help",
+            "Not sure, need design help",
           ],
         },
         {
@@ -413,8 +413,8 @@ window.PSI_QUOTE = {
         {
           q: "Removing any walls?",
           opts: [
-            "Yes — and I know it's load-bearing",
-            "Yes — and I think it's non-load-bearing",
+            "Yes, and I know it's load-bearing",
+            "Yes, and I think it's non-load-bearing",
             "No",
             "Not sure (need PSI to assess)",
           ],
@@ -477,7 +477,7 @@ window.PSI_QUOTE = {
           opts: [
             "Completely unfinished / raw",
             "Partially finished",
-            "Fully finished — but needs redo",
+            "Fully finished, but needs redo",
           ],
         },
         {
@@ -534,7 +534,7 @@ window.PSI_QUOTE = {
             "None ever",
             "Occasional dampness",
             "Active leaks or water intrusion",
-            "I don't know — need an assessment",
+            "I don't know, need an assessment",
           ],
         },
         {
@@ -610,9 +610,9 @@ window.PSI_QUOTE = {
         {
           q: "Is the house currently occupied?",
           opts: [
-            "Yes — we'll live in it during work",
-            "Yes — but we'll move out during construction",
-            "No — vacant",
+            "Yes, we'll live in it during work",
+            "Yes, but we'll move out during construction",
+            "No, vacant",
             "It's a new purchase / closing soon",
           ],
         },
@@ -701,7 +701,7 @@ window.PSI_QUOTE = {
         {
           q: "Roofing condition?",
           opts: [
-            "Recently replaced — leave alone",
+            "Recently replaced, leave alone",
             "Aging but functional",
             "Needs replacement during this project",
             "Not sure",
@@ -732,15 +732,15 @@ window.PSI_QUOTE = {
         {
           q: "Are you working with a designer or architect?",
           opts: [
-            "Yes — already engaged",
-            "Not yet — but planning to",
-            "No — want PSI to coordinate design-build",
+            "Yes, already engaged",
+            "Not yet, but planning to",
+            "No, want PSI to coordinate design-build",
             "Not sure",
           ],
         },
         {
           q: "Do you have permits sorted?",
-          opts: ["Yes", "No — need help", "Not sure what's required"],
+          opts: ["Yes", "No, need help", "Not sure what's required"],
         },
         {
           q: "When would you like to start?",
@@ -827,7 +827,7 @@ window.PSI_QUOTE = {
         {
           q: "Are you adding a roof or cover?",
           opts: [
-            "No — open deck",
+            "No, open deck",
             "Pergola (open frame)",
             "Solid roof (covered porch)",
             "Retractable awning",
@@ -979,15 +979,15 @@ window.PSI_QUOTE = {
             "Tile",
             "Slate / synthetic slate",
             "Flat roof membrane",
-            "Not sure — open to recommendations",
+            "Not sure, open to recommendations",
           ],
         },
         {
           q: "Active leaks or damage?",
           opts: [
-            "Yes — active leak",
-            "Yes — visible damage but no leak yet",
-            "No — preventive replacement",
+            "Yes, active leak",
+            "Yes, visible damage but no leak yet",
+            "No, preventive replacement",
             "Just aging out",
           ],
         },
@@ -1012,8 +1012,8 @@ window.PSI_QUOTE = {
         {
           q: "Insurance claim involved?",
           opts: [
-            "Yes — already filed",
-            "Yes — considering filing",
+            "Yes, already filed",
+            "Yes, considering filing",
             "No",
             "Not sure",
           ],
@@ -1065,7 +1065,7 @@ window.PSI_QUOTE = {
             "Cedar / real wood",
             "Stone or brick veneer accent",
             "Mix of materials",
-            "Not sure — open to recommendations",
+            "Not sure, open to recommendations",
           ],
         },
         {
@@ -1083,18 +1083,18 @@ window.PSI_QUOTE = {
         },
         {
           q: "Insulation upgrade at the same time?",
-          opts: ["Yes — add insulation under new siding", "No", "Not sure"],
+          opts: ["Yes, add insulation under new siding", "No", "Not sure"],
         },
         {
           q: "Replacing trim, soffit, fascia?",
-          opts: ["Yes, all of it", "Some of it", "No — just siding"],
+          opts: ["Yes, all of it", "Some of it", "No, just siding"],
         },
         {
           q: "Window replacement at same time?",
           opts: [
-            "Yes — replacing windows now",
-            "Maybe — would consider",
-            "No — keeping existing windows",
+            "Yes, replacing windows now",
+            "Maybe, would consider",
+            "No, keeping existing windows",
           ],
         },
         {
@@ -1108,7 +1108,7 @@ window.PSI_QUOTE = {
         {
           q: "Any rot, damage, or repair issues known?",
           opts: [
-            "Yes — known damage",
+            "Yes, known damage",
             "Suspect there may be issues",
             "No",
             "Not sure",
@@ -1230,7 +1230,7 @@ window.PSI_QUOTE = {
           q: "Exterior finish?",
           opts: [
             "Match house",
-            "Different — complementary style",
+            "Different, complementary style",
             "Metal / pole barn style",
             "Not sure",
           ],
@@ -1238,7 +1238,7 @@ window.PSI_QUOTE = {
         {
           q: "Has the location been determined?",
           opts: [
-            "Yes — exact spot chosen",
+            "Yes, exact spot chosen",
             "General area, not exact",
             "Still figuring it out",
           ],
@@ -1289,7 +1289,7 @@ window.PSI_QUOTE = {
             "Owner",
             "Tenant (with landlord approval)",
             "Tenant (still negotiating lease)",
-            "Not yet — evaluating before signing",
+            "Not yet, evaluating before signing",
           ],
         },
         {
@@ -1351,9 +1351,9 @@ window.PSI_QUOTE = {
         {
           q: "ADA / code compliance work needed?",
           opts: [
-            "Yes — known issues to address",
-            "Not sure — need assessment",
-            "No — already compliant",
+            "Yes, known issues to address",
+            "Not sure, need assessment",
+            "No, already compliant",
           ],
         },
         {
@@ -1381,7 +1381,7 @@ window.PSI_QUOTE = {
           opts: [
             "Permits in hand",
             "In progress",
-            "Not started — need help",
+            "Not started, need help",
             "Not sure what's required",
           ],
         },
