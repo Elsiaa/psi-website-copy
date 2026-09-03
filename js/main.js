@@ -505,6 +505,26 @@
       stars: 5,
       html: `<strong>Couldn&rsquo;t be happier with the work, honesty and professionalism.</strong>`,
     },
+    {
+      author: "Schneur Polter",
+      stars: 5,
+      html: `Had a great experience with PSI Construction. I worked directly with Saadya, and he was professional, responsive, and a pleasure to deal with throughout the entire process. <strong>Communication was excellent, everything was handled smoothly, and the quality of the work was top-notch.</strong> You can tell they genuinely care about their clients and stand behind their work. Highly recommend PSI Construction, and especially Saadya!`,
+    },
+    {
+      author: "Mendel Polter",
+      stars: 5,
+      html: `PSI Construction in Kingston, PA did a great job on my project. They were professional, reliable, and paid close attention to the details. <strong>The work was completed on time and I&rsquo;m very happy with the results.</strong> I&rsquo;d definitely recommend them to anyone looking for quality construction work.`,
+    },
+    {
+      author: "Jonathan Hale",
+      stars: 5,
+      html: `<strong>Legendary work! Absolutely recommend these guys!</strong> Efficient, clear, and on point! And yes Saadya&hellip; the measurements were right the first time. &#128514;`,
+    },
+    {
+      author: "Moshe Polter",
+      stars: 5,
+      html: `Great company, <strong>very efficient and easy to work with.</strong> I recommend for all of your construction needs!`,
+    },
   ];
 
   const rTrack = document.getElementById("reviewsTrack");
