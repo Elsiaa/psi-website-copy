@@ -39,9 +39,9 @@
       return;
     }
 
-    // Roughly a viewport of scroll per phase keeps each stage readable
-    // without letting the section overstay.
-    runway.style.height = window.innerHeight * (PHASES * 0.72 + 1) + "px";
+    // A bit over half a viewport per phase: long enough to read each
+    // stage, short enough that the pin never feels stuck.
+    runway.style.height = window.innerHeight * (PHASES * 0.55 + 1) + "px";
     render();
   };
 
@@ -71,6 +71,13 @@
   };
 
   const onScroll = () => {
+    // rAF never fires in a hidden document (background tab, hidden
+    // preview pane), which would freeze the scene mid-build; render
+    // synchronously there and let rAF pace the visible case.
+    if (document.visibilityState === "hidden") {
+      render();
+      return;
+    }
     if (ticking) return;
     ticking = true;
     requestAnimationFrame(() => {
@@ -81,6 +88,7 @@
 
   window.addEventListener("scroll", onScroll, { passive: true });
   window.addEventListener("resize", measure);
+  document.addEventListener("visibilitychange", () => render());
   if (reduced.addEventListener) reduced.addEventListener("change", measure);
   window.addEventListener("load", measure);
   measure();
