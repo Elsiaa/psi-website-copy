@@ -3096,3 +3096,99 @@ details[open] .svc__summary::after {
     grid-template-columns: 1fr;
   }
 }
+
+/* ---------------- Get a Quote band ---------------- */
+
+.quote-cta {
+  background:
+    radial-gradient(
+      760px 380px at 12% -20%,
+      rgba(214, 0, 0, 0.18),
+      transparent 62%
+    ),
+    var(--navy);
+  color: #fff;
+}
+
+.qcta {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: clamp(28px, 5vw, 72px);
+  flex-wrap: wrap;
+}
+
+.qcta__lead {
+  flex: 1 1 420px;
+}
+
+.qcta__lead .section__title {
+  margin-bottom: 14px;
+  color: #fff;
+}
+
+.qcta__sub {
+  margin: 0;
+  max-width: 46ch;
+  color: rgba(255, 255, 255, 0.68);
+  font-size: 16px;
+  line-height: 1.65;
+}
+
+.qcta__actions {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 14px;
+}
+
+/* the one loud control on the page */
+.qcta__btn {
+  background: var(--accent);
+  border-color: var(--accent);
+  padding: 16px 34px;
+  font-size: 13.5px;
+}
+
+.qcta__btn:hover {
+  background: #b30000;
+  border-color: #b30000;
+}
+
+.qcta__phone {
+  color: #fff;
+  text-decoration: none;
+  font-size: clamp(19px, 1.9vw, 24px);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  transition: color 0.2s ease;
+}
+
+.qcta__phone:hover {
+  color: var(--accent);
+}
+
+.qcta__trust {
+  margin: 0;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.qcta__stars {
+  color: #fbbc05;
+  letter-spacing: 1px;
+}
+
+@media (max-width: 760px) {
+  .qcta {
+    align-items: flex-start;
+  }
+  .qcta__actions {
+    width: 100%;
+  }
+  .qcta__btn {
+    width: 100%;
+    text-align: center;
+  }
+}
