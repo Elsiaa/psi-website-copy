@@ -1925,6 +1925,848 @@ body.viewer-lock {
   }
 }
 
+/* ---------------- Capabilities: photographic index ---------------- */
+/* Nine capabilities, nine real jobs. The first tile runs double-size
+   as the anchor; the rest sit on a strict three-up grid. */
+
+.caps {
+  background:
+    radial-gradient(
+      900px 420px at 85% -10%,
+      rgba(214, 0, 0, 0.16),
+      transparent 60%
+    ),
+    var(--navy);
+}
+
+.caps__head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 28px;
+  flex-wrap: wrap;
+}
+
+.caps__head .section__title {
+  margin-bottom: 0;
+}
+
+.caps__lede {
+  margin: 0;
+  max-width: 44ch;
+  color: rgba(255, 255, 255, 0.62);
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.caps__grid {
+  list-style: none;
+  margin: 44px 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: clamp(168px, 16.5vw, 226px);
+  gap: clamp(10px, 1.1vw, 16px);
+}
+
+.cap {
+  position: relative;
+  overflow: hidden;
+  border-radius: 14px;
+  background: #0e1319;
+  isolation: isolate;
+  transition:
+    transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1),
+    box-shadow 0.4s ease;
+}
+
+.cap--featured {
+  grid-column: span 2;
+  grid-row: span 2;
+}
+
+.cap:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 30px 60px -40px rgba(0, 0, 0, 0.9);
+}
+
+.cap__img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(1.01);
+  transition:
+    transform 0.75s cubic-bezier(0.2, 0.8, 0.2, 1),
+    filter 0.45s ease;
+  filter: saturate(0.98) contrast(1.03) brightness(1.08);
+}
+
+.cap:hover .cap__img {
+  transform: scale(1.06);
+  filter: saturate(1.04) contrast(1.05) brightness(1.12);
+}
+
+/* keeps the type legible over any photograph */
+.cap__scrim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(10, 13, 18, 0.93) 0%,
+    rgba(10, 13, 18, 0.78) 20%,
+    rgba(10, 13, 18, 0.34) 46%,
+    rgba(10, 13, 18, 0.04) 72%,
+    transparent 100%
+  );
+  transition: opacity 0.4s ease;
+}
+
+.cap:hover .cap__scrim {
+  opacity: 0.94;
+}
+
+/* the red rule wipes in on hover */
+.cap::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+  z-index: 2;
+}
+
+.cap:hover::after {
+  transform: scaleX(1);
+}
+
+.cap__body {
+  position: absolute;
+  inset: auto 0 0 0;
+  padding: clamp(14px, 1.5vw, 22px);
+  z-index: 1;
+}
+
+.cap__num {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  color: rgba(255, 255, 255, 0.55);
+  font-variant-numeric: tabular-nums;
+  transition: color 0.3s ease;
+}
+
+.cap:hover .cap__num {
+  color: var(--accent);
+}
+
+.cap h3 {
+  margin: 0 0 6px;
+  font-size: 16.5px;
+  line-height: 1.28;
+  letter-spacing: -0.01em;
+  color: #fff;
+  text-wrap: balance;
+}
+
+.cap p {
+  margin: 0;
+  font-size: 13.5px;
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.74);
+  max-width: 44ch;
+}
+
+.cap--featured h3 {
+  font-size: clamp(20px, 2.1vw, 27px);
+  margin-bottom: 8px;
+}
+
+.cap--featured p {
+  font-size: 15px;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.cap--featured .cap__num {
+  font-size: 12.5px;
+}
+
+@media (max-width: 960px) {
+  .caps__grid {
+    grid-template-columns: repeat(2, 1fr);
+    grid-auto-rows: clamp(160px, 26vw, 210px);
+  }
+  .cap--featured {
+    grid-column: span 2;
+    grid-row: span 1;
+  }
+  .cap--featured h3 {
+    font-size: 21px;
+  }
+}
+
+@media (max-width: 600px) {
+  .caps__grid {
+    grid-template-columns: 1fr;
+    grid-auto-rows: clamp(190px, 52vw, 240px);
+  }
+  .cap--featured {
+    grid-column: span 1;
+  }
+}
+
+/* ============================================================
+   THE BUILD — one scene, scroll-assembled
+   55 Reynolds Street goes up as the section scrolls: each phase
+   class .on-N reveals its layer; transitions do the motion.
+   ============================================================ */
+
+.bscene {
+  position: relative;
+  flex: 1 1 auto;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: minmax(240px, 340px) 1fr;
+  gap: clamp(16px, 3vw, 44px);
+  align-items: center;
+  width: 100%;
+  max-width: 1180px;
+  margin: 0 auto;
+}
+
+.bhouse {
+  grid-column: 2;
+  width: 100%;
+  height: 100%;
+  max-height: min(64vh, 560px);
+}
+
+/* ---------------- copy panel ---------------- */
+
+.bcopy {
+  grid-column: 1;
+  grid-row: 1;
+  position: relative;
+  min-height: 190px;
+}
+
+.bstep {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transform: translateY(14px);
+  transition:
+    opacity 0.4s ease,
+    transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+  pointer-events: none;
+}
+
+.bstep.is-on {
+  opacity: 1;
+  transform: none;
+}
+
+.bstep__num {
+  margin: 0 0 8px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  color: var(--accent);
+}
+
+.bstep h3 {
+  margin: 0 0 10px;
+  font-size: clamp(19px, 2vw, 26px);
+  line-height: 1.15;
+  letter-spacing: -0.015em;
+}
+
+.bstep p:last-child {
+  margin: 0;
+  color: var(--muted);
+  font-size: 15.5px;
+  line-height: 1.62;
+  max-width: 38ch;
+}
+
+/* ---------------- scene layers ---------------- */
+
+.bground {
+  fill: rgba(16, 18, 20, 0.35);
+}
+
+/* every phase layer waits invisible */
+.bp {
+  opacity: 0;
+  transition: opacity 0.45s ease;
+}
+
+/* 01 blueprint */
+.bline,
+.bline2 {
+  fill: none;
+  stroke: rgba(214, 0, 0, 0.62);
+  stroke-width: 3;
+  stroke-linejoin: round;
+  stroke-dasharray: 1400;
+  stroke-dashoffset: 1400;
+  transition: stroke-dashoffset 1.4s ease-in-out 0.1s;
+}
+.bline2 {
+  transition-delay: 0.7s;
+}
+.on-1 .bp1 {
+  opacity: 1;
+}
+.on-1 .bline,
+.on-1 .bline2 {
+  stroke-dashoffset: 0;
+}
+/* the drawing fades once real construction starts */
+.on-3 .bp1 {
+  opacity: 0.14;
+}
+.on-6 .bp1 {
+  opacity: 0;
+}
+
+/* 02 stamp slams in */
+.bstamp {
+  transform: scale(2.4);
+  transform-box: fill-box;
+  transform-origin: center;
+  transition:
+    opacity 0.3s ease,
+    transform 0.45s cubic-bezier(0.2, 1.4, 0.3, 1);
+}
+.on-2 .bp2 {
+  opacity: 1;
+  transform: scale(1);
+}
+.on-3 .bp2 {
+  opacity: 0;
+  transform: scale(0.7);
+}
+
+/* 03 excavation */
+.on-3 .bp3 {
+  opacity: 1;
+}
+.bpit,
+.bhole-r {
+  transform: scaleX(0);
+  transform-box: fill-box;
+  transform-origin: center;
+  transition: transform 1.1s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.on-3 .bpit,
+.on-3 .bhole-r {
+  transform: scaleX(1);
+}
+.bdirt {
+  transform: scale(0);
+  transform-box: fill-box;
+  transform-origin: center bottom;
+  transition: transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) 0.4s;
+}
+.on-3 .bdirt {
+  transform: scale(1);
+}
+@keyframes bdig-boom {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  35% {
+    transform: rotate(13deg);
+  }
+  60% {
+    transform: rotate(9deg);
+  }
+  82% {
+    transform: rotate(-5deg);
+  }
+}
+@keyframes bdig-bucket {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  38% {
+    transform: rotate(-24deg);
+  }
+  64% {
+    transform: rotate(14deg);
+  }
+}
+.on-3 .bboom {
+  animation: bdig-boom 3.8s ease-in-out infinite;
+  transform-box: fill-box;
+  transform-origin: 90% 40%;
+}
+.on-3 .bstick .bbucket {
+  animation: bdig-bucket 3.8s ease-in-out infinite;
+  transform-box: fill-box;
+  transform-origin: 50% 0%;
+}
+/* machine leaves when the foundation starts */
+.bexc {
+  transition:
+    transform 0.9s ease,
+    opacity 0.6s ease;
+}
+.on-4 .bexc {
+  transform: translateX(140px);
+  opacity: 0;
+}
+.on-4 .bboom,
+.on-4 .bbucket {
+  animation: none;
+}
+
+/* 04 precast panels drop in */
+.on-4 .bp4 {
+  opacity: 1;
+}
+.bpanel {
+  fill: #b9b5ae;
+  stroke: rgba(16, 18, 20, 0.25);
+  stroke-width: 2;
+  transform: translateY(-360px);
+  transition: transform 0.85s cubic-bezier(0.3, 1.2, 0.3, 1) var(--d, 0s);
+}
+.on-4 .bpanel {
+  transform: translateY(0);
+}
+.bcable {
+  transition: opacity 0.4s ease;
+}
+.on-5 .bcable {
+  opacity: 0;
+}
+
+/* 05 framing rises floor by floor */
+.on-5 .bp5 {
+  opacity: 1;
+}
+.bs {
+  fill: #e4ddcf;
+  stroke: rgba(16, 18, 20, 0.18);
+  stroke-width: 1.5;
+}
+.bfloor {
+  transform: scaleY(0);
+  transform-box: fill-box;
+  transform-origin: center bottom;
+  transition: transform 0.8s cubic-bezier(0.2, 0.9, 0.25, 1);
+}
+.bf2 {
+  transition-delay: 0.55s;
+}
+.bf3 {
+  transition-delay: 1.1s;
+}
+.on-5 .bfloor {
+  transform: scaleY(1);
+}
+
+/* 06 shell: stucco sweeps up, windows land */
+.on-6 .bp6 {
+  opacity: 1;
+}
+.bshell {
+  clip-path: inset(100% 0 0 0);
+  transition: clip-path 1.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.on-6 .bshell {
+  clip-path: inset(0 0 0 0);
+}
+.bstucco {
+  fill: #f2f0ec;
+  stroke: rgba(16, 18, 20, 0.2);
+  stroke-width: 2;
+}
+.bwin {
+  fill: #23272c;
+  stroke: #101214;
+  stroke-width: 2;
+  opacity: 0;
+  transform: scale(0.6);
+  transform-box: fill-box;
+  transform-origin: center;
+  transition:
+    opacity 0.3s ease calc(0.9s + var(--d, 0s)),
+    transform 0.45s cubic-bezier(0.2, 1.3, 0.3, 1) calc(0.9s + var(--d, 0s));
+}
+.on-6 .bwin {
+  opacity: 1;
+  transform: scale(1);
+}
+/* x-ray while the trades are inside */
+.bstucco {
+  transition: opacity 0.6s ease;
+}
+.on-7 .bstucco {
+  opacity: 0.22;
+}
+.on-9 .bstucco {
+  opacity: 1;
+}
+
+/* 07 rough-in threads through the walls */
+.on-7 .bp7 {
+  opacity: 1;
+}
+.bpipe,
+.bwire {
+  fill: none;
+  stroke-linecap: round;
+  stroke-dasharray: 560;
+  stroke-dashoffset: 560;
+  transition: stroke-dashoffset 1.5s ease-in-out 0.2s;
+}
+.bpipe {
+  stroke: #8f98a1;
+  stroke-width: 11;
+}
+.bwire {
+  stroke: var(--accent);
+  stroke-width: 5;
+  transition-delay: 0.7s;
+}
+.on-7 .bpipe,
+.on-7 .bwire {
+  stroke-dashoffset: 0;
+}
+.bnode {
+  fill: var(--accent);
+}
+@keyframes bblink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.25;
+  }
+}
+.on-7 .bnode {
+  animation: bblink 1.5s ease-in-out infinite;
+}
+.on-9 .bp7 {
+  opacity: 0;
+}
+
+/* 08 drywall closes the x-ray */
+.bdry {
+  fill: #efece6;
+  transform: translateX(-260px);
+  transition:
+    opacity 0.4s ease,
+    transform 0.9s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.on-8 .bp8 {
+  opacity: 0.92;
+  transform: translateX(0);
+}
+.on-9 .bp8 {
+  opacity: 0;
+}
+
+/* 09 the lights come on */
+.on-9 .bp9 {
+  opacity: 1;
+}
+.bglow {
+  fill: #f5c86b;
+  opacity: 0;
+  transition: opacity 0.5s ease var(--d, 0s);
+}
+.on-9 .bglow {
+  opacity: 0.85;
+}
+
+/* 10 handover */
+.on-10 .bp10 {
+  opacity: 1;
+}
+.btree {
+  fill: #7d8b74;
+  transform: scale(0);
+  transform-box: fill-box;
+  transform-origin: center bottom;
+  transition: transform 0.6s cubic-bezier(0.2, 1.3, 0.3, 1) var(--d, 0s);
+}
+.bstoop {
+  fill: #cfccc5;
+}
+.on-10 .btree {
+  transform: scale(1);
+}
+.bhandle {
+  fill: rgba(255, 255, 255, 0.9);
+}
+.bkey {
+  transform: translateY(-30px) rotate(-10deg);
+  transform-box: fill-box;
+  transform-origin: 20% 20%;
+  opacity: 0;
+  transition:
+    opacity 0.4s ease 0.3s,
+    transform 0.7s cubic-bezier(0.2, 1.2, 0.3, 1) 0.3s;
+}
+.on-10 .bkey {
+  opacity: 1;
+  transform: translateY(0) rotate(0deg);
+}
+@keyframes bswing {
+  0%,
+  100% {
+    transform: rotate(-5deg);
+  }
+  50% {
+    transform: rotate(6deg);
+  }
+}
+.on-10 .bkey {
+  animation: bswing 3.2s ease-in-out 1s infinite;
+}
+.bspark {
+  fill: rgba(214, 0, 0, 0.55);
+  opacity: 0;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+@keyframes bspark {
+  0%,
+  60%,
+  100% {
+    opacity: 0;
+    transform: scale(0.5) rotate(0deg);
+  }
+  75% {
+    opacity: 1;
+    transform: scale(1.2) rotate(20deg);
+  }
+  88% {
+    opacity: 0.4;
+    transform: scale(0.85) rotate(32deg);
+  }
+}
+.on-10 .bspark {
+  animation: bspark 3.6s ease-in-out infinite;
+}
+
+/* ---------------- fallbacks ---------------- */
+
+.pflow-runway:not(.is-pinned) {
+  height: auto;
+}
+.pflow-runway:not(.is-pinned) .pflow-stage {
+  position: static;
+  height: auto;
+  min-height: 0;
+  padding: clamp(56px, 8vh, 96px) clamp(20px, 4vw, 48px);
+}
+/* unpinned: everything simply built, copy flows as a list */
+.pflow-runway:not(.is-pinned) .bp,
+.pflow-runway:not(.is-pinned) .bpanel,
+.pflow-runway:not(.is-pinned) .bfloor,
+.pflow-runway:not(.is-pinned) .bwin,
+.pflow-runway:not(.is-pinned) .btree,
+.pflow-runway:not(.is-pinned) .bkey,
+.pflow-runway:not(.is-pinned) .bshell {
+  opacity: 1;
+  transform: none;
+  clip-path: none;
+  transition: none;
+}
+.pflow-runway:not(.is-pinned) .bline,
+.pflow-runway:not(.is-pinned) .bline2 {
+  stroke-dashoffset: 0;
+  opacity: 0;
+}
+.pflow-runway:not(.is-pinned) .bp1,
+.pflow-runway:not(.is-pinned) .bp2,
+.pflow-runway:not(.is-pinned) .bp3,
+.pflow-runway:not(.is-pinned) .bp7,
+.pflow-runway:not(.is-pinned) .bp8 {
+  opacity: 0;
+}
+.pflow-runway:not(.is-pinned) .bscene {
+  display: block;
+}
+.pflow-runway:not(.is-pinned) .bcopy {
+  position: static;
+  min-height: 0;
+  margin-top: 26px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 22px;
+}
+.pflow-runway:not(.is-pinned) .bstep {
+  position: static;
+  opacity: 1;
+  transform: none;
+}
+.pflow-runway:not(.is-pinned) .pflow-rail {
+  display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bp,
+  .bpanel,
+  .bfloor,
+  .bwin,
+  .btree,
+  .bkey,
+  .bshell,
+  .bstep {
+    transition: none !important;
+    animation: none !important;
+  }
+}
+
+@media (max-width: 900px) {
+  .bscene {
+    grid-template-columns: 1fr;
+  }
+  .bhouse {
+    grid-column: 1;
+    grid-row: 1;
+    max-height: 46vh;
+  }
+  .bcopy {
+    grid-column: 1;
+    grid-row: 2;
+    min-height: 150px;
+  }
+}
+
+/* the spoil pile gets backfilled once framing starts */
+.on-5 .bdirt {
+  transform: scale(0);
+}
+
+/* ---------------- Google reviews trust badge ---------------- */
+
+.gbadge {
+  display: flex;
+  align-items: center;
+  gap: clamp(20px, 3vw, 44px);
+  flex-wrap: wrap;
+  margin: 26px 0 30px;
+  padding: 18px 24px;
+  background: #fff;
+  border: 1px solid var(--hairline);
+  border-radius: 14px;
+  box-shadow: 0 14px 36px -30px rgba(16, 18, 20, 0.5);
+}
+
+.gbadge__brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.gbadge__g {
+  width: 40px;
+  height: 40px;
+  flex: 0 0 auto;
+}
+
+.gbadge__wordmark {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.gbadge__verified {
+  margin: 2px 0 0;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12.5px;
+  color: var(--muted);
+}
+
+.gbadge__tick {
+  width: 15px;
+  height: 15px;
+  flex: 0 0 auto;
+}
+
+.gbadge__score {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-left: clamp(20px, 3vw, 44px);
+  border-left: 1px solid var(--hairline);
+}
+
+.gbadge__num {
+  margin: 0;
+  font-size: 34px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.gbadge__stars {
+  color: #fbbc05;
+  font-size: 17px;
+  letter-spacing: 2px;
+  line-height: 1;
+}
+
+.gbadge__count {
+  margin: 4px 0 0;
+  font-size: 12.5px;
+  color: var(--muted);
+}
+
+.gbadge__cta {
+  margin-left: auto;
+  display: inline-block;
+  padding: 11px 20px;
+  border-radius: 24px;
+  background: #4285f4;
+  color: #fff;
+  text-decoration: none;
+  font-size: 13.5px;
+  font-weight: 600;
+  transition: background 160ms ease;
+}
+
+.gbadge__cta:hover {
+  background: #3367d6;
+}
+
+.review-card__gmark {
+  float: right;
+  width: 22px;
+  height: 22px;
+  margin: 2px 0 6px 10px;
+}
+
+@media (max-width: 720px) {
+  .gbadge__score {
+    border-left: 0;
+    padding-left: 0;
+  }
+  .gbadge__cta {
+    margin-left: 0;
+  }
+}
+
 /* ---------------- Capabilities: dark editorial index ---------------- */
 
 .caps {

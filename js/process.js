@@ -90,6 +90,18 @@
   window.addEventListener("resize", measure);
   document.addEventListener("visibilitychange", () => render());
   if (reduced.addEventListener) reduced.addEventListener("change", measure);
-  window.addEventListener("load", measure);
+  window.addEventListener("load", () => {
+    measure();
+    // Measuring changes the runway height, which can knock an in-flight
+    // anchor jump off target; land it again once the height is settled.
+    if (location.hash) {
+      try {
+        const target = document.querySelector(location.hash);
+        if (target) target.scrollIntoView({ behavior: "instant" });
+      } catch (e) {
+        /* malformed hash: nothing to scroll to */
+      }
+    }
+  });
   measure();
 })();
