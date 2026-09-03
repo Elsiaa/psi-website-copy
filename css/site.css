@@ -3144,3 +3144,121 @@ details[open] .svc__summary::after {
     text-align: center;
   }
 }
+
+/* ---------------- FAQ ---------------- */
+
+.faq__grid {
+  display: grid;
+  grid-template-columns: minmax(260px, 4fr) 7fr;
+  gap: clamp(28px, 5vw, 72px);
+  align-items: start;
+}
+
+.faq__lead .section__title {
+  margin-bottom: 14px;
+}
+
+.faq__note {
+  margin: 0 0 6px;
+  color: var(--muted);
+  font-size: 15px;
+}
+
+.faq__phone {
+  font-size: clamp(18px, 1.7vw, 22px);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.faq__phone:hover {
+  color: var(--accent);
+}
+
+.faq__item {
+  border-top: 1px solid var(--hairline);
+}
+
+.faq__item:last-child {
+  border-bottom: 1px solid var(--hairline);
+}
+
+.faq__q {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 20px 2px;
+  cursor: pointer;
+  list-style: none;
+  font-size: clamp(16px, 1.4vw, 18px);
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: -0.01em;
+  transition: color 0.2s ease;
+}
+
+.faq__q::-webkit-details-marker {
+  display: none;
+}
+
+.faq__q:hover,
+.faq__item[open] .faq__q {
+  color: var(--accent);
+}
+
+/* plus that becomes a minus when the answer is open */
+.faq__mark {
+  position: relative;
+  flex: 0 0 auto;
+  width: 15px;
+  height: 15px;
+  margin-top: 5px;
+}
+
+.faq__mark::before,
+.faq__mark::after {
+  content: "";
+  position: absolute;
+  background: currentColor;
+  transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.faq__mark::before {
+  top: 6.5px;
+  left: 0;
+  width: 15px;
+  height: 2px;
+}
+
+.faq__mark::after {
+  left: 6.5px;
+  top: 0;
+  width: 2px;
+  height: 15px;
+}
+
+.faq__item[open] .faq__mark::after {
+  transform: rotate(90deg);
+}
+
+.faq__a {
+  padding: 0 2px 24px;
+  max-width: 68ch;
+}
+
+.faq__a p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 15.5px;
+  line-height: 1.7;
+}
+
+@media (max-width: 900px) {
+  .faq__grid {
+    grid-template-columns: 1fr;
+    gap: 22px;
+  }
+}
