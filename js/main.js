@@ -38,6 +38,160 @@
   window.addEventListener("scroll", onScroll, { passive: true });
   onScroll();
 
+  // ---------------- Google Reviews carousel ----------------
+  const reviews = [
+    {
+      author: "Yossi Lasker",
+      stars: 5,
+      html: `We couldn&rsquo;t be happier with our experience working with PSI Construction. They handled a full home remodel and finished our basement, and the results are absolutely fantastic. The team was professional, efficient, and respectful of our home. The project moved along quickly, and the pricing was by far the best we found. <strong>If you&rsquo;re looking for quality work at an honest price, PSI Construction is the way to go.</strong>`,
+    },
+    {
+      author: "Mendel Erlenwein",
+      stars: 5,
+      html: `Unbelievable work, could not recommend enough! As always, things come up in projects, new design ideas, etc and they came through on every single detail without constantly trying to up the estimate. <strong>Everything was meticulously planned out and executed to perfection,</strong> Great folks to work with and most of all, honest and stand behind their work!`,
+    },
+    {
+      author: "Moshe Dahan",
+      stars: 5,
+      html: `Had these guys do my guest/office bathroom over in my house. <strong>The job was done and bathroom was usable in three days.</strong> The bosses are super professional and detailed with what goes into each job. Great communication and great work. They quoted me on window replacement and another bathroom remodel and I&rsquo;m going with them for both jobs. Worth every penny working with these guys.`,
+    },
+    {
+      author: "Ben Berkovitz",
+      stars: 5,
+      html: `PSI Construction did an amazing job on our renovation plus new build project. <strong>They were very patient, transparent, communicative and very professional throughout our entire project.</strong> Their pricing was very competitive, and they completed the project within the expected timeline they gave us. Whenever something came up, they provided us with all the different options we could choose from. I highly recommend them and would hire them again for future projects.`,
+    },
+    {
+      author: "Mikaela",
+      stars: 4,
+      html: `Great price. PSI came referred to us through friends in the NEPA area. They renovated our guest bath for us in a matter of a few weeks. They were communicative and worked with us to achieve an on-time completion date and <strong>we were extremely impressed with the tile work for the tub area!</strong>`,
+    },
+    {
+      author: "Mushkie Schaeffer",
+      stars: 5,
+      html: `We had a seamless experience working with PSI on our custom home sauna. Although this was their first sauna project, they proved confidence and execution in their build. <strong>The finished sauna is both functional and spa-like,</strong> due to their research in providing us with the best materials for performance and visuals. We highly recommend them to anyone looking for an in-home sauna room that looks crafted and state-of-the-art!`,
+    },
+    {
+      author: "Miguel Andres Contreras",
+      stars: 5,
+      html: `<strong>Couldn&rsquo;t be happier with the work, honesty and professionalism.</strong>`,
+    },
+    {
+      author: "Schneur Polter",
+      stars: 5,
+      html: `Had a great experience with PSI Construction. I worked directly with Saadya, and he was professional, responsive, and a pleasure to deal with throughout the entire process. <strong>Communication was excellent, everything was handled smoothly, and the quality of the work was top-notch.</strong> You can tell they genuinely care about their clients and stand behind their work. Highly recommend PSI Construction, and especially Saadya!`,
+    },
+    {
+      author: "Mendel Polter",
+      stars: 5,
+      html: `PSI Construction in Kingston, PA did a great job on my project. They were professional, reliable, and paid close attention to the details. <strong>The work was completed on time and I&rsquo;m very happy with the results.</strong> I&rsquo;d definitely recommend them to anyone looking for quality construction work.`,
+    },
+    {
+      author: "Jonathan Hale",
+      stars: 5,
+      html: `<strong>Legendary work! Absolutely recommend these guys!</strong> Efficient, clear, and on point! And yes Saadya&hellip; the measurements were right the first time. &#128514;`,
+    },
+    {
+      author: "Moshe Polter",
+      stars: 5,
+      html: `Great company, <strong>very efficient and easy to work with.</strong> I recommend for all of your construction needs!`,
+    },
+  ];
+
+  const rTrack = document.getElementById("reviewsTrack");
+  reviews.forEach((r) => {
+    const card = document.createElement("article");
+    card.className = "review-card";
+    const initials = r.author
+      .split(/\s+/)
+      .slice(0, 2)
+      .map((w) => w[0])
+      .join("")
+      .toUpperCase();
+    card.innerHTML = `
+      <div class="review-card__head">
+        <span class="review-card__avatar" aria-hidden="true">${initials}</span>
+        <p class="review-card__author">${r.author}<small>Google review</small></p>
+        <svg class="review-card__gmark" viewBox="0 0 48 48" role="img" aria-label="Posted on Google">
+          <path fill="#4285F4" d="M45.12 24.5c0-1.56-.14-3.06-.4-4.5H24v8.51h11.84c-.51 2.75-2.06 5.08-4.39 6.64v5.52h7.11c4.16-3.83 6.56-9.47 6.56-16.17z"/>
+          <path fill="#34A853" d="M24 46c5.94 0 10.92-1.97 14.56-5.33l-7.11-5.52c-1.97 1.32-4.49 2.1-7.45 2.1-5.73 0-10.58-3.87-12.31-9.07H4.34v5.7C7.96 41.07 15.4 46 24 46z"/>
+          <path fill="#FBBC05" d="M11.69 28.18C11.25 26.86 11 25.45 11 24s.25-2.86.69-4.18v-5.7H4.34C2.85 17.09 2 20.45 2 24s.85 6.91 2.34 9.88l7.35-5.7z"/>
+          <path fill="#EA4335" d="M24 10.75c3.23 0 6.13 1.11 8.41 3.29l6.31-6.31C34.91 4.18 29.93 2 24 2 15.4 2 7.96 6.93 4.34 14.12l7.35 5.7c1.73-5.2 6.58-9.07 12.31-9.07z"/>
+        </svg>
+      </div>
+      <div class="review-card__stars" aria-label="${r.stars} out of 5 stars">${"★".repeat(r.stars)}${"☆".repeat(5 - r.stars)}</div>
+      <p class="review-card__text">&ldquo;${r.html}&rdquo;</p>`;
+    rTrack.appendChild(card);
+  });
+
+  // Aggregate score in the badge, computed from the cards themselves.
+  const gAvg = reviews.reduce((t, r) => t + r.stars, 0) / reviews.length;
+  const gRating = document.getElementById("gRating");
+  const gStars = document.getElementById("gStars");
+  if (gRating) gRating.textContent = (Math.round(gAvg * 10) / 10).toFixed(1);
+  if (gStars) {
+    gStars.textContent =
+      "★".repeat(Math.round(gAvg)) + "☆".repeat(5 - Math.round(gAvg));
+    gStars.setAttribute(
+      "aria-label",
+      `Rated ${(Math.round(gAvg * 10) / 10).toFixed(1)} out of 5`,
+    );
+  }
+})();
+
+/* ============================================================
+   Mobile navigation
+   The links become a panel below 760px. Kept honest about the
+   things a panel has to get right: focus, Escape, the back of
+   the page not scrolling underneath, and never staying open when
+   the layout returns to the desktop row.
+   ============================================================ */
+(() => {
+  "use strict";
+  const nav = document.getElementById("topNav");
+  const toggle = document.getElementById("navToggle");
+  const panel = document.getElementById("navLinks");
+  const scrim = document.getElementById("navScrim");
+  if (!nav || !toggle || !panel) return;
+
+  const phone = window.matchMedia("(max-width: 760px)");
+  let open = false;
+
+  const setOpen = (next) => {
+    open = next;
+    nav.classList.toggle("nav--open", open);
+    toggle.setAttribute("aria-expanded", String(open));
+    toggle.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+    if (scrim) scrim.hidden = !open;
+    // hold the page still while the panel is up
+    document.body.style.overflow = open ? "hidden" : "";
+    if (open) {
+      const first = panel.querySelector("a");
+      if (first) first.focus({ preventScroll: true });
+    }
+  };
+
+  toggle.addEventListener("click", () => setOpen(!open));
+  if (scrim) scrim.addEventListener("click", () => setOpen(false));
+
+  // a link tap should navigate and dismiss, not leave the panel hanging
+  panel.addEventListener("click", (e) => {
+    if (e.target.closest("a") && open) setOpen(false);
+  });
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && open) {
+      setOpen(false);
+      toggle.focus();
+    }
+  });
+
+  // rotating to landscape must not strand an open panel over a desktop row
+  const sync = () => {
+    if (!phone.matches && open) setOpen(false);
+  };
+  if (phone.addEventListener) phone.addEventListener("change", sync);
+  window.addEventListener("resize", sync);
+
   // ---------------- Previous Projects ----------------
   const projects = window.PSI_PROJECTS || [];
   const office = window.PSI_OFFICE;
@@ -369,6 +523,35 @@
     { passive: true },
   );
 
+  // Dragging or wheeling the rail moves scrollLeft without goViewer(), so
+  // once the scroll settles, adopt whichever photo actually snapped in.
+  let vSettle = null;
+  vRail.addEventListener(
+    "scroll",
+    () => {
+      if (Date.now() >= vHeldUntil) return; // programmatic scroll: vPos is authoritative
+      clearTimeout(vSettle);
+      vSettle = setTimeout(() => {
+        const figs = [...vRail.children];
+        if (!figs.length) return;
+        let best = 0,
+          bestDist = Infinity;
+        figs.forEach((f, k) => {
+          const d = Math.abs(f.offsetLeft - V_PAD - vRail.scrollLeft);
+          if (d < bestDist) {
+            bestDist = d;
+            best = k;
+          }
+        });
+        if (best !== vPos) {
+          vPos = best;
+          paintViewerChrome();
+        }
+      }, 160);
+    },
+    { passive: true },
+  );
+
   viewer.addEventListener("click", (e) => {
     if (e.target.closest("[data-vclose]")) return closeViewer();
     const th = e.target.closest("[data-vgo]");
@@ -445,160 +628,4 @@
 
   buildJobs();
   select(0, "init");
-
-  // ---------------- Google Reviews carousel ----------------
-  const reviews = [
-    {
-      author: "Yossi Lasker",
-      stars: 5,
-      html: `We couldn&rsquo;t be happier with our experience working with PSI Construction. They handled a full home remodel and finished our basement, and the results are absolutely fantastic. The team was professional, efficient, and respectful of our home. The project moved along quickly, and the pricing was by far the best we found. <strong>If you&rsquo;re looking for quality work at an honest price, PSI Construction is the way to go.</strong>`,
-    },
-    {
-      author: "Mendel Erlenwein",
-      stars: 5,
-      html: `Unbelievable work, could not recommend enough! As always, things come up in projects, new design ideas, etc and they came through on every single detail without constantly trying to up the estimate. <strong>Everything was meticulously planned out and executed to perfection,</strong> Great folks to work with and most of all, honest and stand behind their work!`,
-    },
-    {
-      author: "Moshe Dahan",
-      stars: 5,
-      html: `Had these guys do my guest/office bathroom over in my house. <strong>The job was done and bathroom was usable in three days.</strong> The bosses are super professional and detailed with what goes into each job. Great communication and great work. They quoted me on window replacement and another bathroom remodel and I&rsquo;m going with them for both jobs. Worth every penny working with these guys.`,
-    },
-    {
-      author: "Ben Berkovitz",
-      stars: 5,
-      html: `PSI Construction did an amazing job on our renovation plus new build project. <strong>They were very patient, transparent, communicative and very professional throughout our entire project.</strong> Their pricing was very competitive, and they completed the project within the expected timeline they gave us. Whenever something came up, they provided us with all the different options we could choose from. I highly recommend them and would hire them again for future projects.`,
-    },
-    {
-      author: "Mikaela",
-      stars: 4,
-      html: `Great price. PSI came referred to us through friends in the NEPA area. They renovated our guest bath for us in a matter of a few weeks. They were communicative and worked with us to achieve an on-time completion date and <strong>we were extremely impressed with the tile work for the tub area!</strong>`,
-    },
-    {
-      author: "Mushkie Schaeffer",
-      stars: 5,
-      html: `We had a seamless experience working with PSI on our custom home sauna. Although this was their first sauna project, they proved confidence and execution in their build. <strong>The finished sauna is both functional and spa-like,</strong> due to their research in providing us with the best materials for performance and visuals. We highly recommend them to anyone looking for an in-home sauna room that looks crafted and state-of-the-art!`,
-    },
-    {
-      author: "Miguel Andres Contreras",
-      stars: 5,
-      html: `<strong>Couldn&rsquo;t be happier with the work, honesty and professionalism.</strong>`,
-    },
-    {
-      author: "Schneur Polter",
-      stars: 5,
-      html: `Had a great experience with PSI Construction. I worked directly with Saadya, and he was professional, responsive, and a pleasure to deal with throughout the entire process. <strong>Communication was excellent, everything was handled smoothly, and the quality of the work was top-notch.</strong> You can tell they genuinely care about their clients and stand behind their work. Highly recommend PSI Construction, and especially Saadya!`,
-    },
-    {
-      author: "Mendel Polter",
-      stars: 5,
-      html: `PSI Construction in Kingston, PA did a great job on my project. They were professional, reliable, and paid close attention to the details. <strong>The work was completed on time and I&rsquo;m very happy with the results.</strong> I&rsquo;d definitely recommend them to anyone looking for quality construction work.`,
-    },
-    {
-      author: "Jonathan Hale",
-      stars: 5,
-      html: `<strong>Legendary work! Absolutely recommend these guys!</strong> Efficient, clear, and on point! And yes Saadya&hellip; the measurements were right the first time. &#128514;`,
-    },
-    {
-      author: "Moshe Polter",
-      stars: 5,
-      html: `Great company, <strong>very efficient and easy to work with.</strong> I recommend for all of your construction needs!`,
-    },
-  ];
-
-  const rTrack = document.getElementById("reviewsTrack");
-  reviews.forEach((r) => {
-    const card = document.createElement("article");
-    card.className = "review-card";
-    const initials = r.author
-      .split(/\s+/)
-      .slice(0, 2)
-      .map((w) => w[0])
-      .join("")
-      .toUpperCase();
-    card.innerHTML = `
-      <div class="review-card__head">
-        <span class="review-card__avatar" aria-hidden="true">${initials}</span>
-        <p class="review-card__author">${r.author}<small>Google review</small></p>
-        <svg class="review-card__gmark" viewBox="0 0 48 48" role="img" aria-label="Posted on Google">
-          <path fill="#4285F4" d="M45.12 24.5c0-1.56-.14-3.06-.4-4.5H24v8.51h11.84c-.51 2.75-2.06 5.08-4.39 6.64v5.52h7.11c4.16-3.83 6.56-9.47 6.56-16.17z"/>
-          <path fill="#34A853" d="M24 46c5.94 0 10.92-1.97 14.56-5.33l-7.11-5.52c-1.97 1.32-4.49 2.1-7.45 2.1-5.73 0-10.58-3.87-12.31-9.07H4.34v5.7C7.96 41.07 15.4 46 24 46z"/>
-          <path fill="#FBBC05" d="M11.69 28.18C11.25 26.86 11 25.45 11 24s.25-2.86.69-4.18v-5.7H4.34C2.85 17.09 2 20.45 2 24s.85 6.91 2.34 9.88l7.35-5.7z"/>
-          <path fill="#EA4335" d="M24 10.75c3.23 0 6.13 1.11 8.41 3.29l6.31-6.31C34.91 4.18 29.93 2 24 2 15.4 2 7.96 6.93 4.34 14.12l7.35 5.7c1.73-5.2 6.58-9.07 12.31-9.07z"/>
-        </svg>
-      </div>
-      <div class="review-card__stars" aria-label="${r.stars} out of 5 stars">${"★".repeat(r.stars)}${"☆".repeat(5 - r.stars)}</div>
-      <p class="review-card__text">&ldquo;${r.html}&rdquo;</p>`;
-    rTrack.appendChild(card);
-  });
-
-  // Aggregate score in the badge, computed from the cards themselves.
-  const gAvg = reviews.reduce((t, r) => t + r.stars, 0) / reviews.length;
-  const gRating = document.getElementById("gRating");
-  const gStars = document.getElementById("gStars");
-  const gCount = document.getElementById("gCount");
-  if (gRating) gRating.textContent = (Math.round(gAvg * 10) / 10).toFixed(1);
-  if (gStars) {
-    gStars.textContent =
-      "★".repeat(Math.round(gAvg)) + "☆".repeat(5 - Math.round(gAvg));
-    gStars.setAttribute(
-      "aria-label",
-      `Rated ${(Math.round(gAvg * 10) / 10).toFixed(1)} out of 5`,
-    );
-  }
-  if (gCount) gCount.textContent = String(reviews.length);
-})();
-
-/* ============================================================
-   Mobile navigation
-   The links become a panel below 760px. Kept honest about the
-   things a panel has to get right: focus, Escape, the back of
-   the page not scrolling underneath, and never staying open when
-   the layout returns to the desktop row.
-   ============================================================ */
-(() => {
-  "use strict";
-  const nav = document.getElementById("topNav");
-  const toggle = document.getElementById("navToggle");
-  const panel = document.getElementById("navLinks");
-  const scrim = document.getElementById("navScrim");
-  if (!nav || !toggle || !panel) return;
-
-  const phone = window.matchMedia("(max-width: 760px)");
-  let open = false;
-
-  const setOpen = (next) => {
-    open = next;
-    nav.classList.toggle("nav--open", open);
-    toggle.setAttribute("aria-expanded", String(open));
-    toggle.setAttribute("aria-label", open ? "Close menu" : "Open menu");
-    if (scrim) scrim.hidden = !open;
-    // hold the page still while the panel is up
-    document.body.style.overflow = open ? "hidden" : "";
-    if (open) {
-      const first = panel.querySelector("a");
-      if (first) first.focus({ preventScroll: true });
-    }
-  };
-
-  toggle.addEventListener("click", () => setOpen(!open));
-  if (scrim) scrim.addEventListener("click", () => setOpen(false));
-
-  // a link tap should navigate and dismiss, not leave the panel hanging
-  panel.addEventListener("click", (e) => {
-    if (e.target.closest("a") && open) setOpen(false);
-  });
-
-  document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape" && open) {
-      setOpen(false);
-      toggle.focus();
-    }
-  });
-
-  // rotating to landscape must not strand an open panel over a desktop row
-  const sync = () => {
-    if (!phone.matches && open) setOpen(false);
-  };
-  if (phone.addEventListener) phone.addEventListener("change", sync);
-  window.addEventListener("resize", sync);
 })();

@@ -208,6 +208,7 @@
   const MAX_INFLIGHT = 6;
   let inflight = 0;
 
+  let retrySweeps = 0;
   function pump() {
     while (inflight < MAX_INFLIGHT && orderCursor < loadOrder.length) {
       const i = loadOrder[orderCursor++];
@@ -217,6 +218,20 @@
         inflight--;
         pump();
       });
+    }
+    // Transient fetch failures were marked retryable; sweep the order a
+    // few more times so one bad response cannot strand the loader.
+    if (
+      inflight === 0 &&
+      orderCursor >= loadOrder.length &&
+      readyCount < N &&
+      retrySweeps < 3
+    ) {
+      retrySweeps++;
+      setTimeout(() => {
+        orderCursor = 0;
+        pump();
+      }, 1500 * retrySweeps);
     }
   }
 
