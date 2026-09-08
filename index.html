@@ -29,7 +29,7 @@
       integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
       crossorigin=""
     />
-    <link rel="stylesheet" href="css/site.css?v=ta4636f8" />
+    <link rel="stylesheet" href="css/site.css?v=bc34ffbd" />
   </head>
   <body>
     <nav class="nav" id="topNav" aria-label="Primary">
@@ -350,823 +350,1208 @@
 
     <!-- ===================== OUR PROCESS ===================== -->
     <section class="section process" id="process">
-      <div class="pflow-runway" id="processRunway">
-        <div class="pflow-stage">
-          <div class="pflow-head">
-            <div>
-              <h2 class="section__title">How a House Gets Built</h2>
-            </div>
-            <p class="pflow-head__lede">
-              This is 55 Reynolds Street, the house in the opening shot, built
-              here from its filed plans. Keep scrolling and watch it go up.
-            </p>
-          </div>
-
-          <div class="bscene" id="processScene">
-            <svg class="bhouse" viewBox="0 0 720 480" aria-hidden="true">
-              <defs>
-                <pattern
-                  id="bgrid"
-                  width="36"
-                  height="36"
-                  patternUnits="userSpaceOnUse"
+      <div class="ps-runway" id="psRunway">
+        <div class="ps-stage">
+          <div class="ps-inner">
+            <div class="ps-copy">
+              <h2 class="section__title">How We Build</h2>
+              <p class="ps-sub">
+                55 Reynolds Street, from empty lot to keys. Scroll to build it.
+              </p>
+              <ol class="ps-steps" id="psSteps">
+                <li class="ps-step" data-step="0">
+                  <p class="ps-step__n">01</p>
+                  <h3>Plan &amp; Design</h3>
+                  <p class="ps-step__d">
+                    Drawings, engineering, and a budget settled before anyone
+                    breaks ground.
+                  </p>
+                </li>
+                <li class="ps-step" data-step="1">
+                  <p class="ps-step__n">02</p>
+                  <h3>Site Preparation</h3>
+                  <p class="ps-step__d">
+                    Lot cleared, elevations set, and the hole dug to the plan.
+                  </p>
+                </li>
+                <li class="ps-step" data-step="2">
+                  <p class="ps-step__n">03</p>
+                  <h3>Foundation</h3>
+                  <p class="ps-step__d">
+                    Footings poured, walls set square and level, waterproofed
+                    before backfill.
+                  </p>
+                </li>
+                <li class="ps-step" data-step="3">
+                  <p class="ps-step__n">04</p>
+                  <h3>Framing</h3>
+                  <p class="ps-step__d">
+                    Floors, walls, and roof structure go up a storey at a time.
+                  </p>
+                </li>
+                <li class="ps-step" data-step="4">
+                  <p class="ps-step__n">05</p>
+                  <h3>Exterior &amp; Systems</h3>
+                  <p class="ps-step__d">
+                    Roof closed, windows set, mechanical rough-in inspected.
+                  </p>
+                </li>
+                <li class="ps-step" data-step="5">
+                  <p class="ps-step__n">06</p>
+                  <h3>Interior &amp; Finishes</h3>
+                  <p class="ps-step__d">
+                    Insulated, boarded, then the finish work you actually touch.
+                  </p>
+                </li>
+                <li class="ps-step" data-step="6">
+                  <p class="ps-step__n">07</p>
+                  <h3>Final Walkthrough</h3>
+                  <p class="ps-step__d">
+                    Punch list closed, keys handed over, and our number still
+                    works.
+                  </p>
+                </li>
+              </ol>
+              <div
+                class="ps-rail"
+                id="psRail"
+                role="group"
+                aria-label="Jump to stage"
+              >
+                <button
+                  class="ps-tick-btn"
+                  type="button"
+                  data-go="0"
+                  aria-label="Stage 01"
                 >
-                  <path
-                    d="M36 0H0v36"
-                    fill="none"
-                    stroke="rgba(214,0,0,0.07)"
-                    stroke-width="1"
-                  />
-                </pattern>
-                <clipPath id="bhole">
-                  <rect
-                    class="bhole-r"
-                    x="228"
-                    y="398"
-                    width="328"
-                    height="60"
-                  />
-                </clipPath>
-              </defs>
+                  <span></span></button
+                ><button
+                  class="ps-tick-btn"
+                  type="button"
+                  data-go="1"
+                  aria-label="Stage 02"
+                >
+                  <span></span></button
+                ><button
+                  class="ps-tick-btn"
+                  type="button"
+                  data-go="2"
+                  aria-label="Stage 03"
+                >
+                  <span></span></button
+                ><button
+                  class="ps-tick-btn"
+                  type="button"
+                  data-go="3"
+                  aria-label="Stage 04"
+                >
+                  <span></span></button
+                ><button
+                  class="ps-tick-btn"
+                  type="button"
+                  data-go="4"
+                  aria-label="Stage 05"
+                >
+                  <span></span></button
+                ><button
+                  class="ps-tick-btn"
+                  type="button"
+                  data-go="5"
+                  aria-label="Stage 06"
+                >
+                  <span></span></button
+                ><button
+                  class="ps-tick-btn"
+                  type="button"
+                  data-go="6"
+                  aria-label="Stage 07"
+                >
+                  <span></span>
+                </button>
+              </div>
+            </div>
+            <div class="ps-art">
+              <svg
+                class="ps-scene"
+                viewBox="86 116 868 538"
+                role="img"
+                aria-label="A three-storey house is built from empty lot to finished home as the section scrolls"
+              >
+                <defs>
+                  <linearGradient id="psGlass" x1="0" y1="0" x2="0.4" y2="1">
+                    <stop offset="0" stop-color="#2b3138" />
+                    <stop offset="1" stop-color="#1b1f24" />
+                  </linearGradient>
+                  <linearGradient id="psLit" x1="0" y1="0" x2="0.3" y2="1">
+                    <stop offset="0" stop-color="#ffdca6" />
+                    <stop offset="1" stop-color="#f5be6b" />
+                  </linearGradient>
+                  <clipPath id="psSkin">
+                    <rect x="300" y="174" width="400" height="346" />
+                  </clipPath>
+                </defs>
 
-              <rect
-                class="bp bp1"
-                x="60"
-                y="40"
-                width="600"
-                height="400"
-                fill="url(#bgrid)"
-              />
-
-              <!-- ground -->
-              <rect
-                class="bground"
-                x="40"
-                y="400"
-                width="640"
-                height="4"
-                rx="2"
-              />
-
-              <!-- 01 blueprint: the elevation draws itself -->
-              <g class="bp bp1">
-                <path
-                  class="bline"
-                  d="M240 400V120h240v280M480 150h64v250M240 400h304"
-                />
-                <path
-                  class="bline bline2"
-                  d="M264 150h48v58h-48zM330 150h48v58h-48zM396 150h48v58h-48zM264 242h48v58h-48zM330 242h48v58h-48zM396 242h48v58h-48zM264 322h48v58h-48zM330 322h48v58h-48zM396 322h48v78h-48z"
-                />
-              </g>
-
-              <!-- 02 permit stamp -->
-              <g class="bp bp2 bstamp">
-                <circle cx="360" cy="256" r="52" fill="var(--accent)" />
-                <circle
-                  cx="360"
-                  cy="256"
-                  r="40"
-                  fill="none"
-                  stroke="rgba(255,255,255,0.55)"
-                  stroke-width="3"
-                />
-                <path
-                  d="M338 256l15 17 29-34"
-                  fill="none"
-                  stroke="#fff"
-                  stroke-width="8"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                />
-              </g>
-
-              <!-- 03 excavation -->
-              <g class="bp bp3">
-                <g clip-path="url(#bhole)">
-                  <rect
-                    class="bpit"
-                    x="228"
-                    y="398"
-                    width="328"
-                    height="56"
-                    fill="#3d3730"
-                  />
+                <!-- ground: a hairline that runs past the house so the site reads wider than the build -->
+                <g class="ps-ground">
+                  <line class="ps-grade" x1="70" y1="520" x2="930" y2="520" />
+                  <ellipse class="ps-ao" cx="530" cy="527" rx="300" ry="12" />
                 </g>
-                <path
-                  class="bdirt"
-                  d="M560 400c10-26 30-36 48-30 10-16 32-16 42-2 14-6 26 4 28 18 8 6 10 8 10 14z"
-                  fill="#8a7f6d"
-                />
-                <g class="bexc">
-                  <rect
-                    x="588"
-                    y="368"
-                    width="104"
-                    height="26"
-                    rx="13"
-                    fill="#4a4642"
+
+                <!-- 01 plan: footprint, stakes and string, one real dimension -->
+                <g class="ps-plan">
+                  <path class="ps-foot" d="M300 520 h400 M700 520 h92" />
+                  <path
+                    class="ps-elev"
+                    d="M300 520 V174 H700 V520 M700 232 H792 V520"
                   />
-                  <circle cx="606" cy="381" r="8" fill="#2e2b28" />
-                  <circle cx="638" cy="381" r="8" fill="#2e2b28" />
-                  <circle cx="670" cy="381" r="8" fill="#2e2b28" />
-                  <rect
-                    x="604"
-                    y="322"
-                    width="66"
-                    height="46"
-                    rx="9"
-                    fill="var(--accent)"
-                  />
-                  <rect
-                    x="612"
-                    y="330"
-                    width="26"
-                    height="22"
-                    rx="4"
-                    fill="#b9c6cf"
-                  />
-                  <g class="bboom">
-                    <rect
-                      x="540"
-                      y="318"
-                      width="70"
-                      height="14"
-                      rx="7"
-                      fill="#8f8a83"
-                      transform="rotate(160 604 328)"
-                    />
-                    <g class="bstick">
-                      <rect
-                        x="524"
-                        y="330"
-                        width="13"
-                        height="44"
-                        rx="6"
-                        fill="#6f6a63"
-                      />
-                      <path
-                        class="bbucket"
-                        d="M514 372h32l-5 20a7 7 0 0 1-7 6h-9a7 7 0 0 1-7-6z"
-                        fill="#57524c"
-                      />
-                    </g>
+                  <g class="stake" data-i="0">
+                    <line x1="288" y1="518" x2="288" y2="494" />
+                    <path class="stake__flag" d="M288 494 l9 4 -9 4z" />
+                  </g>
+                  <g class="stake" data-i="1">
+                    <line x1="470" y1="518" x2="470" y2="494" />
+                    <path class="stake__flag" d="M470 494 l9 4 -9 4z" />
+                  </g>
+                  <g class="stake" data-i="2">
+                    <line x1="700" y1="518" x2="700" y2="494" />
+                    <path class="stake__flag" d="M700 494 l9 4 -9 4z" />
+                  </g>
+                  <g class="stake" data-i="3">
+                    <line x1="800" y1="518" x2="800" y2="494" />
+                    <path class="stake__flag" d="M800 494 l9 4 -9 4z" />
+                  </g>
+                  <path class="ps-string" d="M288 500 H800" />
+                  <g class="ps-dim">
+                    <line x1="300" y1="618" x2="700" y2="618" />
+                    <line class="ps-tick" x1="300" y1="610" x2="300" y2="626" />
+                    <line class="ps-tick" x1="700" y1="610" x2="700" y2="626" />
+                    <text x="500.0" y="613">32&#8217;-1&#8541;&#8221;</text>
                   </g>
                 </g>
-              </g>
 
-              <!-- 04 precast foundation panels -->
-              <g class="bp bp4">
-                <path
-                  class="bcable"
-                  d="M360 0v96M360 96l-26 30M360 96l26 30"
-                  stroke="rgba(16,18,20,0.4)"
-                  stroke-width="3"
-                  fill="none"
-                />
-                <rect
-                  class="bpanel"
-                  x="242"
-                  y="402"
-                  width="58"
-                  height="50"
-                  style="--d: 0s"
-                />
-                <rect
-                  class="bpanel"
-                  x="302"
-                  y="402"
-                  width="58"
-                  height="50"
-                  style="--d: 0.22s"
-                />
-                <rect
-                  class="bpanel"
-                  x="362"
-                  y="402"
-                  width="58"
-                  height="50"
-                  style="--d: 0.44s"
-                />
-                <rect
-                  class="bpanel"
-                  x="422"
-                  y="402"
-                  width="58"
-                  height="50"
-                  style="--d: 0.66s"
-                />
-              </g>
-
-              <!-- 05 framing -->
-              <g class="bp bp5">
-                <g class="bfloor bf1">
-                  <rect
-                    class="bs"
-                    x="248"
-                    y="322"
-                    width="10"
-                    height="78"
-                    rx="3"
-                  />
-                  <rect
-                    class="bs"
-                    x="276"
-                    y="322"
-                    width="10"
-                    height="78"
-                    rx="3"
-                  />
-                  <rect
-                    class="bs"
-                    x="304"
-                    y="322"
-                    width="10"
-                    height="78"
-                    rx="3"
-                  />
-                  <rect
-                    class="bs"
-                    x="332"
-                    y="322"
-                    width="10"
-                    height="78"
-                    rx="3"
-                  />
-                  <rect
-                    class="bs"
-                    x="360"
-                    y="322"
-                    width="10"
-                    height="78"
-                    rx="3"
-                  />
-                  <rect
-                    class="bs"
-                    x="388"
-                    y="322"
-                    width="10"
-                    height="78"
-                    rx="3"
-                  />
-                  <rect
-                    class="bs"
-                    x="416"
-                    y="322"
-                    width="10"
-                    height="78"
-                    rx="3"
-                  />
-                  <rect
-                    class="bs"
-                    x="444"
-                    y="322"
-                    width="10"
-                    height="78"
-                    rx="3"
-                  />
-                  <rect
-                    class="bs"
-                    x="472"
-                    y="322"
-                    width="10"
-                    height="78"
-                    rx="3"
-                  />
-                  <rect
-                    class="bs"
-                    x="240"
-                    y="312"
-                    width="240"
-                    height="10"
-                    rx="4"
-                  />
-                </g>
-                <g class="bfloor bf2">
-                  <rect
-                    class="bs"
-                    x="248"
-                    y="232"
-                    width="10"
-                    height="80"
-                    rx="3"
-                  />
-                  <rect
-                    class="bs"
-                    x="276"
-                    y="232"
-                    width="10"
-                    height="80"
-                    rx="3"
-                  />
-                  <rect
-                    class="bs"
-                    x="304"
-                    y="232"
-                    width="10"
-                    height="80"
-                    rx="3"
-                  />
-                  <rect
-                    class="bs"
-                    x="332"
-                    y="232"
-                    width="10"
-                    height="80"
-                    rx="3"
-                  />
-                  <rect
-                    class="bs"
-                    x="360"
-                    y="232"
-                    width="10"
-                    height="80"
-                    rx="3"
-                  />
-                  <rect
-                    class="bs"
-                    x="388"
-                    y="232"
-                    width="10"
-                    height="80"
-                    rx="3"
-                  />
-                  <rect
-                    class="bs"
-                    x="416"
-                    y="232"
-                    width="10"
-                    height="80"
-                    rx="3"
-                  />
-                  <rect
-                    class="bs"
-                    x="444"
-                    y="232"
-                    width="10"
-                    height="80"
-                    rx="3"
-                  />
-                  <rect
-                    class="bs"
-                    x="472"
-                    y="232"
-                    width="10"
-                    height="80"
-                    rx="3"
-                  />
-                  <rect
-                    class="bs"
-                    x="240"
-                    y="222"
-                    width="240"
-                    height="10"
-                    rx="4"
-                  />
-                </g>
-                <g class="bfloor bf3">
-                  <rect
-                    class="bs"
-                    x="248"
-                    y="140"
-                    width="10"
-                    height="82"
-                    rx="3"
-                  />
-                  <rect
-                    class="bs"
-                    x="276"
-                    y="140"
-                    width="10"
-                    height="82"
-                    rx="3"
-                  />
-                  <rect
-                    class="bs"
-                    x="304"
-                    y="140"
-                    width="10"
-                    height="82"
-                    rx="3"
-                  />
-                  <rect
-                    class="bs"
-                    x="332"
-                    y="140"
-                    width="10"
-                    height="82"
-                    rx="3"
-                  />
-                  <rect
-                    class="bs"
-                    x="360"
-                    y="140"
-                    width="10"
-                    height="82"
-                    rx="3"
-                  />
-                  <rect
-                    class="bs"
-                    x="388"
-                    y="140"
-                    width="10"
-                    height="82"
-                    rx="3"
-                  />
-                  <rect
-                    class="bs"
-                    x="416"
-                    y="140"
-                    width="10"
-                    height="82"
-                    rx="3"
-                  />
-                  <rect
-                    class="bs"
-                    x="444"
-                    y="140"
-                    width="10"
-                    height="82"
-                    rx="3"
-                  />
-                  <rect
-                    class="bs"
-                    x="472"
-                    y="140"
-                    width="10"
-                    height="82"
-                    rx="3"
-                  />
-                  <rect
-                    class="bs"
-                    x="240"
-                    y="130"
-                    width="240"
-                    height="10"
-                    rx="4"
-                  />
-                </g>
-              </g>
-
-              <!-- 07 rough-in (drawn behind facade, x-ray) -->
-              <g class="bp bp7">
-                <path
-                  class="bpipe"
-                  d="M258 396V208a14 14 0 0 1 14-14h64a14 14 0 0 1 14 14v52"
-                />
-                <path class="bwire" d="M300 396V260a10 10 0 0 1 10-10h116" />
-                <circle class="bnode" cx="426" cy="250" r="8" />
-              </g>
-
-              <!-- 08 drywall -->
-              <rect
-                class="bp bp8 bdry"
-                x="244"
-                y="124"
-                width="232"
-                height="272"
-              />
-
-              <!-- 06 exterior shell -->
-              <g class="bp bp6">
-                <g class="bshell">
-                  <rect
-                    class="bstucco"
-                    x="240"
-                    y="120"
-                    width="240"
-                    height="280"
-                  />
-                  <rect
-                    class="bstucco bstucco--wing"
-                    x="480"
-                    y="150"
-                    width="64"
-                    height="250"
-                  />
-                  <rect
-                    x="240"
-                    y="120"
-                    width="240"
-                    height="9"
-                    fill="rgba(255,255,255,0.6)"
-                  />
-                  <rect
-                    x="480"
-                    y="150"
-                    width="64"
-                    height="7"
-                    fill="rgba(255,255,255,0.55)"
-                  />
-                </g>
-                <rect
-                  class="bwin"
-                  x="264"
-                  y="150"
-                  width="48"
-                  height="58"
-                  rx="3"
-                  style="--d: 0s"
-                />
-                <rect
-                  class="bwin"
-                  x="330"
-                  y="150"
-                  width="48"
-                  height="58"
-                  rx="3"
-                  style="--d: 0.09s"
-                />
-                <rect
-                  class="bwin"
-                  x="396"
-                  y="150"
-                  width="48"
-                  height="58"
-                  rx="3"
-                  style="--d: 0.18s"
-                />
-                <rect
-                  class="bwin"
-                  x="264"
-                  y="242"
-                  width="48"
-                  height="58"
-                  rx="3"
-                  style="--d: 0.27s"
-                />
-                <rect
-                  class="bwin"
-                  x="330"
-                  y="242"
-                  width="48"
-                  height="58"
-                  rx="3"
-                  style="--d: 0.36s"
-                />
-                <rect
-                  class="bwin"
-                  x="396"
-                  y="242"
-                  width="48"
-                  height="58"
-                  rx="3"
-                  style="--d: 0.44999999999999996s"
-                />
-                <rect
-                  class="bwin"
-                  x="264"
-                  y="322"
-                  width="48"
-                  height="58"
-                  rx="3"
-                  style="--d: 0.54s"
-                />
-                <rect
-                  class="bwin"
-                  x="330"
-                  y="322"
-                  width="48"
-                  height="58"
-                  rx="3"
-                  style="--d: 0.63s"
-                />
-                <rect
-                  class="bwin bdoor"
-                  x="398"
-                  y="324"
-                  width="46"
-                  height="76"
-                  rx="3"
-                  style="--d: 0.85s"
-                />
-                <rect
-                  class="bwin bwwin"
-                  x="494"
-                  y="176"
-                  width="34"
-                  height="44"
-                  rx="3"
-                  style="--d: 0.5s"
-                />
-                <rect
-                  class="bwin bwwin"
-                  x="494"
-                  y="262"
-                  width="34"
-                  height="44"
-                  rx="3"
-                  style="--d: 0.62s"
-                />
-              </g>
-
-              <!-- 09 finishes: the windows warm up -->
-              <g class="bp bp9">
-                <rect
-                  class="bglow"
-                  x="268"
-                  y="154"
-                  width="40"
-                  height="50"
-                  rx="2"
-                  style="--d: 0s"
-                />
-                <rect
-                  class="bglow"
-                  x="334"
-                  y="154"
-                  width="40"
-                  height="50"
-                  rx="2"
-                  style="--d: 0.12s"
-                />
-                <rect
-                  class="bglow"
-                  x="400"
-                  y="154"
-                  width="40"
-                  height="50"
-                  rx="2"
-                  style="--d: 0.24s"
-                />
-                <rect
-                  class="bglow"
-                  x="268"
-                  y="246"
-                  width="40"
-                  height="50"
-                  rx="2"
-                  style="--d: 0.36s"
-                />
-                <rect
-                  class="bglow"
-                  x="334"
-                  y="246"
-                  width="40"
-                  height="50"
-                  rx="2"
-                  style="--d: 0.48s"
-                />
-                <rect
-                  class="bglow"
-                  x="400"
-                  y="246"
-                  width="40"
-                  height="50"
-                  rx="2"
-                  style="--d: 0.6s"
-                />
-                <rect
-                  class="bglow"
-                  x="268"
-                  y="326"
-                  width="40"
-                  height="50"
-                  rx="2"
-                  style="--d: 0.72s"
-                />
-                <rect
-                  class="bglow"
-                  x="334"
-                  y="326"
-                  width="40"
-                  height="50"
-                  rx="2"
-                  style="--d: 0.84s"
-                />
-              </g>
-
-              <!-- 10 handover -->
-              <g class="bp bp10">
-                <path
-                  class="btree"
-                  d="M196 400c0-34 12-56 20-56s20 22 20 56z"
-                  style="--d: 0s"
-                />
-                <path
-                  class="btree"
-                  d="M556 400c0-30 11-50 18-50s18 20 18 50z"
-                  style="--d: 0.15s"
-                />
-                <rect
-                  class="btree bstoop"
-                  x="390"
-                  y="394"
-                  width="62"
-                  height="10"
-                  rx="3"
-                  style="--d: 0.3s"
-                />
-                <circle class="bhandle" cx="436" cy="364" r="3.5" />
-                <g class="bkey">
-                  <circle cx="580" cy="120" r="17" fill="var(--accent)" />
-                  <circle cx="580" cy="120" r="6.5" fill="#fff" />
+                <!-- 02 site prep: the ground opens -->
+                <g class="ps-dig">
+                  <path class="ps-pit" d="M280 520 L296 588 H704 L720 520 Z" />
                   <path
-                    d="M592 132l26 26M606 146l-8 8M614 154l-7 7"
-                    stroke="var(--accent)"
-                    stroke-width="10"
-                    stroke-linecap="round"
-                    fill="none"
+                    class="ps-spoil"
+                    d="M812 520 c14-34 44-46 66-38 12-20 40-20 52 0 16-8 30 4 32 20 8 6 12 10 12 18 z"
+                  />
+                  <path class="ps-track" d="M120 536 H250 M120 546 H250" />
+                </g>
+
+                <!-- 03 foundation -->
+                <g class="ps-fdn">
+                  <rect
+                    class="fdn__ftg"
+                    x="288"
+                    y="566"
+                    width="424"
+                    height="18"
+                    rx="2"
+                  />
+                  <g class="fdn__panels">
+                    <rect
+                      class="fdn__p"
+                      data-i="0"
+                      x="292.0"
+                      y="520"
+                      width="68"
+                      height="46"
+                    />
+                    <rect
+                      class="fdn__p"
+                      data-i="1"
+                      x="361.3"
+                      y="520"
+                      width="68"
+                      height="46"
+                    />
+                    <rect
+                      class="fdn__p"
+                      data-i="2"
+                      x="430.6"
+                      y="520"
+                      width="68"
+                      height="46"
+                    />
+                    <rect
+                      class="fdn__p"
+                      data-i="3"
+                      x="499.9"
+                      y="520"
+                      width="68"
+                      height="46"
+                    />
+                    <rect
+                      class="fdn__p"
+                      data-i="4"
+                      x="569.2"
+                      y="520"
+                      width="68"
+                      height="46"
+                    />
+                    <rect
+                      class="fdn__p"
+                      data-i="5"
+                      x="638.5"
+                      y="520"
+                      width="68"
+                      height="46"
+                    />
+                  </g>
+                  <rect
+                    class="fdn__slab"
+                    x="300"
+                    y="510"
+                    width="400"
+                    height="12"
+                    rx="2"
+                  />
+                  <path
+                    class="ps-backfill"
+                    d="M280 520 L296 588 H704 L720 520 Z"
                   />
                 </g>
-                <path class="bspark" d="M580 76l3 9 9 3-9 3-3 9-3-9-9-3 9-3z" />
-              </g>
-            </svg>
-            <div class="bcopy" id="processCopy">
-              <div class="bstep" data-step="0">
-                <p class="bstep__num">01</p>
-                <h3>Design & Drawings</h3>
-                <p>
-                  The house exists on paper first. Layout, structure, and budget
-                  get settled with the architect and engineer while decisions
-                  are still cheap.
-                </p>
-              </div>
-              <div class="bstep" data-step="1">
-                <p class="bstep__num">02</p>
-                <h3>Permits & Approvals</h3>
-                <p>
-                  We pull the permits and handle the township, the inspectors,
-                  and the paperwork. You do not chase any of it.
-                </p>
-              </div>
-              <div class="bstep" data-step="2">
-                <p class="bstep__num">03</p>
-                <h3>Site Work & Excavation</h3>
-                <p>
-                  Machines open the ground. We clear the lot, set the
-                  elevations, and dig the basement, watching drainage before
-                  anything gets set.
-                </p>
-              </div>
-              <div class="bstep" data-step="3">
-                <p class="bstep__num">04</p>
-                <h3>Footings & Foundation</h3>
-                <p>
-                  Precast concrete wall panels are craned into the hole and set
-                  square, level, and waterproofed. Mistakes down here are the
-                  expensive ones.
-                </p>
-              </div>
-              <div class="bstep" data-step="4">
-                <p class="bstep__num">05</p>
-                <h3>Framing & Structure</h3>
-                <p>
-                  Stud walls and engineered floor trusses rise a storey at a
-                  time. Straight walls and correct openings here save every
-                  trade that follows.
-                </p>
-              </div>
-              <div class="bstep" data-step="5">
-                <p class="bstep__num">06</p>
-                <h3>Roof & Exterior</h3>
-                <p>
-                  Stucco, windows, and doors close the building in. Once it is
-                  weather-tight, the weather stops setting the schedule.
-                </p>
-              </div>
-              <div class="bstep" data-step="6">
-                <p class="bstep__num">07</p>
-                <h3>Rough-In: Plumbing, Electric, HVAC</h3>
-                <p>
-                  Pipes, wire, and ductwork thread through the open walls, then
-                  get inspected. The part nobody sees and everybody lives with.
-                </p>
-              </div>
-              <div class="bstep" data-step="7">
-                <p class="bstep__num">08</p>
-                <h3>Insulation & Drywall</h3>
-                <p>
-                  The house gets sealed, insulated, hung, taped, and sanded.
-                  Flat walls and clean corners make the finish work look right.
-                </p>
-              </div>
-              <div class="bstep" data-step="8">
-                <p class="bstep__num">09</p>
-                <h3>Finishes</h3>
-                <p>
-                  Cabinets, counters, tile, flooring, trim, and paint. The
-                  lights come on. This is the part you touch every day.
-                </p>
-              </div>
-              <div class="bstep" data-step="9">
-                <p class="bstep__num">10</p>
-                <h3>Walkthrough & Handover</h3>
-                <p>
-                  We walk the finished job with you, fix the punch list, and
-                  hand over the keys. You have our number afterwards.
-                </p>
-              </div>
-            </div>
-          </div>
 
-          <div class="pflow-rail">
-            <div class="pflow-rail__line">
-              <span class="pflow-rail__fill" id="processFill"></span>
+                <!-- 04 framing: floors, then walls storey by storey, then the roof deck -->
+                <g class="ps-frame">
+                  <g class="fl1">
+                    <rect class="fl1__j" x="310" y="511" width="6" height="9" />
+                    <rect class="fl1__j" x="335" y="511" width="6" height="9" />
+                    <rect class="fl1__j" x="360" y="511" width="6" height="9" />
+                    <rect class="fl1__j" x="385" y="511" width="6" height="9" />
+                    <rect class="fl1__j" x="410" y="511" width="6" height="9" />
+                    <rect class="fl1__j" x="435" y="511" width="6" height="9" />
+                    <rect class="fl1__j" x="460" y="511" width="6" height="9" />
+                    <rect class="fl1__j" x="485" y="511" width="6" height="9" />
+                    <rect class="fl1__j" x="510" y="511" width="6" height="9" />
+                    <rect class="fl1__j" x="535" y="511" width="6" height="9" />
+                    <rect class="fl1__j" x="560" y="511" width="6" height="9" />
+                    <rect class="fl1__j" x="585" y="511" width="6" height="9" />
+                    <rect class="fl1__j" x="610" y="511" width="6" height="9" />
+                    <rect class="fl1__j" x="635" y="511" width="6" height="9" />
+                    <rect class="fl1__j" x="660" y="511" width="6" height="9" />
+                    <rect class="fl1__j" x="685" y="511" width="6" height="9" />
+                    <rect
+                      class="fl1__rim"
+                      x="300"
+                      y="509"
+                      width="400"
+                      height="11"
+                      rx="1.5"
+                    />
+                  </g>
+                  <g class="ps-studs s1">
+                    <rect
+                      class="stud"
+                      data-i="0"
+                      x="308"
+                      y="403"
+                      width="7"
+                      height="117"
+                      rx="1.5"
+                    />
+                    <rect
+                      class="stud"
+                      data-i="1"
+                      x="333"
+                      y="403"
+                      width="7"
+                      height="117"
+                      rx="1.5"
+                    />
+                    <rect
+                      class="stud"
+                      data-i="2"
+                      x="358"
+                      y="403"
+                      width="7"
+                      height="117"
+                      rx="1.5"
+                    />
+                    <rect
+                      class="stud"
+                      data-i="3"
+                      x="383"
+                      y="403"
+                      width="7"
+                      height="117"
+                      rx="1.5"
+                    />
+                    <rect
+                      class="stud"
+                      data-i="4"
+                      x="408"
+                      y="403"
+                      width="7"
+                      height="117"
+                      rx="1.5"
+                    />
+                    <rect
+                      class="stud"
+                      data-i="5"
+                      x="433"
+                      y="403"
+                      width="7"
+                      height="117"
+                      rx="1.5"
+                    />
+                    <rect
+                      class="stud"
+                      data-i="6"
+                      x="458"
+                      y="403"
+                      width="7"
+                      height="117"
+                      rx="1.5"
+                    />
+                    <rect
+                      class="stud"
+                      data-i="7"
+                      x="483"
+                      y="403"
+                      width="7"
+                      height="117"
+                      rx="1.5"
+                    />
+                    <rect
+                      class="stud"
+                      data-i="8"
+                      x="508"
+                      y="403"
+                      width="7"
+                      height="117"
+                      rx="1.5"
+                    />
+                    <rect
+                      class="stud"
+                      data-i="9"
+                      x="533"
+                      y="403"
+                      width="7"
+                      height="117"
+                      rx="1.5"
+                    />
+                    <rect
+                      class="stud"
+                      data-i="10"
+                      x="558"
+                      y="403"
+                      width="7"
+                      height="117"
+                      rx="1.5"
+                    />
+                    <rect
+                      class="stud"
+                      data-i="11"
+                      x="583"
+                      y="403"
+                      width="7"
+                      height="117"
+                      rx="1.5"
+                    />
+                    <rect
+                      class="stud"
+                      data-i="12"
+                      x="608"
+                      y="403"
+                      width="7"
+                      height="117"
+                      rx="1.5"
+                    />
+                    <rect
+                      class="stud"
+                      data-i="13"
+                      x="633"
+                      y="403"
+                      width="7"
+                      height="117"
+                      rx="1.5"
+                    />
+                    <rect
+                      class="stud"
+                      data-i="14"
+                      x="658"
+                      y="403"
+                      width="7"
+                      height="117"
+                      rx="1.5"
+                    />
+                    <rect
+                      class="stud"
+                      data-i="15"
+                      x="683"
+                      y="403"
+                      width="7"
+                      height="117"
+                      rx="1.5"
+                    />
+                  </g>
+                  <g class="fl2">
+                    <rect class="fl2__j" x="310" y="394" width="6" height="9" />
+                    <rect class="fl2__j" x="335" y="394" width="6" height="9" />
+                    <rect class="fl2__j" x="360" y="394" width="6" height="9" />
+                    <rect class="fl2__j" x="385" y="394" width="6" height="9" />
+                    <rect class="fl2__j" x="410" y="394" width="6" height="9" />
+                    <rect class="fl2__j" x="435" y="394" width="6" height="9" />
+                    <rect class="fl2__j" x="460" y="394" width="6" height="9" />
+                    <rect class="fl2__j" x="485" y="394" width="6" height="9" />
+                    <rect class="fl2__j" x="510" y="394" width="6" height="9" />
+                    <rect class="fl2__j" x="535" y="394" width="6" height="9" />
+                    <rect class="fl2__j" x="560" y="394" width="6" height="9" />
+                    <rect class="fl2__j" x="585" y="394" width="6" height="9" />
+                    <rect class="fl2__j" x="610" y="394" width="6" height="9" />
+                    <rect class="fl2__j" x="635" y="394" width="6" height="9" />
+                    <rect class="fl2__j" x="660" y="394" width="6" height="9" />
+                    <rect class="fl2__j" x="685" y="394" width="6" height="9" />
+                    <rect
+                      class="fl2__rim"
+                      x="300"
+                      y="392"
+                      width="400"
+                      height="11"
+                      rx="1.5"
+                    />
+                  </g>
+                  <g class="ps-studs s2">
+                    <rect
+                      class="stud"
+                      data-i="16"
+                      x="308"
+                      y="286"
+                      width="7"
+                      height="117"
+                      rx="1.5"
+                    />
+                    <rect
+                      class="stud"
+                      data-i="17"
+                      x="333"
+                      y="286"
+                      width="7"
+                      height="117"
+                      rx="1.5"
+                    />
+                    <rect
+                      class="stud"
+                      data-i="18"
+                      x="358"
+                      y="286"
+                      width="7"
+                      height="117"
+                      rx="1.5"
+                    />
+                    <rect
+                      class="stud"
+                      data-i="19"
+                      x="383"
+                      y="286"
+                      width="7"
+                      height="117"
+                      rx="1.5"
+                    />
+                    <rect
+                      class="stud"
+                      data-i="20"
+                      x="408"
+                      y="286"
+                      width="7"
+                      height="117"
+                      rx="1.5"
+                    />
+                    <rect
+                      class="stud"
+                      data-i="21"
+                      x="433"
+                      y="286"
+                      width="7"
+                      height="117"
+                      rx="1.5"
+                    />
+                    <rect
+                      class="stud"
+                      data-i="22"
+                      x="458"
+                      y="286"
+                      width="7"
+                      height="117"
+                      rx="1.5"
+                    />
+                    <rect
+                      class="stud"
+                      data-i="23"
+                      x="483"
+                      y="286"
+                      width="7"
+                      height="117"
+                      rx="1.5"
+                    />
+                    <rect
+                      class="stud"
+                      data-i="24"
+                      x="508"
+                      y="286"
+                      width="7"
+                      height="117"
+                      rx="1.5"
+                    />
+                    <rect
+                      class="stud"
+                      data-i="25"
+                      x="533"
+                      y="286"
+                      width="7"
+                      height="117"
+                      rx="1.5"
+                    />
+                    <rect
+                      class="stud"
+                      data-i="26"
+                      x="558"
+                      y="286"
+                      width="7"
+                      height="117"
+                      rx="1.5"
+                    />
+                    <rect
+                      class="stud"
+                      data-i="27"
+                      x="583"
+                      y="286"
+                      width="7"
+                      height="117"
+                      rx="1.5"
+                    />
+                    <rect
+                      class="stud"
+                      data-i="28"
+                      x="608"
+                      y="286"
+                      width="7"
+                      height="117"
+                      rx="1.5"
+                    />
+                    <rect
+                      class="stud"
+                      data-i="29"
+                      x="633"
+                      y="286"
+                      width="7"
+                      height="117"
+                      rx="1.5"
+                    />
+                    <rect
+                      class="stud"
+                      data-i="30"
+                      x="658"
+                      y="286"
+                      width="7"
+                      height="117"
+                      rx="1.5"
+                    />
+                    <rect
+                      class="stud"
+                      data-i="31"
+                      x="683"
+                      y="286"
+                      width="7"
+                      height="117"
+                      rx="1.5"
+                    />
+                  </g>
+                  <g class="fl3">
+                    <rect class="fl3__j" x="310" y="277" width="6" height="9" />
+                    <rect class="fl3__j" x="335" y="277" width="6" height="9" />
+                    <rect class="fl3__j" x="360" y="277" width="6" height="9" />
+                    <rect class="fl3__j" x="385" y="277" width="6" height="9" />
+                    <rect class="fl3__j" x="410" y="277" width="6" height="9" />
+                    <rect class="fl3__j" x="435" y="277" width="6" height="9" />
+                    <rect class="fl3__j" x="460" y="277" width="6" height="9" />
+                    <rect class="fl3__j" x="485" y="277" width="6" height="9" />
+                    <rect class="fl3__j" x="510" y="277" width="6" height="9" />
+                    <rect class="fl3__j" x="535" y="277" width="6" height="9" />
+                    <rect class="fl3__j" x="560" y="277" width="6" height="9" />
+                    <rect class="fl3__j" x="585" y="277" width="6" height="9" />
+                    <rect class="fl3__j" x="610" y="277" width="6" height="9" />
+                    <rect class="fl3__j" x="635" y="277" width="6" height="9" />
+                    <rect class="fl3__j" x="660" y="277" width="6" height="9" />
+                    <rect class="fl3__j" x="685" y="277" width="6" height="9" />
+                    <rect
+                      class="fl3__rim"
+                      x="300"
+                      y="275"
+                      width="400"
+                      height="11"
+                      rx="1.5"
+                    />
+                  </g>
+                  <g class="ps-studs s3">
+                    <rect
+                      class="stud"
+                      data-i="32"
+                      x="308"
+                      y="174"
+                      width="7"
+                      height="112"
+                      rx="1.5"
+                    />
+                    <rect
+                      class="stud"
+                      data-i="33"
+                      x="333"
+                      y="174"
+                      width="7"
+                      height="112"
+                      rx="1.5"
+                    />
+                    <rect
+                      class="stud"
+                      data-i="34"
+                      x="358"
+                      y="174"
+                      width="7"
+                      height="112"
+                      rx="1.5"
+                    />
+                    <rect
+                      class="stud"
+                      data-i="35"
+                      x="383"
+                      y="174"
+                      width="7"
+                      height="112"
+                      rx="1.5"
+                    />
+                    <rect
+                      class="stud"
+                      data-i="36"
+                      x="408"
+                      y="174"
+                      width="7"
+                      height="112"
+                      rx="1.5"
+                    />
+                    <rect
+                      class="stud"
+                      data-i="37"
+                      x="433"
+                      y="174"
+                      width="7"
+                      height="112"
+                      rx="1.5"
+                    />
+                    <rect
+                      class="stud"
+                      data-i="38"
+                      x="458"
+                      y="174"
+                      width="7"
+                      height="112"
+                      rx="1.5"
+                    />
+                    <rect
+                      class="stud"
+                      data-i="39"
+                      x="483"
+                      y="174"
+                      width="7"
+                      height="112"
+                      rx="1.5"
+                    />
+                    <rect
+                      class="stud"
+                      data-i="40"
+                      x="508"
+                      y="174"
+                      width="7"
+                      height="112"
+                      rx="1.5"
+                    />
+                    <rect
+                      class="stud"
+                      data-i="41"
+                      x="533"
+                      y="174"
+                      width="7"
+                      height="112"
+                      rx="1.5"
+                    />
+                    <rect
+                      class="stud"
+                      data-i="42"
+                      x="558"
+                      y="174"
+                      width="7"
+                      height="112"
+                      rx="1.5"
+                    />
+                    <rect
+                      class="stud"
+                      data-i="43"
+                      x="583"
+                      y="174"
+                      width="7"
+                      height="112"
+                      rx="1.5"
+                    />
+                    <rect
+                      class="stud"
+                      data-i="44"
+                      x="608"
+                      y="174"
+                      width="7"
+                      height="112"
+                      rx="1.5"
+                    />
+                    <rect
+                      class="stud"
+                      data-i="45"
+                      x="633"
+                      y="174"
+                      width="7"
+                      height="112"
+                      rx="1.5"
+                    />
+                    <rect
+                      class="stud"
+                      data-i="46"
+                      x="658"
+                      y="174"
+                      width="7"
+                      height="112"
+                      rx="1.5"
+                    />
+                    <rect
+                      class="stud"
+                      data-i="47"
+                      x="683"
+                      y="174"
+                      width="7"
+                      height="112"
+                      rx="1.5"
+                    />
+                  </g>
+                  <g class="ps-studs sw">
+                    <rect
+                      class="stud"
+                      data-i="48"
+                      x="708"
+                      y="380"
+                      width="7"
+                      height="140"
+                      rx="1.5"
+                    />
+                    <rect
+                      class="stud"
+                      data-i="49"
+                      x="733"
+                      y="380"
+                      width="7"
+                      height="140"
+                      rx="1.5"
+                    />
+                    <rect
+                      class="stud"
+                      data-i="50"
+                      x="758"
+                      y="380"
+                      width="7"
+                      height="140"
+                      rx="1.5"
+                    />
+                    <rect
+                      class="stud"
+                      data-i="51"
+                      x="708"
+                      y="232"
+                      width="7"
+                      height="148"
+                      rx="1.5"
+                    />
+                    <rect
+                      class="stud"
+                      data-i="52"
+                      x="733"
+                      y="232"
+                      width="7"
+                      height="148"
+                      rx="1.5"
+                    />
+                    <rect
+                      class="stud"
+                      data-i="53"
+                      x="758"
+                      y="232"
+                      width="7"
+                      height="148"
+                      rx="1.5"
+                    />
+                  </g>
+                  <g class="ps-beam">
+                    <rect x="296" y="172" width="408" height="13" rx="2" />
+                  </g>
+                  <g class="ps-beam wing">
+                    <rect x="698" y="230" width="98" height="11" rx="2" />
+                  </g>
+                </g>
+
+                <!-- 05 systems, threaded before the walls close -->
+                <g class="ps-sys">
+                  <path class="sys-pipe" d="M362 514 V300 h96" />
+                  <path class="sys-wire" d="M420 514 V360 h180" />
+                  <rect
+                    class="sys-duct"
+                    x="516"
+                    y="292"
+                    width="60"
+                    height="26"
+                    rx="3"
+                  />
+                  <circle class="sys-node" cx="600" cy="360" r="5" />
+                </g>
+
+                <!-- 06 skin + finishes -->
+                <g class="ps-skin">
+                  <g clip-path="url(#psSkin)">
+                    <rect
+                      class="ps-batt"
+                      x="300"
+                      y="174"
+                      width="400"
+                      height="346"
+                    />
+                  </g>
+                  <rect
+                    class="ps-wall"
+                    x="300"
+                    y="174"
+                    width="400"
+                    height="346"
+                  />
+                  <rect
+                    class="ps-wall wing"
+                    x="700"
+                    y="232"
+                    width="92"
+                    height="288"
+                  />
+                  <rect
+                    class="ps-reveal"
+                    x="300"
+                    y="174"
+                    width="400"
+                    height="7"
+                  />
+                  <g class="ps-holes">
+                    <rect class="hole" x="337" y="431" width="76" height="68" />
+                    <rect class="hole" x="462" y="431" width="76" height="68" />
+                    <rect class="hole" x="337" y="314" width="76" height="68" />
+                    <rect class="hole" x="462" y="314" width="76" height="68" />
+                    <rect class="hole" x="587" y="314" width="76" height="68" />
+                    <rect class="hole" x="337" y="197" width="76" height="68" />
+                    <rect class="hole" x="462" y="197" width="76" height="68" />
+                    <rect class="hole" x="587" y="197" width="76" height="68" />
+                  </g>
+                </g>
+
+                <!-- roof caps settle last -->
+                <g class="ps-cap">
+                  <rect x="292" y="158" width="416" height="16" rx="2" />
+                </g>
+                <g class="ps-cap wing">
+                  <rect x="694" y="220" width="106" height="14" rx="2" />
+                </g>
+
+                <!-- openings -->
+                <g class="ps-openings">
+                  <g class="op" data-i="0">
+                    <rect
+                      class="glass"
+                      x="340"
+                      y="434"
+                      width="70"
+                      height="62"
+                      rx="2"
+                    />
+                    <rect
+                      class="frame"
+                      x="340"
+                      y="434"
+                      width="70"
+                      height="62"
+                      rx="2"
+                    />
+                    <line
+                      class="mull"
+                      x1="375.0"
+                      y1="434"
+                      x2="375.0"
+                      y2="496"
+                    />
+                  </g>
+                  <g class="op" data-i="1">
+                    <rect
+                      class="glass"
+                      x="465"
+                      y="434"
+                      width="70"
+                      height="62"
+                      rx="2"
+                    />
+                    <rect
+                      class="frame"
+                      x="465"
+                      y="434"
+                      width="70"
+                      height="62"
+                      rx="2"
+                    />
+                    <line
+                      class="mull"
+                      x1="500.0"
+                      y1="434"
+                      x2="500.0"
+                      y2="496"
+                    />
+                  </g>
+                  <g class="op" data-i="2">
+                    <rect
+                      class="glass"
+                      x="340"
+                      y="317"
+                      width="70"
+                      height="62"
+                      rx="2"
+                    />
+                    <rect
+                      class="frame"
+                      x="340"
+                      y="317"
+                      width="70"
+                      height="62"
+                      rx="2"
+                    />
+                    <line
+                      class="mull"
+                      x1="375.0"
+                      y1="317"
+                      x2="375.0"
+                      y2="379"
+                    />
+                  </g>
+                  <g class="op" data-i="3">
+                    <rect
+                      class="glass"
+                      x="465"
+                      y="317"
+                      width="70"
+                      height="62"
+                      rx="2"
+                    />
+                    <rect
+                      class="frame"
+                      x="465"
+                      y="317"
+                      width="70"
+                      height="62"
+                      rx="2"
+                    />
+                    <line
+                      class="mull"
+                      x1="500.0"
+                      y1="317"
+                      x2="500.0"
+                      y2="379"
+                    />
+                  </g>
+                  <g class="op" data-i="4">
+                    <rect
+                      class="glass"
+                      x="590"
+                      y="317"
+                      width="70"
+                      height="62"
+                      rx="2"
+                    />
+                    <rect
+                      class="frame"
+                      x="590"
+                      y="317"
+                      width="70"
+                      height="62"
+                      rx="2"
+                    />
+                    <line
+                      class="mull"
+                      x1="625.0"
+                      y1="317"
+                      x2="625.0"
+                      y2="379"
+                    />
+                  </g>
+                  <g class="op" data-i="5">
+                    <rect
+                      class="glass"
+                      x="340"
+                      y="200"
+                      width="70"
+                      height="62"
+                      rx="2"
+                    />
+                    <rect
+                      class="frame"
+                      x="340"
+                      y="200"
+                      width="70"
+                      height="62"
+                      rx="2"
+                    />
+                    <line
+                      class="mull"
+                      x1="375.0"
+                      y1="200"
+                      x2="375.0"
+                      y2="262"
+                    />
+                  </g>
+                  <g class="op" data-i="6">
+                    <rect
+                      class="glass"
+                      x="465"
+                      y="200"
+                      width="70"
+                      height="62"
+                      rx="2"
+                    />
+                    <rect
+                      class="frame"
+                      x="465"
+                      y="200"
+                      width="70"
+                      height="62"
+                      rx="2"
+                    />
+                    <line
+                      class="mull"
+                      x1="500.0"
+                      y1="200"
+                      x2="500.0"
+                      y2="262"
+                    />
+                  </g>
+                  <g class="op" data-i="7">
+                    <rect
+                      class="glass"
+                      x="590"
+                      y="200"
+                      width="70"
+                      height="62"
+                      rx="2"
+                    />
+                    <rect
+                      class="frame"
+                      x="590"
+                      y="200"
+                      width="70"
+                      height="62"
+                      rx="2"
+                    />
+                    <line
+                      class="mull"
+                      x1="625.0"
+                      y1="200"
+                      x2="625.0"
+                      y2="262"
+                    />
+                  </g>
+                  <g class="op" data-i="8">
+                    <rect
+                      class="glass"
+                      x="718"
+                      y="268"
+                      width="56"
+                      height="54"
+                      rx="2"
+                    />
+                    <rect
+                      class="frame"
+                      x="718"
+                      y="268"
+                      width="56"
+                      height="54"
+                      rx="2"
+                    />
+                  </g>
+                  <g class="op" data-i="9">
+                    <rect
+                      class="glass"
+                      x="718"
+                      y="404"
+                      width="56"
+                      height="54"
+                      rx="2"
+                    />
+                    <rect
+                      class="frame"
+                      x="718"
+                      y="404"
+                      width="56"
+                      height="54"
+                      rx="2"
+                    />
+                  </g>
+                  <g class="op" data-i="10">
+                    <rect
+                      class="door"
+                      x="592"
+                      y="426"
+                      width="66"
+                      height="94"
+                      rx="2"
+                    />
+                    <circle class="knob" cx="646" cy="474" r="2.6" />
+                  </g>
+                </g>
+
+                <!-- 07 handover -->
+                <g class="ps-final">
+                  <path class="ps-walk" d="M604 520 l-14 78 h74 l-12-78 z" />
+                  <path
+                    class="shrub"
+                    data-i="0"
+                    d="M236 520 c0-26 14.3-37.699999999999996 23.400000000000002-37.699999999999996 c9.1 0 23.400000000000002 11.700000000000001 23.400000000000002 37.699999999999996 z"
+                  />
+                  <path
+                    class="shrub"
+                    data-i="1"
+                    d="M818 520 c0-22 12.100000000000001-31.9 19.8-31.9 c7.699999999999999 0 19.8 9.9 19.8 31.9 z"
+                  />
+                  <path
+                    class="shrub"
+                    data-i="2"
+                    d="M196 520 c0-18 9.9-26.099999999999998 16.2-26.099999999999998 c6.3 0 16.2 8.1 16.2 26.099999999999998 z"
+                  />
+                  <g class="ps-tree">
+                    <path class="ps-trunk" d="M160 520 v-42" />
+                    <path
+                      class="ps-crown"
+                      d="M160 490 c-30 0-44-22-44-40 0-22 20-36 44-36 24 0 44 14 44 36 0 18-14 40-44 40z"
+                    />
+                  </g>
+                  <g class="ps-lamp">
+                    <circle cx="672" cy="440" r="4" />
+                    <path
+                      class="ps-glow"
+                      d="M672 440 m-30 0 a30 30 0 1 0 60 0 a30 30 0 1 0 -60 0"
+                    />
+                  </g>
+                  <g class="ps-stamp">
+                    <circle cx="756" cy="486" r="15" />
+                    <path class="ps-check" d="M749 486 l5 6 10-12" />
+                  </g>
+                </g>
+              </svg>
             </div>
-            <p class="pflow-rail__count">
-              <span id="processCount">01</span> / 10
-            </p>
           </div>
         </div>
       </div>
@@ -1529,7 +1914,7 @@
       crossorigin=""
     ></script>
     <script src="js/main.js?v=rb8758fd" defer></script>
-    <script src="js/process.js?v=p7b3ff1f" defer></script>
+    <script src="js/process.js?v=nc34ffbd" defer></script>
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",

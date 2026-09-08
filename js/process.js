@@ -1,107 +1,277 @@
 /* ============================================================
    PSI Construction — the build
-   The process section pins while vertical scroll assembles
-   55 Reynolds Street phase by phase: progress maps to phases
-   1-10, cumulative .on-N classes reveal each layer, and the
-   copy panel follows.
+   55 Reynolds Street assembles as the section scrolls. Every
+   animated value is a pure function of scroll progress, so the
+   build scrubs backwards exactly as it ran forwards and nothing
+   keeps moving once the reader stops.
 
-   Fails open: no JS, a short/narrow viewport, or reduced motion
-   drops the pin and shows the finished house over a step list.
+   Cheap by construction: transforms, opacity and dash offsets
+   only, one rAF that runs solely while the section is on screen.
    ============================================================ */
 (() => {
   "use strict";
 
-  const runway = document.getElementById("processRunway");
-  const scene = document.getElementById("processScene");
-  const fill = document.getElementById("processFill");
-  const count = document.getElementById("processCount");
-  if (!runway || !scene) return;
+  const runway = document.getElementById("psRunway");
+  const stage = runway && runway.querySelector(".ps-stage");
+  if (!runway || !stage) return;
 
-  const steps = Array.from(scene.querySelectorAll(".bstep"));
-  const PHASES = 10;
-  const reduced = window.matchMedia("(prefers-reduced-motion: reduce)");
+  const scene = runway.querySelector(".ps-scene");
+  const steps = [...runway.querySelectorAll(".ps-step")];
+  const ticks = [...runway.querySelectorAll(".ps-tick-btn")];
+  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)");
 
-  let pinned = false;
-  let ticking = false;
-  let lastPhase = -1;
+  // stage boundaries in progress space
+  const S = [0, 0.14, 0.28, 0.43, 0.6, 0.75, 0.88, 1.0001];
 
-  const canPin = () =>
-    !reduced.matches && window.innerWidth >= 860 && window.innerHeight >= 560;
+  /* ---------- maths ---------- */
+  const cl = (v) => (v < 0 ? 0 : v > 1 ? 1 : v);
+  const at = (p, a, b) => cl((p - a) / (b - a));
+  const out = (t) => 1 - Math.pow(1 - t, 3);
+  const back = (t) => {
+    const c = 1.9;
+    return 1 + (c + 1) * Math.pow(t - 1, 3) + c * Math.pow(t - 1, 2);
+  };
+
+  /* ---------- element cache ---------- */
+  const q = (sel) => [...scene.querySelectorAll(sel)];
+  const one = (sel) => scene.querySelector(sel);
+
+  // windows get a warm pane laid over the cold one, lit at handover
+  q(".op").forEach((g) => {
+    const glass = g.querySelector(".glass");
+    if (!glass) return;
+    const lit = glass.cloneNode(false);
+    lit.setAttribute("class", "lit");
+    lit.setAttribute("fill", "url(#psLit)");
+    lit.style.opacity = "0";
+    glass.after(lit);
+  });
+
+  // dash-drawn paths: measure once, drive the offset later
+  const dashed = q(
+    ".ps-foot, .ps-elev, .ps-string, .ps-track, .sys-pipe, .sys-wire",
+  ).map((el) => {
+    const len = el.getTotalLength ? el.getTotalLength() : 0;
+    el.style.strokeDasharray = el.classList.contains("ps-elev")
+      ? `${len} ${len}` // overrides the CSS dash pattern while drawing
+      : `${len} ${len}`;
+    return { el, len };
+  });
+
+  const tracks = [];
+  /** t: 0..1 across [a,b]; fn writes the element's state */
+  const add = (els, a, b, fn, spread = 0) => {
+    const list = typeof els === "string" ? q(els) : els ? [els] : [];
+    if (!list.length) return;
+    tracks.push({ list, a, b, fn, spread });
+  };
+
+  const fade = (el, t) => (el.style.opacity = t);
+  const rise = (dy) => (el, t) => {
+    const e = out(t);
+    el.style.opacity = t;
+    el.style.transform = `translateY(${(1 - e) * dy}px)`;
+  };
+  const grow = (el, t) => {
+    el.style.opacity = t > 0 ? 1 : 0;
+    el.style.transform = `scaleY(${out(t)})`;
+  };
+  const drop = (dy) => (el, t) => {
+    el.style.opacity = t > 0.02 ? 1 : 0;
+    el.style.transform = `translateY(${(1 - back(t)) * dy}px)`;
+  };
+  const pop = (el, t) => {
+    el.style.opacity = t > 0.02 ? 1 : 0;
+    el.style.transform = `scale(${Math.max(0, back(t))})`;
+  };
+
+  /* ---------- 01 plan ---------- */
+  add(".ps-ao", 0.0, 0.06, fade);
+  add(".ps-foot", 0.01, 0.07, null);
+  add(".stake", 0.03, 0.1, pop, 0.6);
+  add(".ps-string", 0.07, 0.12, null);
+  add(".ps-elev", 0.05, 0.14, null);
+  add(".ps-dim", 0.1, 0.15, fade);
+
+  /* ---------- 02 site preparation ---------- */
+  add(".ps-track", 0.15, 0.22, null);
+  add(".ps-pit", 0.16, 0.26, (el, t) => {
+    el.style.opacity = 1;
+    el.style.transform = `scaleY(${out(t)})`;
+  });
+  add(".ps-spoil", 0.19, 0.27, rise(26));
+  // the drawing has served its purpose once the ground is open
+  add(".ps-elev", 0.22, 0.3, (el, t) => (el.style.opacity = 1 - t));
+  add(".stake", 0.24, 0.31, (el, t) => (el.style.opacity = 1 - t), 0.4);
+  add(".ps-string", 0.22, 0.28, (el, t) => (el.style.opacity = 1 - t));
+  add(".ps-dim", 0.26, 0.33, (el, t) => (el.style.opacity = 1 - t));
+
+  /* ---------- 03 foundation ---------- */
+  add(".fdn__ftg", 0.29, 0.34, grow);
+  add(".fdn__p", 0.33, 0.43, drop(78), 0.75); // panels craned in, one by one
+  add(".fdn__slab", 0.4, 0.44, fade);
+  add(".ps-backfill", 0.41, 0.47, fade); // earth goes back around the walls
+  add(".ps-spoil", 0.41, 0.47, (el, t) => (el.style.opacity = 1 - t));
+  add(".ps-track", 0.4, 0.46, (el, t) => (el.style.opacity = 1 - t * 0.8));
+
+  /* ---------- 04 framing ---------- */
+  add(".fl1", 0.44, 0.47, rise(14));
+  add(".s1 .stud", 0.46, 0.5, grow, 0.8);
+  add(".fl2", 0.5, 0.525, rise(14));
+  add(".s2 .stud", 0.515, 0.555, grow, 0.8);
+  add(".fl3", 0.552, 0.575, rise(14));
+  add(".s3 .stud", 0.565, 0.6, grow, 0.8);
+  add(".sw .stud", 0.5, 0.56, grow, 0.7);
+  add(".ps-beam:not(.wing)", 0.59, 0.625, drop(52)); // ridge beam lands
+  add(".ps-beam.wing", 0.6, 0.635, drop(34));
+
+  /* ---------- 05 systems, then the shell closes ---------- */
+  add(".sys-pipe", 0.6, 0.66, null);
+  add(".sys-wire", 0.62, 0.68, null);
+  add(".sys-duct", 0.645, 0.68, rise(10));
+  add(".sys-node", 0.66, 0.69, pop);
+  add(".ps-batt", 0.66, 0.72, fade);
+  add(".ps-cap:not(.wing)", 0.68, 0.72, drop(34)); // roof settles into place
+  add(".ps-cap.wing", 0.7, 0.735, drop(30));
+  add(".ps-stamp", 0.71, 0.75, pop); // rough-in signed off
+  add(".ps-holes", 0.66, 0.7, fade);
+
+  /* ---------- 06 skin, then openings ---------- */
+  add(".ps-wall:not(.wing)", 0.7, 0.79, (el, t) => {
+    el.style.opacity = 1;
+    el.style.transform = `scaleY(${out(t)})`;
+    el.style.transformOrigin = "50% 100%";
+  });
+  add(".ps-wall.wing", 0.74, 0.82, (el, t) => {
+    el.style.opacity = 1;
+    el.style.transform = `scaleY(${out(t)})`;
+    el.style.transformOrigin = "50% 100%";
+  });
+  add(".ps-reveal", 0.79, 0.83, fade);
+  add(".ps-holes", 0.78, 0.83, (el, t) => (el.style.opacity = 1 - t));
+  add(".op", 0.78, 0.9, pop, 0.72); // windows click into their openings
+
+  /* ---------- 07 handover ---------- */
+  add(".ps-walk", 0.88, 0.92, fade);
+  add(".shrub", 0.89, 0.96, pop, 0.6);
+  add(".ps-tree", 0.9, 0.97, pop);
+  add(".lit", 0.93, 1.0, (el, t) => (el.style.opacity = t * 0.9));
+  add(".ps-lamp", 0.94, 1.0, fade);
+
+  /* ---------- paint ---------- */
+  const paint = (p) => {
+    for (const tr of tracks) {
+      const n = tr.list.length;
+      for (let i = 0; i < n; i++) {
+        const el = tr.list[i];
+        let a = tr.a,
+          b = tr.b;
+        if (tr.spread && n > 1) {
+          const span = (b - a) * (1 - tr.spread);
+          const off = ((b - a) * tr.spread * i) / (n - 1);
+          a = tr.a + off;
+          b = a + span;
+        }
+        const t = at(p, a, b);
+        if (tr.fn) tr.fn(el, t);
+        else {
+          // dash-drawn stroke
+          const d = dashed.find((x) => x.el === el);
+          if (d) {
+            el.style.opacity = 1;
+            el.style.strokeDashoffset = d.len * (1 - out(t));
+          }
+        }
+      }
+    }
+
+    let stage7 = 0;
+    for (let i = 0; i < 7; i++) if (p >= S[i]) stage7 = i;
+    steps.forEach((el, i) => el.classList.toggle("is-on", i === stage7));
+    ticks.forEach((el, i) => {
+      el.classList.toggle("is-on", i === stage7);
+      el.classList.toggle("is-done", i < stage7);
+    });
+  };
+
+  /* ---------- scroll wiring ---------- */
+  let pinned = false,
+    ticking = false,
+    last = -1,
+    visible = true;
+
+  // Phones get the build too: the scene is the hero there. Only a very
+  // short viewport, or a reader who asked for less motion, opts out.
+  const canPin = () => !reduce.matches && window.innerHeight >= 560;
 
   const measure = () => {
     pinned = canPin();
     runway.classList.toggle("is-pinned", pinned);
-
     if (!pinned) {
       runway.style.height = "";
-      for (let n = 1; n <= PHASES; n++) scene.classList.remove("on-" + n);
-      lastPhase = -1;
+      last = -1;
+      paint(1); // the finished house, with every stage listed beneath it
+      steps.forEach((el) => el.classList.add("is-on"));
       return;
     }
-
-    // A bit over half a viewport per phase: long enough to read each
-    // stage, short enough that the pin never feels stuck.
-    runway.style.height = window.innerHeight * (PHASES * 0.55 + 1) + "px";
-    render();
+    const w = window.innerWidth;
+    const per = w >= 900 ? 0.48 : w >= 600 ? 0.42 : 0.36; // less scroll on a phone
+    runway.style.height = Math.round(window.innerHeight * (1 + 7 * per)) + "px";
+    render(true);
   };
 
-  const render = () => {
+  const render = (force) => {
     if (!pinned) return;
-
-    const distance = runway.offsetHeight - window.innerHeight;
-    const progress =
-      distance <= 0
-        ? 1
-        : Math.min(
-            1,
-            Math.max(0, -runway.getBoundingClientRect().top / distance),
-          );
-
-    // Phase 1 lights immediately; the last sliver holds phase 10.
-    const phase = Math.min(PHASES, 1 + Math.floor(progress * PHASES * 0.999));
-
-    if (phase !== lastPhase) {
-      for (let n = 1; n <= PHASES; n++)
-        scene.classList.toggle("on-" + n, n <= phase);
-      steps.forEach((el, i) => el.classList.toggle("is-on", i === phase - 1));
-      if (count) count.textContent = String(phase).padStart(2, "0");
-      lastPhase = phase;
-    }
-    if (fill) fill.style.width = progress * 100 + "%";
+    const span = runway.offsetHeight - window.innerHeight;
+    const p = span <= 0 ? 0 : cl(-runway.getBoundingClientRect().top / span);
+    if (!force && Math.abs(p - last) < 0.0002) return; // idle: draw nothing
+    last = p;
+    paint(p);
   };
 
   const onScroll = () => {
-    // rAF never fires in a hidden document (background tab, hidden
-    // preview pane), which would freeze the scene mid-build; render
-    // synchronously there and let rAF pace the visible case.
+    if (!visible) return;
+    // rAF never fires in a hidden document, which would freeze the build
+    // mid-assembly; paint straight away there and let rAF pace the rest.
     if (document.visibilityState === "hidden") {
-      render();
+      render(false);
       return;
     }
     if (ticking) return;
     ticking = true;
     requestAnimationFrame(() => {
-      render();
+      render(false);
       ticking = false;
     });
   };
 
+  // only listen while the section is anywhere near the viewport
+  if ("IntersectionObserver" in window) {
+    new IntersectionObserver(
+      ([e]) => {
+        visible = e.isIntersecting;
+        if (visible) render(true);
+      },
+      { rootMargin: "120% 0px" },
+    ).observe(runway);
+  }
+
+  ticks.forEach((btn, i) => {
+    btn.addEventListener("click", () => {
+      if (!pinned) return;
+      const mid = (S[i] + S[i + 1]) / 2;
+      const span = runway.offsetHeight - window.innerHeight;
+      window.scrollTo({
+        top: runway.offsetTop + span * mid,
+        behavior: "smooth",
+      });
+    });
+  });
+
   window.addEventListener("scroll", onScroll, { passive: true });
   window.addEventListener("resize", measure);
-  document.addEventListener("visibilitychange", () => render());
-  if (reduced.addEventListener) reduced.addEventListener("change", measure);
-  window.addEventListener("load", () => {
-    measure();
-    // Measuring changes the runway height, which can knock an in-flight
-    // anchor jump off target; land it again once the height is settled.
-    if (location.hash) {
-      try {
-        const target = document.querySelector(location.hash);
-        if (target) target.scrollIntoView({ behavior: "instant" });
-      } catch (e) {
-        /* malformed hash: nothing to scroll to */
-      }
-    }
-  });
+  document.addEventListener("visibilitychange", () => render(true));
+  if (reduce.addEventListener) reduce.addEventListener("change", measure);
+  window.addEventListener("load", () => measure());
   measure();
 })();
