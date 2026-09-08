@@ -435,7 +435,7 @@ h4 {
 .projects__layout {
   display: grid;
   grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
-  gap: 22px;
+  gap: 24px;
   margin-top: 36px;
 }
 @media (max-width: 900px) {
@@ -458,108 +458,15 @@ h4 {
 .shots-wrap {
   position: relative;
 }
-.shots {
-  height: clamp(380px, 56vh, 560px);
-  border: 1px solid var(--hairline);
-  background: #0f1113;
-  display: flex;
-  overflow: hidden; /* no manual scrolling — arrows only, so the
-                                  page scrolls normally over the panel */
-}
 .shots::-webkit-scrollbar {
   display: none;
 }
 
-.shot {
-  flex: 0 0 100%;
-  position: relative;
-  height: 100%;
-  padding: 0;
-  border: 0;
-  margin: 0;
-  background: #0f1113;
-  cursor: pointer;
-  overflow: hidden;
-}
 .shot img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
-}
-
-.shot__phase {
-  position: absolute;
-  top: 12px;
-  left: 12px;
-  background: rgba(29, 39, 51, 0.92);
-  font-size: 13px;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  font-weight: 700;
-  padding: 3px 9px;
-  border-radius: 2px;
-  color: #fff;
-}
-.shot__phase--before {
-  background: rgba(29, 39, 51, 0.92);
-}
-.shot__phase--after {
-  background: var(--accent);
-}
-
-.shot__cap {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  display: block;
-  text-align: left;
-  padding: 74px 18px 16px;
-  background: linear-gradient(
-    to top,
-    rgba(8, 9, 10, 0.93) 0%,
-    rgba(8, 9, 10, 0.68) 48%,
-    rgba(8, 9, 10, 0) 100%
-  );
-  color: #fff;
-}
-.shot__cap strong {
-  display: block;
-  font-size: 14px;
-  line-height: 1.25;
-  margin-bottom: 4px;
-}
-.shot__cap span {
-  display: block;
-  font-size: 14px;
-  line-height: 1.45;
-  color: rgba(255, 255, 255, 0.86);
-}
-
-.shots__arrow {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: 2;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  background: rgba(0, 0, 0, 0.4);
-  color: #fff;
-  font-size: 16px;
-  cursor: pointer;
-}
-.shots__arrow:hover {
-  background: var(--accent);
-  border-color: var(--accent);
-}
-.shots__arrow--prev {
-  left: 12px;
-}
-.shots__arrow--next {
-  right: 12px;
 }
 
 .pin {
@@ -643,7 +550,7 @@ h4 {
 /* Carousel */
 
 .carousel {
-  margin-top: 22px;
+  margin-top: 24px;
   position: relative;
 }
 .carousel__track-wrap {
@@ -736,7 +643,7 @@ body.viewer-lock {
   top: 12px;
   left: 12px;
   background: rgba(29, 39, 51, 0.92);
-  font-size: 9.5px;
+  font-size: 13px;
   letter-spacing: 0.2em;
   text-transform: uppercase;
   font-weight: 700;
@@ -763,7 +670,7 @@ body.viewer-lock {
     rgba(8, 9, 10, 0) 100%
   );
   color: #fff;
-  font-size: 14.5px;
+  font-size: 15px;
   line-height: 1.45;
 }
 
@@ -871,7 +778,7 @@ body.viewer-lock {
   background: #fff;
   border: 1px solid var(--hairline);
   border-radius: 12px;
-  padding: 22px 22px 24px;
+  padding: 20px 20px 24px;
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -934,7 +841,7 @@ body.viewer-lock {
 
 .review-card__text {
   margin: 0;
-  font-size: 14.5px;
+  font-size: 15px;
   line-height: 1.65;
   color: #33383d;
 }
@@ -979,11 +886,12 @@ body.viewer-lock {
 
 .btn {
   display: inline-block;
-  padding: 13px 24px;
+  padding: 12px 24px;
+  border-radius: 4px;
   background: var(--navy);
   color: #fff;
   text-decoration: none;
-  font-size: 14.5px;
+  font-size: 15px;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   font-weight: 600;
@@ -1020,7 +928,7 @@ body.viewer-lock {
 .contact-grid {
   display: grid;
   grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
-  gap: 26px;
+  gap: 24px;
   align-items: start;
   margin-top: 36px;
 }
@@ -1042,7 +950,7 @@ body.viewer-lock {
 }
 .contact-box .lede {
   font-size: 15px;
-  margin-bottom: 22px;
+  margin-bottom: 24px;
 }
 
 .contact-rows {
@@ -1064,7 +972,7 @@ body.viewer-lock {
 }
 .contact-rows dd {
   margin: 0;
-  font-size: 16.5px;
+  font-size: 17px;
   font-weight: 600;
   line-height: 1.45;
 }
@@ -1079,14 +987,14 @@ body.viewer-lock {
   display: block;
   font-weight: 400;
   color: var(--muted);
-  font-size: 14.5px;
+  font-size: 15px;
   margin-top: 3px;
 }
 
 /* ---------------- Quote questionnaire ---------------- */
 
 .quote__progress {
-  margin-bottom: 22px;
+  margin-bottom: 24px;
 }
 .quote__progress-label {
   font-size: 14px;
@@ -1115,7 +1023,7 @@ body.viewer-lock {
 }
 .quote__note {
   margin: -10px 0 16px;
-  font-size: 14.5px;
+  font-size: 15px;
   color: var(--muted);
   font-style: italic;
 }
@@ -1129,7 +1037,7 @@ body.viewer-lock {
   text-align: left;
   font: inherit;
   font-size: 15px;
-  padding: 13px 16px;
+  padding: 12px 16px;
   background: var(--paper);
   border: 1px solid var(--hairline);
   cursor: pointer;
@@ -1160,7 +1068,7 @@ body.viewer-lock {
   border: 0;
   cursor: pointer;
   font: inherit;
-  font-size: 14.5px;
+  font-size: 15px;
   color: var(--muted);
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -1254,10 +1162,10 @@ body.viewer-lock {
   font-style: italic;
   opacity: 0.75;
   margin-top: 14px;
-  font-size: 14.5px;
+  font-size: 15px;
 }
 .footer__col {
-  font-size: 14.5px;
+  font-size: 15px;
   line-height: 2;
   opacity: 0.9;
 }
@@ -1326,7 +1234,7 @@ body.viewer-lock {
   padding: 18px 24px;
   background: #fff;
   border: 1px solid var(--hairline);
-  border-radius: 14px;
+  border-radius: 12px;
   box-shadow: 0 14px 36px -30px rgba(16, 18, 20, 0.5);
 }
 
@@ -1395,18 +1303,22 @@ body.viewer-lock {
 .gbadge__cta {
   margin-left: auto;
   display: inline-block;
-  padding: 11px 20px;
-  border-radius: 24px;
-  background: #4285f4;
-  color: #fff;
+  padding: 12px 20px;
+  border-radius: 4px;
+  background: transparent;
+  border: 1px solid rgba(16, 18, 20, 0.28);
+  color: var(--ink);
   text-decoration: none;
   font-size: 15px;
   font-weight: 600;
-  transition: background 160ms ease;
+  transition:
+    border-color 0.2s ease,
+    color 0.2s ease;
 }
 
 .gbadge__cta:hover {
-  background: #3367d6;
+  border-color: var(--accent);
+  color: var(--accent);
 }
 
 @media (max-width: 720px) {
@@ -1466,7 +1378,7 @@ body.viewer-lock {
 .cap {
   position: relative;
   overflow: hidden;
-  border-radius: 14px;
+  border-radius: 12px;
   background: #0e1319;
   isolation: isolate;
   transition:
@@ -1492,8 +1404,8 @@ body.viewer-lock {
   object-fit: cover;
   transform: scale(1.01);
   transition:
-    transform 0.75s cubic-bezier(0.2, 0.8, 0.2, 1),
-    filter 0.45s ease;
+    transform 0.25s ease,
+    filter 0.2s ease;
   filter: saturate(0.98) contrast(1.03) brightness(1.08);
 }
 
@@ -1564,7 +1476,7 @@ body.viewer-lock {
 
 .cap h3 {
   margin: 0 0 6px;
-  font-size: 16.5px;
+  font-size: 17px;
   line-height: 1.28;
   letter-spacing: -0.01em;
   color: #fff;
@@ -1627,7 +1539,7 @@ body.viewer-lock {
 }
 
 .intro__left .section__title {
-  margin-bottom: 22px;
+  margin-bottom: 24px;
 }
 
 .intro__pull {
@@ -1685,7 +1597,7 @@ body.viewer-lock {
 
 .facts--band dd {
   margin: 0;
-  font-size: 15.5px;
+  font-size: 16px;
   font-weight: 600;
   line-height: 1.5;
   letter-spacing: -0.005em;
@@ -1717,7 +1629,7 @@ body.viewer-lock {
 @media (max-width: 900px) {
   .intro__grid {
     grid-template-columns: 1fr;
-    gap: 22px;
+    gap: 24px;
   }
   .facts--band {
     grid-template-columns: repeat(2, 1fr);
@@ -1782,7 +1694,7 @@ body.viewer-lock {
 .qcta__btn {
   background: var(--accent);
   border-color: var(--accent);
-  padding: 16px 34px;
+  padding: 16px 32px;
   font-size: 15px;
 }
 
@@ -1924,14 +1836,14 @@ body.viewer-lock {
 .faq__a p {
   margin: 0;
   color: var(--muted);
-  font-size: 15.5px;
+  font-size: 16px;
   line-height: 1.7;
 }
 
 @media (max-width: 900px) {
   .faq__grid {
     grid-template-columns: 1fr;
-    gap: 22px;
+    gap: 24px;
   }
 }
 
@@ -1994,7 +1906,7 @@ body.viewer-lock {
 
 .proof__label {
   margin: 0;
-  font-size: 14.5px;
+  font-size: 15px;
   line-height: 1.45;
   color: var(--muted);
 }
@@ -2016,7 +1928,7 @@ body.viewer-lock {
 @media (max-width: 860px) {
   .proofbar__inner {
     grid-template-columns: repeat(2, auto);
-    gap: 22px 20px;
+    gap: 24px 20px;
   }
   .proof {
     padding-left: 20px;
@@ -2101,7 +2013,7 @@ section[id],
   margin: 0 0 30px;
   max-width: 34ch;
   color: var(--muted);
-  font-size: 15.5px;
+  font-size: 16px;
   line-height: 1.6;
 }
 
@@ -2156,7 +2068,7 @@ section[id],
   margin: 0;
   max-width: 34ch;
   color: var(--muted);
-  font-size: 15.5px;
+  font-size: 16px;
   line-height: 1.65;
 }
 
@@ -2470,7 +2382,7 @@ section[id],
     font-size: clamp(19px, 5vw, 24px);
   }
   .ps-step__d {
-    font-size: 14.5px;
+    font-size: 15px;
     max-width: none;
   }
 }
@@ -2504,7 +2416,7 @@ section[id],
   position: static;
   min-height: 0;
   display: grid;
-  gap: 22px;
+  gap: 24px;
 }
 
 .ps-runway:not(.is-pinned) .ps-step {
@@ -2742,7 +2654,7 @@ section[id],
 .caps__btn {
   background: var(--accent);
   border-color: var(--accent);
-  padding: 16px 34px;
+  padding: 16px 32px;
   font-size: 14px;
 }
 
@@ -2876,7 +2788,7 @@ section[id],
 
   /* FAQ answers get room to breathe */
   .faq__q {
-    font-size: 16.5px;
+    font-size: 17px;
     padding: 18px 2px;
   }
 
@@ -3166,7 +3078,7 @@ section[id],
   }
 
   #projects .lede {
-    font-size: 14.5px;
+    font-size: 15px;
     line-height: 1.5;
     margin-bottom: 14px;
   }
@@ -3248,7 +3160,7 @@ section[id],
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+  transition: transform 0.25s ease;
 }
 
 .job:hover .job__media img {
@@ -3263,7 +3175,7 @@ section[id],
   border-radius: 20px;
   background: rgba(16, 18, 20, 0.72);
   color: #fff;
-  font-size: 12.5px;
+  font-size: 13px;
   font-weight: 600;
   letter-spacing: 0.03em;
 }
@@ -3277,7 +3189,7 @@ section[id],
   display: block;
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: 15.5px;
+  font-size: 16px;
   letter-spacing: -0.01em;
   color: var(--ink);
 }
@@ -3536,7 +3448,7 @@ section[id],
     align-items: flex-start;
     gap: 18px;
     margin: 0 0 14px;
-    padding: 24px 22px;
+    padding: 24px;
   }
 
   .reviews__side .gbadge__score {
@@ -3660,16 +3572,12 @@ section[id],
 .qcta__sub,
 .faq__note,
 .caps__cta-note {
-  font-size: 16.5px;
+  font-size: 17px;
   line-height: 1.6;
 }
 
 /* the viewer phase chip is a label, not a sentence: sans, but roomier */
 .viewer__phase,
-.shot__phase {
-  font-size: 12.5px;
-  letter-spacing: 0.18em;
-}
 
 /* the card whose pin is lit answers back */
 .job.is-active {
@@ -3706,4 +3614,26 @@ section[id],
   .hero--still .hero__poster {
     object-position: 42% 58%;
   }
+}
+
+/* ---------------- Quote planner joins the component system ---------------- */
+
+.quote__opt {
+  border-radius: 4px;
+}
+
+.quote__field input[type="text"],
+.quote__field input[type="email"],
+.quote__field input[type="tel"],
+.quote__field textarea,
+.quote__field select {
+  border-radius: 4px;
+}
+
+.quote__field input:focus-visible,
+.quote__field textarea:focus-visible,
+.quote__field select:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-color: var(--accent);
 }
