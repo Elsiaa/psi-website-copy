@@ -2560,37 +2560,6 @@ section[id],
   transform-origin: 650px 466px;
 }
 
-/* Each tile names the job it came from: the photograph is evidence,
-   and the address is what makes it checkable. */
-.cap__job {
-  display: flex;
-  align-items: center;
-  gap: 7px;
-  margin: 9px 0 0;
-  font-size: 11.5px;
-  font-weight: 600;
-  letter-spacing: 0.04em;
-  color: rgba(255, 255, 255, 0.62);
-  transition: color 0.3s ease;
-}
-
-.cap__dot {
-  width: 5px;
-  height: 5px;
-  border-radius: 50%;
-  background: var(--accent);
-  flex: 0 0 auto;
-}
-
-.cap:hover .cap__job {
-  color: rgba(255, 255, 255, 0.86);
-}
-
-.cap--featured .cap__job {
-  font-size: 12.5px;
-  margin-top: 12px;
-}
-
 /* secondary review action: present, but never competing with the primary */
 .gbadge__cta--ghost {
   background: transparent;
