@@ -1892,7 +1892,10 @@ body.viewer-lock {
   margin: 0 auto;
   padding: 30px clamp(20px, 4vw, 48px);
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  /* two facts now, so the cells hug their content instead of
+     stretching across the full width */
+  grid-template-columns: repeat(2, auto);
+  justify-content: start;
   gap: clamp(18px, 3vw, 48px);
 }
 
@@ -1955,7 +1958,7 @@ body.viewer-lock {
 
 @media (max-width: 860px) {
   .proofbar__inner {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, auto);
     gap: 22px 20px;
   }
   .proof {
