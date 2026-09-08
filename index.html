@@ -29,7 +29,7 @@
       integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
       crossorigin=""
     />
-    <link rel="stylesheet" href="css/site.css?v=bcaf2e2b" />
+    <link rel="stylesheet" href="css/site.css?v=x30520ad" />
   </head>
   <body>
     <nav class="nav" id="topNav" aria-label="Primary">
@@ -529,116 +529,91 @@
 
                   <!-- tracked excavator, side elevation, facing the cut -->
                   <g class="ps-exc">
-                    <ellipse class="exc-ao" cx="792" cy="521" rx="76" ry="7" />
-
-                    <!-- undercarriage -->
+                    <ellipse class="exc-ao" cx="796" cy="522" rx="82" ry="8" />
                     <g class="exc-under">
-                      <rect
+                      <path
                         class="exc-belt"
-                        x="726"
-                        y="484"
-                        width="132"
-                        height="34"
-                        rx="17"
+                        d="M742 482h96a26 26 0 0 1 0 52h-96a26 26 0 0 1 0-52z"
                       />
-                      <rect
-                        class="exc-belt-in"
-                        x="737"
-                        y="493"
-                        width="110"
-                        height="16"
-                        rx="8"
-                      />
-                      <circle class="exc-wheel" cx="744" cy="501" r="10" />
-                      <circle class="exc-wheel" cx="840" cy="501" r="10" />
-                      <circle class="exc-roller" cx="768" cy="510" r="4.5" />
-                      <circle class="exc-roller" cx="792" cy="510" r="4.5" />
-                      <circle class="exc-roller" cx="816" cy="510" r="4.5" />
+                      <path class="exc-belt-in" d="M744 494h92v28h-92z" />
+                      <circle class="exc-sprocket" cx="746" cy="508" r="15" />
+                      <circle class="exc-sprocket" cx="834" cy="508" r="15" />
+                      <circle class="exc-hub" cx="746" cy="508" r="5" />
+                      <circle class="exc-hub" cx="834" cy="508" r="5" />
+                      <circle class="exc-roller" cx="770" cy="524" r="6" />
+                      <circle class="exc-roller" cx="790" cy="524" r="6" />
+                      <circle class="exc-roller" cx="810" cy="524" r="6" />
                       <path
                         class="exc-cleat"
-                        d="M736 518h8M752 518h8M768 518h8M784 518h8M800 518h8M816 518h8M832 518h8"
-                      />
-                    </g>
-
-                    <!-- house, counterweight, cab -->
-                    <g class="exc-house">
-                      <rect
-                        class="exc-body"
-                        x="760"
-                        y="446"
-                        width="84"
-                        height="40"
-                        rx="6"
+                        d="M736 534h10M752 534h10M768 534h10M784 534h10M800 534h10M816 534h10M832 534h10"
                       />
                       <rect
-                        class="exc-cw"
-                        x="826"
-                        y="444"
-                        width="30"
-                        height="44"
-                        rx="6"
-                      />
-                      <rect
-                        class="exc-hi"
-                        x="764"
-                        y="449"
-                        width="76"
-                        height="5"
-                        rx="2.5"
-                      />
-                      <path class="exc-line" d="M800 452v30" />
-                      <rect
-                        class="exc-cab"
-                        x="736"
-                        y="420"
-                        width="42"
-                        height="66"
-                        rx="7"
-                      />
-                      <rect
-                        class="exc-glass"
-                        x="741"
-                        y="426"
-                        width="32"
-                        height="34"
+                        class="exc-deck"
+                        x="734"
+                        y="470"
+                        width="112"
+                        height="12"
                         rx="4"
                       />
+                    </g>
+                    <g class="exc-house">
+                      <path
+                        class="exc-body"
+                        d="M744 470v-30a10 10 0 0 1 10-10h84a10 10 0 0 1 10 10v30z"
+                      />
+                      <path
+                        class="exc-cw"
+                        d="M838 430h18a8 8 0 0 1 8 8v32h-26z"
+                      />
+                      <rect
+                        class="exc-stripe"
+                        x="744"
+                        y="452"
+                        width="94"
+                        height="7"
+                      />
+                      <text class="exc-mark" x="791" y="447">PSI</text>
+                      <path
+                        class="exc-cab"
+                        d="M726 470v-52a10 10 0 0 1 10-10h26a8 8 0 0 1 8 8v54z"
+                      />
+                      <path class="exc-glass" d="M733 416h26v30h-26z" />
+                      <path class="exc-rail" d="M726 470h44" />
                       <rect
                         class="exc-stack"
-                        x="820"
-                        y="432"
+                        x="824"
+                        y="416"
                         width="7"
-                        height="14"
+                        height="16"
                         rx="3"
                       />
                     </g>
-
-                    <!-- boom / stick / bucket: each pivots on the joint above it -->
                     <g class="exc-boom">
                       <path
                         class="exc-arm"
-                        d="M762.5 460.6 L680.5 392.6 L671.5 403.4 L753.5 471.4 Z"
+                        d="M764 458 L686 386 A9 9 0 0 0 672 398 L750 474 A9 9 0 0 0 764 458Z"
                       />
-                      <path class="exc-ram" d="M776 470 L714 432" />
-                      <path class="exc-rod" d="M714 432 L700 423" />
-                      <circle class="exc-pin" cx="758" cy="466" r="5" />
+                      <path class="exc-ram" d="M780 468 L716 430" />
+                      <path class="exc-rod" d="M716 430 L698 419" />
+                      <circle class="exc-pin" cx="758" cy="466" r="6" />
                       <g class="exc-stick">
                         <path
-                          class="exc-arm"
-                          d="M681.6 400.2 L653.6 470.2 L642.4 465.8 L670.4 395.8 Z"
+                          class="exc-arm exc-arm--stick"
+                          d="M684 394 L656 472 A8 8 0 0 0 668 478 L696 400 A8 8 0 0 0 684 394Z"
                         />
-                        <path class="exc-ram" d="M694 404 L664 424" />
-                        <circle class="exc-pin" cx="676" cy="398" r="4.5" />
+                        <path class="exc-ram" d="M698 406 L668 428" />
+                        <circle class="exc-pin" cx="676" cy="398" r="5" />
                         <g class="exc-bucket">
                           <path
                             class="exc-scoop"
-                            d="M648 460 C630 466 619 479 621 493 C623 503 633 508 644 505 L670 498 L661 468 Z"
+                            d="M650 458 C630 464 617 480 620 496 C623 508 635 513 647 509 L676 500 L664 464 Z"
                           />
+                          <path class="exc-lip" d="M620 496 L647 509" />
                           <path
                             class="exc-teeth"
-                            d="M623 497 l-7 3 M631 502 l-6 5 M640 506 l-4 6"
+                            d="M621 500l-8 4M630 505l-7 6M640 509l-5 7"
                           />
-                          <circle class="exc-pin" cx="650" cy="466" r="4" />
+                          <circle class="exc-pin" cx="652" cy="464" r="4.5" />
                         </g>
                       </g>
                     </g>

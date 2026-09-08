@@ -2465,79 +2465,105 @@ section[id],
 }
 
 /* ---------------- the excavator ---------------- */
-/* Amber machine, charcoal undercarriage, worn steel bucket. Every
-   joint pivots on its own pin, so the arm reads as linkage rather
-   than a picture of an arm. */
+/* PSI livery: red house, black undercarriage, steel rams. The wordmark
+   is real SVG text, so it renders sharp at any size. Each joint turns on
+   its own pin, which is what makes the arm read as linkage. */
 
 .exc-ao {
   fill: rgba(16, 18, 20, 0.16);
 }
 .exc-belt {
-  fill: #2b2f33;
+  fill: #1d2126;
 }
 .exc-belt-in {
-  fill: #3f464b;
+  fill: #333940;
 }
-.exc-wheel {
-  fill: #565d62;
+.exc-sprocket {
+  fill: #454c53;
+}
+.exc-hub {
+  fill: #6d757c;
 }
 .exc-roller {
-  fill: #4a5155;
+  fill: #3c434a;
 }
 .exc-cleat {
-  stroke: #22262a;
-  stroke-width: 4;
+  stroke: #121518;
+  stroke-width: 5;
   stroke-linecap: round;
 }
-.exc-body,
-.exc-cw,
-.exc-cab {
-  fill: #c08f33;
+.exc-deck {
+  fill: #2b3138;
+}
+
+.exc-body {
+  fill: var(--accent);
 }
 .exc-cw {
-  fill: #a87c2b;
+  fill: #a80000;
 }
-.exc-hi {
-  fill: rgba(255, 255, 255, 0.34);
+.exc-stripe {
+  fill: rgba(16, 18, 20, 0.9);
 }
-.exc-line {
-  stroke: rgba(16, 18, 20, 0.22);
-  stroke-width: 1.5;
+.exc-mark {
+  fill: #fff;
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-anchor: middle;
+}
+.exc-cab {
+  fill: #23282e;
 }
 .exc-glass {
-  fill: url(#psGlass);
+  fill: #93a3b0;
+}
+.exc-rail {
+  stroke: rgba(255, 255, 255, 0.22);
+  stroke-width: 2;
 }
 .exc-stack {
   fill: #6f7276;
 }
+
 .exc-arm {
-  fill: #c08f33;
-  stroke: rgba(16, 18, 20, 0.18);
+  fill: var(--accent);
+  stroke: rgba(16, 18, 20, 0.2);
   stroke-width: 1.2;
   stroke-linejoin: round;
 }
+.exc-arm--stick {
+  fill: #c40000;
+}
 .exc-ram {
   stroke: #98a1a8;
-  stroke-width: 7;
+  stroke-width: 8;
   stroke-linecap: round;
   fill: none;
 }
 .exc-rod {
-  stroke: #c9ced2;
-  stroke-width: 3.5;
+  stroke: #ced3d7;
+  stroke-width: 4;
   stroke-linecap: round;
   fill: none;
 }
 .exc-pin {
-  fill: #7d838a;
+  fill: #2b3138;
 }
 .exc-scoop {
-  fill: #5f666b;
-  stroke: rgba(16, 18, 20, 0.28);
+  fill: #3f464d;
+  stroke: rgba(16, 18, 20, 0.35);
   stroke-width: 1.2;
 }
+.exc-lip {
+  stroke: #79828a;
+  stroke-width: 3;
+  stroke-linecap: round;
+  fill: none;
+}
 .exc-teeth {
-  stroke: #4a5054;
+  stroke: #59616a;
   stroke-width: 4;
   stroke-linecap: round;
   fill: none;
@@ -2557,27 +2583,7 @@ section[id],
   transform-origin: 676px 398px;
 }
 .exc-bucket {
-  transform-origin: 650px 466px;
-}
-
-/* secondary review action: present, but never competing with the primary */
-.gbadge__cta--ghost {
-  background: transparent;
-  color: #1b1f24;
-  border: 1px solid rgba(16, 18, 20, 0.28);
-  margin-left: 10px;
-}
-
-.gbadge__cta--ghost:hover {
-  background: rgba(16, 18, 20, 0.06);
-  border-color: rgba(16, 18, 20, 0.5);
-}
-
-@media (max-width: 720px) {
-  .gbadge__cta--ghost {
-    margin-left: 0;
-    margin-top: 8px;
-  }
+  transform-origin: 652px 464px;
 }
 
 /* ---------------- Quote band: the work, beside the ask ---------------- */
