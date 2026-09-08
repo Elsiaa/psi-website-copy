@@ -1227,17 +1227,257 @@ body.viewer-lock {
 }
 
 /* ============================================================
-   OUR PROCESS — horizontal, scroll-driven build sequence
-   The section owns a tall runway; the stage sticks to the
-   viewport while vertical scroll is translated into horizontal
-   travel across the ten stages. Art is inline SVG in the PSI
-   palette, with a slow float and a counter-phase shadow breathe
-   so the pieces read as clay resting above the page.
+   OUR PROCESS — one project, photographed at every stage
+   Seven frames of the same house from the same camera. Scroll
+   position cross-dissolves between them, so the build runs
+   forward and back under the reader's finger.
    ============================================================ */
 
 .process {
   padding: 0;
-  overflow: clip;
+  background: var(--paper);
+}
+
+.ps-runway {
+  position: relative;
+  height: 460vh;
+}
+
+.ps-stage {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  min-height: 600px;
+  display: flex;
+  align-items: center;
+}
+
+.ps-inner {
+  width: 100%;
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0 clamp(20px, 6vw, 96px);
+  display: grid;
+  grid-template-columns: minmax(238px, 3.5fr) 8fr;
+  gap: clamp(20px, 3vw, 56px);
+  align-items: center;
+}
+
+/* ---------------- copy ---------------- */
+
+.ps-copy .section__title {
+  margin-bottom: 10px;
+}
+
+.ps-sub {
+  margin: 0 0 30px;
+  max-width: 34ch;
+  color: var(--muted);
+  font-size: 15.5px;
+  line-height: 1.6;
+}
+
+.ps-steps {
+  position: relative;
+  list-style: none;
+  margin: 0 0 28px;
+  padding: 0;
+  min-height: 172px;
+}
+
+.ps-step {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transform: translateY(12px);
+  transition:
+    opacity 0.4s ease,
+    transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+  pointer-events: none;
+}
+
+.ps-step.is-on {
+  opacity: 1;
+  transform: none;
+}
+
+.ps-step__n {
+  margin: 0 0 10px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.24em;
+  color: var(--accent);
+  font-variant-numeric: tabular-nums;
+}
+
+.ps-step h3 {
+  margin: 0 0 10px;
+  font-size: clamp(21px, 2.3vw, 30px);
+  line-height: 1.12;
+  letter-spacing: -0.022em;
+  text-wrap: balance;
+}
+
+.ps-step__d {
+  margin: 0;
+  max-width: 34ch;
+  color: var(--muted);
+  font-size: 15.5px;
+  line-height: 1.65;
+}
+
+/* ---------------- stage rail ---------------- */
+
+.ps-rail {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.ps-tick-btn {
+  padding: 10px 0;
+  background: none;
+  border: 0;
+  cursor: pointer;
+  flex: 1 1 auto;
+}
+
+.ps-tick-btn span {
+  display: block;
+  height: 2px;
+  border-radius: 2px;
+  background: rgba(16, 18, 20, 0.16);
+  transition:
+    background 0.35s ease,
+    transform 0.35s ease;
+  transform-origin: left;
+}
+
+.ps-tick-btn:hover span {
+  background: rgba(16, 18, 20, 0.4);
+}
+
+.ps-tick-btn.is-done span {
+  background: rgba(214, 0, 0, 0.32);
+}
+
+.ps-tick-btn.is-on span {
+  background: var(--accent);
+  transform: scaleY(2);
+}
+
+/* ---------------- the frames ---------------- */
+
+.ps-art {
+  min-width: 0;
+}
+
+.ps-frames {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1400 / 781;
+  max-height: 74vh;
+  overflow: hidden;
+  border-radius: 14px;
+  background: #e9e6e0;
+  box-shadow: 0 30px 70px -50px rgba(16, 18, 20, 0.65);
+}
+
+.ps-frame {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  will-change: opacity;
+}
+
+/* first frame is visible before the engine runs, so the section
+   never opens on an empty box */
+.ps-frame:first-child {
+  opacity: 1;
+}
+
+/* ---------------- mobile ---------------- */
+
+@media (max-width: 900px) {
+  .ps-stage {
+    align-items: flex-start;
+    padding-top: clamp(76px, 11vh, 104px);
+    min-height: 0;
+  }
+  .ps-inner {
+    grid-template-columns: 1fr;
+    gap: clamp(10px, 2vh, 20px);
+    align-content: start;
+  }
+  .ps-art {
+    order: 1;
+  }
+  .ps-copy {
+    order: 2;
+  }
+  .ps-frames {
+    max-height: 40vh;
+  }
+  .ps-sub {
+    display: none;
+  }
+  .ps-copy .section__title {
+    font-size: clamp(24px, 6vw, 32px);
+    margin-bottom: 14px;
+  }
+  .ps-steps {
+    min-height: 148px;
+    margin-bottom: 18px;
+  }
+  .ps-step h3 {
+    font-size: clamp(19px, 5vw, 24px);
+  }
+  .ps-step__d {
+    font-size: 14.5px;
+    max-width: none;
+  }
+}
+
+@media (max-width: 430px) {
+  .ps-stage {
+    min-height: 560px;
+  }
+  .ps-steps {
+    min-height: 160px;
+  }
+}
+
+/* ---------------- no pin: last frame, full list ---------------- */
+
+.ps-runway:not(.is-pinned) {
+  height: auto;
+}
+
+.ps-runway:not(.is-pinned) .ps-stage {
+  position: static;
+  height: auto;
+  min-height: 0;
+  padding: clamp(64px, 10vh, 120px) 0;
+}
+
+.ps-runway:not(.is-pinned) .ps-steps {
+  position: static;
+  min-height: 0;
+  display: grid;
+  gap: 22px;
+}
+
+.ps-runway:not(.is-pinned) .ps-step {
+  position: static;
+  opacity: 1;
+  transform: none;
+}
+
+.ps-runway:not(.is-pinned) .ps-rail {
+  display: none;
 }
 
 /* ---------------- Google reviews trust badge ---------------- */
@@ -2140,297 +2380,7 @@ section[id],
   min-width: 0;
 }
 
-.ps-scene {
-  display: block;
-  width: 100%;
-  height: auto;
-  max-height: 78vh;
-  overflow: visible;
-}
-
-/* ground */
-.ps-grade {
-  stroke: rgba(16, 18, 20, 0.22);
-  stroke-width: 1.5;
-}
-.ps-ao {
-  fill: rgba(16, 18, 20, 0.07);
-}
-
-/* 01 plan — drawn, not printed */
-.ps-foot,
-.ps-elev {
-  fill: none;
-  stroke: rgba(214, 0, 0, 0.55);
-  stroke-width: 2;
-  stroke-linejoin: round;
-}
-.ps-elev {
-  stroke-dasharray: 5 7;
-}
-.stake line {
-  stroke: #8a8377;
-  stroke-width: 2.5;
-  stroke-linecap: round;
-}
-.stake__flag {
-  fill: var(--accent);
-}
-.ps-string {
-  fill: none;
-  stroke: rgba(16, 18, 20, 0.3);
-  stroke-width: 1;
-  stroke-dasharray: 3 5;
-}
-.ps-dim line {
-  stroke: rgba(16, 18, 20, 0.42);
-  stroke-width: 1;
-}
-.ps-dim text {
-  fill: var(--muted);
-  font-size: 15px;
-  font-weight: 600;
-  text-anchor: middle;
-  font-family: inherit;
-  letter-spacing: 0.02em;
-}
-
-/* 02 earth */
-.ps-pit {
-  fill: #b9b0a0;
-  transform-box: view-box;
-  transform-origin: 500px 520px;
-}
-.ps-spoil {
-  fill: #cdc4b2;
-  transform-box: view-box;
-  transform-origin: 916px 520px;
-}
-.ps-track {
-  fill: none;
-  stroke: rgba(16, 18, 20, 0.16);
-  stroke-width: 3;
-  stroke-dasharray: 9 11;
-  stroke-linecap: round;
-}
-
-/* 03 concrete */
-.fdn__ftg {
-  fill: #b5b0a7;
-}
-.fdn__p {
-  fill: #c9c5bd;
-  stroke: rgba(16, 18, 20, 0.13);
-  stroke-width: 1;
-}
-.fdn__slab {
-  fill: #d2cec6;
-}
-.ps-backfill {
-  fill: #d8d2c6;
-}
-
-/* 04 timber */
-.stud {
-  fill: #d9c9a4;
-}
-.fl1__rim,
-.fl2__rim,
-.fl3__rim {
-  fill: #cbb88c;
-}
-.fl1__j,
-.fl2__j,
-.fl3__j {
-  fill: #e0d2b2;
-}
-.ps-beam rect {
-  fill: #c4ae7e;
-}
-
-/* 05 systems, deliberately quiet */
-.sys-pipe {
-  fill: none;
-  stroke: #9aa3ab;
-  stroke-width: 4;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-.sys-wire {
-  fill: none;
-  stroke: rgba(214, 0, 0, 0.5);
-  stroke-width: 2.5;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-.sys-duct {
-  fill: #b9bfc4;
-}
-.sys-node {
-  fill: rgba(214, 0, 0, 0.7);
-}
-
-/* 06 skin */
-.ps-batt {
-  fill: rgba(214, 0, 0, 0.1);
-}
-.ps-wall {
-  fill: #efece5;
-  stroke: rgba(16, 18, 20, 0.15);
-  stroke-width: 1;
-}
-.ps-reveal {
-  fill: rgba(255, 255, 255, 0.75);
-}
-.ps-cap rect {
-  fill: #dcd7cd;
-  stroke: rgba(16, 18, 20, 0.14);
-  stroke-width: 1;
-}
-.hole {
-  fill: rgba(16, 18, 20, 0.5);
-}
-
-/* openings */
-.glass {
-  fill: url(#psGlass);
-}
-.frame {
-  fill: none;
-  stroke: #1b1f24;
-  stroke-width: 3.5;
-}
-.mull {
-  stroke: #1b1f24;
-  stroke-width: 2.5;
-}
-.door {
-  fill: #23282e;
-}
-.knob {
-  fill: #cbb88c;
-}
-
-/* 07 handover */
-.ps-walk {
-  fill: #ddd8cd;
-}
-.shrub {
-  fill: #7f8c74;
-}
-.ps-trunk {
-  stroke: #8a7b64;
-  stroke-width: 6;
-  stroke-linecap: round;
-  fill: none;
-}
-.ps-crown {
-  fill: #74836a;
-}
-.ps-lamp circle {
-  fill: #f3d9a4;
-}
-.ps-glow {
-  fill: rgba(245, 200, 120, 0.28);
-}
-.ps-stamp circle {
-  fill: none;
-  stroke: rgba(214, 0, 0, 0.7);
-  stroke-width: 2;
-}
-.ps-check {
-  fill: none;
-  stroke: var(--accent);
-  stroke-width: 2.6;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-
-/* everything the engine moves pivots from its own box */
-.stud,
-.stake,
-.op,
-.fdn__p,
-.shrub,
-.ps-cap,
-.ps-beam,
-.ps-tree,
-.ps-stamp,
-.ps-lamp,
-.fl1,
-.fl2,
-.fl3 {
-  transform-box: fill-box;
-}
-
-.stud,
-.fdn__p {
-  transform-origin: 50% 100%;
-}
-.stake,
-.shrub,
-.ps-tree {
-  transform-origin: 50% 100%;
-}
-.op,
-.ps-stamp,
-.ps-lamp {
-  transform-origin: 50% 50%;
-}
-
 /* ---------------- mobile: scene on top, copy beneath ---------------- */
-
-@media (max-width: 900px) {
-  .ps-stage {
-    align-items: flex-start;
-    padding-top: clamp(76px, 11vh, 104px);
-    min-height: 0;
-  }
-  .ps-inner {
-    grid-template-columns: 1fr;
-    gap: clamp(4px, 1.4vh, 14px);
-    align-content: start;
-  }
-  .ps-art {
-    order: 1;
-  }
-  .ps-copy {
-    order: 2;
-  }
-  .ps-scene {
-    max-height: 42vh;
-  }
-  .ps-sub {
-    display: none; /* the scene says it faster than the sentence does */
-  }
-  .ps-copy .section__title {
-    font-size: clamp(24px, 6vw, 32px);
-    margin-bottom: 14px;
-  }
-  .ps-steps {
-    min-height: 148px;
-    margin-bottom: 18px;
-  }
-  .ps-step h3 {
-    font-size: clamp(19px, 5vw, 24px);
-  }
-  .ps-step__d {
-    font-size: 14.5px;
-    max-width: none;
-  }
-}
-
-@media (max-width: 430px) {
-  .ps-stage {
-    min-height: 560px;
-  }
-  .ps-scene {
-    max-height: 38vh;
-  }
-  .ps-steps {
-    min-height: 160px;
-  }
-}
 
 /* ---------------- no pin: the finished house and the full list ---------------- */
 
@@ -2466,145 +2416,3 @@ section[id],
 /* Amber machine, charcoal undercarriage, worn steel bucket. Every
    joint pivots on its own pin, so the arm reads as linkage rather
    than a picture of an arm. */
-
-.exc-ao {
-  fill: rgba(16, 18, 20, 0.16);
-}
-.exc-belt {
-  fill: #2b2f33;
-}
-.exc-belt-in {
-  fill: #3f464b;
-}
-.exc-wheel {
-  fill: #565d62;
-}
-.exc-roller {
-  fill: #4a5155;
-}
-.exc-cleat {
-  stroke: #22262a;
-  stroke-width: 4;
-  stroke-linecap: round;
-}
-.exc-body,
-.exc-cw,
-.exc-cab {
-  fill: #c08f33;
-}
-.exc-cw {
-  fill: #a87c2b;
-}
-.exc-hi {
-  fill: rgba(255, 255, 255, 0.34);
-}
-.exc-line {
-  stroke: rgba(16, 18, 20, 0.22);
-  stroke-width: 1.5;
-}
-.exc-glass {
-  fill: url(#psGlass);
-}
-.exc-stack {
-  fill: #6f7276;
-}
-.exc-arm {
-  fill: #c08f33;
-  stroke: rgba(16, 18, 20, 0.18);
-  stroke-width: 1.2;
-  stroke-linejoin: round;
-}
-.exc-ram {
-  stroke: #98a1a8;
-  stroke-width: 7;
-  stroke-linecap: round;
-  fill: none;
-}
-.exc-rod {
-  stroke: #c9ced2;
-  stroke-width: 3.5;
-  stroke-linecap: round;
-  fill: none;
-}
-.exc-pin {
-  fill: #7d838a;
-}
-.exc-scoop {
-  fill: #5f666b;
-  stroke: rgba(16, 18, 20, 0.28);
-  stroke-width: 1.2;
-}
-.exc-teeth {
-  stroke: #4a5054;
-  stroke-width: 4;
-  stroke-linecap: round;
-  fill: none;
-}
-
-/* joints rotate about their real pin positions in scene units */
-.exc-boom,
-.exc-stick,
-.exc-bucket,
-.ps-exc {
-  transform-box: view-box;
-}
-.exc-boom {
-  transform-origin: 758px 466px;
-}
-.exc-stick {
-  transform-origin: 676px 398px;
-}
-.exc-bucket {
-  transform-origin: 650px 466px;
-}
-
-/* Each tile names the job it came from: the photograph is evidence,
-   and the address is what makes it checkable. */
-.cap__job {
-  display: flex;
-  align-items: center;
-  gap: 7px;
-  margin: 9px 0 0;
-  font-size: 11.5px;
-  font-weight: 600;
-  letter-spacing: 0.04em;
-  color: rgba(255, 255, 255, 0.62);
-  transition: color 0.3s ease;
-}
-
-.cap__dot {
-  width: 5px;
-  height: 5px;
-  border-radius: 50%;
-  background: var(--accent);
-  flex: 0 0 auto;
-}
-
-.cap:hover .cap__job {
-  color: rgba(255, 255, 255, 0.86);
-}
-
-.cap--featured .cap__job {
-  font-size: 12.5px;
-  margin-top: 12px;
-}
-
-/* secondary review action: present, but never competing with the primary */
-.gbadge__cta--ghost {
-  background: transparent;
-  color: #1b1f24;
-  border: 1px solid rgba(16, 18, 20, 0.28);
-  margin-left: 10px;
-}
-
-.gbadge__cta--ghost:hover {
-  background: rgba(16, 18, 20, 0.06);
-  border-color: rgba(16, 18, 20, 0.5);
-}
-
-@media (max-width: 720px) {
-  .gbadge__cta--ghost {
-    margin-left: 0;
-    margin-top: 8px;
-  }
-}
