@@ -47,7 +47,7 @@
   hero.style.height = "100svh";
   hero.classList.add("hero--still");
   canvas.style.display = "none";
-  if (poster) poster.src = "assets/hero-sunset.jpg";
+  // the <picture> sources already carry the right frame per orientation
   if (loader) loader.remove();
   if (true) return;
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");

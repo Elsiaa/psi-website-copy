@@ -3700,3 +3700,10 @@ section[id],
 .hero--still .hero__scrollcue {
   display: none;
 }
+
+/* the wide frame keeps the house and its lawn favoured as viewports narrow */
+@media (orientation: landscape) {
+  .hero--still .hero__poster {
+    object-position: 42% 58%;
+  }
+}
