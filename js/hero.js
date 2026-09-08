@@ -40,16 +40,19 @@
   const ctx = canvas.getContext("2d", { alpha: false });
 
   // ------------------------------------------------------------------
-  // The opening screen is the sunset photograph of the finished build.
-  // The scroll-scrubbed sequence is retired: no 22MB of frames, no pin,
-  // just the house at golden hour and the page underneath it.
+  // Two heroes. Portrait phones open on the sunset photograph: one
+  // 348K frame, no pin. Landscape viewports get the scroll-scrubbed
+  // build sequence back, exactly as it ran before.
   // ------------------------------------------------------------------
-  hero.style.height = "100svh";
-  hero.classList.add("hero--still");
-  canvas.style.display = "none";
-  // the <picture> sources already carry the right frame per orientation
-  if (loader) loader.remove();
-  if (true) return;
+  if (
+    window.matchMedia("(max-width: 760px) and (orientation: portrait)").matches
+  ) {
+    hero.style.height = "100svh";
+    hero.classList.add("hero--still");
+    canvas.style.display = "none";
+    if (loader) loader.remove();
+    return;
+  }
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 
   // ------------------------------------------------------------------
