@@ -369,6 +369,7 @@
     <button class="sbot__fab" type="button" aria-expanded="false"
       aria-controls="sbotPanel" aria-label="Questions? Ask PSI">
       <img src="assets/logo/psi-logo.png" alt="" />
+      <span class="sbot__fabx" aria-hidden="true">&times;</span>
     </button>
     <section class="sbot__panel" id="sbotPanel" role="dialog" aria-modal="false"
       aria-label="PSI support assistant" hidden>

@@ -3714,17 +3714,32 @@ section[id],
   object-fit: contain;
 }
 
-.sbot--open .sbot__fab {
+.sbot__fabx {
   display: none;
+  font-size: 26px;
+  line-height: 1;
+  color: var(--ink);
+}
+
+.sbot--open .sbot__fab {
+  z-index: 47;
+}
+
+.sbot--open .sbot__fab img {
+  display: none;
+}
+
+.sbot--open .sbot__fabx {
+  display: block;
 }
 
 .sbot__panel {
   position: fixed;
   right: 18px;
-  bottom: 18px;
+  bottom: 86px;
   z-index: 46;
   width: min(370px, calc(100vw - 24px));
-  max-height: min(600px, calc(100svh - 40px));
+  max-height: min(560px, calc(100svh - 108px));
   display: flex;
   flex-direction: column;
   background: #fff;
@@ -3759,13 +3774,13 @@ section[id],
 
 .sbot__tools {
   position: absolute;
-  top: 16px;
-  right: 16px;
+  top: 14px;
+  right: 12px;
 }
 
 .sbot__close {
-  width: 34px;
-  height: 34px;
+  width: 40px;
+  height: 40px;
   border: 0;
   background: none;
   color: var(--muted);
@@ -3965,6 +3980,12 @@ section[id],
   .sbot__fab {
     right: 16px;
     bottom: calc(16px + env(safe-area-inset-bottom));
+  }
+  .sbot--open .sbot__panel {
+    max-height: min(76svh, 600px);
+  }
+  .sbot--open .sbot__fab {
+    display: none;
   }
 }
 
