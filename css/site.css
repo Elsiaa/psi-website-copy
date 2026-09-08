@@ -3107,3 +3107,47 @@ section[id],
     min-height: 44px;
   }
 }
+
+/* ---------------- Mobile: map + gallery share one screen ---------------- */
+/* The desktop section stacks two 56vh panels; a phone gets both on the
+   same screen — map above, gallery below — sized so the whole section
+   lands as one page in the snap flow. */
+
+@media (max-width: 760px) {
+  #projects {
+    padding-top: 34px;
+    padding-bottom: 34px;
+  }
+
+  #projects .section__title {
+    margin-bottom: 8px;
+  }
+
+  #projects .lede {
+    font-size: 14.5px;
+    line-height: 1.5;
+    margin-bottom: 14px;
+  }
+
+  .projects__layout {
+    gap: 12px;
+  }
+
+  #projectMap {
+    height: clamp(200px, 30svh, 300px);
+  }
+
+  .shots {
+    height: clamp(220px, 33svh, 320px);
+  }
+
+  .shots__hint {
+    margin-top: 8px;
+    font-size: 13px;
+    line-height: 1.4;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+}
