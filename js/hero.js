@@ -46,7 +46,12 @@
   // ------------------------------------------------------------------
   if (reducedMotion.matches) {
     hero.style.height = "100svh";
-    if (CONFIG.frameCount > 0) {
+    if (
+      window.matchMedia("(max-width: 760px) and (orientation: portrait)")
+        .matches
+    ) {
+      poster.src = "assets/hero-mobile-seq/final.jpg";
+    } else if (CONFIG.frameCount > 0) {
       poster.src = CONFIG.framePath(CONFIG.frameCount - 1);
       poster.style.objectPosition = "50% 50%";
     }
@@ -100,7 +105,7 @@
       // the still must match the viewport it retreats into, not the
       // orientation the page happened to load in
       poster.src = portraitPhone.matches
-        ? "assets/hero-mobile-seq/m-024.jpg"
+        ? "assets/hero-mobile-seq/final.jpg"
         : "assets/hero-sequence/frame-0193.webp";
       poster.style.display = "";
     }
@@ -254,6 +259,28 @@
     ctx.imageSmoothingEnabled = true;
     ctx.imageSmoothingQuality = "high";
     ctx.drawImage(img, dx, dy, dw, dh);
+
+    if (finaleReady && progressNow > BLEND_FROM) {
+      const t = Math.min(
+        1,
+        (progressNow - BLEND_FROM) / (1 - BLEND_FROM - 0.04),
+      );
+      const a = t * t * (3 - 2 * t); // smoothstep: eases in and lands flat
+      const fw = finale.width,
+        fh = finale.height;
+      const fs = Math.max((cw * dpr) / fw, (ch * dpr) / fh);
+      const fdw = fw * fs,
+        fdh = fh * fs;
+      ctx.globalAlpha = a;
+      ctx.drawImage(
+        finale,
+        -(fdw - cw * dpr) / 2,
+        -(fdh - ch * dpr) / 2,
+        fdw,
+        fdh,
+      );
+      ctx.globalAlpha = 1;
+    }
   }
 
   // ------------------------------------------------------------------
@@ -262,6 +289,23 @@
   let targetFloat = 0; // scroll-mapped fractional frame
   let currentFloat = 0; // smoothed fractional frame actually drawn
   let drawnFrame = -1;
+
+  // The landing frame: the whole house, outpainted to portrait. The
+  // cropped scrub frames ride in on it and the hero settles here, so
+  // the final composition is never cut off.
+  let finale = null,
+    finaleReady = false,
+    progressNow = 0;
+  if (startedPortrait) {
+    finale = new Image();
+    finale.decoding = "async";
+    finale.onload = () => {
+      finaleReady = true;
+      drawnFrame = -1;
+    };
+    finale.src = "assets/hero-mobile-seq/final.jpg";
+  }
+  const BLEND_FROM = 0.78;
   let lastT = performance.now();
   let canvasLive = false;
 
@@ -293,8 +337,11 @@
 
   function stepOnce(dt) {
     const p = scrollProgress();
+    progressNow = p;
     hero.style.setProperty("--hero-progress", p.toFixed(4));
     targetFloat = frameForProgress(p);
+    // the dissolve tracks scroll continuously, so it repaints every step
+    if (finaleReady && p > BLEND_FROM) drawnFrame = -1;
 
     // Exponential chase: framerate-independent, sub-frame accurate.
     const k = 1 - Math.exp(-CONFIG.smoothing * dt);
