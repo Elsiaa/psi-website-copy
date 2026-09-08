@@ -375,7 +375,6 @@
       <header class="sbot__head">
         <p class="sbot__title">Questions? Ask PSI</p>
         <div class="sbot__tools">
-          <button class="sbot__tool" type="button" data-act="min" title="Minimize" aria-label="Minimize">&#8722;</button>
           <button class="sbot__close" type="button" aria-label="Close">&times;</button>
         </div>
       </header>
@@ -487,7 +486,6 @@
     fab.setAttribute("aria-expanded", String(open));
     root.classList.toggle("sbot--open", open);
     if (open) {
-      root.classList.remove("sbot--min");
       if (!log.children.length) {
         if (state.msgs.length) {
           state.msgs.forEach(bubble);
@@ -504,23 +502,9 @@
   };
 
   fab.addEventListener("click", () => setOpen(!open));
-  const head = root.querySelector(".sbot__head");
-  const setMin = (m) => {
-    root.classList.toggle("sbot--min", m);
-    if (!m) input.focus({ preventScroll: true });
-  };
-  root.querySelector('[data-act="min"]').addEventListener("click", (e) => {
-    e.stopPropagation();
-    setMin(!root.classList.contains("sbot--min"));
-  });
-  head.addEventListener("click", (e) => {
-    if (e.target.closest(".sbot__tools")) return;
-    if (root.classList.contains("sbot--min")) setMin(false);
-  });
   root
     .querySelector(".sbot__close")
     .addEventListener("click", () => setOpen(false));
-
   document.addEventListener("keydown", (e) => {
     if (!open) return;
     if (e.key === "Escape") return setOpen(false);
