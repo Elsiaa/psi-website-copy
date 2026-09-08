@@ -177,7 +177,7 @@
 
   /* ---------- 03 foundation ---------- */
   add(".fdn__ftg", 0.29, 0.34, grow);
-  add(".fdn__p", 0.33, 0.43, drop(78), 0.75); // panels craned in, one by one
+  add(".fdn__p", 0.33, 0.43, grow, 0.7); // walls go up off the footing
   add(".fdn__slab", 0.4, 0.44, fade);
   add(".ps-backfill", 0.41, 0.47, fade); // earth goes back around the walls
   add(".ps-spoil", 0.41, 0.47, (el, t) => (el.style.opacity = 1 - t));
