@@ -29,7 +29,7 @@
       integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
       crossorigin=""
     />
-    <link rel="stylesheet" href="css/site.css?v=bc34ffbd" />
+    <link rel="stylesheet" href="css/site.css?v=e5764620" />
   </head>
   <body>
     <nav class="nav" id="topNav" aria-label="Primary">
@@ -529,14 +529,131 @@
                   </g>
                 </g>
 
-                <!-- 02 site prep: the ground opens -->
+                <!-- 02 site prep: the ground opens, and something opens it -->
                 <g class="ps-dig">
                   <path class="ps-pit" d="M280 520 L296 588 H704 L720 520 Z" />
                   <path
                     class="ps-spoil"
-                    d="M812 520 c14-34 44-46 66-38 12-20 40-20 52 0 16-8 30 4 32 20 8 6 12 10 12 18 z"
+                    d="M866 520 c10-26 34-36 52-30 10-16 32-16 42 0 12-6 22 4 24 16 6 4 10 8 10 14 z"
                   />
-                  <path class="ps-track" d="M120 536 H250 M120 546 H250" />
+                  <path class="ps-track" d="M120 536 H262 M120 546 H262" />
+
+                  <!-- tracked excavator, side elevation, facing the cut -->
+                  <g class="ps-exc">
+                    <ellipse class="exc-ao" cx="792" cy="521" rx="76" ry="7" />
+
+                    <!-- undercarriage -->
+                    <g class="exc-under">
+                      <rect
+                        class="exc-belt"
+                        x="726"
+                        y="484"
+                        width="132"
+                        height="34"
+                        rx="17"
+                      />
+                      <rect
+                        class="exc-belt-in"
+                        x="737"
+                        y="493"
+                        width="110"
+                        height="16"
+                        rx="8"
+                      />
+                      <circle class="exc-wheel" cx="744" cy="501" r="10" />
+                      <circle class="exc-wheel" cx="840" cy="501" r="10" />
+                      <circle class="exc-roller" cx="768" cy="510" r="4.5" />
+                      <circle class="exc-roller" cx="792" cy="510" r="4.5" />
+                      <circle class="exc-roller" cx="816" cy="510" r="4.5" />
+                      <path
+                        class="exc-cleat"
+                        d="M736 518h8M752 518h8M768 518h8M784 518h8M800 518h8M816 518h8M832 518h8"
+                      />
+                    </g>
+
+                    <!-- house, counterweight, cab -->
+                    <g class="exc-house">
+                      <rect
+                        class="exc-body"
+                        x="760"
+                        y="446"
+                        width="84"
+                        height="40"
+                        rx="6"
+                      />
+                      <rect
+                        class="exc-cw"
+                        x="826"
+                        y="444"
+                        width="30"
+                        height="44"
+                        rx="6"
+                      />
+                      <rect
+                        class="exc-hi"
+                        x="764"
+                        y="449"
+                        width="76"
+                        height="5"
+                        rx="2.5"
+                      />
+                      <path class="exc-line" d="M800 452v30" />
+                      <rect
+                        class="exc-cab"
+                        x="736"
+                        y="420"
+                        width="42"
+                        height="66"
+                        rx="7"
+                      />
+                      <rect
+                        class="exc-glass"
+                        x="741"
+                        y="426"
+                        width="32"
+                        height="34"
+                        rx="4"
+                      />
+                      <rect
+                        class="exc-stack"
+                        x="820"
+                        y="432"
+                        width="7"
+                        height="14"
+                        rx="3"
+                      />
+                    </g>
+
+                    <!-- boom / stick / bucket: each pivots on the joint above it -->
+                    <g class="exc-boom">
+                      <path
+                        class="exc-arm"
+                        d="M762.5 460.6 L680.5 392.6 L671.5 403.4 L753.5 471.4 Z"
+                      />
+                      <path class="exc-ram" d="M776 470 L714 432" />
+                      <path class="exc-rod" d="M714 432 L700 423" />
+                      <circle class="exc-pin" cx="758" cy="466" r="5" />
+                      <g class="exc-stick">
+                        <path
+                          class="exc-arm"
+                          d="M681.6 400.2 L653.6 470.2 L642.4 465.8 L670.4 395.8 Z"
+                        />
+                        <path class="exc-ram" d="M694 404 L664 424" />
+                        <circle class="exc-pin" cx="676" cy="398" r="4.5" />
+                        <g class="exc-bucket">
+                          <path
+                            class="exc-scoop"
+                            d="M648 460 C630 466 619 479 621 493 C623 503 633 508 644 505 L670 498 L661 468 Z"
+                          />
+                          <path
+                            class="exc-teeth"
+                            d="M623 497 l-7 3 M631 502 l-6 5 M640 506 l-4 6"
+                          />
+                          <circle class="exc-pin" cx="650" cy="466" r="4" />
+                        </g>
+                      </g>
+                    </g>
+                  </g>
                 </g>
 
                 <!-- 03 foundation -->
@@ -1914,7 +2031,7 @@
       crossorigin=""
     ></script>
     <script src="js/main.js?v=rb8758fd" defer></script>
-    <script src="js/process.js?v=nc34ffbd" defer></script>
+    <script src="js/process.js?v=e5764620" defer></script>
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",

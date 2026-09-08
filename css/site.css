@@ -2195,9 +2195,13 @@ section[id],
 /* 02 earth */
 .ps-pit {
   fill: #b9b0a0;
+  transform-box: view-box;
+  transform-origin: 500px 520px;
 }
 .ps-spoil {
   fill: #cdc4b2;
+  transform-box: view-box;
+  transform-origin: 916px 520px;
 }
 .ps-track {
   fill: none;
@@ -2453,4 +2457,100 @@ section[id],
 
 .ps-runway:not(.is-pinned) .ps-rail {
   display: none;
+}
+
+/* ---------------- the excavator ---------------- */
+/* Amber machine, charcoal undercarriage, worn steel bucket. Every
+   joint pivots on its own pin, so the arm reads as linkage rather
+   than a picture of an arm. */
+
+.exc-ao {
+  fill: rgba(16, 18, 20, 0.16);
+}
+.exc-belt {
+  fill: #2b2f33;
+}
+.exc-belt-in {
+  fill: #3f464b;
+}
+.exc-wheel {
+  fill: #565d62;
+}
+.exc-roller {
+  fill: #4a5155;
+}
+.exc-cleat {
+  stroke: #22262a;
+  stroke-width: 4;
+  stroke-linecap: round;
+}
+.exc-body,
+.exc-cw,
+.exc-cab {
+  fill: #c08f33;
+}
+.exc-cw {
+  fill: #a87c2b;
+}
+.exc-hi {
+  fill: rgba(255, 255, 255, 0.34);
+}
+.exc-line {
+  stroke: rgba(16, 18, 20, 0.22);
+  stroke-width: 1.5;
+}
+.exc-glass {
+  fill: url(#psGlass);
+}
+.exc-stack {
+  fill: #6f7276;
+}
+.exc-arm {
+  fill: #c08f33;
+  stroke: rgba(16, 18, 20, 0.18);
+  stroke-width: 1.2;
+  stroke-linejoin: round;
+}
+.exc-ram {
+  stroke: #98a1a8;
+  stroke-width: 7;
+  stroke-linecap: round;
+  fill: none;
+}
+.exc-rod {
+  stroke: #c9ced2;
+  stroke-width: 3.5;
+  stroke-linecap: round;
+  fill: none;
+}
+.exc-pin {
+  fill: #7d838a;
+}
+.exc-scoop {
+  fill: #5f666b;
+  stroke: rgba(16, 18, 20, 0.28);
+  stroke-width: 1.2;
+}
+.exc-teeth {
+  stroke: #4a5054;
+  stroke-width: 4;
+  stroke-linecap: round;
+  fill: none;
+}
+
+/* joints rotate about their real pin positions in scene units */
+.exc-boom,
+.exc-stick,
+.exc-bucket,
+.ps-exc {
+  transform-box: view-box;
+}
+.exc-boom {
+  transform-origin: 758px 466px;
+}
+.exc-stick {
+  transform-origin: 676px 398px;
+}
+.exc-bucket {
+  transform-origin: 650px 466px;
 }
