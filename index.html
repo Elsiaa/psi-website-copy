@@ -18,18 +18,7 @@
       property="og:image"
       content="https://elsiaa.github.io/psi-website-copy/assets/keyframe-final-hero.png"
     />
-    <link
-      rel="preload"
-      as="image"
-      href="assets/hero-sequence/frame-0001.webp"
-      media="(min-width: 761px)"
-    />
-    <link
-      rel="preload"
-      as="image"
-      href="assets/hero-mobile-seq/m-001.jpg"
-      media="(max-width: 760px) and (orientation: portrait)"
-    />
+    <link rel="preload" as="image" href="assets/hero-sunset.jpg" media="all" />
     <link
       rel="stylesheet"
       href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
@@ -42,7 +31,7 @@
       href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="css/site.css?v=c8015468" />
+    <link rel="stylesheet" href="css/site.css?v=u9db6af1" />
   </head>
   <body>
     <nav class="nav" id="topNav" aria-label="Primary">
@@ -106,13 +95,13 @@
       <div class="hero__viewport">
         <picture>
           <source
-            media="(max-width: 760px) and (orientation: portrait)"
-            srcset="assets/hero-mobile-seq/m-001.jpg"
+            media="(orientation: portrait)"
+            srcset="assets/hero-sunset.jpg"
           />
           <img
             class="hero__poster"
             id="heroPoster"
-            src="assets/hero-sequence/frame-0001.webp"
+            src="assets/hero-sunset.jpg"
             alt="Aerial view of a modern white three-storey residence built by PSI on a landscaped corner lot"
             decoding="async"
             fetchpriority="high"
@@ -2043,7 +2032,7 @@
     </footer>
 
     <script src="assets/hero-sequence/frames-manifest.js"></script>
-    <script src="js/hero.js?v=ff955c4c" defer></script>
+    <script src="js/hero.js?v=u9db6af1" defer></script>
     <script src="data/projects.js?v=pab42706"></script>
     <script
       src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"

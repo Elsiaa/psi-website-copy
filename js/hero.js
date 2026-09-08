@@ -38,6 +38,18 @@
   if (!hero || !canvas) return;
 
   const ctx = canvas.getContext("2d", { alpha: false });
+
+  // ------------------------------------------------------------------
+  // The opening screen is the sunset photograph of the finished build.
+  // The scroll-scrubbed sequence is retired: no 22MB of frames, no pin,
+  // just the house at golden hour and the page underneath it.
+  // ------------------------------------------------------------------
+  hero.style.height = "100svh";
+  hero.classList.add("hero--still");
+  canvas.style.display = "none";
+  if (poster) poster.src = "assets/hero-sunset.jpg";
+  if (loader) loader.remove();
+  if (true) return;
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 
   // ------------------------------------------------------------------

@@ -3676,3 +3676,27 @@ section[id],
   border-color: rgba(214, 0, 0, 0.45);
   box-shadow: 0 22px 44px -34px rgba(214, 0, 0, 0.35);
 }
+
+/* ---------------- Hero: the sunset still ---------------- */
+
+.hero--still .hero__poster {
+  object-fit: cover;
+  object-position: 50% 46%; /* the house holds the frame at any crop */
+}
+
+/* the sky is bright; the title keeps a quiet bed to sit on */
+.hero--still .hero__viewport::after {
+  content: "";
+  position: absolute;
+  inset: 55% 0 0 0;
+  background: linear-gradient(to top, rgba(10, 12, 14, 0.55), transparent);
+  pointer-events: none;
+}
+
+.hero--still .hero__overlay {
+  z-index: 1;
+}
+
+.hero--still .hero__scrollcue {
+  display: none;
+}
