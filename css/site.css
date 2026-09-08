@@ -854,51 +854,118 @@ body.viewer-lock {
 }
 
 /* ---------------- Reviews ---------------- */
+/* Every review on the wall at once: eleven verbatim reviews are the
+   argument, so none of them hide behind an arrow. Column flow lets the
+   different lengths stagger naturally. */
 
-.reviews__track-wrap {
-  overflow: hidden;
+.reviews__wall {
   margin-top: 36px;
+  columns: 3 320px;
+  column-gap: 18px;
 }
-.reviews__track {
-  display: flex;
-  gap: 20px;
-  transition: transform 420ms cubic-bezier(0.4, 0, 0.2, 1);
-}
+
 .review-card {
-  flex: 0 0 min(420px, 88%);
+  break-inside: avoid;
+  margin: 0 0 18px;
   background: #fff;
   border: 1px solid var(--hairline);
-  padding: 28px 26px;
+  border-radius: 12px;
+  padding: 22px 22px 24px;
   display: flex;
   flex-direction: column;
+  gap: 10px;
+  box-shadow: 0 14px 34px -30px rgba(16, 18, 20, 0.45);
+}
+
+.review-card__head {
+  display: flex;
+  align-items: center;
   gap: 12px;
 }
+
+.review-card__avatar {
+  flex: 0 0 auto;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: var(--navy);
+  color: #fff;
+  font-family: var(--font-display);
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+}
+
+/* every third avatar carries the brand red, so the wall reads PSI */
+.review-card:nth-child(3n) .review-card__avatar {
+  background: var(--accent);
+}
+
+.review-card__author {
+  margin: 0;
+  flex: 1 1 auto;
+  font-weight: 600;
+  font-size: 15px;
+  line-height: 1.25;
+}
+
+.review-card__author small {
+  display: block;
+  font-weight: 400;
+  color: var(--muted);
+  font-size: 13px;
+  margin-top: 1px;
+}
+
+.review-card__gmark {
+  flex: 0 0 auto;
+  width: 20px;
+  height: 20px;
+}
+
 .review-card__stars {
-  color: var(--accent);
+  color: #fbbc05;
   font-size: 15px;
   letter-spacing: 3px;
 }
+
 .review-card__text {
   margin: 0;
   font-size: 14.5px;
   line-height: 1.65;
   color: #33383d;
-  flex: 1;
 }
+
 .review-card__text strong {
   color: var(--ink);
 }
-.review-card__author {
-  margin: 0;
-  font-weight: 600;
-  font-size: 14px;
-}
-.review-card__author small {
-  display: block;
-  font-weight: 400;
-  color: var(--muted);
-  font-size: 14px;
-  margin-top: 2px;
+
+/* phones swipe the same cards as a snap rail */
+@media (max-width: 760px) {
+  .reviews__wall {
+    columns: auto;
+    display: flex;
+    gap: 12px;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory;
+    margin-inline: calc(-1 * clamp(20px, 6vw, 96px));
+    padding-inline: clamp(20px, 6vw, 96px);
+    padding-bottom: 10px;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+  .reviews__wall::-webkit-scrollbar {
+    display: none;
+  }
+  .review-card {
+    flex: 0 0 82vw;
+    max-width: 340px;
+    margin-bottom: 4px;
+    scroll-snap-align: center;
+  }
 }
 
 .reviews__nav {
@@ -1339,13 +1406,6 @@ body.viewer-lock {
 
 .gbadge__cta:hover {
   background: #3367d6;
-}
-
-.review-card__gmark {
-  float: right;
-  width: 22px;
-  height: 22px;
-  margin: 2px 0 6px 10px;
 }
 
 @media (max-width: 720px) {

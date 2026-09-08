@@ -529,16 +529,25 @@
   reviews.forEach((r) => {
     const card = document.createElement("article");
     card.className = "review-card";
+    const initials = r.author
+      .split(/\s+/)
+      .slice(0, 2)
+      .map((w) => w[0])
+      .join("")
+      .toUpperCase();
     card.innerHTML = `
-      <svg class="review-card__gmark" viewBox="0 0 48 48" role="img" aria-label="Posted on Google">
-        <path fill="#4285F4" d="M45.12 24.5c0-1.56-.14-3.06-.4-4.5H24v8.51h11.84c-.51 2.75-2.06 5.08-4.39 6.64v5.52h7.11c4.16-3.83 6.56-9.47 6.56-16.17z"/>
-        <path fill="#34A853" d="M24 46c5.94 0 10.92-1.97 14.56-5.33l-7.11-5.52c-1.97 1.32-4.49 2.1-7.45 2.1-5.73 0-10.58-3.87-12.31-9.07H4.34v5.7C7.96 41.07 15.4 46 24 46z"/>
-        <path fill="#FBBC05" d="M11.69 28.18C11.25 26.86 11 25.45 11 24s.25-2.86.69-4.18v-5.7H4.34C2.85 17.09 2 20.45 2 24s.85 6.91 2.34 9.88l7.35-5.7z"/>
-        <path fill="#EA4335" d="M24 10.75c3.23 0 6.13 1.11 8.41 3.29l6.31-6.31C34.91 4.18 29.93 2 24 2 15.4 2 7.96 6.93 4.34 14.12l7.35 5.7c1.73-5.2 6.58-9.07 12.31-9.07z"/>
-      </svg>
+      <div class="review-card__head">
+        <span class="review-card__avatar" aria-hidden="true">${initials}</span>
+        <p class="review-card__author">${r.author}<small>Google review</small></p>
+        <svg class="review-card__gmark" viewBox="0 0 48 48" role="img" aria-label="Posted on Google">
+          <path fill="#4285F4" d="M45.12 24.5c0-1.56-.14-3.06-.4-4.5H24v8.51h11.84c-.51 2.75-2.06 5.08-4.39 6.64v5.52h7.11c4.16-3.83 6.56-9.47 6.56-16.17z"/>
+          <path fill="#34A853" d="M24 46c5.94 0 10.92-1.97 14.56-5.33l-7.11-5.52c-1.97 1.32-4.49 2.1-7.45 2.1-5.73 0-10.58-3.87-12.31-9.07H4.34v5.7C7.96 41.07 15.4 46 24 46z"/>
+          <path fill="#FBBC05" d="M11.69 28.18C11.25 26.86 11 25.45 11 24s.25-2.86.69-4.18v-5.7H4.34C2.85 17.09 2 20.45 2 24s.85 6.91 2.34 9.88l7.35-5.7z"/>
+          <path fill="#EA4335" d="M24 10.75c3.23 0 6.13 1.11 8.41 3.29l6.31-6.31C34.91 4.18 29.93 2 24 2 15.4 2 7.96 6.93 4.34 14.12l7.35 5.7c1.73-5.2 6.58-9.07 12.31-9.07z"/>
+        </svg>
+      </div>
       <div class="review-card__stars" aria-label="${r.stars} out of 5 stars">${"★".repeat(r.stars)}${"☆".repeat(5 - r.stars)}</div>
-      <p class="review-card__text">&ldquo;${r.html}&rdquo;</p>
-      <p class="review-card__author">${r.author}<small>${r.stars} Stars &middot; Google Review</small></p>`;
+      <p class="review-card__text">&ldquo;${r.html}&rdquo;</p>`;
     rTrack.appendChild(card);
   });
 
@@ -557,31 +566,6 @@
     );
   }
   if (gCount) gCount.textContent = String(reviews.length);
-
-  let rIndex = 0;
-  function reviewStep() {
-    const card = rTrack.querySelector(".review-card");
-    if (!card) return 0;
-    return card.getBoundingClientRect().width + 20;
-  }
-  function maxIndex() {
-    const wrap = rTrack.parentElement.getBoundingClientRect().width;
-    const visible = Math.max(1, Math.floor(wrap / reviewStep()));
-    return Math.max(0, reviews.length - visible);
-  }
-  function renderReviews() {
-    rIndex = Math.min(Math.max(0, rIndex), maxIndex());
-    rTrack.style.transform = `translateX(-${rIndex * reviewStep()}px)`;
-  }
-  document.getElementById("reviewsPrev").addEventListener("click", () => {
-    rIndex--;
-    renderReviews();
-  });
-  document.getElementById("reviewsNext").addEventListener("click", () => {
-    rIndex++;
-    renderReviews();
-  });
-  window.addEventListener("resize", renderReviews, { passive: true });
 })();
 
 /* ============================================================
