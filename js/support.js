@@ -12,7 +12,7 @@
      synonym map, weighted term scoring with phrase bonuses and
      an evidence threshold
    - compound questions split and answered part by part
-   - conversation persists (localStorage); typing indicator is
+   - conversation persists for the visit (sessionStorage); typing
      paced to answer length and skipped for reduced motion;
      focus is trapped in the open panel
    ============================================================ */
@@ -345,7 +345,7 @@
   /* ---------------- persistence ---------------- */
   const loadState = () => {
     try {
-      return JSON.parse(localStorage.getItem(STORE)) || {};
+      return JSON.parse(sessionStorage.getItem(STORE)) || {};
     } catch (e) {
       return {};
     }
@@ -353,7 +353,7 @@
   const state = Object.assign({ msgs: [] }, loadState());
   const save = () => {
     try {
-      localStorage.setItem(
+      sessionStorage.setItem(
         STORE,
         JSON.stringify({ msgs: state.msgs.slice(-40) }),
       );
