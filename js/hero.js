@@ -61,13 +61,21 @@
   // portrait source stands on its own, nothing is scrubbed, and the
   // sequence is never requested.
   // ------------------------------------------------------------------
-  const phone = window.matchMedia("(max-width: 760px)");
-  if (phone.matches) {
-    hero.style.height = "100svh";
-    hero.classList.add("hero--still");
-    canvas.style.display = "none";
-    if (loader) loader.remove();
-    return;
+  const phone = window.matchMedia("(max-width: 760px)").matches;
+
+  // Phones scrub their own sequence. The desktop set is 193 landscape
+  // stills (~22MB) cover-cropped to the viewport, which on a portrait
+  // screen throws away most of the frame and the house with it. These 24
+  // are pre-cropped to 3:4 around the house and sized for the screen, so
+  // the opening animation survives at a fraction of the weight.
+  if (phone) {
+    CONFIG.frameCount = 24;
+    CONFIG.framePath = (i) =>
+      `assets/hero-mobile-seq/m-${String(i + 1).padStart(3, "0")}.jpg`;
+    CONFIG.scrollLengthVh = 200; // a shorter runway suits a thumb
+    CONFIG.focalX = 0.5;
+    CONFIG.focalY = 0.5; // frames are already composed; no bias needed
+    hero.classList.add("hero--phone");
   }
 
   hero.style.setProperty("--hero-scroll-length", CONFIG.scrollLengthVh + "vh");

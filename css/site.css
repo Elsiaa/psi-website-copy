@@ -2859,14 +2859,10 @@ section[id],
 }
 
 /* ---------------- Hero on a phone ---------------- */
-/* One portrait frame of the finished building, composed for the screen
-   rather than cropped down to it. */
+/* The same opening animation, scrubbed from portrait frames that were
+   composed for the screen rather than cropped down to it. */
 
-.hero--still {
-  height: 100svh;
-}
-
-.hero--still .hero__poster {
+.hero--phone .hero__poster {
   object-fit: cover;
   object-position: 50% 50%;
 }
@@ -2883,10 +2879,5 @@ section[id],
 
   .hero__tagline {
     font-size: 16px;
-  }
-
-  /* the scroll cue is meaningless when the hero no longer scrubs */
-  .hero--still .hero__scrollcue {
-    display: none;
   }
 }
