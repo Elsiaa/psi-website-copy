@@ -2579,3 +2579,61 @@ section[id],
     margin-top: 8px;
   }
 }
+
+/* ---------------- Quote band: the work, beside the ask ---------------- */
+
+.qcta {
+  align-items: center;
+}
+
+.qcta__shot {
+  order: 3;
+  flex: 0 0 clamp(240px, 28vw, 360px);
+  width: clamp(240px, 28vw, 360px);
+  height: auto;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  border-radius: 12px;
+  box-shadow: 0 26px 60px -40px rgba(0, 0, 0, 0.9);
+}
+
+@media (max-width: 980px) {
+  .qcta__shot {
+    display: none; /* the ask matters more than the picture on a phone */
+  }
+}
+
+/* ---------------- Brand details ---------------- */
+/* Small, consistent uses of the PSI red so the mark, the selection and
+   the keyboard focus ring all read as the same brand. */
+
+::selection {
+  background: rgba(214, 0, 0, 0.9);
+  color: #fff;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* the nav mark gets a touch more presence */
+.nav__logo {
+  transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.nav__brand:hover .nav__logo {
+  transform: scale(1.04);
+}
+
+/* the tel number is a brand asset on this site: PSI reads red everywhere */
+.tel-psi {
+  color: var(--accent);
+  font-weight: 700;
+}
+
+/* a hairline of brand colour under every section heading's section */
+.footer__tagline {
+  color: rgba(255, 255, 255, 0.72);
+}
