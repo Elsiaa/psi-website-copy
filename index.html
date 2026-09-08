@@ -22,6 +22,13 @@
       rel="preload"
       as="image"
       href="assets/hero-sequence/frame-0001.webp"
+      media="(min-width: 761px)"
+    />
+    <link
+      rel="preload"
+      as="image"
+      href="assets/hero-mobile.jpg"
+      media="(max-width: 760px)"
     />
     <link
       rel="stylesheet"
@@ -35,7 +42,7 @@
       href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="css/site.css?v=mf436685" />
+    <link rel="stylesheet" href="css/site.css?v=h1b87793" />
   </head>
   <body>
     <nav class="nav" id="topNav" aria-label="Primary">
@@ -75,14 +82,17 @@
     <!-- ===================== SCROLL-DRIVEN HERO (existing implementation) ===================== -->
     <section class="hero" id="hero" aria-label="Cinematic aerial introduction">
       <div class="hero__viewport">
-        <img
-          class="hero__poster"
-          id="heroPoster"
-          src="assets/hero-sequence/frame-0001.webp"
-          alt="Aerial view of a modern white three-storey residence built by PSI on a landscaped corner lot"
-          decoding="async"
-          fetchpriority="high"
-        />
+        <picture>
+          <source media="(max-width: 760px)" srcset="assets/hero-mobile.jpg" />
+          <img
+            class="hero__poster"
+            id="heroPoster"
+            src="assets/hero-sequence/frame-0001.webp"
+            alt="Aerial view of a modern white three-storey residence built by PSI on a landscaped corner lot"
+            decoding="async"
+            fetchpriority="high"
+          />
+        </picture>
         <canvas
           class="hero__canvas"
           id="heroCanvas"
@@ -199,7 +209,7 @@
             />
             <div class="cap__scrim"></div>
             <div class="cap__body">
-              <span class="cap__num">01</span>
+              <span class="cap__num">1</span>
               <h3>Ground-Up New Home Construction</h3>
               <p>Single-family builds, foundation through final finishes.</p>
             </div>
@@ -214,7 +224,7 @@
             />
             <div class="cap__scrim"></div>
             <div class="cap__body">
-              <span class="cap__num">02</span>
+              <span class="cap__num">2</span>
               <h3>Home Additions</h3>
               <p>Full additions including plumbing and electrical.</p>
             </div>
@@ -229,7 +239,7 @@
             />
             <div class="cap__scrim"></div>
             <div class="cap__body">
-              <span class="cap__num">03</span>
+              <span class="cap__num">3</span>
               <h3>Whole-Home Renovations &amp; Remodels</h3>
               <p>Gut and finish work on existing houses.</p>
             </div>
@@ -244,7 +254,7 @@
             />
             <div class="cap__scrim"></div>
             <div class="cap__body">
-              <span class="cap__num">04</span>
+              <span class="cap__num">4</span>
               <h3>Basement Build-Outs &amp; Finishing</h3>
               <p>
                 Converting unfinished lower levels into fully usable living
@@ -262,7 +272,7 @@
             />
             <div class="cap__scrim"></div>
             <div class="cap__body">
-              <span class="cap__num">05</span>
+              <span class="cap__num">5</span>
               <h3>Concrete &amp; Foundation Work</h3>
               <p>Footings, foundations, slabs, and flatwork.</p>
             </div>
@@ -277,7 +287,7 @@
             />
             <div class="cap__scrim"></div>
             <div class="cap__body">
-              <span class="cap__num">06</span>
+              <span class="cap__num">6</span>
               <h3>Framing &amp; Structural Carpentry</h3>
               <p>Including engineered floor and roof truss packages.</p>
             </div>
@@ -292,7 +302,7 @@
             />
             <div class="cap__scrim"></div>
             <div class="cap__body">
-              <span class="cap__num">07</span>
+              <span class="cap__num">7</span>
               <h3>Bathroom &amp; Interior Room Remodels</h3>
               <p>
                 Complete renovations, relocations, and new builds within
@@ -310,7 +320,7 @@
             />
             <div class="cap__scrim"></div>
             <div class="cap__body">
-              <span class="cap__num">08</span>
+              <span class="cap__num">8</span>
               <h3>Repairs &amp; Property Maintenance</h3>
               <p>
                 For landlords, property managers, and organizations with
@@ -328,7 +338,7 @@
             />
             <div class="cap__scrim"></div>
             <div class="cap__body">
-              <span class="cap__num">09</span>
+              <span class="cap__num">9</span>
               <h3>Institutional &amp; Public Bid Work</h3>
               <p>
                 PennBid and county vendor-list projects, plus architect bid
@@ -360,7 +370,7 @@
               </p>
               <ol class="ps-steps" id="psSteps">
                 <li class="ps-step" data-step="0">
-                  <p class="ps-step__n">01</p>
+                  <p class="ps-step__n">1</p>
                   <h3>Plan &amp; Design</h3>
                   <p class="ps-step__d">
                     Drawings, engineering, and a budget settled before anyone
@@ -368,7 +378,7 @@
                   </p>
                 </li>
                 <li class="ps-step" data-step="1">
-                  <p class="ps-step__n">02</p>
+                  <p class="ps-step__n">2</p>
                   <h3>Site Preparation</h3>
                   <p class="ps-step__d">
                     Lot cleared, elevations set, and the excavation dug to the
@@ -376,7 +386,7 @@
                   </p>
                 </li>
                 <li class="ps-step" data-step="2">
-                  <p class="ps-step__n">03</p>
+                  <p class="ps-step__n">3</p>
                   <h3>Foundation</h3>
                   <p class="ps-step__d">
                     Footings poured below frost line, foundation walls up square
@@ -384,14 +394,14 @@
                   </p>
                 </li>
                 <li class="ps-step" data-step="3">
-                  <p class="ps-step__n">04</p>
+                  <p class="ps-step__n">4</p>
                   <h3>Framing</h3>
                   <p class="ps-step__d">
                     Floors, walls, and roof structure go up a storey at a time.
                   </p>
                 </li>
                 <li class="ps-step" data-step="4">
-                  <p class="ps-step__n">05</p>
+                  <p class="ps-step__n">5</p>
                   <h3>Exterior &amp; Systems</h3>
                   <p class="ps-step__d">
                     Roofing, siding, windows and doors close the building in,
@@ -399,14 +409,14 @@
                   </p>
                 </li>
                 <li class="ps-step" data-step="5">
-                  <p class="ps-step__n">06</p>
+                  <p class="ps-step__n">6</p>
                   <h3>Interior &amp; Finishes</h3>
                   <p class="ps-step__d">
                     Insulated, boarded, then the finish work you actually touch.
                   </p>
                 </li>
                 <li class="ps-step" data-step="6">
-                  <p class="ps-step__n">07</p>
+                  <p class="ps-step__n">7</p>
                   <h3>Final Walkthrough</h3>
                   <p class="ps-step__d">
                     Punch list closed, keys handed over, and our number still
@@ -424,49 +434,49 @@
                   class="ps-tick-btn"
                   type="button"
                   data-go="0"
-                  aria-label="Stage 01"
+                  aria-label="Stage 1"
                 >
                   <span></span></button
                 ><button
                   class="ps-tick-btn"
                   type="button"
                   data-go="1"
-                  aria-label="Stage 02"
+                  aria-label="Stage 2"
                 >
                   <span></span></button
                 ><button
                   class="ps-tick-btn"
                   type="button"
                   data-go="2"
-                  aria-label="Stage 03"
+                  aria-label="Stage 3"
                 >
                   <span></span></button
                 ><button
                   class="ps-tick-btn"
                   type="button"
                   data-go="3"
-                  aria-label="Stage 04"
+                  aria-label="Stage 4"
                 >
                   <span></span></button
                 ><button
                   class="ps-tick-btn"
                   type="button"
                   data-go="4"
-                  aria-label="Stage 05"
+                  aria-label="Stage 5"
                 >
                   <span></span></button
                 ><button
                   class="ps-tick-btn"
                   type="button"
                   data-go="5"
-                  aria-label="Stage 06"
+                  aria-label="Stage 6"
                 >
                   <span></span></button
                 ><button
                   class="ps-tick-btn"
                   type="button"
                   data-go="6"
-                  aria-label="Stage 07"
+                  aria-label="Stage 7"
                 >
                   <span></span>
                 </button>
@@ -2067,7 +2077,7 @@
     </footer>
 
     <script src="assets/hero-sequence/frames-manifest.js"></script>
-    <script src="js/hero.js?v=cd66c788" defer></script>
+    <script src="js/hero.js?v=h1b87793" defer></script>
     <script src="data/projects.js?v=mf436685"></script>
     <script
       src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"

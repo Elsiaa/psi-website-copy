@@ -54,6 +54,22 @@
     return;
   }
 
+  // ------------------------------------------------------------------
+  // Phones get a different hero on purpose. The sequence is 193 landscape
+  // frames (25MB) cover-cropped to the viewport: on a portrait screen that
+  // throws away most of the frame and the house with it. Here the markup's
+  // portrait source stands on its own, nothing is scrubbed, and the
+  // sequence is never requested.
+  // ------------------------------------------------------------------
+  const phone = window.matchMedia("(max-width: 760px)");
+  if (phone.matches) {
+    hero.style.height = "100svh";
+    hero.classList.add("hero--still");
+    canvas.style.display = "none";
+    if (loader) loader.remove();
+    return;
+  }
+
   hero.style.setProperty("--hero-scroll-length", CONFIG.scrollLengthVh + "vh");
   document.documentElement.style.setProperty(
     "--hero-scroll-length",
