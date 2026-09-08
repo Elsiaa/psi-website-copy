@@ -208,9 +208,7 @@
     "real answer.";
 
   const GREETING =
-    "Hello. Ask anything about our work, our process, or getting a quote. " +
-    "I answer from what is on this site; anything past that, I hand you to " +
-    "a person.";
+    "Hello. Ask about our work, our process, or getting a quote.";
 
   /* ---------------- retrieval engine ---------------- */
   const SYN = {
@@ -376,11 +374,8 @@
       aria-label="PSI support assistant" hidden>
       <header class="sbot__head">
         <p class="sbot__title">Questions? Ask PSI</p>
-        <p class="sbot__sub">Answers come from this site. Anything else goes to a person.</p>
         <div class="sbot__tools">
           <button class="sbot__tool" type="button" data-act="min" title="Minimize" aria-label="Minimize">&#8722;</button>
-          <button class="sbot__tool" type="button" data-act="email" title="Email me this conversation" aria-label="Email me this conversation">&#9993;</button>
-          <button class="sbot__tool" type="button" data-act="clear" title="Clear conversation" aria-label="Clear conversation">&#8635;</button>
           <button class="sbot__close" type="button" aria-label="Close">&times;</button>
         </div>
       </header>
@@ -401,14 +396,10 @@
   const form = root.querySelector(".sbot__form");
   const input = root.querySelector(".sbot__input");
 
-  const stamp = (ts) =>
-    new Date(ts).toLocaleTimeString([], { hour: "numeric", minute: "2-digit" });
-
   function bubble(m) {
     const b = document.createElement("div");
     b.className = "sbot__msg sbot__msg--" + m.who;
-    b.innerHTML =
-      m.html + '<time class="sbot__time">' + stamp(m.ts) + "</time>";
+    b.innerHTML = m.html;
     log.appendChild(b);
     log.scrollTop = log.scrollHeight;
   }
@@ -483,28 +474,6 @@
     }
   }
 
-  function emailTranscript() {
-    const lines = state.msgs.map((m) => {
-      const who = m.who === "you" ? "Me" : "PSI";
-      return who + ": " + m.html.replace(/<[^>]+>/g, "");
-    });
-    location.href =
-      "mailto:info@psiconstructionpa.com?subject=" +
-      encodeURIComponent("Question from the website") +
-      "&body=" +
-      encodeURIComponent(
-        "My conversation with the PSI site assistant:\n\n" + lines.join("\n"),
-      );
-  }
-
-  function clearConversation() {
-    state.msgs = [];
-    save();
-    log.innerHTML = "";
-    reply(GREETING, null);
-    renderChips();
-  }
-
   /* ---------------- open/close with a focus trap ---------------- */
   let open = false;
   const focusables = () =>
@@ -521,10 +490,6 @@
       root.classList.remove("sbot--min");
       if (!log.children.length) {
         if (state.msgs.length) {
-          const d = document.createElement("p");
-          d.className = "sbot__divider";
-          d.textContent = "earlier conversation";
-          log.appendChild(d);
           state.msgs.forEach(bubble);
           renderChips();
         } else {
@@ -555,12 +520,6 @@
   root
     .querySelector(".sbot__close")
     .addEventListener("click", () => setOpen(false));
-  root
-    .querySelector('[data-act="email"]')
-    .addEventListener("click", emailTranscript);
-  root
-    .querySelector('[data-act="clear"]')
-    .addEventListener("click", clearConversation);
 
   document.addEventListener("keydown", (e) => {
     if (!open) return;

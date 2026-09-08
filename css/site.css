@@ -3638,27 +3638,6 @@ section[id],
   border-color: var(--accent);
 }
 
-.sbot__time {
-  display: block;
-  margin-top: 4px;
-  font-size: 11px;
-  color: var(--muted);
-}
-
-.sbot__msg--you .sbot__time {
-  color: rgba(255, 255, 255, 0.55);
-  text-align: right;
-}
-
-.sbot__divider {
-  align-self: center;
-  margin: 0;
-  font-family: var(--font-serif);
-  font-style: italic;
-  font-size: 12px;
-  color: var(--muted);
-}
-
 .sbot__hr {
   border: 0;
   border-top: 1px solid var(--hairline);
@@ -3705,11 +3684,7 @@ section[id],
 .sbot--min .sbot__log,
 .sbot--min .sbot__chips,
 .sbot--min .sbot__form,
-.sbot--min .sbot__sub {
-  display: none;
-}
-
-.sbot--min .sbot__panel {
+.sbot--min .sbot--min .sbot__panel {
   max-height: none;
   width: min(280px, calc(100vw - 24px));
 }
@@ -3777,7 +3752,7 @@ section[id],
 
 .sbot__head {
   position: relative;
-  padding: 16px 48px 14px 18px;
+  padding: 14px 92px 14px 18px;
   background: var(--navy);
   color: #fff;
 }
