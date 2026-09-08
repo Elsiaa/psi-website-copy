@@ -61,14 +61,18 @@
   // portrait source stands on its own, nothing is scrubbed, and the
   // sequence is never requested.
   // ------------------------------------------------------------------
-  const phone = window.matchMedia("(max-width: 760px)").matches;
-
-  // Phones scrub their own sequence. The desktop set is 193 landscape
-  // stills (~22MB) cover-cropped to the viewport, which on a portrait
-  // screen throws away most of the frame and the house with it. These 24
-  // are pre-cropped to 3:4 around the house and sized for the screen, so
-  // the opening animation survives at a fraction of the weight.
-  if (phone) {
+  // ------------------------------------------------------------------
+  // Sequence variants. The desktop set is 193 landscape stills; on a
+  // portrait phone, cover-cropping them throws away the house. The
+  // mobile set is 24 frames pre-cropped to 3:4 around the building.
+  // The choice keys on ORIENTATION, not width: a landscape phone is a
+  // wide, short viewport and the 16:9 set is the right one for it.
+  // ------------------------------------------------------------------
+  const portraitPhone = window.matchMedia(
+    "(max-width: 760px) and (orientation: portrait)",
+  );
+  const startedPortrait = portraitPhone.matches;
+  if (startedPortrait) {
     CONFIG.frameCount = 24;
     CONFIG.framePath = (i) =>
       `assets/hero-mobile-seq/m-${String(i + 1).padStart(3, "0")}.jpg`;
@@ -76,6 +80,37 @@
     CONFIG.focalX = 0.5;
     CONFIG.focalY = 0.5; // frames are already composed; no bias needed
     hero.classList.add("hero--phone");
+  } else if (window.matchMedia("(max-width: 900px)").matches) {
+    // small landscape viewports keep the 16:9 frames but a shorter runway
+    CONFIG.scrollLengthVh = 220;
+  }
+
+  // The engine can always retreat to a correct still: right sequence's
+  // final frame, full-viewport, no scrub. Used on any runtime failure
+  // and when a rotation crosses the portrait/landscape boundary, where
+  // the loaded frames stop matching the viewport they were cut for.
+  let dead = false;
+  const retreat = () => {
+    if (dead) return;
+    dead = true;
+    hero.classList.add("hero--still");
+    hero.style.height = "100svh";
+    canvas.style.display = "none";
+    if (poster) {
+      // the still must match the viewport it retreats into, not the
+      // orientation the page happened to load in
+      poster.src = portraitPhone.matches
+        ? "assets/hero-mobile-seq/m-024.jpg"
+        : "assets/hero-sequence/frame-0193.webp";
+      poster.style.display = "";
+    }
+    if (loader) loader.remove();
+  };
+
+  if (portraitPhone.addEventListener) {
+    portraitPhone.addEventListener("change", () => {
+      if (portraitPhone.matches !== startedPortrait) retreat();
+    });
   }
 
   hero.style.setProperty("--hero-scroll-length", CONFIG.scrollLengthVh + "vh");
@@ -282,6 +317,7 @@
   }
 
   function tick(now) {
+    if (dead) return;
     const dt = Math.min(0.05, (now - lastT) / 1000);
     lastT = now;
     stepOnce(dt);
@@ -327,8 +363,13 @@
   window.addEventListener("resize", resize, { passive: true });
   resize();
   pump();
-  requestAnimationFrame((t) => {
-    lastT = t;
-    requestAnimationFrame(tick);
-  });
+  try {
+    requestAnimationFrame((t) => {
+      if (dead) return;
+      resize();
+      requestAnimationFrame(tick);
+    });
+  } catch (e) {
+    retreat();
+  }
 })();
