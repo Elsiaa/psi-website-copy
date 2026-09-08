@@ -3943,15 +3943,28 @@ section[id],
 }
 
 @media (max-width: 480px) {
+  /* A true bottom sheet: flush to the bottom edge, rounded on top. */
   .sbot__panel {
-    right: 12px;
-    left: 12px;
-    bottom: 12px;
+    right: 0;
+    left: 0;
+    bottom: 0;
     width: auto;
+    max-height: min(82svh, 620px);
+    border-radius: 22px 22px 0 0;
+    border-left: 0;
+    border-right: 0;
+    border-bottom: 0;
+  }
+  .sbot__form {
+    padding-bottom: calc(14px + env(safe-area-inset-bottom));
+  }
+  /* 16px stops iOS zooming the page when the field is focused. */
+  .sbot__input {
+    font-size: 16px;
   }
   .sbot__fab {
     right: 16px;
-    bottom: 16px;
+    bottom: calc(16px + env(safe-area-inset-bottom));
   }
 }
 
