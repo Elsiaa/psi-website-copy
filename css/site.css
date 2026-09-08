@@ -232,8 +232,8 @@ img {
 
 .hero__eyebrow {
   margin: 0 0 10px;
-  font-size: clamp(11px, 0.9vw, 13px);
-  letter-spacing: 0.34em;
+  font-size: clamp(13px, 1vw, 14px);
+  letter-spacing: 0.26em;
   text-transform: uppercase;
   opacity: 0.82;
 }
@@ -1202,6 +1202,8 @@ body.viewer-lock {
   opacity: 0.9;
 }
 .footer__col a {
+  display: inline-block;
+  padding: 6px 0;
   color: inherit;
   text-decoration: none;
 }
@@ -3073,13 +3075,6 @@ section[id],
 
   /* sections shorter than a screen compose to one, centred rather than
      top-stacked with dead space beneath */
-  #about,
-  #capabilities,
-  #quote {
-    min-height: 100svh;
-    display: grid;
-    align-content: center;
-  }
 
   /* the runway sections opt out: they are already paced by their own scroll */
   #hero,
@@ -3097,5 +3092,18 @@ section[id],
   #reviews,
   #faq {
     padding-top: clamp(44px, 7vh, 60px);
+  }
+}
+
+/* FAQ +/- marks and viewer arrows: comfortable under a thumb */
+@media (max-width: 760px) {
+  .faq__q {
+    min-height: 52px;
+  }
+
+  .viewer__arrow,
+  .carousel__btn {
+    min-width: 44px;
+    min-height: 44px;
   }
 }
