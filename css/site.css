@@ -3701,6 +3701,24 @@ section[id],
   }
 }
 
+/* Minimized: the panel collapses to its header bar; click to restore. */
+.sbot--min .sbot__log,
+.sbot--min .sbot__chips,
+.sbot--min .sbot__form,
+.sbot--min .sbot__sub {
+  display: none;
+}
+
+.sbot--min .sbot__panel {
+  max-height: none;
+  width: min(280px, calc(100vw - 24px));
+}
+
+.sbot--min .sbot__head {
+  cursor: pointer;
+  padding: 12px 116px 12px 18px;
+}
+
 /* ---------------- Support assistant ---------------- */
 /* The site's own materials: navy head, paper body, red action. */
 

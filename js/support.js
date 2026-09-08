@@ -378,6 +378,7 @@
         <p class="sbot__title">Questions? Ask PSI</p>
         <p class="sbot__sub">Answers come from this site. Anything else goes to a person.</p>
         <div class="sbot__tools">
+          <button class="sbot__tool" type="button" data-act="min" title="Minimize" aria-label="Minimize">&#8722;</button>
           <button class="sbot__tool" type="button" data-act="email" title="Email me this conversation" aria-label="Email me this conversation">&#9993;</button>
           <button class="sbot__tool" type="button" data-act="clear" title="Clear conversation" aria-label="Clear conversation">&#8635;</button>
           <button class="sbot__close" type="button" aria-label="Close">&times;</button>
@@ -517,6 +518,7 @@
     fab.setAttribute("aria-expanded", String(open));
     root.classList.toggle("sbot--open", open);
     if (open) {
+      root.classList.remove("sbot--min");
       if (!log.children.length) {
         if (state.msgs.length) {
           const d = document.createElement("p");
@@ -537,6 +539,19 @@
   };
 
   fab.addEventListener("click", () => setOpen(!open));
+  const head = root.querySelector(".sbot__head");
+  const setMin = (m) => {
+    root.classList.toggle("sbot--min", m);
+    if (!m) input.focus({ preventScroll: true });
+  };
+  root.querySelector('[data-act="min"]').addEventListener("click", (e) => {
+    e.stopPropagation();
+    setMin(!root.classList.contains("sbot--min"));
+  });
+  head.addEventListener("click", (e) => {
+    if (e.target.closest(".sbot__tools")) return;
+    if (root.classList.contains("sbot--min")) setMin(false);
+  });
   root
     .querySelector(".sbot__close")
     .addEventListener("click", () => setOpen(false));
