@@ -3681,155 +3681,199 @@ section[id],
 }
 
 /* ---------------- Support assistant ---------------- */
-/* Elsiaa-school widget: white circle launcher carrying the brand mark,
-   an airy rounded card, pill actions, a thin grey x. */
+/* Mirrors the elsiaa.com support widget: labeled white pill launcher
+   (a 52px circle on phones) with a fade-up entrance, a navy quote pill
+   with a dismiss beside it, and a full-screen dim overlay holding one
+   tall rounded card: avatar header, stacked pill chips, pill composer
+   with a round dark send. */
+
+.sbot__dock {
+  position: fixed;
+  right: 16px;
+  bottom: calc(16px + env(safe-area-inset-bottom));
+  z-index: 45;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  opacity: 0;
+  transform: translateY(16px);
+  transition:
+    opacity 0.5s ease,
+    transform 0.5s ease;
+}
+
+.sbot--in .sbot__dock {
+  opacity: 1;
+  transform: none;
+}
 
 .sbot__fab {
-  position: fixed;
-  right: 18px;
-  bottom: 18px;
-  z-index: 45;
-  width: 56px;
-  height: 56px;
-  border: 1px solid var(--hairline);
-  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 48px;
+  padding: 0 24px 0 20px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 999px;
   background: #fff;
+  color: var(--ink);
+  font: inherit;
+  font-size: 13px;
+  font-weight: 700;
   cursor: pointer;
-  display: grid;
-  place-items: center;
-  box-shadow: 0 10px 26px -12px rgba(16, 18, 20, 0.4);
+  box-shadow: 0 18px 44px -18px rgba(0, 0, 0, 0.35);
   transition:
-    transform 0.2s ease,
-    box-shadow 0.2s ease;
+    border-color 0.2s ease,
+    color 0.2s ease;
 }
 
 .sbot__fab:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 16px 32px -14px rgba(16, 18, 20, 0.5);
+  border-color: var(--accent);
+  color: var(--accent);
 }
 
 .sbot__fab img {
-  width: 34px;
-  height: 34px;
+  width: 28px;
+  height: 28px;
   object-fit: contain;
 }
 
-.sbot__fabx {
-  display: none;
-  font-size: 26px;
-  line-height: 1;
-  color: var(--ink);
+.sbot__cta {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0 8px 0 24px;
+  border-radius: 999px;
+  background: var(--navy);
+  box-shadow: 0 18px 44px -18px rgba(0, 0, 0, 0.5);
 }
 
-.sbot--open .sbot__fab {
-  z-index: 47;
+.sbot__cta a {
+  display: flex;
+  align-items: center;
+  min-height: 48px;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 700;
+  text-decoration: none;
 }
 
-.sbot--open .sbot__fab img {
-  display: none;
+.sbot__ctax {
+  width: 36px;
+  height: 36px;
+  border: 0;
+  border-radius: 50%;
+  background: none;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 14px;
+  cursor: pointer;
+  transition: color 0.2s ease;
 }
 
-.sbot--open .sbot__fabx {
-  display: block;
+.sbot__ctax:hover {
+  color: #fff;
+}
+
+.sbot__overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 70;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  padding: 16px;
+  background: rgba(16, 18, 20, 0.45);
 }
 
 .sbot__panel {
-  position: fixed;
-  right: 18px;
-  bottom: 86px;
-  z-index: 46;
-  width: min(370px, calc(100vw - 24px));
-  max-height: min(560px, calc(100svh - 108px));
   display: flex;
   flex-direction: column;
+  width: min(430px, 100%);
+  height: min(760px, 100%);
   background: #fff;
-  border: 1px solid var(--hairline);
-  border-radius: 22px;
+  border-radius: 24px;
   overflow: hidden;
-  box-shadow: 0 30px 70px -40px rgba(16, 18, 20, 0.55);
+  box-shadow: 0 40px 90px -40px rgba(0, 0, 0, 0.5);
 }
 
 .sbot__head {
-  position: relative;
-  padding: 22px 56px 14px 22px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 18px 16px 18px 20px;
+  border-bottom: 1px solid var(--hairline);
   background: #fff;
 }
 
-.sbot__eyebrow {
-  margin: 0 0 6px;
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: var(--accent);
+.sbot__avatar {
+  width: 44px;
+  height: 44px;
+  object-fit: contain;
+  flex: 0 0 auto;
+}
+
+.sbot__headtext {
+  flex: 1 1 auto;
+  min-width: 0;
 }
 
 .sbot__title {
   margin: 0;
   font-family: var(--font-display);
-  font-size: 22px;
+  font-size: 19px;
   font-weight: 700;
   color: var(--ink);
 }
 
-.sbot__tools {
-  position: absolute;
-  top: 14px;
-  right: 12px;
+.sbot__sub {
+  margin: 2px 0 0;
+  font-size: 14px;
+  color: var(--muted);
 }
 
 .sbot__close {
+  flex: 0 0 auto;
   width: 40px;
   height: 40px;
   border: 0;
   background: none;
   color: var(--muted);
-  font-size: 22px;
-  line-height: 1;
+  font-size: 17px;
   cursor: pointer;
   border-radius: 50%;
-  display: grid;
-  place-items: center;
-  transition:
-    color 0.2s ease,
-    background 0.2s ease;
+  transition: color 0.2s ease;
 }
 
 .sbot__close:hover {
   color: var(--ink);
-  background: rgba(16, 18, 20, 0.06);
 }
 
 .sbot__log {
   flex: 1 1 auto;
   overflow-y: auto;
-  padding: 8px 18px 14px;
+  padding: 18px 18px 8px;
   display: flex;
   flex-direction: column;
   gap: 10px;
-  min-height: 120px;
 }
 
 .sbot__msg {
-  max-width: 88%;
-  padding: 11px 15px;
+  max-width: 90%;
+  padding: 13px 17px;
   border-radius: 18px;
-  font-size: 15px;
-  line-height: 1.55;
+  font-size: 16px;
+  line-height: 1.5;
 }
 
 .sbot__msg--psi {
   align-self: flex-start;
-  background: var(--paper);
-  border: 1px solid var(--hairline);
-  border-bottom-left-radius: 6px;
+  background: #f2f1ee;
 }
 
 .sbot__msg--you {
   align-self: flex-end;
   background: var(--navy);
   color: #fff;
-  border-bottom-right-radius: 6px;
 }
 
 .sbot__msg a {
@@ -3885,21 +3929,22 @@ section[id],
 
 .sbot__chips {
   display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  padding: 0 18px 12px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 8px 18px 14px;
 }
 
 .sbot__chip {
-  padding: 9px 16px;
+  padding: 12px 20px;
   border: 1px solid var(--hairline);
   border-radius: 999px;
   background: #fff;
   font: inherit;
-  font-size: 14px;
+  font-size: 15px;
   color: var(--ink);
   cursor: pointer;
-  text-decoration: none;
+  text-align: left;
   transition:
     border-color 0.2s ease,
     color 0.2s ease;
@@ -3910,90 +3955,82 @@ section[id],
   color: var(--accent);
 }
 
-.sbot__chip--call {
-  border-color: var(--accent);
-  color: var(--accent);
-  font-weight: 600;
-}
-
 .sbot__form {
   display: flex;
-  gap: 8px;
-  padding: 12px 18px 18px;
-  border-top: 1px solid var(--hairline);
+  align-items: center;
+  gap: 10px;
+  padding: 14px 18px calc(18px + env(safe-area-inset-bottom));
   background: #fff;
 }
 
 .sbot__input {
   flex: 1 1 auto;
   min-width: 0;
-  padding: 11px 16px;
-  border: 1px solid var(--hairline);
+  min-height: 52px;
+  padding: 0 20px;
+  border: 0;
   border-radius: 999px;
+  background: #f2f1ee;
   font: inherit;
-  font-size: 15px;
+  font-size: 16px;
 }
 
 .sbot__input:focus-visible {
   outline: 2px solid var(--accent);
   outline-offset: 1px;
-  border-color: var(--accent);
 }
 
 .sbot__send {
-  padding: 11px 20px;
+  flex: 0 0 auto;
+  width: 52px;
+  height: 52px;
   border: 0;
-  border-radius: 999px;
-  background: var(--accent);
+  border-radius: 50%;
+  background: var(--ink);
   color: #fff;
-  font: inherit;
-  font-size: 15px;
-  font-weight: 600;
+  font-size: 20px;
   cursor: pointer;
+  display: grid;
+  place-items: center;
   transition: background 0.2s ease;
 }
 
 .sbot__send:hover {
-  background: #b30000;
+  background: var(--accent);
 }
 
-@media (max-width: 480px) {
-  /* A true bottom sheet: flush to the bottom edge, rounded on top. */
-  .sbot__panel {
-    right: 0;
-    left: 0;
-    bottom: 0;
-    width: auto;
-    max-height: min(82svh, 620px);
-    border-radius: 22px 22px 0 0;
-    border-left: 0;
-    border-right: 0;
-    border-bottom: 0;
-  }
-  .sbot__form {
-    padding-bottom: calc(14px + env(safe-area-inset-bottom));
-  }
-  /* 16px stops iOS zooming the page when the field is focused. */
-  .sbot__input {
-    font-size: 16px;
-  }
+@media (max-width: 760px) {
   .sbot__fab {
-    right: 16px;
-    bottom: calc(16px + env(safe-area-inset-bottom));
+    width: 52px;
+    height: 52px;
+    min-height: 0;
+    padding: 0;
+    justify-content: center;
+    gap: 0;
   }
-  .sbot--open .sbot__panel {
-    max-height: min(76svh, 600px);
+  .sbot__fablabel {
+    display: none;
   }
-  .sbot--open .sbot__fab {
+  .sbot__fab img {
+    width: 32px;
+    height: 32px;
+  }
+  .sbot__cta {
     display: none;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .sbot__dock {
+    transition: none;
+    opacity: 1;
+    transform: none;
+  }
   .sbot__fab,
   .sbot__chip,
   .sbot__send,
-  .sbot__close {
+  .sbot__close,
+  .sbot__ctax {
     transition: none;
   }
   .sbot__typing i {

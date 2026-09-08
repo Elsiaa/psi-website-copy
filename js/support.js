@@ -207,8 +207,7 @@
     "<a href='contact.html'>quote form</a> and we will come back with a " +
     "real answer.";
 
-  const GREETING =
-    "Hello. Ask about our work, our process, or getting a quote.";
+  const GREETING = "Hi, I'm the PSI support agent. How can I help you?";
 
   /* ---------------- retrieval engine ---------------- */
   const SYN = {
@@ -366,29 +365,53 @@
   const root = document.createElement("div");
   root.className = "sbot";
   root.innerHTML = `
-    <button class="sbot__fab" type="button" aria-expanded="false"
-      aria-controls="sbotPanel" aria-label="Questions? Ask PSI">
-      <img src="assets/logo/psi-logo.png" alt="" />
-      <span class="sbot__fabx" aria-hidden="true">&times;</span>
-    </button>
-    <section class="sbot__panel" id="sbotPanel" role="dialog" aria-modal="false"
-      aria-label="PSI support assistant" hidden>
-      <header class="sbot__head">
-        <p class="sbot__eyebrow">Support</p>
-        <p class="sbot__title">Ask PSI</p>
-        <div class="sbot__tools">
-          <button class="sbot__close" type="button" aria-label="Close">&times;</button>
-        </div>
-      </header>
-      <div class="sbot__log" role="log" aria-live="polite"></div>
-      <div class="sbot__chips"></div>
-      <form class="sbot__form">
-        <input class="sbot__input" type="text" autocomplete="off" maxlength="240"
-          placeholder="Type a question…" aria-label="Type a question" />
-        <button class="sbot__send" type="submit">Ask</button>
-      </form>
-    </section>`;
+    <div class="sbot__dock">
+      <button class="sbot__fab" type="button" aria-expanded="false"
+        aria-controls="sbotPanel" aria-label="Chat with PSI">
+        <img src="assets/logo/psi-logo.png" alt="" />
+        <span class="sbot__fablabel">Chat with PSI</span>
+      </button>
+      <div class="sbot__cta">
+        <a href="contact.html">Get a quote &rarr;</a>
+        <button class="sbot__ctax" type="button" aria-label="Dismiss">&#10005;</button>
+      </div>
+    </div>
+    <div class="sbot__overlay" hidden>
+      <section class="sbot__panel" id="sbotPanel" role="dialog" aria-modal="true"
+        aria-label="PSI support">
+        <header class="sbot__head">
+          <img class="sbot__avatar" src="assets/logo/psi-logo.png" alt="" />
+          <div class="sbot__headtext">
+            <p class="sbot__title">PSI Support</p>
+            <p class="sbot__sub">Answers now. Points you to a person when it can't.</p>
+          </div>
+          <button class="sbot__close" type="button" aria-label="Close">&#10005;</button>
+        </header>
+        <div class="sbot__log" role="log" aria-live="polite"></div>
+        <div class="sbot__chips"></div>
+        <form class="sbot__form">
+          <input class="sbot__input" type="text" autocomplete="off" maxlength="240"
+            placeholder="Type your message…" aria-label="Type your message" />
+          <button class="sbot__send" type="submit" aria-label="Send">&rarr;</button>
+        </form>
+      </section>
+    </div>`;
   document.body.appendChild(root);
+  requestAnimationFrame(() =>
+    requestAnimationFrame(() => root.classList.add("sbot--in")),
+  );
+
+  const overlay = root.querySelector(".sbot__overlay");
+  const cta = root.querySelector(".sbot__cta");
+  try {
+    if (sessionStorage.getItem("psi-sbot-cta") === "x") cta.remove();
+  } catch (e) {}
+  root.querySelector(".sbot__ctax").addEventListener("click", () => {
+    cta.remove();
+    try {
+      sessionStorage.setItem("psi-sbot-cta", "x");
+    } catch (e) {}
+  });
 
   const fab = root.querySelector(".sbot__fab");
   const panel = root.querySelector(".sbot__panel");
@@ -433,6 +456,7 @@
 
   function renderChips(ids) {
     chips.innerHTML = "";
+    const HUMAN = "I want to talk to a person";
     const list = ids
       ? KB.filter((t) => ids.includes(t.id))
       : [KB[1], KB[9], KB[0]];
@@ -444,11 +468,19 @@
       c.addEventListener("click", () => ask(t.q));
       chips.appendChild(c);
     });
-    const call = document.createElement("a");
-    call.className = "sbot__chip sbot__chip--call";
-    call.href = "tel:5703388774";
-    call.textContent = "Call 570-338-8PSI";
-    chips.appendChild(call);
+    const human = document.createElement("button");
+    human.type = "button";
+    human.className = "sbot__chip";
+    human.textContent = "I want to talk to a person";
+    human.addEventListener("click", () => {
+      record("I want to talk to a person", "you");
+      reply(KB.find((t) => t.id === "contact").a, [
+        "quote",
+        "examples",
+        "areas",
+      ]);
+    });
+    chips.appendChild(human);
   }
 
   function suggestions(usedIds) {
@@ -484,7 +516,7 @@
 
   const setOpen = (next) => {
     open = next;
-    panel.hidden = !open;
+    overlay.hidden = !open;
     fab.setAttribute("aria-expanded", String(open));
     root.classList.toggle("sbot--open", open);
     if (open) {
@@ -504,6 +536,9 @@
   };
 
   fab.addEventListener("click", () => setOpen(!open));
+  overlay.addEventListener("click", (e) => {
+    if (e.target === overlay) setOpen(false);
+  });
   root
     .querySelector(".sbot__close")
     .addEventListener("click", () => setOpen(false));
