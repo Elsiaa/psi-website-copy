@@ -447,6 +447,7 @@ h4 {
 #projectMap {
   height: clamp(380px, 56vh, 560px);
   border: 1px solid var(--hairline);
+  border-radius: 12px;
   background: #e8e6e1;
   z-index: 1;
 }
@@ -3186,15 +3187,23 @@ section[id],
    its pin; clicking opens the job's photo set. */
 
 .jobs {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  /* flex-wrap, not grid: a grid here sized its rows from the cards'
+     min-content pass, where percentage padding is cyclic, and every
+     row locked at one line of text no matter what the cards held */
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
   gap: 14px;
-  align-content: start;
   max-height: clamp(380px, 56vh, 560px);
   overflow-y: auto;
   overscroll-behavior: contain;
   padding-right: 6px;
   scrollbar-width: thin;
+}
+
+.jobs .job {
+  flex: 1 1 calc(50% - 7px);
+  max-width: calc(50% - 7px);
 }
 
 .job {
@@ -3221,17 +3230,21 @@ section[id],
 }
 
 .job__media {
+  /* a padding ratio box, not aspect-ratio: grid row sizing resolves
+     percentage padding against the track width, where an auto-height
+     image with aspect-ratio contributes nothing and the row collapses */
   position: relative;
   display: block;
   width: 100%;
+  padding-top: 62.5%;
   overflow: hidden;
 }
 
 .job__media img {
-  display: block;
+  position: absolute;
+  inset: 0;
   width: 100%;
-  height: auto;
-  aspect-ratio: 16 / 10;
+  height: 100%;
   object-fit: cover;
   transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
@@ -3346,8 +3359,9 @@ section[id],
 }
 
 @media (max-width: 1160px) and (min-width: 761px) {
-  .jobs {
-    grid-template-columns: 1fr;
+  .jobs .job {
+    flex-basis: 100%;
+    max-width: 100%;
   }
 }
 
@@ -3623,4 +3637,10 @@ section[id],
 .shot__phase {
   font-size: 12.5px;
   letter-spacing: 0.18em;
+}
+
+/* the card whose pin is lit answers back */
+.job.is-active {
+  border-color: rgba(214, 0, 0, 0.45);
+  box-shadow: 0 22px 44px -34px rgba(214, 0, 0, 0.35);
 }

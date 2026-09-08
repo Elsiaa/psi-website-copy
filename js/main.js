@@ -391,6 +391,13 @@
 
     // Pin
     markers[i].setIcon(pinIcon(true, hasCase(p)));
+
+    // Card
+    const cards = jobsGrid.querySelectorAll(".job");
+    cards.forEach((c) => c.classList.toggle("is-active", +c.dataset.job === i));
+    const active = jobsGrid.querySelector(".job.is-active");
+    if (active && source === "map")
+      active.scrollIntoView({ block: "nearest", behavior: "smooth" });
     // Scrolling the photos flies the map to that job and zooms in, so the lit
     // pin is actually readable — at full extent it is hard to see what changed.
     // No popup though: that would cover the map on every step.
