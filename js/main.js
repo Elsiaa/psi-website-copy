@@ -97,6 +97,8 @@
         : `<strong>${p.type || "Previous project"}</strong><br>${p.city}`,
     );
     m.on("click", () => select(i, "map"));
+    // hovering a pin lights its card, exactly as the cards light the pins
+    m.on("mouseover", () => select(i, "hover"));
     return m;
   });
 
@@ -177,6 +179,12 @@
   // Hovering a card lights its pin, so the grid and the map read as one
   // instrument rather than two widgets sharing a section.
   jobsGrid.addEventListener("pointerover", (e) => {
+    const card = e.target.closest(".job");
+    if (card) select(+card.dataset.job, "hover");
+  });
+
+  // tabbing through the cards lights the pins just like the pointer does
+  jobsGrid.addEventListener("focusin", (e) => {
     const card = e.target.closest(".job");
     if (card) select(+card.dataset.job, "hover");
   });
@@ -384,13 +392,16 @@
       focusPin(i, null, source === "map");
       return;
     }
-    if (current >= 0)
+    if (current >= 0) {
       markers[current].setIcon(pinIcon(false, hasCase(projects[current])));
+      markers[current].setZIndexOffset(0);
+    }
     current = i;
     const p = projects[i];
 
-    // Pin
+    // Pin: lit, and above the cluster so it reads at Kingston's density
     markers[i].setIcon(pinIcon(true, hasCase(p)));
+    markers[i].setZIndexOffset(1000);
 
     // Card
     const cards = jobsGrid.querySelectorAll(".job");
@@ -406,7 +417,7 @@
       return;
     }
     if (source !== "map" && source !== "init") focusPin(i, null, true);
-    if (source !== "init") markers[i].openPopup();
+    if (source !== "init" && source !== "card") markers[i].openPopup();
 
     // Clicking a pin opens that job's photographs full screen.
     if (source === "map") openViewer(i, 0);
