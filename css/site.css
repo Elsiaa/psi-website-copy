@@ -3681,39 +3681,37 @@ section[id],
 }
 
 /* ---------------- Support assistant ---------------- */
-/* The site's own materials: navy head, paper body, red action. */
+/* Elsiaa-school widget: white circle launcher carrying the brand mark,
+   an airy rounded card, pill actions, a thin grey x. */
 
 .sbot__fab {
   position: fixed;
   right: 18px;
   bottom: 18px;
   z-index: 45;
-  width: 46px;
-  height: 46px;
-  opacity: 0.92;
-  border: 0;
+  width: 56px;
+  height: 56px;
+  border: 1px solid var(--hairline);
   border-radius: 50%;
-  background: var(--accent);
-  color: #fff;
+  background: #fff;
   cursor: pointer;
   display: grid;
   place-items: center;
-  box-shadow: 0 8px 20px -8px rgba(16, 18, 20, 0.45);
+  box-shadow: 0 10px 26px -12px rgba(16, 18, 20, 0.4);
   transition:
     transform 0.2s ease,
-    background 0.2s ease;
+    box-shadow 0.2s ease;
 }
 
 .sbot__fab:hover {
-  background: #b30000;
   transform: translateY(-2px);
-  opacity: 1;
+  box-shadow: 0 16px 32px -14px rgba(16, 18, 20, 0.5);
 }
 
-.sbot__fab svg {
-  width: 20px;
-  height: 20px;
-  fill: currentColor;
+.sbot__fab img {
+  width: 34px;
+  height: 34px;
+  object-fit: contain;
 }
 
 .sbot--open .sbot__fab {
@@ -3722,89 +3720,75 @@ section[id],
 
 .sbot__panel {
   position: fixed;
-  right: 20px;
-  bottom: 20px;
+  right: 18px;
+  bottom: 18px;
   z-index: 46;
-  width: min(360px, calc(100vw - 24px));
-  max-height: min(560px, calc(100svh - 40px));
+  width: min(370px, calc(100vw - 24px));
+  max-height: min(600px, calc(100svh - 40px));
   display: flex;
   flex-direction: column;
-  background: var(--paper);
+  background: #fff;
   border: 1px solid var(--hairline);
-  border-radius: 12px;
+  border-radius: 22px;
   overflow: hidden;
-  box-shadow: 0 30px 70px -40px rgba(16, 18, 20, 0.6);
+  box-shadow: 0 30px 70px -40px rgba(16, 18, 20, 0.55);
 }
 
 .sbot__head {
   position: relative;
-  padding: 14px 92px 14px 18px;
-  background: var(--navy);
-  color: #fff;
+  padding: 22px 56px 14px 22px;
+  background: #fff;
+}
+
+.sbot__eyebrow {
+  margin: 0 0 6px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--accent);
 }
 
 .sbot__title {
   margin: 0;
   font-family: var(--font-display);
-  font-size: 17px;
+  font-size: 22px;
   font-weight: 700;
-}
-
-.sbot__sub {
-  margin: 4px 0 0;
-  font-family: var(--font-serif);
-  font-style: italic;
-  font-size: 13px;
-  color: rgba(255, 255, 255, 0.7);
+  color: var(--ink);
 }
 
 .sbot__tools {
   position: absolute;
-  top: 10px;
-  right: 10px;
-  display: flex;
-  gap: 2px;
-}
-
-.sbot__tool {
-  width: 32px;
-  height: 32px;
-  border: 0;
-  background: none;
-  color: rgba(255, 255, 255, 0.75);
-  font-size: 15px;
-  cursor: pointer;
-  border-radius: 4px;
-}
-
-.sbot__tool:hover {
-  color: #fff;
-  background: rgba(255, 255, 255, 0.12);
+  top: 16px;
+  right: 16px;
 }
 
 .sbot__close {
-  width: 32px;
-  height: 32px;
+  width: 34px;
+  height: 34px;
   border: 0;
-  background: rgba(255, 255, 255, 0.14);
-  color: #fff;
-  font-size: 18px;
+  background: none;
+  color: var(--muted);
+  font-size: 22px;
   line-height: 1;
   cursor: pointer;
   border-radius: 50%;
   display: grid;
   place-items: center;
-  transition: background 0.2s ease;
+  transition:
+    color 0.2s ease,
+    background 0.2s ease;
 }
 
 .sbot__close:hover {
-  background: rgba(255, 255, 255, 0.28);
+  color: var(--ink);
+  background: rgba(16, 18, 20, 0.06);
 }
 
 .sbot__log {
   flex: 1 1 auto;
   overflow-y: auto;
-  padding: 14px;
+  padding: 8px 18px 14px;
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -3813,24 +3797,24 @@ section[id],
 
 .sbot__msg {
   max-width: 88%;
-  padding: 10px 14px;
-  border-radius: 12px;
+  padding: 11px 15px;
+  border-radius: 18px;
   font-size: 15px;
   line-height: 1.55;
 }
 
 .sbot__msg--psi {
   align-self: flex-start;
-  background: #fff;
+  background: var(--paper);
   border: 1px solid var(--hairline);
-  border-bottom-left-radius: 4px;
+  border-bottom-left-radius: 6px;
 }
 
 .sbot__msg--you {
   align-self: flex-end;
   background: var(--navy);
   color: #fff;
-  border-bottom-right-radius: 4px;
+  border-bottom-right-radius: 6px;
 }
 
 .sbot__msg a {
@@ -3842,17 +3826,59 @@ section[id],
   color: #fff;
 }
 
+.sbot__hr {
+  border: 0;
+  border-top: 1px solid var(--hairline);
+  margin: 10px 0;
+}
+
+.sbot__typing {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  min-height: 20px;
+}
+
+.sbot__typing i {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--muted);
+  animation: sbotDot 1.1s ease-in-out infinite;
+}
+
+.sbot__typing i:nth-child(2) {
+  animation-delay: 0.18s;
+}
+
+.sbot__typing i:nth-child(3) {
+  animation-delay: 0.36s;
+}
+
+@keyframes sbotDot {
+  0%,
+  60%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.4;
+  }
+  30% {
+    transform: translateY(-4px);
+    opacity: 1;
+  }
+}
+
 .sbot__chips {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
-  padding: 0 14px 10px;
+  padding: 0 18px 12px;
 }
 
 .sbot__chip {
-  padding: 8px 12px;
+  padding: 9px 16px;
   border: 1px solid var(--hairline);
-  border-radius: 4px;
+  border-radius: 999px;
   background: #fff;
   font: inherit;
   font-size: 14px;
@@ -3878,7 +3904,7 @@ section[id],
 .sbot__form {
   display: flex;
   gap: 8px;
-  padding: 12px 14px 14px;
+  padding: 12px 18px 18px;
   border-top: 1px solid var(--hairline);
   background: #fff;
 }
@@ -3886,30 +3912,28 @@ section[id],
 .sbot__input {
   flex: 1 1 auto;
   min-width: 0;
-  padding: 10px 12px;
+  padding: 11px 16px;
   border: 1px solid var(--hairline);
-  border-radius: 4px;
+  border-radius: 999px;
   font: inherit;
   font-size: 15px;
 }
 
 .sbot__input:focus-visible {
   outline: 2px solid var(--accent);
-  outline-offset: 2px;
+  outline-offset: 1px;
   border-color: var(--accent);
 }
 
 .sbot__send {
-  padding: 10px 18px;
+  padding: 11px 20px;
   border: 0;
-  border-radius: 4px;
+  border-radius: 999px;
   background: var(--accent);
   color: #fff;
   font: inherit;
-  font-size: 14px;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  font-size: 15px;
+  font-weight: 600;
   cursor: pointer;
   transition: background 0.2s ease;
 }
@@ -3934,7 +3958,11 @@ section[id],
 @media (prefers-reduced-motion: reduce) {
   .sbot__fab,
   .sbot__chip,
-  .sbot__send {
+  .sbot__send,
+  .sbot__close {
     transition: none;
+  }
+  .sbot__typing i {
+    animation: none;
   }
 }

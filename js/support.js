@@ -368,12 +368,13 @@
   root.innerHTML = `
     <button class="sbot__fab" type="button" aria-expanded="false"
       aria-controls="sbotPanel" aria-label="Questions? Ask PSI">
-      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 3h16a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H6.4L2 20V5a2 2 0 0 1 2-2z"/></svg>
+      <img src="assets/logo/psi-logo.png" alt="" />
     </button>
     <section class="sbot__panel" id="sbotPanel" role="dialog" aria-modal="false"
       aria-label="PSI support assistant" hidden>
       <header class="sbot__head">
-        <p class="sbot__title">Questions? Ask PSI</p>
+        <p class="sbot__eyebrow">Support</p>
+        <p class="sbot__title">Ask PSI</p>
         <div class="sbot__tools">
           <button class="sbot__close" type="button" aria-label="Close">&times;</button>
         </div>
