@@ -2060,15 +2060,20 @@ section[id],
   inset: 0;
   opacity: 0;
   transform: translateY(12px);
+  /* leaving: clear out quickly, so two captions are never legible at once */
   transition:
-    opacity 0.4s ease,
-    transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+    opacity 0.16s ease,
+    transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
   pointer-events: none;
 }
 
 .ps-step.is-on {
   opacity: 1;
   transform: none;
+  /* arriving: wait for the old one to go, then come in */
+  transition:
+    opacity 0.34s ease 0.13s,
+    transform 0.46s cubic-bezier(0.2, 0.8, 0.2, 1) 0.13s;
 }
 
 .ps-step__n {
@@ -2151,12 +2156,14 @@ section[id],
 }
 
 /* ground */
-.ps-grade {
-  stroke: rgba(16, 18, 20, 0.22);
-  stroke-width: 1.5;
+.ps-plane {
+  fill: url(#psGround);
+}
+.ps-below {
+  fill: url(#psBelow);
 }
 .ps-ao {
-  fill: rgba(16, 18, 20, 0.07);
+  fill: rgba(16, 18, 20, 0.09);
 }
 
 /* 01 plan — drawn, not printed */
@@ -2199,12 +2206,12 @@ section[id],
 
 /* 02 earth */
 .ps-pit {
-  fill: #b9b0a0;
+  fill: url(#psEarth);
   transform-box: view-box;
   transform-origin: 500px 520px;
 }
 .ps-spoil {
-  fill: #cdc4b2;
+  fill: url(#psSoil);
   transform-box: view-box;
   transform-origin: 916px 520px;
 }
@@ -2218,10 +2225,10 @@ section[id],
 
 /* 03 concrete */
 .fdn__ftg {
-  fill: #b5b0a7;
+  fill: #b0aaa0;
 }
 .fdn__p {
-  fill: #c9c5bd;
+  fill: url(#psConc);
   stroke: rgba(16, 18, 20, 0.13);
   stroke-width: 1;
 }
@@ -2229,12 +2236,12 @@ section[id],
   fill: #d2cec6;
 }
 .ps-backfill {
-  fill: #d8d2c6;
+  fill: url(#psSoil);
 }
 
 /* 04 timber */
 .stud {
-  fill: #d9c9a4;
+  fill: url(#psTimber);
 }
 .fl1__rim,
 .fl2__rim,
@@ -2277,7 +2284,7 @@ section[id],
   fill: rgba(214, 0, 0, 0.1);
 }
 .ps-wall {
-  fill: #efece5;
+  fill: url(#psWall);
   stroke: rgba(16, 18, 20, 0.15);
   stroke-width: 1;
 }
@@ -2285,7 +2292,7 @@ section[id],
   fill: rgba(255, 255, 255, 0.75);
 }
 .ps-cap rect {
-  fill: #dcd7cd;
+  fill: url(#psCap);
   stroke: rgba(16, 18, 20, 0.14);
   stroke-width: 1;
 }
@@ -2318,7 +2325,7 @@ section[id],
   fill: #ddd8cd;
 }
 .shrub {
-  fill: #7f8c74;
+  fill: url(#psLeaf);
 }
 .ps-trunk {
   stroke: #8a7b64;
@@ -2327,7 +2334,7 @@ section[id],
   fill: none;
 }
 .ps-crown {
-  fill: #74836a;
+  fill: url(#psLeaf);
 }
 .ps-lamp circle {
   fill: #f3d9a4;
@@ -2642,4 +2649,13 @@ section[id],
 /* a hairline of brand colour under every section heading's section */
 .footer__tagline {
   color: rgba(255, 255, 255, 0.72);
+}
+
+/* the wing sits back from the main face, so it takes less light */
+.ps-wall.wing {
+  fill: url(#psWing);
+}
+/* a soft shadow where the parapet oversails the wall */
+.cap-shade {
+  fill: rgba(16, 18, 20, 0.11);
 }

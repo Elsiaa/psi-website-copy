@@ -11,7 +11,7 @@
    StreetAddress.
 
    Coordinates (Aug 2026) come from the Esri World Geocoder, which
-   returned Addr_type=PointAddress — an authoritative parcel/rooftop
+   returned Addr_type=PointAddress: an authoritative parcel/rooftop
    point — at score 99-100 for every address below.
 
    The previous values were TIGER street-line interpolation via
@@ -33,8 +33,8 @@ window.PSI_PROJECTS = [
     lat: 41.265253,
     lng: -75.889529,
     id: "corner-new-build",
-    type: "New Construction — 3-Story Residence",
-    desc: "New three-story residence at the corner of Rutter Avenue and Reynolds Street — 4,752 sq ft, Residential (R-1), built to the 2018 IRC/IBC. Originally addressed 424–426 Rutter Avenue; re-addressed to 55 Reynolds Street on rezoning. Featured in the aerial opener on this page.",
+    type: "New Construction, 3-Story Residence",
+    desc: "New three-story residence at the corner of Rutter Avenue and Reynolds Street: 4,752 sq ft, Residential (R-1), built to the 2018 IRC/IBC. Originally addressed 424–426 Rutter Avenue; re-addressed to 55 Reynolds Street on rezoning. Featured in the aerial opener on this page.",
     img: "assets/keyframe-final-hero.png",
     caption:
       "Three-storey white stucco residence with black-framed windows on a landscaped corner lot",
@@ -55,7 +55,7 @@ window.PSI_PROJECTS = [
       {
         src: "assets/photos/50-reynolds/50reynolds-before-shower.jpg",
         phase: "before",
-        cap: "The original stall \u2014 white square tile, three exposed valves, barely a shoulder wide",
+        cap: "The original stall: white square tile, three exposed valves, barely a shoulder wide",
       },
       {
         src: "assets/photos/50-reynolds/50reynolds-before-closet.jpg",
@@ -70,7 +70,7 @@ window.PSI_PROJECTS = [
       {
         src: "assets/photos/50-reynolds/50reynolds-after-02-full.jpg",
         phase: "after",
-        cap: "The full enlarged enclosure \u2014 built-in bench, hand shower, lit niche",
+        cap: "The full enlarged enclosure: built-in bench, hand shower, lit niche",
       },
       {
         src: "assets/photos/50-reynolds/50reynolds-after-03-niche.jpg",
@@ -86,14 +86,14 @@ window.PSI_PROJECTS = [
     lng: -75.8873066,
     id: "water-damage-reynolds",
     type: "Water Damage Restoration",
-    desc: "A house taken back to framing after water damage \u2014 ceilings and walls opened, insulation and wiring renewed, then boarded, floored and finished throughout.",
+    desc: "A house taken back to framing after water damage: ceilings and walls opened, insulation and wiring renewed, then boarded, floored and finished throughout.",
     img: "https://psiconstruction.github.io/psi-website/assets/photos/289-reynolds/289reynolds-19-7491ef3b.jpg",
     caption: "The living room finished",
     gallery: [
       {
         src: "https://psiconstruction.github.io/psi-website/assets/photos/289-reynolds/289reynolds-01-ceb3c3de.jpg",
         phase: "before",
-        cap: "Before — the basement under water, contents boxed and the walls stripped back",
+        cap: "Before: the basement under water, contents boxed and the walls stripped back",
       },
       {
         src: "https://psiconstruction.github.io/psi-website/assets/photos/289-reynolds/289reynolds-02-e7fe37a5.jpg",
@@ -128,7 +128,7 @@ window.PSI_PROJECTS = [
       {
         src: "https://psiconstruction.github.io/psi-website/assets/photos/289-reynolds/289reynolds-08-fc3a6d43.jpg",
         phase: "drywall",
-        cap: "The main floor opened up — stair and fireplace beyond",
+        cap: "The main floor opened up, stair and fireplace beyond",
       },
       {
         src: "https://psiconstruction.github.io/psi-website/assets/photos/289-reynolds/289reynolds-09-8cba1cfd.jpg",
@@ -183,7 +183,7 @@ window.PSI_PROJECTS = [
       {
         src: "https://psiconstruction.github.io/psi-website/assets/photos/289-reynolds/289reynolds-19-7491ef3b.jpg",
         phase: "after",
-        cap: "The living room finished — fireplace, trim and new floor",
+        cap: "The living room finished: fireplace, trim and new floor",
       },
     ],
   },
@@ -194,19 +194,19 @@ window.PSI_PROJECTS = [
     lng: -75.8836466,
     id: "basement-finish-warren",
     type: "Basement Renovation",
-    desc: "An unfinished basement turned into finished living space \u2014 bedrooms, a full bathroom with a tiled tub surround, new flooring and lighting throughout.",
+    desc: "An unfinished basement turned into finished living space: bedrooms, a full bathroom with a tiled tub surround, new flooring and lighting throughout.",
     img: "https://psiconstruction.github.io/psi-website/assets/photos/554-warren/554warren-05-b0278efc.jpg",
     caption: "The tiled tub surround",
     gallery: [
       {
         src: "https://psiconstruction.github.io/psi-website/assets/photos/554-warren/554warren-01-488f33f4.jpg",
         phase: "before",
-        cap: "Before — bare concrete walls, exposed joists and an open steel beam",
+        cap: "Before: bare concrete walls, exposed joists and an open steel beam",
       },
       {
         src: "https://psiconstruction.github.io/psi-website/assets/photos/554-warren/554warren-02-b7dc47a0.jpg",
         phase: "before",
-        cap: "Before — the old steel stair down, water heater tucked beneath",
+        cap: "Before: the old steel stair down, water heater tucked beneath",
       },
       {
         src: "https://psiconstruction.github.io/psi-website/assets/photos/554-warren/554warren-03-0548fa8d.jpg",
@@ -226,7 +226,7 @@ window.PSI_PROJECTS = [
       {
         src: "https://psiconstruction.github.io/psi-website/assets/photos/554-warren/554warren-06-43608cc5.jpg",
         phase: "after",
-        cap: "The finished bathroom — tub, vanity and arched mirror in place",
+        cap: "The finished bathroom: tub, vanity and arched mirror in place",
       },
       {
         src: "https://psiconstruction.github.io/psi-website/assets/photos/554-warren/554warren-07-5a667f25.jpg",
@@ -248,14 +248,14 @@ window.PSI_PROJECTS = [
     lng: -75.8871484,
     id: "addition-and-first-floor",
     type: "Second-Storey Addition \u0026 First-Floor Renovation",
-    desc: "A full second storey built onto a single-storey house \u2014 framed, sheathed, roofed and sided \u2014 with the first floor renovated underneath it.",
+    desc: "A full second storey built onto a single-storey house: framed, sheathed, roofed and sided, with the first floor renovated underneath it.",
     img: "assets/photos/417-warren/417warren-27.jpg",
     caption: "The addition sided and trimmed",
     gallery: [
       {
         src: "assets/photos/417-warren/417warren-01.jpg",
         phase: "framing",
-        cap: "The second floor framed out — subfloor down, walls going up",
+        cap: "The second floor framed out: subfloor down, walls going up",
       },
       {
         src: "assets/photos/417-warren/417warren-02.jpg",
@@ -280,7 +280,7 @@ window.PSI_PROJECTS = [
       {
         src: "assets/photos/417-warren/417warren-06.jpg",
         phase: "framing",
-        cap: "From the street — a one-storey house gaining a floor",
+        cap: "From the street, a one-storey house gaining a floor",
       },
       {
         src: "assets/photos/417-warren/417warren-07.jpg",
@@ -400,7 +400,7 @@ window.PSI_PROJECTS = [
       {
         src: "assets/photos/417-warren/417warren-30.jpg",
         phase: "after",
-        cap: "Bathroom finished — vanity, toilet, tiled floor",
+        cap: "Bathroom finished: vanity, toilet, tiled floor",
       },
       {
         src: "assets/photos/417-warren/417warren-31.jpg",
@@ -497,7 +497,7 @@ window.PSI_PROJECTS = [
     lng: -75.8845569,
     id: "exterior-room-addition",
     type: "Exterior Room Addition",
-    desc: "A new room built onto the house \u2014 framed, roofed and sheathed from the ground up, then finished inside with the original brick left exposed.",
+    desc: "A new room built onto the house: framed, roofed and sheathed from the ground up, then finished inside with the original brick left exposed.",
     img: "assets/photos/225-james/225james-08.jpg",
     caption: "The finished room",
     gallery: [
@@ -514,7 +514,7 @@ window.PSI_PROJECTS = [
       {
         src: "assets/photos/225-james/225james-03.jpg",
         phase: "framing",
-        cap: "Inside the new structure — studs, sheathing and subfloor down",
+        cap: "Inside the new structure: studs, sheathing and subfloor down",
       },
       {
         src: "assets/photos/225-james/225james-04.jpg",
@@ -539,7 +539,7 @@ window.PSI_PROJECTS = [
       {
         src: "assets/photos/225-james/225james-08.jpg",
         phase: "after",
-        cap: "The finished room — white walls and new wood floor",
+        cap: "The finished room, white walls and new wood floor",
       },
       {
         src: "assets/photos/225-james/225james-09.jpg",
@@ -569,20 +569,20 @@ window.PSI_PROJECTS = [
     lat: 41.2643452,
     lng: -75.8909416,
     id: "fire-rebuild",
-    type: "Fire Rebuild \u2014 Whole House",
-    desc: "A house lost to fire and rebuilt in full \u2014 structure, stair, floors, kitchen and baths, finished throughout.",
+    type: "Fire Rebuild, Whole House",
+    desc: "A house lost to fire and rebuilt in full: structure, stair, floors, kitchen and baths, finished throughout.",
     img: "assets/photos/378-rutter/378rutter-06.jpg",
     caption: "The rebuilt stair",
     gallery: [
       {
         src: "https://psiconstruction.github.io/psi-website/assets/photos/378-rutter/378rutter-early-01-1792ee8e.jpg",
         phase: "before",
-        cap: "Before — the original kitchen, untouched, seen from the porch door",
+        cap: "Before: the original kitchen, untouched, seen from the porch door",
       },
       {
         src: "https://psiconstruction.github.io/psi-website/assets/photos/378-rutter/378rutter-early-02-23a44b8f.jpg",
         phase: "demo",
-        cap: "After the fire — rafters charred through overhead, new subfloor going down",
+        cap: "After the fire: rafters charred through overhead, new subfloor going down",
       },
       {
         src: "https://psiconstruction.github.io/psi-website/assets/photos/378-rutter/378rutter-early-03-f59ce7c5.jpg",
@@ -627,7 +627,7 @@ window.PSI_PROJECTS = [
       {
         src: "assets/photos/378-rutter/378rutter-01.jpg",
         phase: "after",
-        cap: "The front room rebuilt — new floors, trim and windows throughout",
+        cap: "The front room rebuilt: new floors, trim and windows throughout",
       },
       {
         src: "assets/photos/378-rutter/378rutter-02.jpg",
@@ -652,7 +652,7 @@ window.PSI_PROJECTS = [
       {
         src: "assets/photos/378-rutter/378rutter-06.jpg",
         phase: "after",
-        cap: "The new stair — white balusters against stained treads",
+        cap: "The new stair, white balusters against stained treads",
       },
       {
         src: "assets/photos/378-rutter/378rutter-07.jpg",
@@ -707,15 +707,15 @@ window.PSI_PROJECTS = [
     lat: 41.2674966,
     lng: -75.8853806,
     id: "duplex-to-single-family",
-    type: "Full Gut \u2014 Duplex to Single-Family",
-    desc: "A large gut renovation turning a two-unit duplex back into a single-family home \u2014 stripped to the framing throughout, re-framed, then tiled, decked and fitted out.",
+    type: "Full Gut, Duplex to Single-Family",
+    desc: "A large gut renovation turning a two-unit duplex back into a single-family home: stripped to the framing throughout, re-framed, then tiled, decked and fitted out.",
     img: "assets/photos/580-rutter/580rutter-16.jpg",
     caption: "Checkerboard tile through the hall",
     gallery: [
       {
         src: "assets/photos/580-rutter/580rutter-01.jpg",
         phase: "before",
-        cap: "The house from the street — two units, before the conversion",
+        cap: "The house from the street: two units, before the conversion",
       },
       {
         src: "assets/photos/580-rutter/580rutter-02.jpg",
@@ -760,7 +760,7 @@ window.PSI_PROJECTS = [
       {
         src: "assets/photos/580-rutter/580rutter-10.jpg",
         phase: "drywall",
-        cap: "Rooms closed in — drywall hung and taped",
+        cap: "Rooms closed in, drywall hung and taped",
       },
       {
         src: "assets/photos/580-rutter/580rutter-11.jpg",
@@ -828,14 +828,14 @@ window.PSI_PROJECTS = [
     lng: -75.8860182,
     id: "garage-to-two-apartments",
     type: "Garage Converted to Two Apartments",
-    desc: "A detached garage taken back to its block shell and rebuilt as two self-contained apartments \u2014 new slab, framing, stair, kitchens, bathrooms and finishes throughout.",
+    desc: "A detached garage taken back to its block shell and rebuilt as two self-contained apartments: new slab, framing, stair, kitchens, bathrooms and finishes throughout.",
     img: "assets/photos/586-charles/586charles-28.jpg",
     caption: "Unit two, finished",
     gallery: [
       {
         src: "assets/photos/586-charles/586charles-01.jpg",
         phase: "before",
-        cap: "The garage as found — open rafters and a dirt-strewn floor",
+        cap: "The garage as found, open rafters and a dirt-strewn floor",
       },
       {
         src: "assets/photos/586-charles/586charles-02.jpg",
@@ -920,7 +920,7 @@ window.PSI_PROJECTS = [
       {
         src: "assets/photos/586-charles/586charles-18.jpg",
         phase: "after",
-        cap: "Unit one — open kitchen and living space",
+        cap: "Unit one, open kitchen and living space",
       },
       {
         src: "assets/photos/586-charles/586charles-19.jpg",
@@ -970,7 +970,7 @@ window.PSI_PROJECTS = [
       {
         src: "assets/photos/586-charles/586charles-28.jpg",
         phase: "after",
-        cap: "Unit two — kitchen and living, finished",
+        cap: "Unit two: kitchen and living, finished",
       },
       {
         src: "assets/photos/586-charles/586charles-29.jpg",
@@ -998,7 +998,7 @@ window.PSI_PROJECTS = [
       {
         src: "assets/photos/549-charles/549charles-01.jpg",
         phase: "before",
-        cap: "The original bathroom — yellow wall tile and an alcove tub",
+        cap: "The original bathroom, yellow wall tile and an alcove tub",
       },
       {
         src: "assets/photos/549-charles/549charles-02.jpg",
@@ -1078,12 +1078,12 @@ window.PSI_PROJECTS = [
       {
         src: "assets/photos/549-charles/549charles-17.jpg",
         phase: "after",
-        cap: "The primary vanity complete — gold pulls, tap and sconces",
+        cap: "The primary vanity complete: gold pulls, tap and sconces",
       },
       {
         src: "assets/photos/549-charles/549charles-18.jpg",
         phase: "after",
-        cap: "The second bathroom — glass door and full-height tile",
+        cap: "The second bathroom, glass door and full-height tile",
       },
       {
         src: "assets/photos/549-charles/549charles-19.jpg",
@@ -1098,7 +1098,7 @@ window.PSI_PROJECTS = [
       {
         src: "assets/photos/549-charles/549charles-21.jpg",
         phase: "railing",
-        cap: "The new stair railing — turned balusters and an oak cap",
+        cap: "The new stair railing, turned balusters and an oak cap",
       },
       {
         src: "assets/photos/549-charles/549charles-22.jpg",
@@ -1119,14 +1119,14 @@ window.PSI_PROJECTS = [
     lng: -75.8766291,
     id: "renovation-and-basement-finish",
     type: "Home Renovation \u0026 Basement Finish",
-    desc: "A large first-floor renovation combined with a full basement finish \u2014 the house stripped back and rebuilt above, and an unfinished basement turned into bedrooms, bathrooms and living space.",
+    desc: "A large first-floor renovation combined with a full basement finish: the house stripped back and rebuilt above, and an unfinished basement turned into bedrooms, bathrooms and living space.",
     img: "assets/photos/841-nandy/841nandy-30.jpg",
     caption: "The finished basement living space",
     gallery: [
       {
         src: "assets/photos/841-nandy/841nandy-01.jpg",
         phase: "before",
-        cap: "The house as found — panelled walls and original carpet",
+        cap: "The house as found, panelled walls and original carpet",
       },
       {
         src: "assets/photos/841-nandy/841nandy-02.jpg",
@@ -1365,15 +1365,15 @@ window.PSI_PROJECTS = [
     lat: 41.2568152,
     lng: -75.8857917,
     id: "commercial-two-bath-gut",
-    type: "Commercial Bathroom Gut \u2014 Two Bathrooms",
-    desc: "A commercial remodel of two bathrooms off a shared hallway, taken back to the studs and floor joists and rebuilt \u2014 re-framed, re-plumbed, waterproofed and fully tiled.",
+    type: "Commercial Bathroom Gut, Two Bathrooms",
+    desc: "A commercial remodel of two bathrooms off a shared hallway, taken back to the studs and floor joists and rebuilt: re-framed, re-plumbed, waterproofed and fully tiled.",
     img: "assets/photos/139-third/139third-16.jpg",
     caption: "The finished tub bathroom",
     gallery: [
       {
         src: "assets/photos/139-third/139third-01.jpg",
         phase: "before",
-        cap: "The original bathroom coming apart — old tub and wall tile still in place",
+        cap: "The original bathroom coming apart, old tub and wall tile still in place",
       },
       {
         src: "assets/photos/139-third/139third-02.jpg",
@@ -1413,7 +1413,7 @@ window.PSI_PROJECTS = [
       {
         src: "assets/photos/139-third/139third-09.jpg",
         phase: "waterproofing",
-        cap: "Cement board hung on the wet walls — the substrate tile actually wants",
+        cap: "Cement board hung on the wet walls, the substrate tile actually wants",
       },
       {
         src: "assets/photos/139-third/139third-10.jpg",
@@ -1443,7 +1443,7 @@ window.PSI_PROJECTS = [
       {
         src: "assets/photos/139-third/139third-15.jpg",
         phase: "after",
-        cap: "The walk-in shower finished — frameless glass, pebble floor, recessed niche",
+        cap: "The walk-in shower finished: frameless glass, pebble floor, recessed niche",
       },
       {
         src: "assets/photos/139-third/139third-16.jpg",
@@ -1463,7 +1463,7 @@ window.PSI_PROJECTS = [
       {
         src: "assets/photos/139-third/139third-19.jpg",
         phase: "after",
-        cap: "The second bathroom complete — vanity, mirror and fixtures in place",
+        cap: "The second bathroom complete: vanity, mirror and fixtures in place",
       },
       {
         src: "assets/photos/139-third/139third-20.jpg",
@@ -1485,14 +1485,14 @@ window.PSI_PROJECTS = [
     lng: -75.8824097,
     id: "basement-finish-meadowland",
     type: "Basement Renovation",
-    desc: "An unfinished basement rebuilt into finished living space \u2014 new stair, drywall throughout, lighting, flooring and built-in shelving.",
+    desc: "An unfinished basement rebuilt into finished living space: new stair, drywall throughout, lighting, flooring and built-in shelving.",
     img: "assets/photos/569-meadowland/569meadowland-08.jpg",
     caption: "The finished basement",
     gallery: [
       {
         src: "assets/photos/569-meadowland/569meadowland-01.jpg",
         phase: "before",
-        cap: "The basement before work — bare joists, block walls and an old painted floor",
+        cap: "The basement before work: bare joists, block walls and an old painted floor",
       },
       {
         src: "assets/photos/569-meadowland/569meadowland-02.jpg",
@@ -1517,7 +1517,7 @@ window.PSI_PROJECTS = [
       {
         src: "assets/photos/569-meadowland/569meadowland-06.jpg",
         phase: "after",
-        cap: "The new stair — white balusters, oak cap, grey treads",
+        cap: "The new stair: white balusters, oak cap, grey treads",
       },
       {
         src: "assets/photos/569-meadowland/569meadowland-07.jpg",
@@ -1568,7 +1568,7 @@ window.PSI_PROJECTS = [
 ];
 
 window.PSI_OFFICE = {
-  name: "PSI Construction — Office",
+  name: "PSI Construction, Office",
   address: "190 Wyoming St, Wilkes-Barre, PA 18705",
   lat: 41.250928,
   lng: -75.868402,
