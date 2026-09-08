@@ -1749,17 +1749,6 @@ body.viewer-lock {
   color: var(--accent);
 }
 
-.qcta__trust {
-  margin: 0;
-  font-size: 14.5px;
-  color: rgba(255, 255, 255, 0.55);
-}
-
-.qcta__stars {
-  color: #fbbc05;
-  letter-spacing: 1px;
-}
-
 @media (max-width: 760px) {
   .qcta {
     align-items: flex-start;
@@ -2825,15 +2814,9 @@ section[id],
 
   /* the quote band's button is the whole width of the thumb */
   .qcta__btn,
-  .gbadge__cta,
-  .gbadge__cta--ghost {
+  .gbadge__cta {
     width: 100%;
     text-align: center;
-  }
-
-  .gbadge__cta--ghost {
-    margin-left: 0;
-    margin-top: 10px;
   }
 
   .gbadge {
@@ -2879,5 +2862,240 @@ section[id],
 
   .hero__tagline {
     font-size: 16px;
+  }
+}
+
+/* ============================================================
+   MOBILE NAVIGATION
+   The desktop bar is a single row of uppercase links. At phone
+   widths that wrapped to five lines and left 17px touch targets,
+   so the same vocabulary — uppercase, letterspaced, navy ground,
+   red accent — is rebuilt as a panel with real targets.
+   Desktop keeps its row: everything here is scoped to <=760px.
+   ============================================================ */
+
+.nav__toggle,
+.nav__call {
+  display: none;
+}
+
+@media (max-width: 760px) {
+  .nav {
+    padding: 10px 16px;
+    gap: 10px;
+    align-items: center;
+  }
+
+  /* calling is the shortest path to a contractor, so it stays in the bar */
+  .nav__call {
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    margin-left: auto;
+    border-radius: 50%;
+    color: inherit;
+    background: rgba(255, 255, 255, 0.1);
+    transition: background 0.2s ease;
+  }
+
+  .nav--solid .nav__call {
+    background: rgba(16, 18, 20, 0.06);
+  }
+
+  .nav__call svg {
+    width: 21px;
+    height: 21px;
+    fill: currentColor;
+  }
+
+  .nav__toggle {
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    border: 0;
+    background: none;
+    color: inherit;
+    cursor: pointer;
+  }
+
+  .nav__bars {
+    display: block;
+    width: 22px;
+  }
+
+  .nav__bars i {
+    display: block;
+    height: 2px;
+    background: currentColor;
+    border-radius: 2px;
+    transition:
+      transform 0.32s cubic-bezier(0.2, 0.8, 0.2, 1),
+      opacity 0.2s ease;
+  }
+
+  .nav__bars i + i {
+    margin-top: 5px;
+  }
+
+  /* the bars become the close mark rather than swapping icons */
+  .nav--open .nav__bars i:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+  }
+  .nav--open .nav__bars i:nth-child(2) {
+    opacity: 0;
+  }
+  .nav--open .nav__bars i:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+  }
+
+  .nav__links {
+    position: fixed;
+    inset: 0;
+    z-index: 60;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: center;
+    gap: 0;
+    padding: 96px clamp(22px, 7vw, 40px) 32px;
+    background: var(--navy);
+    color: #fff;
+    /* the panel is present but inert until opened, so it can animate */
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-8px);
+    transition:
+      opacity 0.28s ease,
+      transform 0.36s cubic-bezier(0.2, 0.8, 0.2, 1),
+      visibility 0s linear 0.3s;
+  }
+
+  .nav--open .nav__links {
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    transition-delay: 0s;
+  }
+
+  /* each row is a full-width target, not a word */
+  .nav__links a {
+    display: flex;
+    align-items: center;
+    min-height: 60px;
+    padding: 4px 2px;
+    font-family: var(--font-display);
+    font-size: clamp(23px, 6.4vw, 30px);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    text-transform: none;
+    opacity: 1;
+    color: #fff;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  }
+
+  /* the phone number reads as a number, not another menu item */
+  .nav__links a[href^="tel:"] {
+    font-size: 19px;
+    letter-spacing: 0.02em;
+    color: rgba(255, 255, 255, 0.8);
+    min-height: 56px;
+  }
+
+  .nav__links .nav__cta {
+    justify-content: center;
+    margin-top: 20px;
+    min-height: 58px;
+    border: 0;
+    border-radius: 4px;
+    background: var(--accent);
+    color: #fff;
+    font-family: var(--font-sans);
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  .nav__scrim {
+    position: fixed;
+    inset: 0;
+    z-index: 55;
+    background: rgba(10, 13, 18, 0.5);
+  }
+
+  /* the logo stays legible against the panel behind it */
+  .nav--open .nav__logo--onsolid {
+    opacity: 0;
+  }
+}
+
+@media (max-width: 760px) and (prefers-reduced-motion: reduce) {
+  .nav__links,
+  .nav__bars i {
+    transition: none;
+  }
+}
+
+/* ---------------- Mobile: a tighter bar, and section-per-screen ---------------- */
+
+@media (max-width: 760px) {
+  /* the bar is a thin frame around the mark, not a band */
+  .nav {
+    padding: 6px 14px;
+  }
+
+  .nav__logo {
+    height: 34px;
+    width: auto;
+  }
+
+  .nav__call,
+  .nav__toggle {
+    width: 42px;
+    height: 42px;
+  }
+
+  /* Each section lands as its own screen. Proximity rather than mandatory:
+     the hero and the build own multi-viewport runways, and mandatory snap
+     would fight their scrubbing. */
+  html {
+    scroll-snap-type: y proximity;
+  }
+
+  section[id],
+  .footer {
+    scroll-snap-align: start;
+    scroll-margin-top: 54px;
+  }
+
+  /* sections shorter than a screen compose to one, centred rather than
+     top-stacked with dead space beneath */
+  #about,
+  #capabilities,
+  #quote {
+    min-height: 100svh;
+    display: grid;
+    align-content: center;
+  }
+
+  /* the runway sections opt out: they are already paced by their own scroll */
+  #hero,
+  #process {
+    scroll-snap-align: none;
+  }
+
+  /* section rhythm: closer than desktop, and varied rather than uniform */
+  .section {
+    padding-top: clamp(52px, 9vh, 72px);
+    padding-bottom: clamp(52px, 9vh, 72px);
+  }
+
+  #projects,
+  #reviews,
+  #faq {
+    padding-top: clamp(44px, 7vh, 60px);
   }
 }

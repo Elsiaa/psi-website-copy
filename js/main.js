@@ -585,3 +585,58 @@
   });
   window.addEventListener("resize", renderReviews, { passive: true });
 })();
+
+/* ============================================================
+   Mobile navigation
+   The links become a panel below 760px. Kept honest about the
+   things a panel has to get right: focus, Escape, the back of
+   the page not scrolling underneath, and never staying open when
+   the layout returns to the desktop row.
+   ============================================================ */
+(() => {
+  "use strict";
+  const nav = document.getElementById("topNav");
+  const toggle = document.getElementById("navToggle");
+  const panel = document.getElementById("navLinks");
+  const scrim = document.getElementById("navScrim");
+  if (!nav || !toggle || !panel) return;
+
+  const phone = window.matchMedia("(max-width: 760px)");
+  let open = false;
+
+  const setOpen = (next) => {
+    open = next;
+    nav.classList.toggle("nav--open", open);
+    toggle.setAttribute("aria-expanded", String(open));
+    toggle.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+    if (scrim) scrim.hidden = !open;
+    // hold the page still while the panel is up
+    document.body.style.overflow = open ? "hidden" : "";
+    if (open) {
+      const first = panel.querySelector("a");
+      if (first) first.focus({ preventScroll: true });
+    }
+  };
+
+  toggle.addEventListener("click", () => setOpen(!open));
+  if (scrim) scrim.addEventListener("click", () => setOpen(false));
+
+  // a link tap should navigate and dismiss, not leave the panel hanging
+  panel.addEventListener("click", (e) => {
+    if (e.target.closest("a") && open) setOpen(false);
+  });
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && open) {
+      setOpen(false);
+      toggle.focus();
+    }
+  });
+
+  // rotating to landscape must not strand an open panel over a desktop row
+  const sync = () => {
+    if (!phone.matches && open) setOpen(false);
+  };
+  if (phone.addEventListener) phone.addEventListener("change", sync);
+  window.addEventListener("resize", sync);
+})();
