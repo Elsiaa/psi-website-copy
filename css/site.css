@@ -2073,9 +2073,11 @@ section[id],
   position: sticky;
   top: 0;
   height: 100vh;
+  height: 100svh; /* tracks the real visible viewport under moving chrome */
   min-height: 600px;
   display: flex;
   align-items: center;
+  justify-content: center;
 }
 
 .ps-inner {

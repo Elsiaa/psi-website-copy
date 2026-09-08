@@ -12,6 +12,12 @@
   "use strict";
 
   const runway = document.getElementById("psRunway");
+  // CSS vh and window.innerHeight disagree wherever browser chrome moves
+  // (iOS Safari, emulated panes). The layout viewport is the one CSS uses,
+  // so every pin calculation reads it too — or the release point drifts
+  // and the composition rides off-centre.
+  const vpH = () => document.documentElement.clientHeight;
+  const vpW = () => document.documentElement.clientWidth;
   const stage = runway && runway.querySelector(".ps-stage");
   if (!runway || !stage) return;
 
@@ -298,7 +304,7 @@
 
   // Phones get the build too: the scene is the hero there. Only a very
   // short viewport, or a reader who asked for less motion, opts out.
-  const canPin = () => !reduce.matches && window.innerHeight >= 560;
+  const canPin = () => !reduce.matches && vpH() >= 560;
 
   const measure = () => {
     pinned = canPin();
@@ -310,15 +316,15 @@
       steps.forEach((el) => el.classList.add("is-on"));
       return;
     }
-    const w = window.innerWidth;
+    const w = vpW();
     const per = w >= 900 ? 0.48 : w >= 600 ? 0.42 : 0.36; // less scroll on a phone
-    runway.style.height = Math.round(window.innerHeight * (1 + 7 * per)) + "px";
+    runway.style.height = Math.round(vpH() * (1 + 7 * per)) + "px";
     render(true);
   };
 
   const render = (force) => {
     if (!pinned) return;
-    const span = runway.offsetHeight - window.innerHeight;
+    const span = runway.offsetHeight - vpH();
     const p = span <= 0 ? 0 : cl(-runway.getBoundingClientRect().top / span);
     if (!force && Math.abs(p - last) < 0.0002) return; // idle: draw nothing
     last = p;
@@ -356,7 +362,7 @@
     btn.addEventListener("click", () => {
       if (!pinned) return;
       const mid = (S[i] + S[i + 1]) / 2;
-      const span = runway.offsetHeight - window.innerHeight;
+      const span = runway.offsetHeight - vpH();
       window.scrollTo({
         top: runway.offsetTop + span * mid,
         behavior: "smooth",
