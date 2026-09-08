@@ -73,10 +73,12 @@
 
   const tracks = [];
   /** t: 0..1 across [a,b]; fn writes the element's state */
-  const add = (els, a, b, fn, spread = 0) => {
+  const add = (els, a, b, fn, spread = 0, gate = false) => {
     const list = typeof els === "string" ? q(els) : els ? [els] : [];
     if (!list.length) return;
-    tracks.push({ list, a, b, fn, spread });
+    // gate: a later track that retires an element must stay out of the way
+    // until its range opens, or its "1 - t" reads as fully visible at p = 0
+    tracks.push({ list, a, b, fn, spread, gate });
   };
 
   const fade = (el, t) => (el.style.opacity = t);
@@ -170,18 +172,25 @@
     el.style.transform = `scaleY(${g})`;
   });
   // the drawing has served its purpose once the ground is open
-  add(".ps-elev", 0.22, 0.3, (el, t) => (el.style.opacity = 1 - t));
-  add(".stake", 0.24, 0.31, (el, t) => (el.style.opacity = 1 - t), 0.4);
-  add(".ps-string", 0.22, 0.28, (el, t) => (el.style.opacity = 1 - t));
-  add(".ps-dim", 0.26, 0.33, (el, t) => (el.style.opacity = 1 - t));
+  add(".ps-elev", 0.22, 0.3, (el, t) => (el.style.opacity = 1 - t), 0, true);
+  add(".stake", 0.24, 0.31, (el, t) => (el.style.opacity = 1 - t), 0.4, true);
+  add(".ps-string", 0.22, 0.28, (el, t) => (el.style.opacity = 1 - t), 0, true);
+  add(".ps-dim", 0.26, 0.33, (el, t) => (el.style.opacity = 1 - t), 0, true);
 
   /* ---------- 03 foundation ---------- */
   add(".fdn__ftg", 0.29, 0.34, grow);
   add(".fdn__p", 0.33, 0.43, grow, 0.7); // walls go up off the footing
   add(".fdn__slab", 0.4, 0.44, fade);
   add(".ps-backfill", 0.41, 0.47, fade); // earth goes back around the walls
-  add(".ps-spoil", 0.41, 0.47, (el, t) => (el.style.opacity = 1 - t));
-  add(".ps-track", 0.4, 0.46, (el, t) => (el.style.opacity = 1 - t * 0.8));
+  add(".ps-spoil", 0.41, 0.47, (el, t) => (el.style.opacity = 1 - t), 0, true);
+  add(
+    ".ps-track",
+    0.4,
+    0.46,
+    (el, t) => (el.style.opacity = 1 - t * 0.8),
+    0,
+    true,
+  );
 
   /* ---------- 04 framing ---------- */
   add(".fl1", 0.44, 0.47, rise(14));
@@ -217,7 +226,7 @@
     el.style.transformOrigin = "50% 100%";
   });
   add(".ps-reveal", 0.79, 0.83, fade);
-  add(".ps-holes", 0.78, 0.83, (el, t) => (el.style.opacity = 1 - t));
+  add(".ps-holes", 0.78, 0.83, (el, t) => (el.style.opacity = 1 - t), 0, true);
   add(".op", 0.78, 0.9, pop, 0.72); // windows click into their openings
 
   /* ---------- 07 handover ---------- */
@@ -230,6 +239,7 @@
   /* ---------- paint ---------- */
   const paint = (p) => {
     for (const tr of tracks) {
+      if (tr.gate && p < tr.a) continue;
       const n = tr.list.length;
       for (let i = 0; i < n; i++) {
         const el = tr.list[i];
