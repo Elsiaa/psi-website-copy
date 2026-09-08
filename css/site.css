@@ -2207,7 +2207,7 @@ section[id],
   display: block;
   width: 100%;
   height: auto;
-  max-height: 78vh;
+  max-height: 80vh;
   overflow: visible;
 }
 
@@ -2247,19 +2247,6 @@ section[id],
   stroke-width: 1;
   stroke-dasharray: 3 5;
 }
-.ps-dim line {
-  stroke: rgba(16, 18, 20, 0.42);
-  stroke-width: 1;
-}
-.ps-dim text {
-  fill: var(--muted);
-  font-size: 15px;
-  font-weight: 600;
-  text-anchor: middle;
-  font-family: inherit;
-  letter-spacing: 0.02em;
-}
-
 /* 02 earth */
 .ps-pit {
   fill: url(#psEarth);
@@ -3236,13 +3223,15 @@ section[id],
 .job__media {
   position: relative;
   display: block;
-  aspect-ratio: 16 / 10;
+  width: 100%;
   overflow: hidden;
 }
 
 .job__media img {
+  display: block;
   width: 100%;
-  height: 100%;
+  height: auto;
+  aspect-ratio: 16 / 10;
   object-fit: cover;
   transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
@@ -3283,6 +3272,9 @@ section[id],
   margin-top: 3px;
   font-size: 14px;
   color: var(--muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 /* ---------------- viewer chrome: counter + film strip ---------------- */
@@ -3351,6 +3343,12 @@ section[id],
   font-size: 14px;
   font-weight: 600;
   font-variant-numeric: tabular-nums;
+}
+
+@media (max-width: 1160px) and (min-width: 761px) {
+  .jobs {
+    grid-template-columns: 1fr;
+  }
 }
 
 /* ---------------- mobile: map above, job rail below ---------------- */
@@ -3468,4 +3466,161 @@ section[id],
   .nav--open .nav__links a {
     animation: none;
   }
+}
+
+/* ---------------- Reviews: summary rail beside the wall ---------------- */
+
+@media (min-width: 900px) {
+  .reviews__layout {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    gap: clamp(24px, 3vw, 44px);
+    align-items: start;
+    margin-top: 36px;
+  }
+
+  /* the score keeps the reader company while they read the evidence */
+  .reviews__side {
+    position: sticky;
+    top: 96px;
+  }
+
+  .reviews__side .gbadge {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 18px;
+    margin: 0 0 14px;
+    padding: 24px 22px;
+  }
+
+  .reviews__side .gbadge__score {
+    padding-left: 0;
+    border-left: 0;
+  }
+
+  .reviews__side .gbadge__num {
+    font-size: 44px;
+  }
+
+  .reviews__side .gbadge__cta {
+    align-self: stretch;
+    text-align: center;
+  }
+
+  .reviews__side .reviews__nav {
+    margin: 0;
+  }
+
+  .reviews__side .reviews__nav .btn {
+    display: block;
+    text-align: center;
+  }
+
+  .reviews__layout .reviews__wall {
+    margin-top: 0;
+    columns: 2 300px;
+  }
+}
+
+/* ---------------- Desktop header refinements ---------------- */
+
+@media (min-width: 761px) {
+  /* links earn a red underline that draws from the left */
+  .nav__links a:not(.nav__cta) {
+    position: relative;
+    padding: 6px 0;
+  }
+
+  .nav__links a:not(.nav__cta)::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 2px;
+    background: var(--accent);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+
+  .nav__links a:not(.nav__cta):hover::after,
+  .nav__links a:not(.nav__cta):focus-visible::after {
+    transform: scaleX(1);
+  }
+
+  /* the bar's one action reads in the brand red, like every other CTA */
+  .nav__cta {
+    background: var(--accent);
+    border-color: var(--accent);
+  }
+
+  .nav__cta:hover {
+    background: #b30000;
+    border-color: #b30000;
+  }
+}
+
+/* ============================================================
+   CAPTION VOICE
+   Every caption on the site speaks in one editorial register:
+   the serif italic the ledes already use, sized to be read.
+   Uppercase micro-labels stay in the sans; this is for sentences.
+   ============================================================ */
+
+:root {
+  --font-serif: Georgia, "Iowan Old Style", "Times New Roman", serif;
+}
+
+.viewer__cap,
+.job__type,
+.facts__note,
+.review-card__author small,
+.proof__label,
+.ps-sub,
+.qcta__sub,
+.faq__note,
+.caps__cta-note,
+.pflow-head__lede {
+  font-family: var(--font-serif);
+  font-style: italic;
+  letter-spacing: 0.01em;
+}
+
+/* sized per role, none of them squinting-small */
+.job__type {
+  font-size: 15px;
+  margin-top: 4px;
+}
+
+.viewer__cap {
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.facts__note {
+  font-size: 14px;
+}
+
+.review-card__author small {
+  font-size: 14px;
+}
+
+.proof__label {
+  font-size: 15px;
+}
+
+.ps-sub,
+.qcta__sub,
+.faq__note,
+.caps__cta-note {
+  font-size: 16.5px;
+  line-height: 1.6;
+}
+
+/* the viewer phase chip is a label, not a sentence: sans, but roomier */
+.viewer__phase,
+.shot__phase {
+  font-size: 12.5px;
+  letter-spacing: 0.18em;
 }

@@ -106,7 +106,6 @@
   add(".stake", 0.03, 0.1, pop, 0.6);
   add(".ps-string", 0.07, 0.12, null);
   add(".ps-elev", 0.05, 0.14, null);
-  add(".ps-dim", 0.1, 0.15, fade);
 
   /* ---------- 02 site preparation ---------- */
   add(".ps-track", 0.15, 0.21, null);
@@ -175,7 +174,6 @@
   add(".ps-elev", 0.42, 0.48, (el, t) => (el.style.opacity = 1 - t), 0, true);
   add(".stake", 0.24, 0.31, (el, t) => (el.style.opacity = 1 - t), 0.4, true);
   add(".ps-string", 0.22, 0.28, (el, t) => (el.style.opacity = 1 - t), 0, true);
-  add(".ps-dim", 0.4, 0.46, (el, t) => (el.style.opacity = 1 - t), 0, true);
 
   /* ---------- 03 foundation ---------- */
   add(".fdn__ftg", 0.29, 0.34, grow);

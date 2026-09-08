@@ -85,7 +85,7 @@
     }).addTo(map);
     m.bindPopup(
       hasCase(p)
-        ? `<strong>${p.name}</strong><br>` +
+        ? `<strong>${p.type || "Previous project"}</strong><br>` +
             (p.type
               ? `<em style="color:#d60000;font-style:normal;font-weight:600">${p.type}</em><br>`
               : "") +
@@ -94,7 +94,7 @@
               ? `<span style="display:block;margin-top:6px;max-width:240px">${p.desc}</span>`
               : "") +
             `<button class="case__open" data-project="${i}" data-open="${i}">See these photos &rarr;</button>`
-        : `<strong>${p.name}</strong><br>${p.city}`,
+        : `<strong>${p.type || "Previous project"}</strong><br>${p.city}`,
     );
     m.on("click", () => select(i, "map"));
     return m;
@@ -147,7 +147,7 @@
         '<img loading="lazy" src="' +
         p.img +
         '" alt="' +
-        (p.caption || p.name) +
+        (p.caption || p.type || "PSI project") +
         '">' +
         '<span class="job__count">' +
         count +
@@ -156,10 +156,10 @@
         "</span>" +
         '<span class="job__body">' +
         '<span class="job__name">' +
-        p.name +
+        (p.type || "Previous project") +
         "</span>" +
         '<span class="job__type">' +
-        (p.type || p.city) +
+        p.city +
         "</span>" +
         "</span>";
       jobsGrid.appendChild(card);
@@ -228,9 +228,9 @@
           : [];
     if (!list.length) return;
     vReturn = document.activeElement;
-    viewer.querySelector(".viewer__eyebrow").textContent =
+    viewer.querySelector(".viewer__eyebrow").textContent = p.city;
+    viewer.querySelector(".viewer__title").textContent =
       p.type || "Previous project";
-    viewer.querySelector(".viewer__title").textContent = p.name;
     viewer.querySelector(".viewer__desc").textContent = p.desc || "";
     vThumbs.innerHTML = list
       .map(function (g, k) {
@@ -250,7 +250,7 @@
         (g) => `
       <figure class="viewer__fig">
         <div class="viewer__imgwrap">
-          <img src="${g.src}" alt="${g.cap || p.name}">
+          <img src="${g.src}" alt="${g.cap || p.type}">
           ${g.phase ? `<span class="viewer__phase viewer__phase--${g.phase}">${g.phase}</span>` : ""}
           ${g.cap ? `<figcaption class="viewer__cap">${g.cap}</figcaption>` : ""}
         </div>
@@ -411,9 +411,13 @@
   function focusPin(i, zoom, force) {
     if (!force && mapHeld()) return;
     const p = projects[i];
-    map.flyTo([p.lat, p.lng], zoom || Math.max(map.getZoom(), 16), {
-      duration: 0.9,
-    });
+    map.flyTo(
+      [p.lat, p.lng],
+      zoom || Math.min(Math.max(map.getZoom(), 14.5), 15),
+      {
+        duration: 0.9,
+      },
+    );
   }
 
   buildJobs();
