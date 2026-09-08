@@ -561,14 +561,6 @@ h4 {
   right: 12px;
 }
 
-.shots__hint {
-  margin: 14px 0 0;
-  font-size: 15px;
-  font-weight: 700;
-  letter-spacing: -0.005em;
-  color: var(--ink);
-}
-
 .pin {
   width: 16px;
   height: 16px;
@@ -3139,15 +3131,5 @@ section[id],
 
   .shots {
     height: clamp(220px, 33svh, 320px);
-  }
-
-  .shots__hint {
-    margin-top: 8px;
-    font-size: 13px;
-    line-height: 1.4;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
   }
 }

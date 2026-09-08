@@ -126,7 +126,6 @@
   }
 
   const wall = document.getElementById("shotWall");
-  const hint = document.getElementById("shotHint");
 
   // One entry per PHOTOGRAPH. A project with a gallery contributes all of its
   // shots; anything else contributes its single image.
@@ -465,7 +464,6 @@
   renderShots();
   requestAnimationFrame(syncPinToShot);
   play();
-  hint.textContent = `${shots.length} photographs across ${new Set(shots.map((x) => x.i)).size} documented jobs. Click any photograph, or a pin, to open that job.`;
   select(0, "init");
 
   // ---------------- Google Reviews carousel ----------------
