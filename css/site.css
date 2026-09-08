@@ -3370,6 +3370,8 @@ section[id],
 @media (max-width: 760px) {
   .jobs {
     display: flex;
+    /* the desktop grid-replacement wraps; the phone rail must not */
+    flex-wrap: nowrap;
     max-height: none;
     overflow-x: auto;
     overflow-y: hidden;
@@ -3384,10 +3386,38 @@ section[id],
   .jobs::-webkit-scrollbar {
     display: none;
   }
-  .job {
-    flex: 0 0 66vw;
-    max-width: 280px;
+  /* outweigh the desktop .jobs .job basis */
+  .jobs .job {
+    flex: 0 0 62vw;
+    max-width: 260px;
     scroll-snap-align: center;
+  }
+
+  /* one settled line-count per card: rhythm over raggedness */
+  .job__name {
+    font-size: 15px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    min-height: 2.5em;
+  }
+
+  .job__type {
+    font-size: 14px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  #projects .section__title {
+    margin-bottom: 6px;
+  }
+
+  #projects .lede {
+    font-size: 15px;
+    line-height: 1.5;
+    margin-bottom: 12px;
   }
   .viewer__thumb {
     width: 52px;
