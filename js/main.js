@@ -45,6 +45,11 @@
   if (!mapEl || !projects.length || typeof L === "undefined") return;
 
   const map = L.map(mapEl, { scrollWheelZoom: false });
+  // Leaflet 1.9 puts a Ukrainian flag in its attribution prefix; keep the
+  // required Leaflet and OpenStreetMap credits, drop the flag.
+  map.attributionControl.setPrefix(
+    '<a href="https://leafletjs.com">Leaflet</a>',
+  );
   L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
     maxZoom: 19,
     attribution:
