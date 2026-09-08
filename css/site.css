@@ -3637,3 +3637,231 @@ section[id],
   outline-offset: 2px;
   border-color: var(--accent);
 }
+
+/* ---------------- Support assistant ---------------- */
+/* The site's own materials: navy head, paper body, red action. */
+
+.sbot__fab {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  z-index: 45;
+  width: 56px;
+  height: 56px;
+  border: 0;
+  border-radius: 50%;
+  background: var(--accent);
+  color: #fff;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  box-shadow: 0 12px 28px -10px rgba(214, 0, 0, 0.5);
+  transition:
+    transform 0.2s ease,
+    background 0.2s ease;
+}
+
+.sbot__fab:hover {
+  background: #b30000;
+  transform: translateY(-2px);
+}
+
+.sbot__fab svg {
+  width: 24px;
+  height: 24px;
+  fill: currentColor;
+}
+
+.sbot--open .sbot__fab {
+  display: none;
+}
+
+.sbot__panel {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  z-index: 46;
+  width: min(360px, calc(100vw - 24px));
+  max-height: min(560px, calc(100svh - 40px));
+  display: flex;
+  flex-direction: column;
+  background: var(--paper);
+  border: 1px solid var(--hairline);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 30px 70px -40px rgba(16, 18, 20, 0.6);
+}
+
+.sbot__head {
+  position: relative;
+  padding: 16px 48px 14px 18px;
+  background: var(--navy);
+  color: #fff;
+}
+
+.sbot__title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 17px;
+  font-weight: 700;
+}
+
+.sbot__sub {
+  margin: 4px 0 0;
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.sbot__close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 36px;
+  height: 36px;
+  border: 0;
+  background: none;
+  color: #fff;
+  font-size: 22px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.sbot__log {
+  flex: 1 1 auto;
+  overflow-y: auto;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-height: 120px;
+}
+
+.sbot__msg {
+  max-width: 88%;
+  padding: 10px 14px;
+  border-radius: 12px;
+  font-size: 15px;
+  line-height: 1.55;
+}
+
+.sbot__msg--psi {
+  align-self: flex-start;
+  background: #fff;
+  border: 1px solid var(--hairline);
+  border-bottom-left-radius: 4px;
+}
+
+.sbot__msg--you {
+  align-self: flex-end;
+  background: var(--navy);
+  color: #fff;
+  border-bottom-right-radius: 4px;
+}
+
+.sbot__msg a {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.sbot__msg--you a {
+  color: #fff;
+}
+
+.sbot__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 0 14px 10px;
+}
+
+.sbot__chip {
+  padding: 8px 12px;
+  border: 1px solid var(--hairline);
+  border-radius: 4px;
+  background: #fff;
+  font: inherit;
+  font-size: 14px;
+  color: var(--ink);
+  cursor: pointer;
+  text-decoration: none;
+  transition:
+    border-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.sbot__chip:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.sbot__chip--call {
+  border-color: var(--accent);
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.sbot__form {
+  display: flex;
+  gap: 8px;
+  padding: 12px 14px 14px;
+  border-top: 1px solid var(--hairline);
+  background: #fff;
+}
+
+.sbot__input {
+  flex: 1 1 auto;
+  min-width: 0;
+  padding: 10px 12px;
+  border: 1px solid var(--hairline);
+  border-radius: 4px;
+  font: inherit;
+  font-size: 15px;
+}
+
+.sbot__input:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-color: var(--accent);
+}
+
+.sbot__send {
+  padding: 10px 18px;
+  border: 0;
+  border-radius: 4px;
+  background: var(--accent);
+  color: #fff;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.sbot__send:hover {
+  background: #b30000;
+}
+
+@media (max-width: 480px) {
+  .sbot__panel {
+    right: 12px;
+    left: 12px;
+    bottom: 12px;
+    width: auto;
+  }
+  .sbot__fab {
+    right: 16px;
+    bottom: 16px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sbot__fab,
+  .sbot__chip,
+  .sbot__send {
+    transition: none;
+  }
+}
