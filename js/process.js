@@ -172,10 +172,10 @@
     el.style.transform = `scaleY(${g})`;
   });
   // the drawing has served its purpose once the ground is open
-  add(".ps-elev", 0.22, 0.3, (el, t) => (el.style.opacity = 1 - t), 0, true);
+  add(".ps-elev", 0.42, 0.48, (el, t) => (el.style.opacity = 1 - t), 0, true);
   add(".stake", 0.24, 0.31, (el, t) => (el.style.opacity = 1 - t), 0.4, true);
   add(".ps-string", 0.22, 0.28, (el, t) => (el.style.opacity = 1 - t), 0, true);
-  add(".ps-dim", 0.26, 0.33, (el, t) => (el.style.opacity = 1 - t), 0, true);
+  add(".ps-dim", 0.4, 0.46, (el, t) => (el.style.opacity = 1 - t), 0, true);
 
   /* ---------- 03 foundation ---------- */
   add(".fdn__ftg", 0.29, 0.34, grow);
@@ -208,26 +208,45 @@
   add(".sys-wire", 0.62, 0.68, null);
   add(".sys-duct", 0.645, 0.68, rise(10));
   add(".sys-node", 0.66, 0.69, pop);
-  add(".ps-batt", 0.66, 0.72, fade);
-  add(".ps-cap:not(.wing)", 0.68, 0.72, drop(34)); // roof settles into place
-  add(".ps-cap.wing", 0.7, 0.735, drop(30));
-  add(".ps-stamp", 0.71, 0.75, pop); // rough-in signed off
-  add(".ps-holes", 0.66, 0.7, fade);
+  add(".ps-cap:not(.wing)", 0.63, 0.68, drop(34)); // roof settles into place
+  add(".ps-cap.wing", 0.655, 0.7, drop(30));
+  add(".ps-stamp", 0.7, 0.74, pop); // rough-in signed off
+  add(".ps-holes", 0.6, 0.635, fade);
 
   /* ---------- 06 skin, then openings ---------- */
-  add(".ps-wall:not(.wing)", 0.7, 0.79, (el, t) => {
+  add(".ps-wall:not(.wing)", 0.645, 0.725, (el, t) => {
     el.style.opacity = 1;
     el.style.transform = `scaleY(${out(t)})`;
     el.style.transformOrigin = "50% 100%";
   });
-  add(".ps-wall.wing", 0.74, 0.82, (el, t) => {
+  add(".ps-wall.wing", 0.675, 0.745, (el, t) => {
     el.style.opacity = 1;
     el.style.transform = `scaleY(${out(t)})`;
     el.style.transformOrigin = "50% 100%";
   });
-  add(".ps-reveal", 0.79, 0.83, fade);
-  add(".ps-holes", 0.78, 0.83, (el, t) => (el.style.opacity = 1 - t), 0, true);
-  add(".op", 0.78, 0.9, pop, 0.72); // windows click into their openings
+  add(".ps-reveal", 0.72, 0.755, fade);
+  add(".ps-holes", 0.665, 0.72, (el, t) => (el.style.opacity = 1 - t), 0, true);
+  add(".op", 0.685, 0.755, pop, 0.72); // windows click into their openings
+
+  /* ---------- 06 interior: the wall opens up, insulation goes in, it closes ---------- */
+  add(
+    ".ps-wall",
+    0.76,
+    0.88,
+    (el, t) => {
+      // a brief x-ray so the insulation and drywall stage is something you can see
+      el.style.opacity = kf(t, [
+        [0, 1],
+        [0.18, 0.26],
+        [0.62, 0.26],
+        [1, 1],
+      ]);
+    },
+    0,
+    true,
+  );
+  add(".ps-batt", 0.77, 0.84, fade);
+  add(".ps-batt", 0.85, 0.9, (el, t) => (el.style.opacity = 1 - t), 0, true);
 
   /* ---------- 07 handover ---------- */
   add(".ps-walk", 0.88, 0.92, fade);
