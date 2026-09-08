@@ -18,6 +18,10 @@
   --accent: #d60000; /* PSI logo red, sampled from PSI MAIN Logo.png */
   --hairline: rgba(16, 18, 20, 0.14);
   --hero-scroll-length: 320vh;
+  --font-sans:
+    "Inter", system-ui, -apple-system, "Avenir Next", "Helvetica Neue", Arial,
+    sans-serif;
+  --font-display: "Archivo", var(--font-sans);
 }
 
 html {
@@ -28,7 +32,8 @@ body {
   margin: 0;
   background: var(--paper);
   color: var(--ink);
-  font-family: "Avenir Next", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: var(--font-sans);
+  font-feature-settings: "kern" 1;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
@@ -139,14 +144,14 @@ img {
 .nav__links {
   display: flex;
   align-items: center;
-  gap: clamp(10px, 2.4vw, 28px);
+  gap: clamp(10px, 1.7vw, 22px);
   flex-wrap: wrap;
 }
 .nav__links a {
   color: inherit;
   text-decoration: none;
-  font-size: 12px;
-  letter-spacing: 0.18em;
+  font-size: 14px;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
   opacity: 0.9;
 }
@@ -261,7 +266,7 @@ img {
 }
 
 .hero__scrollcue-label {
-  font-size: 11px;
+  font-size: 14px;
   letter-spacing: 0.3em;
   text-transform: uppercase;
   opacity: 0.75;
@@ -341,7 +346,7 @@ img {
 
 .eyebrow {
   margin: 0 0 14px;
-  font-size: 12px;
+  font-size: 14px;
   letter-spacing: 0.32em;
   text-transform: uppercase;
   color: var(--muted);
@@ -351,6 +356,14 @@ img {
 }
 .eyebrow--accent {
   color: var(--accent);
+}
+
+.section__title,
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-display);
 }
 
 .section__title {
@@ -395,7 +408,7 @@ img {
   border-bottom: 1px solid var(--hairline);
 }
 .facts dt {
-  font-size: 11px;
+  font-size: 14px;
   letter-spacing: 0.22em;
   text-transform: uppercase;
   color: var(--muted);
@@ -479,8 +492,8 @@ img {
   top: 12px;
   left: 12px;
   background: rgba(29, 39, 51, 0.92);
-  font-size: 9.5px;
-  letter-spacing: 0.2em;
+  font-size: 13px;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
   font-weight: 700;
   padding: 3px 9px;
@@ -518,7 +531,7 @@ img {
 }
 .shot__cap span {
   display: block;
-  font-size: 12.5px;
+  font-size: 14px;
   line-height: 1.45;
   color: rgba(255, 255, 255, 0.86);
 }
@@ -550,7 +563,7 @@ img {
 
 .shots__hint {
   margin: 14px 0 0;
-  font-size: 13.5px;
+  font-size: 15px;
   font-weight: 700;
   letter-spacing: -0.005em;
   color: var(--ink);
@@ -628,7 +641,7 @@ img {
   border: 0;
   border-radius: 2px;
   font: inherit;
-  font-size: 12px;
+  font-size: 14px;
   letter-spacing: 0.14em;
   text-transform: uppercase;
   cursor: pointer;
@@ -676,7 +689,7 @@ body.viewer-lock {
 .viewer__eyebrow {
   margin: 0 0 6px;
   color: var(--accent);
-  font-size: 10.5px;
+  font-size: 14px;
   letter-spacing: 0.22em;
   text-transform: uppercase;
   font-weight: 700;
@@ -688,7 +701,7 @@ body.viewer-lock {
 }
 .viewer__desc {
   margin: 0;
-  font-size: 13.5px;
+  font-size: 15px;
   line-height: 1.6;
   color: rgba(255, 255, 255, 0.72);
 }
@@ -757,7 +770,7 @@ body.viewer-lock {
     rgba(8, 9, 10, 0) 100%
   );
   color: #fff;
-  font-size: 13px;
+  font-size: 14.5px;
   line-height: 1.45;
 }
 
@@ -843,7 +856,7 @@ body.viewer-lock {
   color: #fff;
 }
 .carousel__counter {
-  font-size: 12.5px;
+  font-size: 14px;
   letter-spacing: 0.14em;
   color: var(--muted);
 }
@@ -892,7 +905,7 @@ body.viewer-lock {
   display: block;
   font-weight: 400;
   color: var(--muted);
-  font-size: 12px;
+  font-size: 14px;
   margin-top: 2px;
 }
 
@@ -910,7 +923,7 @@ body.viewer-lock {
   background: var(--navy);
   color: #fff;
   text-decoration: none;
-  font-size: 13px;
+  font-size: 14.5px;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   font-weight: 600;
@@ -983,7 +996,7 @@ body.viewer-lock {
   border-bottom: 1px solid var(--hairline);
 }
 .contact-rows dt {
-  font-size: 11px;
+  font-size: 14px;
   letter-spacing: 0.22em;
   text-transform: uppercase;
   color: var(--muted);
@@ -1006,7 +1019,7 @@ body.viewer-lock {
   display: block;
   font-weight: 400;
   color: var(--muted);
-  font-size: 13px;
+  font-size: 14.5px;
   margin-top: 3px;
 }
 
@@ -1016,7 +1029,7 @@ body.viewer-lock {
   margin-bottom: 22px;
 }
 .quote__progress-label {
-  font-size: 11.5px;
+  font-size: 14px;
   letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--muted);
@@ -1042,7 +1055,7 @@ body.viewer-lock {
 }
 .quote__note {
   margin: -10px 0 16px;
-  font-size: 13px;
+  font-size: 14.5px;
   color: var(--muted);
   font-style: italic;
 }
@@ -1087,7 +1100,7 @@ body.viewer-lock {
   border: 0;
   cursor: pointer;
   font: inherit;
-  font-size: 13px;
+  font-size: 14.5px;
   color: var(--muted);
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -1104,7 +1117,7 @@ body.viewer-lock {
 }
 .quote__field label {
   display: block;
-  font-size: 11.5px;
+  font-size: 14px;
   letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--muted);
@@ -1141,7 +1154,7 @@ body.viewer-lock {
   padding: 18px;
   max-height: 320px;
   overflow-y: auto;
-  font-size: 13.5px;
+  font-size: 15px;
   line-height: 1.7;
   white-space: pre-wrap;
   font-family: ui-monospace, "SF Mono", Menlo, monospace;
@@ -1197,7 +1210,7 @@ body.viewer-lock {
 }
 .footer__col .eyebrow {
   color: rgba(255, 255, 255, 0.55);
-  font-size: 10.5px;
+  font-size: 14px;
   margin-bottom: 8px;
 }
 
@@ -1279,7 +1292,7 @@ body.viewer-lock {
   display: flex;
   align-items: center;
   gap: 6px;
-  font-size: 12.5px;
+  font-size: 14px;
   color: var(--muted);
 }
 
@@ -1313,7 +1326,7 @@ body.viewer-lock {
 
 .gbadge__count {
   margin: 4px 0 0;
-  font-size: 12.5px;
+  font-size: 14px;
   color: var(--muted);
 }
 
@@ -1325,7 +1338,7 @@ body.viewer-lock {
   background: #4285f4;
   color: #fff;
   text-decoration: none;
-  font-size: 13.5px;
+  font-size: 15px;
   font-weight: 600;
   transition: background 160ms ease;
 }
@@ -1482,7 +1495,7 @@ body.viewer-lock {
 .cap__num {
   display: block;
   margin-bottom: 8px;
-  font-size: 11.5px;
+  font-size: 14px;
   font-weight: 700;
   letter-spacing: 0.22em;
   color: rgba(255, 255, 255, 0.55);
@@ -1505,7 +1518,7 @@ body.viewer-lock {
 
 .cap p {
   margin: 0;
-  font-size: 13.5px;
+  font-size: 15px;
   line-height: 1.55;
   color: rgba(255, 255, 255, 0.74);
   max-width: 44ch;
@@ -1522,7 +1535,7 @@ body.viewer-lock {
 }
 
 .cap--featured .cap__num {
-  font-size: 12.5px;
+  font-size: 14px;
 }
 
 @media (max-width: 960px) {
@@ -1608,7 +1621,7 @@ body.viewer-lock {
 
 .facts--band dt {
   margin: 0 0 8px;
-  font-size: 11.5px;
+  font-size: 14px;
   font-weight: 700;
   letter-spacing: 0.18em;
   text-transform: uppercase;
@@ -1635,7 +1648,7 @@ body.viewer-lock {
 .facts__note {
   display: block;
   margin-top: 5px;
-  font-size: 12.5px;
+  font-size: 14px;
   font-weight: 400;
   color: var(--muted);
 }
@@ -1715,7 +1728,7 @@ body.viewer-lock {
   background: var(--accent);
   border-color: var(--accent);
   padding: 16px 34px;
-  font-size: 13.5px;
+  font-size: 15px;
 }
 
 .qcta__btn:hover {
@@ -1738,7 +1751,7 @@ body.viewer-lock {
 
 .qcta__trust {
   margin: 0;
-  font-size: 13px;
+  font-size: 14.5px;
   color: rgba(255, 255, 255, 0.55);
 }
 
@@ -1937,7 +1950,7 @@ body.viewer-lock {
 
 .proof__label {
   margin: 0;
-  font-size: 13px;
+  font-size: 14.5px;
   line-height: 1.45;
   color: var(--muted);
 }
@@ -2078,7 +2091,7 @@ section[id],
 
 .ps-step__n {
   margin: 0 0 10px;
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 700;
   letter-spacing: 0.24em;
   color: var(--accent);
@@ -2658,4 +2671,168 @@ section[id],
 /* a soft shadow where the parapet oversails the wall */
 .cap-shade {
   fill: rgba(16, 18, 20, 0.11);
+}
+
+/* ---------------- Capabilities: the way out of the grid ---------------- */
+
+.caps__cta {
+  display: flex;
+  align-items: center;
+  gap: clamp(16px, 2vw, 26px);
+  flex-wrap: wrap;
+  margin-top: clamp(28px, 4vw, 44px);
+  padding-top: clamp(24px, 3vw, 34px);
+  border-top: 1px solid rgba(255, 255, 255, 0.14);
+}
+
+.caps__btn {
+  background: var(--accent);
+  border-color: var(--accent);
+  padding: 16px 34px;
+  font-size: 14px;
+}
+
+.caps__btn:hover {
+  background: #b30000;
+  border-color: #b30000;
+}
+
+.caps__cta-note {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.66);
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+@media (max-width: 620px) {
+  .caps__btn {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+/* ============================================================
+   MOBILE — deliberate layouts, not shrunk desktop ones.
+   Everything below lives inside a media query; the desktop
+   rules above are untouched.
+   ============================================================ */
+
+@media (max-width: 760px) {
+  /* What We Build becomes a swipeable rail that bleeds to both edges */
+  .caps__grid {
+    display: flex;
+    grid-template-columns: none;
+    grid-auto-rows: auto;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory;
+    gap: 12px;
+    margin-inline: calc(-1 * clamp(20px, 6vw, 96px));
+    padding-inline: clamp(20px, 6vw, 96px);
+    padding-bottom: 10px;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .caps__grid::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* a sliver of the next card is the only affordance needed */
+  .cap,
+  .cap--featured {
+    flex: 0 0 76vw;
+    max-width: 330px;
+    grid-column: auto;
+    grid-row: auto;
+    aspect-ratio: 4 / 3;
+    scroll-snap-align: center;
+  }
+
+  .cap--featured h3 {
+    font-size: 19px;
+  }
+
+  .caps__head {
+    display: block;
+  }
+
+  .caps__cta {
+    margin-top: 24px;
+  }
+
+  /* one thumb-sized target, not a row of them */
+  .caps__btn {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+@media (max-width: 620px) {
+  /* headings stop competing with the phone's width */
+  .section__title {
+    font-size: clamp(27px, 8vw, 36px);
+    line-height: 1.08;
+  }
+
+  /* the intro reads as one column, quote first */
+  .intro__pull {
+    font-size: 18px;
+    padding-left: 14px;
+  }
+
+  .intro__lede {
+    font-size: 17px;
+  }
+
+  /* contact facts stack into readable rows rather than a cramped grid */
+  .facts--band {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  /* the proof strip reads as two lines, not four columns */
+  .proofbar__inner {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  /* reviews and projects get full-width media */
+  .projects__layout {
+    grid-template-columns: 1fr;
+  }
+
+  /* the quote band's button is the whole width of the thumb */
+  .qcta__btn,
+  .gbadge__cta,
+  .gbadge__cta--ghost {
+    width: 100%;
+    text-align: center;
+  }
+
+  .gbadge__cta--ghost {
+    margin-left: 0;
+    margin-top: 10px;
+  }
+
+  .gbadge {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .gbadge__score {
+    padding-left: 0;
+    border-left: 0;
+  }
+
+  /* FAQ answers get room to breathe */
+  .faq__q {
+    font-size: 16.5px;
+    padding: 18px 2px;
+  }
+
+  .faq__a {
+    padding-bottom: 20px;
+  }
 }
