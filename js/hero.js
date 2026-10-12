@@ -53,6 +53,31 @@
     if (loader) loader.remove();
     return;
   }
+
+  // ------------------------------------------------------------------
+  // Framed on a touch device (the live preview on elsiaa.com/designs):
+  // the frame hands this page a desktop-wide viewport, so the check
+  // above passes, but the device is a phone. 193 full-size 1920x1080
+  // bitmaps is ~1.6GB of decoded memory, and iOS kills the parent tab.
+  // Same still as a portrait phone gets, at the frame's own width.
+  // ------------------------------------------------------------------
+  let framed = false;
+  try {
+    framed = window.self !== window.top;
+  } catch (e) {
+    framed = true;
+  }
+  if (framed && window.matchMedia("(pointer: coarse)").matches) {
+    hero.style.height = "100svh";
+    hero.classList.add("hero--still");
+    canvas.style.display = "none";
+    if (poster) {
+      poster.src = "assets/hero-sunset-wide.jpg";
+      poster.style.display = "";
+    }
+    if (loader) loader.remove();
+    return;
+  }
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 
   // ------------------------------------------------------------------
