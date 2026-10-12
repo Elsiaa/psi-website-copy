@@ -57,9 +57,11 @@
   // ------------------------------------------------------------------
   // Framed on a touch device (the live preview on elsiaa.com/designs):
   // the frame hands this page a desktop-wide viewport, so the check
-  // above passes, but the device is a phone. 193 full-size 1920x1080
-  // bitmaps is ~1.6GB of decoded memory, and iOS kills the parent tab.
-  // Same still as a portrait phone gets, at the frame's own width.
+  // above passes, but the device is a phone. Held at full size, 193
+  // 1920x1080 bitmaps is ~1.6GB of decoded memory and iOS kills the
+  // parent tab. "Lite" keeps the full scrub but holds every other frame
+  // at 800px (~140MB) and draws at 1x — the frame is shown at a quarter
+  // of its size, so nothing visible is lost.
   // ------------------------------------------------------------------
   let framed = false;
   try {
@@ -67,17 +69,8 @@
   } catch (e) {
     framed = true;
   }
-  if (framed && window.matchMedia("(pointer: coarse)").matches) {
-    hero.style.height = "100svh";
-    hero.classList.add("hero--still");
-    canvas.style.display = "none";
-    if (poster) {
-      poster.src = "assets/hero-sunset-wide.jpg";
-      poster.style.display = "";
-    }
-    if (loader) loader.remove();
-    return;
-  }
+  const lite = framed && window.matchMedia("(pointer: coarse)").matches;
+  const LITE_W = 800;
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 
   // ------------------------------------------------------------------
@@ -175,6 +168,18 @@
 
   const supportsBitmap = "createImageBitmap" in window;
 
+  // Lite mode: keep a small copy and release the full-size decode.
+  function shrink(bmp) {
+    if (!lite || bmp.width <= LITE_W) return bmp;
+    const h = Math.round((bmp.height * LITE_W) / bmp.width);
+    const c = document.createElement("canvas");
+    c.width = LITE_W;
+    c.height = h;
+    c.getContext("2d").drawImage(bmp, 0, 0, LITE_W, h);
+    if (bmp.close) bmp.close();
+    return c;
+  }
+
   function loadFrame(i, priority) {
     if (i < 0 || i >= N || loadState[i] !== 0) return Promise.resolve();
     loadState[i] = 1;
@@ -185,7 +190,7 @@
       })
       .then((blob) =>
         supportsBitmap
-          ? createImageBitmap(blob)
+          ? createImageBitmap(blob).then(shrink)
           : new Promise((res, rej) => {
               const img = new Image();
               img.onload = () => res(img);
@@ -228,7 +233,9 @@
     return order;
   }
 
-  const loadOrder = coarseToFineOrder(N);
+  const loadOrder = coarseToFineOrder(N).filter(
+    (i) => !lite || i % 2 === 0 || i === N - 1,
+  );
   let orderCursor = 0;
   const MAX_INFLIGHT = 6;
   let inflight = 0;
@@ -249,7 +256,7 @@
     if (
       inflight === 0 &&
       orderCursor >= loadOrder.length &&
-      readyCount < N &&
+      readyCount < loadOrder.length &&
       retrySweeps < 3
     ) {
       retrySweeps++;
@@ -280,7 +287,7 @@
   function resize() {
     // Cap backing store: sequence frames are 1920px wide, so >2x their
     // density buys nothing and costs memory on Retina displays.
-    dpr = Math.min(window.devicePixelRatio || 1, 2);
+    dpr = lite ? 1 : Math.min(window.devicePixelRatio || 1, 2);
     cw = canvas.clientWidth;
     ch = canvas.clientHeight;
     const bw = Math.round(cw * dpr);
@@ -382,9 +389,9 @@
 
   function onFrameArrived(i) {
     if (loaderBar) {
-      loaderBar.style.width = ((readyCount / N) * 100).toFixed(1) + "%";
+      loaderBar.style.width = ((readyCount / loadOrder.length) * 100).toFixed(1) + "%";
     }
-    if (readyCount === N) hero.classList.add("hero--loaded");
+    if (readyCount === loadOrder.length) hero.classList.add("hero--loaded");
     // If the frame that just arrived is what the viewer is waiting on,
     // repaint immediately.
     if (Math.abs(i - targetFloat) < 1.5) drawnFrame = -1;
