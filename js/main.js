@@ -13,7 +13,7 @@
   // to the front elevation. Past it the image behind the logo is light, so the
   // white mark stops reading and the full-colour one takes over — well before
   // the hero itself ends.
-  const LOGO_SWITCH_AT = 0.5;
+  const LOGO_SWITCH_AT = 0.24;
   const heroProgress = (heroEl) => {
     const runway = heroEl.offsetHeight - window.innerHeight;
     if (runway <= 0) return 1;
