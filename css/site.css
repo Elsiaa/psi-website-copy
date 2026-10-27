@@ -6399,3 +6399,63 @@ section[id],
     animation: none;
   }
 }
+
+/* ---------------- the planner's type: heavier, darker, tighter ----------------
+   The labels were thin light-grey caps tracked wide, so the one thing to
+   do on each screen read as fine print. Everything the hand lands on is
+   bold now and set in ink. */
+.quote__progress-label {
+  font-size: 12.5px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  color: var(--ink);
+}
+
+.quote__q {
+  font-size: clamp(21px, 2vw, 25px);
+  font-weight: 800;
+  letter-spacing: -0.015em;
+  color: var(--ink);
+}
+
+.quote__note {
+  font-weight: 600;
+}
+
+.quote__field label {
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  color: var(--ink);
+}
+
+.quote__field input[type="text"],
+.quote__field input[type="email"],
+.quote__field input[type="tel"],
+.quote__field select,
+.quote__field textarea {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.quote__opt {
+  font-weight: 600;
+}
+
+.quote__opt-label {
+  font-weight: 800;
+}
+
+.quote__opt-hint {
+  font-weight: 500;
+}
+
+.quote__back {
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.quote__restart {
+  font-weight: 700;
+}
