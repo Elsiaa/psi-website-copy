@@ -23,17 +23,34 @@
   const reduce = window.matchMedia("(prefers-reduced-motion: reduce)");
 
   function setStage(f) {
-    // f is a float 0..N-1; crossfade the two neighbouring frames
+    // f is a float 0..N-1. Each stage holds crisp for about a third
+    // of its span (the dwell); the crossfade runs eased between the
+    // dwells, and the incoming photograph settles from a touch
+    // larger, so every stage reads as an arrival instead of a blur.
+    const DWELL = 0.44;
     const i = Math.max(0, Math.min(N - 1, f));
     const lo = Math.floor(i);
     const hi = Math.min(N - 1, lo + 1);
     const t = i - lo;
+    let e = t <= DWELL ? 0 : t >= 1 - DWELL ? 1 : (t - DWELL) / (1 - 2 * DWELL);
+    e = e * e * (3 - 2 * e); // smoothstep
     frames.forEach((img, k) => {
-      img.style.opacity = k === lo ? 1 : k === hi ? t : 0;
-      img.style.zIndex = k === lo ? 1 : k === hi ? 2 : 0;
+      if (k === lo) {
+        img.style.opacity = 1;
+        img.style.zIndex = 1;
+        img.style.transform = "none";
+      } else if (k === hi) {
+        img.style.opacity = e;
+        img.style.zIndex = 2;
+        img.style.transform = "scale(" + (1.02 - 0.02 * e).toFixed(4) + ")";
+      } else {
+        img.style.opacity = 0;
+        img.style.zIndex = 0;
+        img.style.transform = "none";
+      }
     });
-    const active = t > 0.5 ? hi : lo;
-    steps.forEach((s, k) => s.classList.toggle("is-on", k === active));
+    const active = e > 0.5 ? hi : lo;
+    steps.forEach((st, k) => st.classList.toggle("is-on", k === active));
     ticks.forEach((b, k) => b.classList.toggle("is-on", k === active));
     if (count) count.textContent = active + 1 + " / " + N;
   }

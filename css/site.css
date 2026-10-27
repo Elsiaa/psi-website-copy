@@ -1978,7 +1978,7 @@ section[id],
 
 .ps-runway {
   position: relative;
-  height: 460vh; /* JS retunes this to the real stage height */
+  height: 500vh; /* seven stages, held crisp with quick dissolves */
 }
 
 .ps-stage {
@@ -2164,6 +2164,8 @@ section[id],
    the page paper, so the model sits directly on the site. */
 .ps-frame {
   mix-blend-mode: multiply;
+  transform-origin: 50% 88%;
+  will-change: opacity, transform;
 }
 
 .ps-frame {
