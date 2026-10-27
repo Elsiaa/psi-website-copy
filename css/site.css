@@ -3877,6 +3877,42 @@ section[id],
 
 /* ---------------- what we build: the service rail ---------------- */
 
+/* cued by the hero's finale: the section rises to meet the handoff */
+.heroo-js ~ .caps .caps__head,
+.heroo-js ~ .caps .svc-rail,
+.heroo-js ~ .caps .svc-progress {
+  opacity: 0;
+  transform: translateY(26px);
+  transition:
+    opacity 0.6s ease,
+    transform 0.7s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.heroo-js ~ .caps.caps--in .caps__head,
+.heroo-js ~ .caps.caps--in .svc-rail,
+.heroo-js ~ .caps.caps--in .svc-progress {
+  opacity: 1;
+  transform: none;
+}
+
+.heroo-js ~ .caps.caps--in .svc-rail {
+  transition-delay: 0.08s;
+}
+
+.heroo-js ~ .caps.caps--in .svc-progress {
+  transition-delay: 0.16s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .heroo-js ~ .caps .caps__head,
+  .heroo-js ~ .caps .svc-rail,
+  .heroo-js ~ .caps .svc-progress {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
 .caps__head {
   display: flex;
   align-items: baseline;

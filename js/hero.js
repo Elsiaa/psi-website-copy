@@ -54,6 +54,7 @@
   });
 
   if (reduce.matches) return; // everything stays visible and still
+  hero.classList.add("heroo-js"); // the caps prelude only arms with the engine
 
   // ---- scroll: close, open, disassemble, reassemble, hand off ----
   const closed = hero.querySelector(".heroo__house--closed");
@@ -91,23 +92,21 @@
       house.style.opacity = 1;
     }
 
-    // 5) the reassembled house hands off to What We Build
-    const hand = seg(p, 0.86, 1);
-    if (hand > 0.2 && zoomed) setZoom(null);
-    copy.style.opacity = Math.max(
-      0,
-      1 - Math.max(seg(p, 0.42, 0.6) * 0.65, hand) * 1.6,
-    ).toFixed(3);
-    copy.style.transform = "translateY(" + (-hand * 48).toFixed(1) + "px)";
-    // while the copy is away for the disassembly, the model drifts
-    // up to hold the centre of the screen
-    const lift = seg(p, 0.42, 0.6) * (1 - hand) * 7;
+    // 5) the finale: title and model leave together, and the next
+    //    section is cued to rise and meet them
+    const hand = seg(p, 0.88, 1);
+    if (hand > 0.1 && zoomed) setZoom(null);
+    copy.style.opacity = (1 - hand).toFixed(3);
+    copy.style.transform = "translateY(" + (-hand * 56).toFixed(1) + "px)";
     stage.style.transform =
       "translateY(" +
-      (hand * 10 - lift).toFixed(2) +
+      (-hand * 6).toFixed(2) +
       "svh) scale(" +
-      (1 - 0.2 * hand).toFixed(4) +
+      (1 - 0.16 * hand).toFixed(4) +
       ")";
+    stage.style.opacity = (1 - hand * 0.9).toFixed(3);
+    const caps = document.getElementById("capabilities");
+    if (caps) caps.classList.toggle("caps--in", p >= 0.9);
   }
   addEventListener("scroll", paint, { passive: true });
   addEventListener("resize", paint, { passive: true });
