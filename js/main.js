@@ -690,3 +690,31 @@
   buildJobs();
   select(0, "init");
 })();
+
+/* ---- service cards: a tap flips them where there is no hover ---- */
+(() => {
+  const rail = document.getElementById("svcRail");
+  if (!rail) return;
+  const fine = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+  rail.addEventListener("click", (e) => {
+    const card = e.target.closest(".svc");
+    if (!card || e.target.closest("a")) return;
+    if (fine) return; // the pointer already flips it
+    const open = !card.classList.contains("is-flipped");
+    rail.querySelectorAll(".svc.is-flipped").forEach((c) => {
+      c.classList.remove("is-flipped");
+      const b = c.querySelector(".svc__btn");
+      if (b) b.tabIndex = -1;
+    });
+    card.classList.toggle("is-flipped", open);
+    const btn = card.querySelector(".svc__btn");
+    if (btn) btn.tabIndex = open ? 0 : -1;
+  });
+  // keyboard: focusing into a card makes its button reachable
+  rail.addEventListener("focusin", (e) => {
+    const card = e.target.closest(".svc");
+    if (!card) return;
+    const btn = card.querySelector(".svc__btn");
+    if (btn) btn.tabIndex = 0;
+  });
+})();
