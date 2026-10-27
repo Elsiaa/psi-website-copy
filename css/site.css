@@ -45,6 +45,8 @@ img {
 /* ---------------- Top navigation ---------------- */
 
 .nav {
+  /* the site is light now: one bar, always legible. Bold black
+     letters on white, red where it counts. */
   position: fixed;
   top: 0;
   left: 0;
@@ -55,23 +57,27 @@ img {
   justify-content: space-between;
   gap: 18px;
   padding: 14px clamp(20px, 4vw, 48px);
-  color: #fff;
-  background: linear-gradient(
-    to bottom,
-    rgba(8, 9, 10, 0.55),
-    rgba(8, 9, 10, 0)
-  );
-  transition:
-    background 240ms ease,
-    color 240ms ease,
-    box-shadow 240ms ease;
+  color: var(--ink);
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 1px 0 var(--hairline);
+  backdrop-filter: blur(8px);
+  transition: box-shadow 240ms ease;
 }
 
 .nav--solid {
-  background: rgba(247, 246, 243, 0.94);
-  color: var(--navy);
+  background: rgba(255, 255, 255, 0.97);
+  color: var(--ink);
   box-shadow: 0 1px 0 var(--hairline);
   backdrop-filter: blur(8px);
+}
+
+.nav__links a {
+  font-weight: 800;
+  color: var(--ink);
+}
+
+.nav__links a:hover {
+  color: var(--accent);
 }
 
 .nav__brand {
@@ -99,10 +105,8 @@ img {
 /* Left/top only — pinning bottom too would stretch it and override the
    shared height. */
 .nav__logo--onsolid {
-  position: absolute;
-  left: 0;
-  top: 0;
-  opacity: 0;
+  position: static;
+  opacity: 1;
 }
 .nav__logo--onhero {
   opacity: 1;
@@ -110,6 +114,14 @@ img {
 .nav__logo {
   transition: opacity 260ms ease;
 }
+.nav__logo--onhero {
+  display: none;
+}
+
+.nav__logo--onsolid {
+  display: block;
+}
+
 /* .nav--solid is listed too so inner pages, which hard-code a solid bar and
    never load main.js, still get the full-colour mark without any script. */
 .nav--darklogo .nav__logo--onhero,
@@ -137,10 +149,6 @@ img {
 /* On the navy footer and over the dark hero, #d60000 sits too close to the
    background to read. Lift it there rather than dimming the letters. */
 .footer .tel-psi,
-.nav:not(.nav--solid) .tel-psi {
-  color: #ff5a5a;
-}
-
 .nav__links {
   display: flex;
   align-items: center;
@@ -3555,7 +3563,7 @@ section[id],
 .hero--open {
   /* a short runway: the sticky stage hands the house off to the
      next section as you scroll */
-  height: 185svh;
+  height: 250svh;
   background: var(--paper);
 }
 
@@ -3683,6 +3691,96 @@ section[id],
   display: block;
   width: 100%;
   height: auto;
+  transition: transform 0.9s cubic-bezier(0.22, 0.9, 0.24, 1);
+  will-change: transform;
+}
+
+/* the facade: stacked over the open house, dissolved by scroll */
+.heroo__house--closed {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  transition: none;
+  pointer-events: none;
+}
+
+/* without the engine (reduced motion), the open house shows */
+@media (prefers-reduced-motion: reduce) {
+  .heroo__house--closed {
+    display: none;
+  }
+}
+
+.heroo__stagewrap {
+  overflow: hidden;
+  border-radius: 18px;
+}
+
+/* tap any room: the chosen pin stays lit while the rest step back */
+.heroo__stagewrap.is-zoomed .heroo__pin {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.heroo__stagewrap.is-zoomed .heroo__pin.is-active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.heroo__pin {
+  transition:
+    opacity 0.35s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.heroo__cap {
+  position: absolute;
+  left: 16px;
+  right: 16px;
+  bottom: 14px;
+  margin: 0;
+  padding: 12px 18px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(4px);
+  border: 1px solid var(--hairline);
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--ink);
+  opacity: 0;
+  transform: translateY(8px);
+  transition:
+    opacity 0.35s ease,
+    transform 0.35s ease;
+  pointer-events: none;
+}
+
+.heroo__stagewrap.is-zoomed .heroo__cap {
+  opacity: 1;
+  transform: none;
+}
+
+.heroo__hint {
+  position: absolute;
+  top: 10px;
+  right: 14px;
+  margin: 0;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.heroo__stagewrap.is-zoomed .heroo__hint {
+  opacity: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .heroo__house {
+    transition: none;
+  }
 }
 
 .heroo__pin {
