@@ -3899,6 +3899,29 @@ section[id],
 
 /* ---------------- what we build: the service rail ---------------- */
 
+/* the headline: big, red into light grey into grey */
+.caps__title {
+  font-size: clamp(44px, 5.2vw, 76px);
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  line-height: 1;
+  display: flex;
+  gap: 0.28em;
+  flex-wrap: wrap;
+}
+
+.caps__t1 {
+  color: var(--accent);
+}
+
+.caps__t2 {
+  color: #c9c5bd;
+}
+
+.caps__t3 {
+  color: #6c727b;
+}
+
 /* cued by the hero's finale: the section rises to meet the handoff */
 .heroo-js ~ .caps .caps__head,
 .heroo-js ~ .caps .svc-rail,
