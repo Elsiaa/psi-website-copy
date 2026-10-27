@@ -3572,8 +3572,9 @@ section[id],
   top: 0;
   height: 100svh;
   display: flex;
-  align-items: center;
-  padding: 96px 0 40px;
+  flex-direction: column;
+  justify-content: center;
+  padding: 88px 0 20px;
   overflow: hidden;
 }
 
@@ -3598,7 +3599,13 @@ section[id],
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: clamp(10px, 2vh, 26px);
+  gap: clamp(8px, 1.6vh, 22px);
+  flex: 1 1 auto;
+  min-height: 0;
+}
+
+.heroo__copy {
+  flex: 0 0 auto;
 }
 
 .heroo__copy {
@@ -3699,14 +3706,19 @@ section[id],
 }
 
 .heroo__stagewrap {
-  width: min(980px, 100%);
+  flex: 1 1 auto;
+  min-height: 0;
+  width: 100%;
+  display: grid;
+  place-items: center;
 }
 
 .heroo__house {
   display: block;
+  position: absolute;
+  inset: 0;
   width: 100%;
-  height: auto;
-  max-height: calc(100svh - 320px);
+  height: 100%;
   object-fit: contain;
   transition: transform 0.9s cubic-bezier(0.22, 0.9, 0.24, 1);
   will-change: transform;
@@ -3718,7 +3730,6 @@ section[id],
   position: absolute;
   inset: 0;
   z-index: 3;
-  height: 100%;
   transition: none;
   pointer-events: none;
 }
@@ -3727,7 +3738,6 @@ section[id],
   position: absolute;
   inset: 0;
   z-index: 2;
-  height: 100%;
   opacity: 0;
   transition: none;
   pointer-events: none;
@@ -3740,12 +3750,13 @@ section[id],
   }
 }
 
-.heroo__stagewrap {
-  overflow: hidden;
+.heroo__fit {
+  position: relative;
   /* one radius source for everything nested inside the stage */
   --stage-r: 18px;
   --stage-pad: 16px;
   border-radius: var(--stage-r);
+  overflow: hidden;
   /* the renders crop their site plot at the frame; feathering the
      stage edges melts that crop into the page instead of cutting */
   mask-image:
@@ -3768,6 +3779,20 @@ section[id],
     ),
     linear-gradient(to bottom, #000 0, #000 calc(100% - 34px), transparent 100%);
   -webkit-mask-composite: source-in;
+  /* sized by whichever dimension binds, always a true 16:9 frame */
+  width: min(980px, 100%);
+  aspect-ratio: 16 / 9;
+  max-height: 100%;
+}
+
+@supports (height: 100cqh) {
+  .heroo__stagewrap {
+    container-type: size;
+  }
+  .heroo__fit {
+    width: auto;
+    height: min(100cqh, 100cqw * 9 / 16, 551px);
+  }
 }
 
 /* tap any room: the chosen pin stays lit while the rest step back */
@@ -3860,9 +3885,6 @@ section[id],
 }
 
 @media (max-width: 900px) {
-  .heroo__house {
-    max-height: calc(100svh - 360px);
-  }
   .hero--open {
     padding-top: 84px;
   }
