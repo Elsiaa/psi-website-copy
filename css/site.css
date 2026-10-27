@@ -1386,11 +1386,15 @@ body.viewer-lock {
 }
 
 .caps__head {
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  gap: 28px;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+  grid-template-areas:
+    "title house"
+    "cta   house";
+  align-content: center;
+  justify-items: start;
+  gap: 20px clamp(24px, 3vw, 52px);
+  margin-bottom: clamp(18px, 3vh, 34px);
 }
 
 .caps__head .section__title {
@@ -3982,31 +3986,51 @@ section[id],
 }
 
 .caps__head .caps__title {
-  grid-column: 1;
+  grid-area: title;
+  margin: 0;
 }
 
 .caps__head .caps__cta {
-  grid-column: 1;
-  justify-self: start;
+  grid-area: cta;
+  align-self: start;
 }
 
 .caps__house {
-  grid-column: 2;
-  grid-row: 1 / span 2;
+  grid-area: house;
+  align-self: center;
+  justify-self: center;
   width: 100%;
   height: auto;
-  max-height: 32vh;
+  max-height: 38vh;
   object-fit: contain;
 }
 
 @media (max-width: 900px) {
   .caps__head {
     grid-template-columns: 1fr;
+    grid-template-areas:
+      "title"
+      "house"
+      "cta";
+    justify-items: stretch;
+    gap: 10px;
+    text-align: center;
+  }
+
+  .caps__head .caps__title {
+    justify-content: center;
+  }
+
+  /* on a phone the link becomes the section's button */
+  .caps__head .caps__cta {
+    justify-self: center;
+    padding: 13px 26px;
+    border-radius: 999px;
+    background: var(--accent);
+    color: #fff;
   }
   .caps__house {
-    grid-column: 1;
-    grid-row: auto;
-    max-height: 21vh;
+    max-height: 26vh;
   }
   .caps__title {
     font-size: clamp(42px, 12vw, 64px);
