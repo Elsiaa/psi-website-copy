@@ -3945,15 +3945,7 @@ section[id],
 /* cued by the hero's finale: the section rises to meet the handoff */
 .heroo-js ~ .caps .caps__head,
 .heroo-js ~ .caps .svc-rail,
-.heroo-js ~ .caps .svc-progress {
-  opacity: 0;
-  transform: translateY(26px);
-  transition:
-    opacity 0.6s ease,
-    transform 0.7s cubic-bezier(0.2, 0.8, 0.2, 1);
-}
-
-.heroo-js ~ .caps.caps--in .caps__head,
+.heroo-js ~ .caps .heroo-js ~ .caps.caps--in .caps__head,
 .heroo-js ~ .caps.caps--in .svc-rail,
 .heroo-js ~ .caps.caps--in .svc-progress {
   opacity: 1;
@@ -4018,9 +4010,6 @@ section[id],
   .caps__title {
     font-size: clamp(30px, 8vw, 42px);
   }
-  .svc {
-    flex-basis: min(250px, 74vw);
-  }
   .svc__desc {
     display: -webkit-box;
     -webkit-line-clamp: 2;
@@ -4044,12 +4033,10 @@ section[id],
 .svc-rail {
   list-style: none;
   margin: 0;
-  padding: 4px 4px 18px;
-  display: flex;
-  gap: 18px;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  scrollbar-width: none;
+  padding: 4px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(280px, 100%), 1fr));
+  gap: clamp(12px, 1.6vw, 20px);
 }
 
 .svc-rail::-webkit-scrollbar {
@@ -4059,8 +4046,6 @@ section[id],
 .svc {
   --card-r: 18px;
   --card-pad: 12px;
-  flex: 0 0 min(280px, 78vw);
-  scroll-snap-align: start;
   background: #fff;
   border: 1px solid var(--hairline);
   border-radius: var(--card-r);
@@ -4174,15 +4159,6 @@ section[id],
   border-radius: 999px;
   position: relative;
   overflow: hidden;
-}
-
-.svc-progress__bar {
-  position: absolute;
-  inset: 0 auto 0 0;
-  width: 18%;
-  background: var(--accent);
-  border-radius: 999px;
-  transition: transform 0.1s linear;
 }
 
 /* ---------------- reviews: one voice at a time ----------------
