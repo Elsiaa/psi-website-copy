@@ -1,1 +1,0 @@
-window.HERO_FRAME_COUNT = 193;
