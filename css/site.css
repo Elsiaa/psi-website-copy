@@ -201,15 +201,28 @@ img {
   text-underline-offset: 4px;
 }
 
-.nav__cta {
-  border: 1px solid currentColor;
-  padding: 8px 14px !important;
-  border-radius: 2px;
-}
+/* the bar's quote button follows the same rule as every other
+   button on the site: a red pill, white letters */
+.nav__cta,
 .nav--solid .nav__cta {
-  background: var(--navy);
+  border: 0;
+  padding: 11px 22px !important;
+  border-radius: 999px;
+  background: var(--accent);
   color: #fff !important;
-  border-color: var(--navy);
+  letter-spacing: 0.08em;
+  transition: background 0.2s ease;
+}
+
+.nav__cta:hover,
+.nav--solid .nav__cta:hover {
+  background: #b30000;
+  color: #fff !important;
+}
+
+/* it is a button, so it takes no link underline */
+.nav__links a.nav__cta::after {
+  display: none;
 }
 
 /* ---------------- Hero (existing implementation) ---------------- */
@@ -4187,6 +4200,10 @@ section[id],
 
 .svc__face--back {
   transform: rotateY(180deg);
+  /* the detail scrolls inside the card rather than being cut off */
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(16, 18, 20, 0.22) transparent;
   padding: 24px 22px 22px;
   background:
     radial-gradient(
@@ -4291,7 +4308,7 @@ section[id],
 
 .svc__list {
   list-style: none;
-  margin: 0 0 18px;
+  margin: 0 0 14px;
   padding: 0;
   display: grid;
   gap: 9px;
@@ -4317,7 +4334,18 @@ section[id],
   background: var(--accent);
 }
 
+.svc__face--back::-webkit-scrollbar {
+  width: 6px;
+}
+
+.svc__face--back::-webkit-scrollbar-thumb {
+  background: rgba(16, 18, 20, 0.2);
+  border-radius: 999px;
+}
+
 .svc__btn {
+  position: sticky;
+  bottom: 0;
   margin-top: auto;
   display: inline-flex;
   align-items: center;
@@ -4753,15 +4781,21 @@ section[id],
 
   .svc__desc {
     font-size: 13px;
-    line-height: 1.45;
+    line-height: 1.4;
+    margin-bottom: 8px;
     display: -webkit-box;
-    -webkit-line-clamp: 3;
+    -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
   }
 
   .svc__more {
     font-size: 11px;
+    margin-top: auto;
+  }
+
+  .svc__face--front {
+    padding-bottom: 14px;
   }
 
   /* the back stays legible at the smaller size */
