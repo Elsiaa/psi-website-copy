@@ -120,54 +120,34 @@
   let scope = null; // the job the lightbox is walking, or null for all
 
   if (host) {
+    host.className = "wgrid";
     jobs.forEach(({ p }) => {
       const shots = p.gallery;
-      const card = document.createElement("section");
-      card.className = "wjob";
-      card.id = "job-" + p.id;
-
-      const head = document.createElement("button");
-      head.type = "button";
-      head.className = "wjob__head";
-      head.setAttribute("aria-expanded", "false");
-      head.innerHTML =
+      const tile = document.createElement("button");
+      tile.type = "button";
+      tile.className = "wjob";
+      tile.id = "job-" + p.id;
+      tile.innerHTML =
+        `<span class="wjob__media">` +
         `<img class="wjob__cover" src="${shots[0].src}" alt="" loading="lazy" decoding="async">` +
-        `<span class="wjob__text">` +
-        `<span class="wjob__name">${p.type || "Previous project"}</span>` +
-        `<span class="wjob__meta">${p.city} &middot; ${shots.length} photograph${shots.length === 1 ? "" : "s"}</span>` +
-        (p.desc ? `<span class="wjob__desc">${p.desc}</span>` : "") +
+        `<span class="wjob__count">${shots.length}</span>` +
         `</span>` +
-        `<span class="wjob__chev" aria-hidden="true"></span>`;
-      card.appendChild(head);
+        `<span class="wjob__body">` +
+        `<span class="wjob__name">${p.type || "Previous project"}</span>` +
+        `<span class="wjob__meta">${p.city}</span>` +
+        `</span>`;
+      host.appendChild(tile);
 
-      const grid = document.createElement("div");
-      grid.className = "wjob__grid";
-      grid.hidden = true;
-      shots.forEach((g) => {
-        const b = document.createElement("button");
-        b.type = "button";
-        b.className = "wshot";
-        b.dataset.job = p.id;
-        b.dataset.src = g.src;
-        b.dataset.cap = g.cap || p.type || "";
-        b.innerHTML = `<img src="${g.src}" alt="${(g.cap || p.type || "PSI project").replace(/"/g, "&quot;")}" loading="lazy" decoding="async">`;
-        grid.appendChild(b);
-      });
-      card.appendChild(grid);
-      host.appendChild(card);
-
-      head.addEventListener("click", () => {
-        const open = grid.hidden;
-        grid.hidden = !open;
-        head.setAttribute("aria-expanded", String(open));
-        card.classList.toggle("is-open", open);
-      });
+      const set = shots.map((g) => ({
+        src: g.src,
+        cap: g.cap || p.type || "",
+      }));
+      tile.addEventListener("click", () => openSet(set, 0));
 
       cards.push({
         p,
-        card,
-        grid,
-        head,
+        card: tile,
+        set,
         hay: [p.type, p.city, p.desc, ...shots.map((g) => g.cap || "")]
           .join(" ")
           .toLowerCase(),
@@ -178,8 +158,8 @@
   function openJob(id) {
     const c = cards.find((x) => x.p.id === id);
     if (!c) return;
-    if (c.grid.hidden) c.head.click();
-    c.card.scrollIntoView({ behavior: "smooth", block: "start" });
+    c.card.scrollIntoView({ behavior: "smooth", block: "center" });
+    openSet(c.set, 0);
   }
 
   function filter() {
@@ -210,15 +190,9 @@
     bImg.alt = s.cap;
     bCap.textContent = s.cap + "  \u00B7  " + (at + 1) + " / " + flat.length;
   }
-  function openFrom(btn) {
-    const c = cards.find((x) => x.p.id === btn.dataset.job);
-    if (!c) return;
-    flat = [...c.grid.children].map((b) => ({
-      src: b.dataset.src,
-      cap: b.dataset.cap,
-    }));
-    at = [...c.grid.children].indexOf(btn);
-    scope = c.p.id;
+  function openSet(set, k) {
+    flat = set;
+    at = k;
     paint();
     box.hidden = false;
     document.body.style.overflow = "hidden";
@@ -233,10 +207,6 @@
     paint();
   };
   if (host && box) {
-    host.addEventListener("click", (e) => {
-      const b = e.target.closest(".wshot");
-      if (b) openFrom(b);
-    });
     box.querySelector(".wlb__close").addEventListener("click", close);
     box
       .querySelector(".wlb__nav--prev")

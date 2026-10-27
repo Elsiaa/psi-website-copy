@@ -3981,8 +3981,10 @@ section[id],
 .caps__head {
   display: grid;
   grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+  grid-template-rows: auto auto;
+  align-content: center;
   align-items: center;
-  gap: 6px 36px;
+  gap: 14px 36px;
   margin-bottom: clamp(14px, 2vh, 24px);
 }
 
@@ -4801,61 +4803,89 @@ section[id],
   color: var(--muted);
 }
 
-/* one card per job */
+/* the gallery: a grid of jobs */
+.wgrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(260px, 100%), 1fr));
+  gap: clamp(12px, 1.6vw, 20px);
+}
+
 .wjob {
+  display: flex;
+  flex-direction: column;
+  padding: 0;
   border: 1px solid var(--hairline);
   border-radius: 16px;
   background: #fff;
   overflow: hidden;
-  margin-bottom: 14px;
-  transition: border-color 0.2s ease;
+  text-align: left;
+  font: inherit;
+  cursor: pointer;
+  transition:
+    transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1),
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
 }
 
-.wjob:hover {
-  border-color: rgba(214, 0, 0, 0.3);
-}
-
-.wjob.is-open {
-  border-color: var(--accent);
+.wjob:hover,
+.wjob:focus-visible {
+  transform: translateY(-4px);
+  border-color: rgba(214, 0, 0, 0.35);
+  box-shadow: 0 24px 48px -30px rgba(16, 18, 20, 0.3);
 }
 
 .wjob[hidden] {
   display: none;
 }
 
-.wjob__head {
-  display: grid;
-  grid-template-columns: 112px minmax(0, 1fr) 36px;
-  align-items: center;
-  gap: 18px;
+.wjob__media {
+  position: relative;
+  display: block;
   width: 100%;
-  padding: 12px 18px 12px 12px;
-  border: 0;
-  background: none;
-  text-align: left;
-  font: inherit;
-  cursor: pointer;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background: #eceae6;
 }
 
 .wjob__cover {
-  width: 112px;
-  height: 84px;
+  width: 100%;
+  height: 100%;
   object-fit: cover;
-  border-radius: 10px;
+  transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
-.wjob__text {
+.wjob:hover .wjob__cover {
+  transform: scale(1.05);
+}
+
+.wjob__count {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  min-width: 30px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.94);
+  text-align: center;
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--accent);
+}
+
+.wjob__body {
   display: flex;
   flex-direction: column;
   gap: 3px;
-  min-width: 0;
+  padding: 13px 16px 16px;
 }
 
 .wjob__name {
   font-family: var(--font-display);
-  font-size: clamp(17px, 1.6vw, 21px);
+  font-size: 17px;
   font-weight: 800;
   letter-spacing: -0.01em;
+  line-height: 1.2;
   color: var(--ink);
 }
 
@@ -4865,82 +4895,6 @@ section[id],
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--accent);
-}
-
-.wjob__desc {
-  font-size: 14px;
-  font-weight: 500;
-  line-height: 1.5;
-  color: #3c4148;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-
-.wjob__chev {
-  justify-self: end;
-  width: 11px;
-  height: 11px;
-  border-right: 2px solid var(--muted);
-  border-bottom: 2px solid var(--muted);
-  transform: rotate(45deg) translate(-2px, -2px);
-  transition:
-    transform 0.25s ease,
-    border-color 0.2s ease;
-}
-
-.wjob.is-open .wjob__chev {
-  border-color: var(--accent);
-  transform: rotate(-135deg) translate(-3px, -3px);
-}
-
-.wjob__grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(min(180px, 100%), 1fr));
-  gap: 8px;
-  padding: 0 12px 14px;
-}
-
-.wjob__grid[hidden] {
-  display: none;
-}
-
-@media (max-width: 620px) {
-  .wjob__head {
-    grid-template-columns: 76px minmax(0, 1fr) 24px;
-    gap: 12px;
-  }
-  .wjob__cover {
-    width: 76px;
-    height: 64px;
-  }
-  .wjob__desc {
-    display: none;
-  }
-}
-
-.wshot {
-  position: relative;
-  display: block;
-  padding: 0;
-  border: 0;
-  border-radius: 10px;
-  overflow: hidden;
-  background: #eceae6;
-  aspect-ratio: 4 / 3;
-  cursor: zoom-in;
-}
-
-.wshot img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.3s ease;
-}
-
-.wshot:hover img {
-  transform: scale(1.05);
 }
 
 /* lightbox */
