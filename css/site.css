@@ -1169,6 +1169,10 @@ body.viewer-lock {
   position: relative;
 }
 
+.quote__progress-label {
+  padding-right: 88px;
+}
+
 .quote__restart {
   position: absolute;
   right: 0;
@@ -4863,30 +4867,62 @@ section[id],
 
 /* on a phone the services run as a swipeable row, not a tall stack */
 @media (max-width: 760px) {
-  /* the head and the row still compose to a single screen: the house
-     costs no height here, because it sits behind the headline */
+  /* What We Build is its own screen on a phone: a light-charcoal panel
+     bleeding to both edges, no drawing behind the headline, the tools
+     and the white cards carrying the colour. Sized to land head and
+     row inside one screen with the nav in the way. */
   .caps__house {
-    width: min(136%, 480px);
-    opacity: 0.15;
+    display: none;
   }
 
   .caps > .section__inner {
-    padding-top: 72px;
-    padding-bottom: 16px;
+    width: 100vw;
+    margin-left: 50%;
+    transform: translateX(-50%);
+    padding: 58px clamp(16px, 6.25vw, 24px) 14px;
+    border-top: 0;
+    background: #2f343a;
+    color: #fff;
   }
 
   .caps__head {
-    gap: 10px;
-    margin-bottom: 10px;
-    padding: 14px 0 12px;
+    gap: 8px;
+    margin-bottom: 8px;
+    padding: 6px 0 8px;
   }
 
   .caps__title {
-    font-size: clamp(38px, 11vw, 54px);
+    font-size: clamp(36px, 10.4vw, 48px);
+  }
+
+  /* red stays red; the greys lift so they read on charcoal */
+  .caps__title .caps__t2 {
+    color: rgba(255, 255, 255, 0.5);
+  }
+
+  .caps__title .caps__t3 {
+    color: #fff;
+  }
+
+  .caps__tools {
+    height: 96px;
+    margin-top: -4px;
+  }
+
+  .caps__tools img:nth-child(1) {
+    height: 54px;
+  }
+
+  .caps__tools img:nth-child(2) {
+    height: 88px;
+  }
+
+  .caps__tools img:nth-child(3) {
+    height: 40px;
   }
 
   .svc {
-    min-height: min(56svh, 410px);
+    min-height: min(50svh, 380px);
   }
 
   .svc__art {

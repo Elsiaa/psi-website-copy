@@ -8,6 +8,7 @@ window.PSI_QUOTE = {
   gateway: {
     q: "What kind of project are you considering?",
     options: [
+      { label: "Full new home (ground-up build)", flow: "newhome" },
       { label: "Home addition (adding new square footage)", flow: "addition" },
       { label: "Bathroom renovation", flow: "bathroom" },
       { label: "Kitchen renovation", flow: "kitchen" },
@@ -27,8 +28,9 @@ window.PSI_QUOTE = {
     groups: [
       {
         label: "Build something new",
-        hint: "An addition, a garage, a structure that is not there yet",
+        hint: "A new house, an addition, a garage",
         options: [
+          "Full new home (ground-up build)",
           "Home addition (adding new square footage)",
           "Garage or detached structure",
         ],
@@ -66,6 +68,114 @@ window.PSI_QUOTE = {
   },
 
   flows: {
+    newhome: {
+      title: "New Home",
+      questions: [
+        {
+          q: "Where are you in the process?",
+          opts: [
+            "I own the land, no plans yet",
+            "I own the land and have plans",
+            "Still looking for land",
+            "Tearing down an existing house to rebuild",
+            "Not sure yet",
+          ],
+        },
+        {
+          q: "Do you have architectural plans?",
+          opts: [
+            "Finished plans, ready to permit",
+            "Rough drawings or a plan I like",
+            "No plans, I need design help",
+          ],
+        },
+        {
+          q: "Approximate finished size?",
+          opts: [
+            "Under 1,500 sqft",
+            "1,500–2,500 sqft",
+            "2,500–3,500 sqft",
+            "3,500+ sqft",
+            "I need help figuring this out",
+          ],
+        },
+        {
+          q: "How many stories?",
+          opts: [
+            "Single story",
+            "Two stories",
+            "Two stories with a finished basement",
+            "Not sure yet",
+          ],
+        },
+        {
+          q: "How many bedrooms?",
+          opts: ["2", "3", "4", "5 or more"],
+        },
+        {
+          q: "How many bathrooms?",
+          opts: ["1.5", "2", "2.5–3", "3.5 or more"],
+        },
+        {
+          q: "Foundation type?",
+          opts: [
+            "Slab on grade",
+            "Crawl space",
+            "Full basement, unfinished",
+            "Full basement, finished",
+            "Not sure, need recommendation",
+          ],
+        },
+        {
+          q: "Garage?",
+          opts: [
+            "No garage",
+            "Attached, 1 car",
+            "Attached, 2 car",
+            "Attached, 3 car",
+            "Detached",
+          ],
+        },
+        {
+          q: "Exterior finish?",
+          opts: [
+            "Vinyl siding",
+            "Fiber cement siding",
+            "Siding with brick or stone accents",
+            "Full brick or stone",
+            "Not sure yet",
+          ],
+        },
+        {
+          q: "What does the site need?",
+          opts: [
+            "Cleared and level, utilities at the street",
+            "Needs clearing or grading",
+            "Needs a well and septic",
+            "Needs utilities brought in",
+            "Not sure",
+          ],
+        },
+        {
+          q: "Finish level you have in mind?",
+          opts: [
+            "Builder grade",
+            "Mid-range",
+            "High-end custom",
+            "A mix, depending on the room",
+          ],
+        },
+        {
+          q: "When would you like to break ground?",
+          opts: [
+            "As soon as possible",
+            "In 3–6 months",
+            "In 6–12 months",
+            "Just planning for now",
+          ],
+        },
+      ],
+    },
     addition: {
       title: "Home Addition",
       questions: [

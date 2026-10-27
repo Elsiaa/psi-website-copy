@@ -23,6 +23,7 @@
     answers: [], // [{q, a}]
     keyed: {}, // answers by question id (for skip logic)
     intake: {},
+    intakeStep: 0,
   };
 
   function activeQuestions() {
@@ -67,6 +68,7 @@
           answers: state.answers,
           keyed: state.keyed,
           intake: state.intake,
+          intakeStep: state.intakeStep,
         }),
       );
     } catch (e) {
@@ -90,6 +92,7 @@
         answers: Array.isArray(d.answers) ? d.answers : [],
         keyed: d.keyed || {},
         intake: d.intake || {},
+        intakeStep: d.intakeStep || 0,
       });
       return true;
     } catch (e) {
@@ -106,6 +109,7 @@
       answers: [],
       keyed: {},
       intake: {},
+      intakeStep: 0,
     });
     render();
   }
@@ -125,6 +129,7 @@
       answers: [{ q: DATA.gateway.q, a: label }],
       keyed: {},
       intake: state.intake || {},
+      intakeStep: 0,
     });
     render();
   }
@@ -196,6 +201,7 @@
         // "Multiple of the above" / "Not sure yet" — straight to intake
         state.flowKey = null;
         state.stage = "intake";
+        state.intakeStep = 0;
       }
       render();
     };
@@ -243,6 +249,7 @@
     const qs = activeQuestions();
     if (state.qIndex >= qs.length) {
       state.stage = "intake";
+      state.intakeStep = 0;
       return render();
     }
     const q = qs[state.qIndex];
@@ -285,21 +292,51 @@
   }
 
   // ---------------- Universal intake block ----------------
+  // The contact details come in four short steps -- one thing to do
+  // per screen -- instead of nine fields on one scroll. Any field the
+  // data adds later that no step names lands on the last one.
+  const INTAKE_STEPS = [
+    { title: "Who should we ask for?", keys: ["name"] },
+    {
+      title: "How do we reach you?",
+      keys: ["phone", "email", "contactMethod", "bestTime"],
+    },
+    { title: "Where is the project?", keys: ["address"] },
+    { title: "Anything else?", keys: [] },
+  ];
+  function intakeSteps() {
+    const named = new Set(INTAKE_STEPS.flatMap((st) => st.keys));
+    const rest = DATA.intake.map((f) => f.key).filter((k) => !named.has(k));
+    return INTAKE_STEPS.map((st, i) =>
+      i === INTAKE_STEPS.length - 1
+        ? { ...st, keys: st.keys.concat(rest) }
+        : st,
+    ).filter((st) => st.keys.some((k) => DATA.intake.some((f) => f.key === k)));
+  }
+
   function renderIntake() {
+    const steps = intakeSteps();
+    state.intakeStep = Math.max(
+      0,
+      Math.min(steps.length - 1, state.intakeStep),
+    );
+    const step = steps[state.intakeStep];
+    const last = state.intakeStep === steps.length - 1;
     const total = totalSteps();
     root.appendChild(
       progressBlock(
         total,
         total,
-        state.flowKey
-          ? `Last step — Question ${total} of ${total}`
-          : "Last step — how do we reach you?",
+        `Last step ${state.intakeStep + 1} of ${steps.length}`,
       ),
     );
-    root.appendChild(el("h3", "quote__q", "Almost done — contact details"));
+    root.appendChild(el("h3", "quote__q", step.title));
 
     const form = el("form", "quote__form");
-    DATA.intake.forEach((f) => {
+    const fields = step.keys
+      .map((k) => DATA.intake.find((f) => f.key === k))
+      .filter(Boolean);
+    fields.forEach((f) => {
       const field = el("div", "quote__field");
       const label = el("label", null, f.label + (f.required ? " *" : ""));
       label.setAttribute("for", "qf_" + f.key);
@@ -340,7 +377,9 @@
     const controls = el("div", "quote__controls");
     controls.appendChild(
       backButton(() => {
-        if (state.flowKey) {
+        if (state.intakeStep > 0) {
+          state.intakeStep--;
+        } else if (state.flowKey) {
           state.stage = "flow";
           state.qIndex = Math.max(0, activeQuestions().length - 1);
           state.answers.pop();
@@ -351,14 +390,18 @@
         render();
       }),
     );
-    const submit = el("button", "btn btn--accent", "Review & send request");
-    submit.type = "submit";
-    controls.appendChild(submit);
+    const next = el(
+      "button",
+      "btn btn--accent",
+      last ? "Review & send request" : "Next",
+    );
+    next.type = "submit";
+    controls.appendChild(next);
     form.appendChild(controls);
 
     form.addEventListener("submit", (e) => {
       e.preventDefault();
-      DATA.intake.forEach((f) => {
+      fields.forEach((f) => {
         const input = document.getElementById("qf_" + f.key);
         if (!input) return;
         if (f.type === "file") {
@@ -369,39 +412,18 @@
           state.intake[f.key] = input.value.trim();
         }
       });
-      state.stage = "done";
+      if (last) {
+        state.stage = "done";
+      } else {
+        state.intakeStep++;
+      }
       render();
     });
 
     root.appendChild(form);
-  }
-
-  // ---------------- Summary + send ----------------
-  function buildSummary() {
-    const flow = state.flowKey ? DATA.flows[state.flowKey] : null;
-    const lines = [];
-    lines.push("PSI CONSTRUCTION — QUOTE REQUEST");
-    lines.push("Project type: " + (flow ? flow.title : state.gatewayChoice));
-    lines.push("");
-    lines.push("— Project details —");
-    state.answers.forEach((a) => lines.push(a.q + "\n  → " + a.a));
-    lines.push("");
-    lines.push("— Contact —");
-    const labels = {
-      name: "Full name",
-      email: "Email",
-      phone: "Phone",
-      contactMethod: "Preferred contact",
-      address: "Project address",
-      bestTime: "Best time to reach",
-      heard: "How they heard about PSI",
-      notes: "Notes",
-      photos: "Photos to attach",
-    };
-    Object.keys(labels).forEach((k) => {
-      if (state.intake[k]) lines.push(labels[k] + ": " + state.intake[k]);
-    });
-    return lines.join("\n");
+    // the first field is the thing to do on this screen
+    const first = form.querySelector("input, select, textarea");
+    if (first && first.type !== "file") first.focus({ preventScroll: true });
   }
 
   function renderDone() {
@@ -432,6 +454,7 @@
     controls.appendChild(
       backButton(() => {
         state.stage = "intake";
+        state.intakeStep = intakeSteps().length - 1;
         render();
       }),
     );
