@@ -12,7 +12,9 @@
   if (!hero) return;
   const copy = hero.querySelector(".heroo__copy");
   const stage = hero.querySelector(".heroo__stagewrap");
-  const house = hero.querySelector(".heroo__house:not(.heroo__house--closed)");
+  const house = hero.querySelector(
+    ".heroo__house:not(.heroo__house--closed):not(.heroo__house--exploded)",
+  );
   const cap = document.getElementById("herooCap");
   const pins = [...hero.querySelectorAll(".heroo__pin")];
   const reduce = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -53,35 +55,56 @@
 
   if (reduce.matches) return; // everything stays visible and still
 
-  // ---- scroll: the house opens, then hands off ----
+  // ---- scroll: close, open, disassemble, reassemble, hand off ----
   const closed = hero.querySelector(".heroo__house--closed");
+  const exploded = hero.querySelector(".heroo__house--exploded");
+  const seg = (p, a, b) => smooth(clamp01((p - a) / (b - a)));
   function paint() {
     const r = hero.getBoundingClientRect();
     const span = r.height - vpH();
     const p = span > 0 ? clamp01(-r.top / span) : 0;
 
-    // phase one: scrolling dissolves the facade into the open house
-    const openAmt = smooth(clamp01(p / 0.5));
+    // 1) the facade dissolves: the house opens
+    const open = seg(p, 0, 0.26);
     if (closed) {
-      closed.style.opacity = (1 - openAmt).toFixed(3);
-      closed.style.transform = "scale(" + (1 + 0.07 * openAmt).toFixed(4) + ")";
+      closed.style.opacity = (1 - open).toFixed(3);
+      closed.style.transform = "scale(" + (1 + 0.06 * open).toFixed(4) + ")";
     }
 
-    // the room pins arrive once the house is open, one after another
+    // 2) the room pins arrive one by one
     pins.forEach((pin, k) => {
-      const vis = zoomed ? pin === zoomed : p >= 0.5 + k * 0.07;
+      const vis = zoomed ? pin === zoomed : p >= 0.26 + k * 0.035 && p < 0.44;
       pin.style.opacity = zoomed ? "" : vis ? 1 : 0;
       pin.style.pointerEvents = vis || zoomed ? "" : "none";
     });
 
-    // phase two: the finished house hands off to the next section
-    const hand = smooth(clamp01((p - 0.62) / 0.38));
-    if (hand > 0.3 && zoomed) setZoom(null);
-    copy.style.opacity = Math.max(0, 1 - hand * 1.9).toFixed(3);
+    // 3) the house disassembles into floating floors, holds, and
+    //    4) reassembles on the way out
+    const apart = seg(p, 0.46, 0.64) * (1 - seg(p, 0.78, 0.92));
+    if (exploded && !zoomed) {
+      exploded.style.opacity = apart.toFixed(3);
+      exploded.style.transform =
+        "scale(" + (0.965 + 0.035 * apart).toFixed(4) + ")";
+      house.style.opacity = (1 - apart * 0.96).toFixed(3);
+    } else if (exploded) {
+      exploded.style.opacity = 0;
+      house.style.opacity = 1;
+    }
+
+    // 5) the reassembled house hands off to What We Build
+    const hand = seg(p, 0.86, 1);
+    if (hand > 0.2 && zoomed) setZoom(null);
+    copy.style.opacity = Math.max(
+      0,
+      1 - Math.max(seg(p, 0.42, 0.6) * 0.65, hand) * 1.6,
+    ).toFixed(3);
     copy.style.transform = "translateY(" + (-hand * 48).toFixed(1) + "px)";
+    // while the copy is away for the disassembly, the model drifts
+    // up to hold the centre of the screen
+    const lift = seg(p, 0.42, 0.6) * (1 - hand) * 7;
     stage.style.transform =
       "translateY(" +
-      (hand * 10).toFixed(2) +
+      (hand * 10 - lift).toFixed(2) +
       "svh) scale(" +
       (1 - 0.2 * hand).toFixed(4) +
       ")";

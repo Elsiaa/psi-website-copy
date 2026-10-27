@@ -3563,7 +3563,7 @@ section[id],
 .hero--open {
   /* a short runway: the sticky stage hands the house off to the
      next section as you scroll */
-  height: 250svh;
+  height: 330svh;
   background: var(--paper);
 }
 
@@ -3695,11 +3695,21 @@ section[id],
   will-change: transform;
 }
 
-/* the facade: stacked over the open house, dissolved by scroll */
+/* the stacked states: facade on top, exploded beneath it, both
+   driven by scroll */
 .heroo__house--closed {
   position: absolute;
   inset: 0;
+  z-index: 3;
+  transition: none;
+  pointer-events: none;
+}
+
+.heroo__house--exploded {
+  position: absolute;
+  inset: 0;
   z-index: 2;
+  opacity: 0;
   transition: none;
   pointer-events: none;
 }
