@@ -3553,11 +3553,31 @@ section[id],
 /* ---------------- hero: the open house ---------------- */
 
 .hero--open {
-  min-height: 100svh;
+  /* a short runway: the sticky stage hands the house off to the
+     next section as you scroll */
+  height: 185svh;
+  background: var(--paper);
+}
+
+.heroo__sticky {
+  position: sticky;
+  top: 0;
+  height: 100svh;
   display: flex;
   align-items: center;
-  background: var(--paper);
   padding: 96px 0 40px;
+  overflow: hidden;
+}
+
+.heroo__copy,
+.heroo__stagewrap {
+  will-change: transform, opacity;
+}
+
+/* the next section rises over the parked house */
+.caps {
+  position: relative;
+  z-index: 2;
 }
 
 .heroo__inner {
