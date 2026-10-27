@@ -21,6 +21,48 @@ window.PSI_QUOTE = {
       { label: "Multiple of the above", flow: null },
       { label: "Not sure yet, I want to explore", flow: null },
     ],
+    // The same twelve answers, asked in two steps: a category first,
+    // then the specific job inside it. A category with one job goes
+    // straight to it; "Not sure yet" goes straight to the intake.
+    groups: [
+      {
+        label: "Build something new",
+        hint: "An addition, a garage, a structure that is not there yet",
+        options: [
+          "Home addition (adding new square footage)",
+          "Garage or detached structure",
+        ],
+      },
+      {
+        label: "Renovate inside",
+        hint: "Kitchens, bathrooms, basements, the whole house",
+        options: [
+          "Kitchen renovation",
+          "Bathroom renovation",
+          "Basement finishing",
+          "Whole-house remodel",
+        ],
+      },
+      {
+        label: "Exterior and outdoors",
+        hint: "Decks, roofing, siding",
+        options: [
+          "Deck, porch, or outdoor living",
+          "Roofing",
+          "Siding / exterior",
+        ],
+      },
+      {
+        label: "Commercial",
+        hint: "Storefronts, offices, rental and mixed-use buildouts",
+        options: ["Commercial buildout"],
+      },
+      {
+        label: "Not sure yet",
+        hint: "Several of these, or still exploring: we will talk it through",
+        options: ["Multiple of the above", "Not sure yet, I want to explore"],
+      },
+    ],
   },
 
   flows: {

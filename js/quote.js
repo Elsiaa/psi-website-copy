@@ -18,6 +18,7 @@
     stage: "gateway", // gateway | flow | intake | done
     flowKey: null,
     gatewayChoice: null,
+    group: null, // the category chosen on the first gateway step
     qIndex: 0,
     answers: [], // [{q, a}]
     keyed: {}, // answers by question id (for skip logic)
@@ -82,29 +83,60 @@
 
   // ---------------- Gateway (Q0) ----------------
   function renderGateway() {
-    root.appendChild(progressBlock(0, 1, "Let's scope your project"));
-    root.appendChild(el("h3", "quote__q", DATA.gateway.q));
-    root.appendChild(
-      optionButtons(
-        DATA.gateway.options.map((o) => o.label),
-        (label) => {
-          const opt = DATA.gateway.options.find((o) => o.label === label);
-          state.gatewayChoice = label;
-          state.answers = [{ q: DATA.gateway.q, a: label }];
-          state.keyed = {};
-          state.qIndex = 0;
-          if (opt && opt.flow) {
-            state.flowKey = opt.flow;
-            state.stage = "flow";
-          } else {
-            // "Multiple of the above" / "Not sure yet" — straight to intake
-            state.flowKey = null;
-            state.stage = "intake";
-          }
+    const groups = DATA.gateway.groups || [];
+    const pick = (label) => {
+      const opt = DATA.gateway.options.find((o) => o.label === label);
+      state.gatewayChoice = label;
+      state.answers = [{ q: DATA.gateway.q, a: label }];
+      state.keyed = {};
+      state.qIndex = 0;
+      if (opt && opt.flow) {
+        state.flowKey = opt.flow;
+        state.stage = "flow";
+      } else {
+        // "Multiple of the above" / "Not sure yet" — straight to intake
+        state.flowKey = null;
+        state.stage = "intake";
+      }
+      render();
+    };
+
+    // Step one: a category. Twelve answers at once was a wall; five
+    // doors is a choice. A category holding a single job opens it
+    // directly, and never becomes the "group" to come back to, so
+    // Back out of its first question lands on the categories again.
+    if (!state.group) {
+      root.appendChild(progressBlock(0, 1, "Let's scope your project"));
+      root.appendChild(el("h3", "quote__q", DATA.gateway.q));
+      const list = el("div", "quote__opts");
+      groups.forEach((g) => {
+        const b = el("button", "quote__opt quote__opt--group");
+        b.type = "button";
+        b.appendChild(el("span", "quote__opt-label", g.label));
+        if (g.hint) b.appendChild(el("span", "quote__opt-hint", g.hint));
+        b.addEventListener("click", () => {
+          if (g.options.length === 1) return pick(g.options[0]);
+          state.group = g;
           render();
-        },
-      ),
+        });
+        list.appendChild(b);
+      });
+      root.appendChild(list);
+      return;
+    }
+
+    // Step two: the specific job inside that category.
+    root.appendChild(progressBlock(0, 1, state.group.label));
+    root.appendChild(el("h3", "quote__q", "Which of these is closest?"));
+    root.appendChild(optionButtons(state.group.options, pick));
+    const controls = el("div", "quote__controls");
+    controls.appendChild(
+      backButton(() => {
+        state.group = null;
+        render();
+      }),
     );
+    root.appendChild(controls);
   }
 
   // ---------------- Flow questions ----------------

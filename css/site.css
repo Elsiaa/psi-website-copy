@@ -1139,6 +1139,31 @@ body.viewer-lock {
   font-weight: 700;
 }
 
+/* a category pill carries its name and, under it, a line saying what
+   lives inside — so the first step reads as five doors, not a wall */
+.quote__opt--group {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+  padding-top: 12px;
+  padding-bottom: 12px;
+}
+
+.quote__opt-label {
+  font-weight: 700;
+}
+
+.quote__opt-hint {
+  font-size: 13px;
+  line-height: 1.35;
+  color: var(--muted);
+}
+
+.quote__opt--group:hover .quote__opt-hint {
+  color: inherit;
+  opacity: 0.8;
+}
+
 .quote__controls {
   display: flex;
   justify-content: space-between;
@@ -1429,8 +1454,9 @@ body.viewer-lock {
    as the anchor; the rest sit on a strict three-up grid. */
 
 .caps {
-  /* page two sits a half-step off the hero's white */
-  background: #f4f5f7;
+  /* page two sits a step off the hero's white: enough grey that the
+     white cards and the red read as sitting on something */
+  background: #eceef1;
 }
 
 /* The figures belong to the company band above them, so they stand on
@@ -1438,7 +1464,7 @@ body.viewer-lock {
    email address and the 4.9, which split one block into two. The
    doubled class outranks the plain .proofbar rule further down. */
 .proofbar.proofbar--stats {
-  background: #f4f5f7;
+  background: #eceef1;
   border-bottom: 0;
 }
 
@@ -4444,26 +4470,47 @@ section[id],
     font-size: clamp(42px, 12vw, 64px);
   }
 
-  /* hammer, drill, saw under the headline: three equal cells with
-     each tool contained, so the long saw and the upright drill carry
-     the same visual weight */
+  /* the tools laid out like they were set down on the bench, not
+     three icons in a row: the drill upright and largest in the middle,
+     the hammer leaning in low from the left, the saw low on the right */
   .caps__tools {
     grid-area: tools;
     position: relative;
     z-index: 1;
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    align-items: center;
-    gap: 10px;
+    display: block;
+    height: 112px;
     width: min(100%, 340px);
-    margin: 0 auto;
+    margin: -8px auto 0;
   }
 
   .caps__tools img {
+    position: absolute;
     display: block;
-    width: 100%;
-    height: 66px;
-    object-fit: contain;
+    width: auto;
+    filter: drop-shadow(0 10px 14px rgba(16, 18, 20, 0.16));
+  }
+
+  /* the rotations swing the ends outward; inset the two edge tools so
+     nothing lands past the head's clipped edge */
+  .caps__tools img:nth-child(1) {
+    height: 62px;
+    left: 7px;
+    bottom: 8px;
+    transform: rotate(-12deg);
+  }
+
+  .caps__tools img:nth-child(2) {
+    height: 100px;
+    left: 50%;
+    top: 4px;
+    transform: translateX(-50%);
+  }
+
+  .caps__tools img:nth-child(3) {
+    height: 46px;
+    right: 4px;
+    bottom: 14px;
+    transform: rotate(8deg);
   }
   .svc__desc {
     display: -webkit-box;
