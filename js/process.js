@@ -15,20 +15,9 @@
   const frames = [...runway.querySelectorAll(".ps-frame")];
   const steps = [...runway.querySelectorAll(".ps-step")];
   const ticks = [...runway.querySelectorAll(".ps-tick-btn")];
-  const pct = document.getElementById("psPct");
-  const phase = document.getElementById("psPhase");
+  const count = document.getElementById("psCount");
   const N = frames.length;
   if (!N) return;
-
-  const PHASES = [
-    "Site · Ready",
-    "Site · Excavation",
-    "Structure · Foundation",
-    "Structure · Framing",
-    "Envelope · Dry-in",
-    "Finish · Landscape",
-    "Complete · Keys",
-  ];
 
   const vpH = () => document.documentElement.clientHeight;
   const reduce = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -46,11 +35,7 @@
     const active = t > 0.5 ? hi : lo;
     steps.forEach((s, k) => s.classList.toggle("is-on", k === active));
     ticks.forEach((b, k) => b.classList.toggle("is-on", k === active));
-    if (pct) {
-      const p = Math.max(1, Math.round((i / (N - 1)) * 100));
-      pct.textContent = p + "% complete";
-    }
-    if (phase) phase.textContent = PHASES[active] || "";
+    if (count) count.textContent = active + 1 + " / " + N;
   }
 
   if (reduce.matches) {
