@@ -2118,231 +2118,62 @@ section[id],
   min-width: 0;
 }
 
-.ps-scene {
-  display: block;
+/* The clay build: seven stage photographs stacked in one frame,
+   crossfaded by scroll. */
+.ps-build {
+  position: relative;
+  margin: 0;
   width: 100%;
-  height: auto;
-  max-height: 80vh;
-  overflow: visible;
+  aspect-ratio: 1344 / 752;
+  max-height: 76vh;
+  border-radius: 14px;
+  overflow: hidden;
+  background: #f3ede2;
+  box-shadow: 0 30px 70px -45px rgba(16, 18, 20, 0.55);
 }
 
-/* ground */
-.ps-plane {
-  fill: url(#psGround);
-}
-.ps-below {
-  fill: url(#psBelow);
-}
-.ps-ao {
-  fill: rgba(16, 18, 20, 0.09);
+.ps-frame {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
 }
 
-/* 01 plan — drawn, not printed */
-.ps-foot,
-.ps-elev {
-  fill: none;
-  stroke: rgba(214, 0, 0, 0.55);
-  stroke-width: 2;
-  stroke-linejoin: round;
-}
-.ps-elev {
-  stroke-dasharray: 5 7;
-}
-.stake line {
-  stroke: #8a8377;
-  stroke-width: 2.5;
-  stroke-linecap: round;
-}
-.stake__flag {
-  fill: var(--accent);
-}
-.ps-string {
-  fill: none;
-  stroke: rgba(16, 18, 20, 0.3);
-  stroke-width: 1;
-  stroke-dasharray: 3 5;
-}
-/* 02 earth */
-.ps-pit {
-  fill: url(#psEarth);
-  transform-box: view-box;
-  transform-origin: 500px 520px;
-}
-.ps-spoil {
-  fill: url(#psSoil);
-  transform-box: view-box;
-  transform-origin: 916px 520px;
-}
-.ps-track {
-  fill: none;
-  stroke: rgba(16, 18, 20, 0.16);
-  stroke-width: 3;
-  stroke-dasharray: 9 11;
-  stroke-linecap: round;
+/* before the engine runs (or without JS) the first stage shows */
+.ps-frame:first-child {
+  opacity: 1;
 }
 
-/* 03 concrete */
-.fdn__ftg {
-  fill: #b0aaa0;
-}
-.fdn__p {
-  fill: url(#psConc);
-  stroke: rgba(16, 18, 20, 0.13);
-  stroke-width: 1;
-}
-.fdn__slab {
-  fill: #d2cec6;
-}
-.ps-backfill {
-  fill: url(#psSoil);
-}
-
-/* 04 timber */
-.stud {
-  fill: url(#psTimber);
-}
-.fl1__rim,
-.fl2__rim,
-.fl3__rim {
-  fill: #cbb88c;
-}
-.fl1__j,
-.fl2__j,
-.fl3__j {
-  fill: #e0d2b2;
-}
-.ps-beam rect {
-  fill: #c4ae7e;
+.ps-meter {
+  position: absolute;
+  right: 14px;
+  bottom: 12px;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 1px;
+  padding: 8px 14px;
+  border-radius: 8px;
+  background: rgba(16, 18, 20, 0.62);
+  backdrop-filter: blur(4px);
+  color: #fff;
+  text-align: right;
 }
 
-/* 05 systems, deliberately quiet */
-.sys-pipe {
-  fill: none;
-  stroke: #9aa3ab;
-  stroke-width: 4;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-.sys-wire {
-  fill: none;
-  stroke: rgba(214, 0, 0, 0.5);
-  stroke-width: 2.5;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-.sys-duct {
-  fill: #b9bfc4;
-}
-.sys-node {
-  fill: rgba(214, 0, 0, 0.7);
+.ps-meter__label {
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.65);
 }
 
-/* 06 skin */
-.ps-batt {
-  fill: rgba(214, 0, 0, 0.1);
-}
-.ps-wall {
-  fill: url(#psWall);
-  stroke: rgba(16, 18, 20, 0.15);
-  stroke-width: 1;
-}
-.ps-reveal {
-  fill: rgba(255, 255, 255, 0.75);
-}
-.ps-cap rect {
-  fill: url(#psCap);
-  stroke: rgba(16, 18, 20, 0.14);
-  stroke-width: 1;
-}
-.hole {
-  fill: rgba(16, 18, 20, 0.5);
-}
-
-/* openings */
-.glass {
-  fill: url(#psGlass);
-}
-.frame {
-  fill: none;
-  stroke: #1b1f24;
-  stroke-width: 3.5;
-}
-.mull {
-  stroke: #1b1f24;
-  stroke-width: 2.5;
-}
-.door {
-  fill: #23282e;
-}
-.knob {
-  fill: #cbb88c;
-}
-
-/* 07 handover */
-.ps-walk {
-  fill: #ddd8cd;
-}
-.shrub {
-  fill: url(#psLeaf);
-}
-.ps-trunk {
-  stroke: #8a7b64;
-  stroke-width: 6;
-  stroke-linecap: round;
-  fill: none;
-}
-.ps-crown {
-  fill: url(#psLeaf);
-}
-.ps-lamp circle {
-  fill: #f3d9a4;
-}
-.ps-glow {
-  fill: rgba(245, 200, 120, 0.28);
-}
-.ps-stamp circle {
-  fill: none;
-  stroke: rgba(214, 0, 0, 0.7);
-  stroke-width: 2;
-}
-.ps-check {
-  fill: none;
-  stroke: var(--accent);
-  stroke-width: 2.6;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-
-/* everything the engine moves pivots from its own box */
-.stud,
-.stake,
-.op,
-.fdn__p,
-.shrub,
-.ps-cap,
-.ps-beam,
-.ps-tree,
-.ps-stamp,
-.ps-lamp,
-.fl1,
-.fl2,
-.fl3 {
-  transform-box: fill-box;
-}
-
-.stud,
-.fdn__p {
-  transform-origin: 50% 100%;
-}
-.stake,
-.shrub,
-.ps-tree {
-  transform-origin: 50% 100%;
-}
-.op,
-.ps-stamp,
-.ps-lamp {
-  transform-origin: 50% 50%;
+.ps-meter__pct {
+  font-family: var(--font-display);
+  font-size: 17px;
+  font-weight: 700;
 }
 
 /* ---------------- mobile: scene on top, copy beneath ---------------- */
@@ -2364,7 +2195,7 @@ section[id],
   .ps-copy {
     order: 2;
   }
-  .ps-scene {
+  .ps-build {
     max-height: 42vh;
   }
   .ps-sub {
@@ -2391,7 +2222,7 @@ section[id],
   .ps-stage {
     min-height: 560px;
   }
-  .ps-scene {
+  .ps-build {
     max-height: 38vh;
   }
   .ps-steps {
