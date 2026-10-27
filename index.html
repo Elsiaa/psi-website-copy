@@ -33,8 +33,8 @@
       href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="css/site.css?v=org1" />
-    <link rel="stylesheet" href="css/upgrade.css?v=org1" />
+    <link rel="stylesheet" href="css/site.css?v=life1" />
+    <link rel="stylesheet" href="css/upgrade.css?v=life1" />
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -161,44 +161,66 @@
             </div>
           </div>
           <div class="heroo__stagewrap">
-            <div class="heroo__fit">
+            <div
+              class="heroo__fit"
+              role="img"
+              aria-label="A handcrafted clay model of a PSI build growing from staked lot to finished home as you scroll"
+            >
               <img
-                class="heroo__house heroo__house--exploded"
-                src="assets/hero-exploded.webp"
-                srcset="
-                  assets/hero-exploded-small.webp 1200w,
-                  assets/hero-exploded.webp       2400w
-                "
-                sizes="(max-width: 900px) 100vw, 72vw"
+                class="hb__frame"
+                src="assets/hero-build/stage-1.webp"
                 alt=""
-                aria-hidden="true"
+                fetchpriority="high"
                 decoding="async"
+                data-f="0"
+              />
+              <img
+                class="hb__frame"
+                src="assets/hero-build/stage-2.webp"
+                alt=""
                 loading="lazy"
+                decoding="async"
+                data-f="1"
               />
               <img
-                class="heroo__house heroo__house--closed"
-                src="assets/hero-closed.webp"
-                srcset="
-                  assets/hero-closed-small.webp 1200w,
-                  assets/hero-closed.webp       2400w
-                "
-                sizes="(max-width: 900px) 100vw, 72vw"
+                class="hb__frame"
+                src="assets/hero-build/stage-3.webp"
                 alt=""
-                aria-hidden="true"
+                loading="lazy"
                 decoding="async"
-                fetchpriority="high"
+                data-f="2"
               />
               <img
-                class="heroo__house"
-                src="assets/hero-cutaway.webp"
-                srcset="
-                  assets/hero-cutaway-small.webp 1200w,
-                  assets/hero-cutaway.webp       2400w
-                "
-                sizes="(max-width: 900px) 100vw, 72vw"
-                alt="Cutaway view of a PSI-built three-storey home: furnished kitchen, living room, bedrooms, baths, and loft office"
+                class="hb__frame"
+                src="assets/hero-build/stage-4.webp"
+                alt=""
+                loading="lazy"
                 decoding="async"
-                fetchpriority="high"
+                data-f="3"
+              />
+              <img
+                class="hb__frame"
+                src="assets/hero-build/stage-5.webp"
+                alt=""
+                loading="lazy"
+                decoding="async"
+                data-f="4"
+              />
+              <img
+                class="hb__frame"
+                src="assets/hero-build/stage-6.webp"
+                alt=""
+                loading="lazy"
+                decoding="async"
+                data-f="5"
+              />
+              <img
+                class="hb__frame"
+                src="assets/hero-build/stage-7.webp"
+                alt=""
+                loading="lazy"
+                decoding="async"
+                data-f="6"
               />
             </div>
           </div>
@@ -215,6 +237,18 @@
             <span class="caps__t3">Build</span>
           </h2>
           <a class="caps__cta" href="contact.html">Get a quote &rarr;</a>
+          <img
+            class="caps__house"
+            src="assets/hero-cutaway.webp"
+            srcset="
+              assets/hero-cutaway-small.webp 1200w,
+              assets/hero-cutaway.webp       2400w
+            "
+            sizes="(max-width: 900px) 92vw, 46vw"
+            alt="Cutaway model of a PSI-built three-storey home, every floor furnished"
+            loading="lazy"
+            decoding="async"
+          />
         </div>
         <ol class="svc-rail" id="svcRail">
           <li class="svc">
@@ -230,9 +264,7 @@
             <p class="svc__desc">
               Single-family builds, foundation through final finishes.
             </p>
-            <p class="svc__tags">
-              <span>Foundations</span><span>Full builds</span><span>Keys</span>
-            </p>
+            <a class="svc__cta" href="contact.html">Get a quote &rarr;</a>
           </li>
           <li class="svc">
             <img
@@ -247,9 +279,7 @@
             <p class="svc__desc">
               Full additions including plumbing and electrical.
             </p>
-            <p class="svc__tags">
-              <span>Plumbing</span><span>Electrical</span><span>Tie-ins</span>
-            </p>
+            <a class="svc__cta" href="contact.html">Get a quote &rarr;</a>
           </li>
           <li class="svc">
             <img
@@ -262,9 +292,7 @@
             <p class="svc__kind">Renovations</p>
             <h3 class="svc__title">Whole-Home Renovations</h3>
             <p class="svc__desc">Gut and finish work on existing houses.</p>
-            <p class="svc__tags">
-              <span>Gut renos</span><span>Layouts</span><span>Finishes</span>
-            </p>
+            <a class="svc__cta" href="contact.html">Get a quote &rarr;</a>
           </li>
           <li class="svc">
             <img
@@ -279,9 +307,7 @@
             <p class="svc__desc">
               Converting unfinished lower levels into fully usable living space.
             </p>
-            <p class="svc__tags">
-              <span>Egress</span><span>Framing</span><span>Flooring</span>
-            </p>
+            <a class="svc__cta" href="contact.html">Get a quote &rarr;</a>
           </li>
           <li class="svc">
             <img
@@ -296,9 +322,7 @@
             <p class="svc__desc">
               Complete renovations, relocations, and new installations.
             </p>
-            <p class="svc__tags">
-              <span>Tile</span><span>Fixtures</span><span>Trim</span>
-            </p>
+            <a class="svc__cta" href="contact.html">Get a quote &rarr;</a>
           </li>
           <li class="svc">
             <img
@@ -311,9 +335,7 @@
             <p class="svc__kind">Structural trades</p>
             <h3 class="svc__title">Concrete &amp; Foundations</h3>
             <p class="svc__desc">Footings, foundations, slabs, and flatwork.</p>
-            <p class="svc__tags">
-              <span>Footings</span><span>Slabs</span><span>Flatwork</span>
-            </p>
+            <a class="svc__cta" href="contact.html">Get a quote &rarr;</a>
           </li>
           <li class="svc">
             <img
@@ -328,9 +350,7 @@
             <p class="svc__desc">
               Including engineered floor and roof truss packages.
             </p>
-            <p class="svc__tags">
-              <span>Trusses</span><span>Decks</span><span>Structure</span>
-            </p>
+            <a class="svc__cta" href="contact.html">Get a quote &rarr;</a>
           </li>
           <li class="svc">
             <img
@@ -346,9 +366,7 @@
               For landlords, property managers, and organizations with multiple
               properties.
             </p>
-            <p class="svc__tags">
-              <span>Turnovers</span><span>Repairs</span><span>Upkeep</span>
-            </p>
+            <a class="svc__cta" href="contact.html">Get a quote &rarr;</a>
           </li>
           <li class="svc">
             <img
@@ -364,9 +382,7 @@
               PennBid and county vendor-list projects, prevailing wage
               compliant.
             </p>
-            <p class="svc__tags">
-              <span>PennBid</span><span>Municipal</span><span>Compliance</span>
-            </p>
+            <a class="svc__cta" href="contact.html">Get a quote &rarr;</a>
           </li>
         </ol>
         <div class="svc-progress" aria-hidden="true">
@@ -1029,11 +1045,11 @@
       integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
       crossorigin=""
     ></script>
-    <script src="js/hero.js?v=org1" defer></script>
-    <script src="js/main.js?v=org1" defer></script>
-    <script src="js/process.js?v=org1" defer></script>
-    <script src="js/transform.js?v=org1" defer></script>
-    <script src="js/upgrade.js?v=org1" defer></script>
+    <script src="js/hero.js?v=life1" defer></script>
+    <script src="js/main.js?v=life1" defer></script>
+    <script src="js/process.js?v=life1" defer></script>
+    <script src="js/transform.js?v=life1" defer></script>
+    <script src="js/upgrade.js?v=life1" defer></script>
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -1106,6 +1122,6 @@
         ]
       }
     </script>
-    <script src="js/support.js?v=org1" defer></script>
+    <script src="js/support.js?v=life1" defer></script>
   </body>
 </html>
