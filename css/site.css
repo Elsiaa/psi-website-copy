@@ -4463,6 +4463,14 @@ section[id],
     0 22px 44px -30px rgba(214, 0, 0, 0.45);
 }
 
+.intro__art {
+  display: block;
+  width: 100%;
+  max-width: 520px;
+  height: auto;
+  margin-top: 10px;
+}
+
 /* ---------------- Support assistant ---------------- */
 /* Mirrors the elsiaa.com support widget: labeled white pill launcher
    (a 52px circle on phones) with a fade-up entrance, a navy quote pill
@@ -4803,7 +4811,15 @@ section[id],
     height: 32px;
   }
   .sbot__cta {
-    display: none;
+    padding: 0 6px 0 16px;
+  }
+  .sbot__cta a {
+    min-height: 44px;
+    font-size: 12px;
+  }
+  .sbot__ctax {
+    width: 30px;
+    height: 30px;
   }
 }
 
