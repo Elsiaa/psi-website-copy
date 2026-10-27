@@ -58,17 +58,17 @@ img {
   gap: 18px;
   padding: 14px clamp(20px, 4vw, 48px);
   color: var(--ink);
-  background: rgba(255, 255, 255, 0.95);
+  /* no backdrop-filter here: it would become the containing block
+     for the fixed mobile panel and trap it inside the bar */
+  background: rgba(255, 255, 255, 0.97);
   box-shadow: 0 1px 0 var(--hairline);
-  backdrop-filter: blur(8px);
   transition: box-shadow 240ms ease;
 }
 
 .nav--solid {
-  background: rgba(255, 255, 255, 0.97);
+  background: rgba(255, 255, 255, 0.98);
   color: var(--ink);
   box-shadow: 0 1px 0 var(--hairline);
-  backdrop-filter: blur(8px);
 }
 
 .nav__links a {
@@ -3245,7 +3245,13 @@ section[id],
     z-index: 65;
     background: transparent;
     box-shadow: none;
-    color: #fff; /* the X must read on the navy panel, whatever the bar held before */
+  }
+
+  /* only while the navy panel is open do the controls go white;
+     on the white bar they keep the ink they inherit */
+  .nav--open .nav__call,
+  .nav--open .nav__toggle {
+    color: #fff;
   }
 
   .nav--open .nav__call {
