@@ -3588,14 +3588,23 @@ section[id],
   z-index: 2;
 }
 
+/* page one, as the reference lays it out: a centred column with the
+   headline on top and the model holding the floor beneath it */
 .heroo__inner {
   width: 100%;
-  max-width: 1280px;
+  max-width: 1120px;
   margin: 0 auto;
   padding: 0 clamp(20px, 5vw, 72px);
-  display: grid;
-  grid-template-columns: minmax(300px, 4fr) 8fr;
-  gap: clamp(24px, 3.5vw, 64px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(10px, 2vh, 26px);
+}
+
+.heroo__copy {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
   align-items: center;
 }
 
@@ -3617,11 +3626,12 @@ section[id],
 .hero--open .hero__title {
   color: var(--ink);
   font-family: var(--font-display);
-  font-size: clamp(34px, 3.4vw, 54px);
+  font-size: clamp(32px, 3.6vw, 56px);
   font-weight: 800;
   line-height: 1.05;
   letter-spacing: -0.02em;
-  margin: 0 0 16px;
+  margin: 0 0 14px;
+  max-width: 21ch;
 }
 
 .hero--open .hero__tagline {
@@ -3629,13 +3639,14 @@ section[id],
   font-family: var(--font-serif);
   font-style: italic;
   font-size: clamp(17px, 1.4vw, 20px);
-  margin: 0 0 28px;
+  margin: 0 0 22px;
 }
 
 .heroo__ctas {
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: 16px 20px;
+  flex-wrap: wrap;
 }
 
 .heroo__cta {
@@ -3687,10 +3698,16 @@ section[id],
   }
 }
 
+.heroo__stagewrap {
+  width: min(980px, 100%);
+}
+
 .heroo__house {
   display: block;
   width: 100%;
   height: auto;
+  max-height: calc(100svh - 320px);
+  object-fit: contain;
   transition: transform 0.9s cubic-bezier(0.22, 0.9, 0.24, 1);
   will-change: transform;
 }
@@ -3701,6 +3718,7 @@ section[id],
   position: absolute;
   inset: 0;
   z-index: 3;
+  height: 100%;
   transition: none;
   pointer-events: none;
 }
@@ -3709,6 +3727,7 @@ section[id],
   position: absolute;
   inset: 0;
   z-index: 2;
+  height: 100%;
   opacity: 0;
   transition: none;
   pointer-events: none;
@@ -3723,7 +3742,10 @@ section[id],
 
 .heroo__stagewrap {
   overflow: hidden;
-  border-radius: 18px;
+  /* one radius source for everything nested inside the stage */
+  --stage-r: 18px;
+  --stage-pad: 16px;
+  border-radius: var(--stage-r);
 }
 
 /* tap any room: the chosen pin stays lit while the rest step back */
@@ -3746,12 +3768,13 @@ section[id],
 
 .heroo__cap {
   position: absolute;
-  left: 16px;
-  right: 16px;
+  left: var(--stage-pad);
+  right: var(--stage-pad);
   bottom: 14px;
   margin: 0;
   padding: 12px 18px;
-  border-radius: 12px;
+  /* concentric with the stage: container radius minus inset, floored */
+  border-radius: max(calc(var(--stage-r) - var(--stage-pad)), 8px);
   background: rgba(255, 255, 255, 0.94);
   backdrop-filter: blur(4px);
   border: 1px solid var(--hairline);
@@ -3831,9 +3854,8 @@ section[id],
 }
 
 @media (max-width: 900px) {
-  .heroo__inner {
-    grid-template-columns: 1fr;
-    gap: 10px;
+  .heroo__house {
+    max-height: calc(100svh - 360px);
   }
   .hero--open {
     padding-top: 84px;
