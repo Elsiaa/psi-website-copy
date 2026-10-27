@@ -14,28 +14,50 @@
   // white mark stops reading and the full-colour one takes over — well before
   // the hero itself ends.
   const LOGO_SWITCH_AT = 0.24;
-  const heroProgress = (heroEl) => {
-    const runway = heroEl.offsetHeight - window.innerHeight;
-    if (runway <= 0) return 1;
-    return Math.min(
-      1,
-      Math.max(0, -heroEl.getBoundingClientRect().top / runway),
-    );
+  const heroEl = document.getElementById("hero");
+  // The hero's geometry only changes when the viewport does. Reading
+  // offsetHeight inside the scroll handler forced a layout on every
+  // event, right after the hero's own handler had dirtied it — the
+  // classic thrash. Measure on resize instead, and scroll off numbers.
+  let heroTop = 0;
+  let heroH = 0;
+  let solidAt = 40;
+  let logoAt = 0;
+  const measure = () => {
+    if (!heroEl) return;
+    heroTop = heroEl.getBoundingClientRect().top + window.scrollY;
+    heroH = heroEl.offsetHeight;
+    const runway = heroH - window.innerHeight;
+    solidAt = heroTop + heroH - window.innerHeight * 0.5;
+    logoAt = runway > 0 ? heroTop + runway * LOGO_SWITCH_AT : heroTop;
   };
+  let lastSolid = null;
+  let lastDark = null;
   const onScroll = () => {
-    const heroEl = document.getElementById("hero");
-    const threshold = heroEl
-      ? heroEl.offsetHeight - window.innerHeight * 0.5
-      : 40;
-    nav.classList.toggle("nav--solid", window.scrollY > threshold);
+    const y = window.scrollY;
     // No hero (inner pages): the bar is solid from the start, so the
     // full-colour mark is always the right one.
-    nav.classList.toggle(
-      "nav--darklogo",
-      heroEl ? heroProgress(heroEl) >= LOGO_SWITCH_AT : true,
-    );
+    const solid = heroEl ? y > solidAt : true;
+    const dark = heroEl ? y >= logoAt : true;
+    if (solid !== lastSolid) {
+      nav.classList.toggle("nav--solid", solid);
+      lastSolid = solid;
+    }
+    if (dark !== lastDark) {
+      nav.classList.toggle("nav--darklogo", dark);
+      lastDark = dark;
+    }
   };
   window.addEventListener("scroll", onScroll, { passive: true });
+  window.addEventListener(
+    "resize",
+    () => {
+      measure();
+      onScroll();
+    },
+    { passive: true },
+  );
+  measure();
   onScroll();
 
   // ---------------- Google Reviews carousel ----------------
@@ -97,86 +119,73 @@
     },
   ];
 
-  // ---- the review stage: one voice at a time ----
-  const rQuote = document.getElementById("rvwQuote");
-  const rName = document.getElementById("rvwName");
-  const rAvatar = document.getElementById("rvwAvatar");
-  const rMeta = document.getElementById("rvwMeta");
-  const rDots = document.getElementById("rvwDots");
-  const rPrev = document.getElementById("rvwPrev");
-  const rNext = document.getElementById("rvwNext");
-  const rStage = document.getElementById("rvwStage");
-  let rIdx = 0;
-  let rTimer = null;
+  // ---- the reviews: a deck you swipe through ----
+  const rTrack = document.getElementById("rvwTrack");
   const rReduce = window.matchMedia("(prefers-reduced-motion: reduce)");
 
-  function showReview(i, instant) {
-    rIdx = ((i % reviews.length) + reviews.length) % reviews.length;
-    const r = reviews[rIdx];
-    const paint = () => {
-      rQuote.innerHTML = "\u201C" + r.html + "\u201D";
-      rName.textContent = r.author;
-      rMeta.innerHTML =
-        'Google review \u00B7 <span class="rvw__meta-stars">' +
-        "\u2605".repeat(r.stars) +
-        "</span>";
-      rAvatar.textContent = r.author
+  if (rTrack) {
+    const initials = (name) =>
+      name
         .split(/\s+/)
         .map((w) => w[0])
         .slice(0, 2)
         .join("");
-      [...rDots.children].forEach((d, k) => {
-        d.classList.toggle("is-on", k === rIdx);
-        d.setAttribute("aria-selected", k === rIdx ? "true" : "false");
+
+    rTrack.innerHTML = reviews
+      .map(
+        (r) => `
+      <figure class="rvw__card">
+        <blockquote class="rvw__quote">\u201C${r.html}\u201D</blockquote>
+        <figcaption class="rvw__by">
+          <span class="rvw__avatar" aria-hidden="true">${initials(r.author)}</span>
+          <span class="rvw__who">
+            <b>${r.author}</b>
+            <i>Google review \u00B7 <span class="rvw__meta-stars">${"\u2605".repeat(
+              r.stars,
+            )}</span></i>
+          </span>
+        </figcaption>
+      </figure>`,
+      )
+      .join("");
+
+    // It carries itself until someone takes the wheel, then it is
+    // theirs: no card sliding out from under a half-read quote.
+    let rTimer = null;
+    let taken = false;
+    const pause = () => {
+      if (rTimer) clearInterval(rTimer);
+      rTimer = null;
+    };
+    const stopAuto = () => {
+      taken = true;
+      pause();
+    };
+    const stepOne = () => {
+      const card = rTrack.firstElementChild;
+      if (!card) return;
+      const gap = parseFloat(getComputedStyle(rTrack).columnGap) || 0;
+      const stride = card.getBoundingClientRect().width + gap;
+      const atEnd =
+        rTrack.scrollLeft + rTrack.clientWidth >= rTrack.scrollWidth - 4;
+      rTrack.scrollTo({
+        left: atEnd ? 0 : rTrack.scrollLeft + stride,
+        behavior: "smooth",
       });
     };
-    if (instant || rReduce.matches) {
-      paint();
-      return;
-    }
-    rStage.classList.add("is-out");
-    setTimeout(() => {
-      paint();
-      rStage.classList.remove("is-out");
-    }, 240);
-  }
-
-  function rRestart() {
-    if (rTimer) clearInterval(rTimer);
-    if (rReduce.matches) return;
-    rTimer = setInterval(() => showReview(rIdx + 1), 7000);
-  }
-
-  if (rQuote && rDots) {
-    reviews.forEach((r, k) => {
-      const d = document.createElement("button");
-      d.type = "button";
-      d.role = "tab";
-      d.className = "rvw__dot";
-      d.setAttribute("aria-label", "Review by " + r.author);
-      d.addEventListener("click", () => {
-        showReview(k);
-        rRestart();
-      });
-      rDots.appendChild(d);
-    });
-    if (rPrev)
-      rPrev.addEventListener("click", () => {
-        showReview(rIdx - 1);
-        rRestart();
-      });
-    if (rNext)
-      rNext.addEventListener("click", () => {
-        showReview(rIdx + 1);
-        rRestart();
-      });
-    showReview(0, true);
-    rRestart();
-    rStage.addEventListener(
-      "pointerenter",
-      () => rTimer && clearInterval(rTimer),
+    // Only while the deck is actually on screen: nothing to gain from
+    // sliding cards nobody is looking at, and it keeps the smooth
+    // scroll off the main thread while the reader is elsewhere.
+    const play = () => {
+      if (taken || rTimer || rReduce.matches) return;
+      rTimer = setInterval(stepOne, 7000);
+    };
+    new IntersectionObserver(([e]) => (e.isIntersecting ? play() : pause()), {
+      threshold: 0.4,
+    }).observe(rTrack);
+    ["pointerdown", "touchstart", "wheel", "keydown"].forEach((ev) =>
+      rTrack.addEventListener(ev, stopAuto, { passive: true, once: true }),
     );
-    rStage.addEventListener("pointerleave", rRestart);
   }
 
   // Aggregate score in the badge, computed from the cards themselves.
@@ -254,7 +263,11 @@
   const mapEl = document.getElementById("projectMap");
   if (!mapEl || !projects.length || typeof L === "undefined") return;
 
-  const map = L.map(mapEl, { scrollWheelZoom: false });
+  // On a touch screen a finger landing on the map used to pan the map
+  // instead of the page, so the page felt stuck. Panning is off there;
+  // the pins stay tappable and the zoom buttons still work.
+  const touch = L.Browser.mobile;
+  const map = L.map(mapEl, { scrollWheelZoom: false, dragging: !touch });
   // Leaflet 1.9 puts a Ukrainian flag in its attribution prefix; keep the
   // required Leaflet and OpenStreetMap credits, drop the flag.
   map.attributionControl.setPrefix(

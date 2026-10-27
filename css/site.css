@@ -4066,6 +4066,12 @@ section[id],
 }
 
 @media (max-width: 900px) {
+  /* a shorter runway: 3.3 screens of thumb to get through the opening
+     is a long wait on a phone. the same seven frames, less scrolling */
+  .hero--open {
+    height: 215svh;
+  }
+
   /* no padding on the section: it would push the sticky screen 84px
      below the fold and cut the buttons off the bottom. the nav is
      cleared by the sticky's own top padding instead */
@@ -4699,17 +4705,21 @@ section[id],
   color: var(--accent);
 }
 
+/* the head is one centred column: title, then the Google badge on its
+   own line, then the sentence under it — each centred on the same axis */
 .rvw__head {
   max-width: 760px;
-  margin-bottom: clamp(28px, 5vh, 56px);
+  margin: 0 auto clamp(28px, 5vh, 56px);
+  text-align: center;
 }
 
 .rvw__fact {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 14px;
   margin: 18px 0 0;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
 }
 
 .rvw__g {
@@ -4737,7 +4747,8 @@ section[id],
 .rvw__factline {
   font-size: clamp(16px, 1.3vw, 18px);
   color: var(--muted);
-  max-width: 34ch;
+  max-width: 44ch;
+  margin: 10px auto 0;
   line-height: 1.5;
 }
 
@@ -4748,27 +4759,56 @@ section[id],
   white-space: nowrap;
 }
 
-.rvw__stage {
-  margin: 0;
-  max-width: 920px;
-  min-height: clamp(220px, 32vh, 320px);
-  transition: opacity 0.24s ease;
+/* a deck you swipe: each voice on its own card, the neighbours
+   showing at both edges so it is obvious there are more */
+.rvw__track {
+  --rvw-card: min(560px, 84vw);
+  display: flex;
+  gap: 18px;
+  /* symmetric gutters, so the first and last card centre like the
+     rest of them rather than sticking to an edge */
+  padding: 4px calc((100% - var(--rvw-card)) / 2) 10px;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
 }
 
-.rvw__stage.is-out {
-  opacity: 0;
+.rvw__track::-webkit-scrollbar {
+  display: none;
+}
+
+.rvw__track:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+  border-radius: 20px;
+}
+
+.rvw__card {
+  flex: 0 0 var(--rvw-card);
+  scroll-snap-align: center;
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: clamp(22px, 2.6vw, 34px);
+  border: 1px solid var(--hairline);
+  border-radius: 18px;
+  background: #fff;
+  box-shadow: 0 20px 44px -32px rgba(16, 18, 20, 0.55);
 }
 
 .rvw__quote {
-  margin: 0 0 26px;
+  margin: 0 0 20px;
+  flex: 1 1 auto;
   font-family: var(--font-display);
-  font-size: clamp(22px, 2.6vw, 36px);
+  font-size: clamp(17px, 1.7vw, 23px);
   font-weight: 600;
-  line-height: 1.3;
-  letter-spacing: -0.015em;
+  line-height: 1.4;
+  letter-spacing: -0.012em;
   color: var(--ink);
   display: -webkit-box;
-  -webkit-line-clamp: 6;
+  -webkit-line-clamp: 9;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
@@ -4782,6 +4822,9 @@ section[id],
   display: flex;
   align-items: center;
   gap: 14px;
+  margin-top: auto;
+  padding-top: 16px;
+  border-top: 1px solid var(--hairline);
 }
 
 .rvw__avatar {
@@ -4825,111 +4868,13 @@ section[id],
   letter-spacing: 1px;
 }
 
-.rvw__controls {
-  display: flex;
-  align-items: center;
-  flex-wrap: nowrap;
-  gap: 14px;
-  margin-top: clamp(24px, 4vh, 40px);
-}
-
-/* the dots wrap inside their own box, so the arrows never break away */
-.rvw__controls .rvw__dots {
-  flex: 1 1 auto;
-  min-width: 0;
-  flex-wrap: wrap;
-}
-
-/* Google's own button idiom: a white disc on its grey hairline,
-   the arrow in Google blue, so the control is unmistakable */
-.rvw__arrow {
-  width: 48px;
-  height: 48px;
-  flex: 0 0 auto;
-  display: grid;
-  place-items: center;
-  border: 1px solid #dadce0;
-  border-radius: 50%;
-  background: #fff;
-  color: #1a73e8;
-  font-size: 19px;
-  font-weight: 700;
-  line-height: 1;
-  cursor: pointer;
-  box-shadow: 0 1px 3px rgba(60, 64, 67, 0.3);
-  transition:
-    background 0.2s ease,
-    box-shadow 0.2s ease,
-    border-color 0.2s ease;
-}
-
-.rvw__arrow:hover {
-  background: #f1f3f4;
-  border-color: #c6cacd;
-  box-shadow: 0 2px 6px rgba(60, 64, 67, 0.35);
-}
-
-.rvw__arrow:active {
-  background: #e8eaed;
-  box-shadow: 0 1px 2px rgba(60, 64, 67, 0.3);
-}
-
-.rvw__arrow:focus-visible {
-  outline: 2px solid #1a73e8;
-  outline-offset: 2px;
-}
-
-.rvw__dots {
-  display: flex;
-  gap: 8px;
-  margin: 0;
-}
-
-.rvw__dot {
-  width: 26px;
-  height: 20px;
-  padding: 9px 0;
-  border: 0;
-  background: none;
-  cursor: pointer;
-}
-
-.rvw__dot::before {
-  content: "";
-  display: block;
-  height: 2px;
-  background: #d8d4cb;
-  border-radius: 999px;
-  transition:
-    background 0.25s ease,
-    transform 0.25s ease;
-}
-
-.rvw__dot:hover::before {
-  background: var(--muted);
-}
-
-.rvw__dot.is-on::before {
-  background: var(--accent);
-  transform: scaleY(1.8);
-}
-
 @media (max-width: 760px) {
+  /* the badge stays on one line; it is the sentence that gives way */
   .rvw__fact {
-    flex-direction: column;
-    gap: 6px;
+    gap: 10px;
   }
   .rvw__quote {
-    -webkit-line-clamp: 8;
-  }
-  .rvw__stage {
-    min-height: 300px;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .rvw__stage {
-    transition: none;
+    -webkit-line-clamp: 11;
   }
 }
 

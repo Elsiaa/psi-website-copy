@@ -28,19 +28,36 @@
   }
   hero.classList.add("heroo-js");
 
+  const caps = document.getElementById("capabilities");
+  let lastP = -1;
+  let lastLo = -1;
+
   function paint() {
     const r = hero.getBoundingClientRect();
     const span = r.height - vpH();
     const p = span > 0 ? clamp01(-r.top / span) : 0;
 
+    // past the hero, p is pinned at 1 for the seven screens of page
+    // that follow. repainting nineteen inline styles on every one of
+    // those scroll events is the stutter: nothing moved, so leave.
+    if (Math.abs(p - lastP) < 0.0004) return;
+    lastP = p;
+
     // the build: a continuous crossfade across the seven frames
     const f = clamp01(p / 0.86) * (N - 1);
     const lo = Math.floor(Math.min(f, N - 1 - 1e-6));
     const t = f - lo;
-    frames.forEach((img, k) => {
-      img.style.opacity = k === lo ? 1 : k === lo + 1 ? t.toFixed(3) : 0;
-      img.style.zIndex = k === lo ? 1 : k === lo + 1 ? 2 : 0;
-    });
+    // only the two frames being crossfaded are written each tick; the
+    // whole stack is restacked just when the pair itself changes
+    if (lo !== lastLo) {
+      frames.forEach((img, k) => {
+        img.style.zIndex = k === lo ? 1 : k === lo + 1 ? 2 : 0;
+        if (k !== lo && k !== lo + 1) img.style.opacity = 0;
+      });
+      lastLo = lo;
+    }
+    frames[lo].style.opacity = 1;
+    if (frames[lo + 1]) frames[lo + 1].style.opacity = t.toFixed(3);
 
     // the finale: headline and model leave together, next section cued
     const hand = seg(p, 0.88, 1);
@@ -53,7 +70,6 @@
       (1 - 0.16 * hand).toFixed(4) +
       ")";
     stage.style.opacity = (1 - hand * 0.9).toFixed(3);
-    const caps = document.getElementById("capabilities");
     if (caps) caps.classList.toggle("caps--in", p >= 0.9);
   }
   addEventListener("scroll", paint, { passive: true });

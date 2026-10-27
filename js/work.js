@@ -52,7 +52,12 @@
   let map = null;
   const markers = [];
   if (mapEl && window.L) {
-    map = L.map(mapEl, { scrollWheelZoom: false });
+    // panning off on touch, so a finger swiping over the map scrolls
+    // the page rather than dragging the map under it
+    map = L.map(mapEl, {
+      scrollWheelZoom: false,
+      dragging: !L.Browser.mobile,
+    });
     map.attributionControl.setPrefix(
       '<a href="https://leafletjs.com">Leaflet</a>',
     );
