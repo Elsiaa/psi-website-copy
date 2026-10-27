@@ -403,15 +403,20 @@
 
   const overlay = root.querySelector(".sbot__overlay");
   const cta = root.querySelector(".sbot__cta");
+  /* the home page already leads with Get a quote in the hero, so the
+     floating one would only repeat it over the top of the buttons */
+  if (document.querySelector(".hero--open")) cta.remove();
   try {
     if (sessionStorage.getItem("psi-sbot-cta") === "x") cta.remove();
   } catch (e) {}
-  root.querySelector(".sbot__ctax").addEventListener("click", () => {
-    cta.remove();
-    try {
-      sessionStorage.setItem("psi-sbot-cta", "x");
-    } catch (e) {}
-  });
+  const ctax = root.querySelector(".sbot__ctax");
+  if (ctax)
+    ctax.addEventListener("click", () => {
+      cta.remove();
+      try {
+        sessionStorage.setItem("psi-sbot-cta", "x");
+      } catch (e) {}
+    });
 
   const fab = root.querySelector(".sbot__fab");
   const panel = root.querySelector(".sbot__panel");

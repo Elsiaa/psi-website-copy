@@ -3865,6 +3865,14 @@ section[id],
   letter-spacing: 1px;
 }
 
+/* the narrow-screen stand-in for the row of five */
+.heroo__star {
+  display: none;
+  color: #fbbc05;
+  font-size: 15px;
+  line-height: 1;
+}
+
 .heroo__link {
   border: 1px solid var(--hairline);
   color: var(--ink);
@@ -4058,9 +4066,9 @@ section[id],
 }
 
 @media (max-width: 900px) {
-  .hero--open {
-    padding-top: 84px;
-  }
+  /* no padding on the section: it would push the sticky screen 84px
+     below the fold and cut the buttons off the bottom. the nav is
+     cleared by the sticky's own top padding instead */
   .hero--open .hero__title {
     font-size: clamp(30px, 8vw, 40px);
   }
@@ -4082,9 +4090,32 @@ section[id],
     font-size: 14px;
   }
 
+  /* five stars will not fit beside the figure on a narrow pill,
+     so one gold star carries the rating instead */
   .heroo__reviews .heroo__stars {
     display: none;
   }
+
+  .heroo__reviews .heroo__star {
+    display: inline-block;
+  }
+
+  /* the model leads on a phone: the house takes the top of the
+     screen and the words read underneath it */
+  .heroo__stagewrap {
+    order: 1;
+  }
+
+  .heroo__copy {
+    order: 2;
+  }
+
+  /* the chat bubble parks bottom-right; the buttons stop above it
+     rather than running underneath */
+  .heroo__sticky {
+    padding-bottom: 76px;
+  }
+
   .heroo__pin {
     font-size: 11px;
     padding: 7px 12px;
@@ -4177,15 +4208,28 @@ section[id],
 }
 
 @media (max-width: 900px) {
+  /* on a phone the house stops being a second column and becomes the
+     ground the headline stands on: one centred stack, the drawing
+     washed back behind the words */
   .caps__head {
+    position: relative;
+    /* the drawing is wider than the column on purpose; clipping keeps
+       that from widening the page itself */
+    overflow: hidden;
     grid-template-columns: 1fr;
     grid-template-areas:
       "title"
-      "house"
       "cta";
     justify-items: stretch;
     gap: 10px;
     text-align: center;
+    padding: clamp(16px, 4vw, 30px) 0 clamp(14px, 3vw, 24px);
+  }
+
+  .caps__head .caps__title,
+  .caps__head .caps__cta {
+    position: relative;
+    z-index: 1;
   }
 
   .caps__head .caps__title {
@@ -4200,8 +4244,32 @@ section[id],
     background: var(--accent);
     color: #fff;
   }
+
   .caps__house {
-    max-height: 26vh;
+    position: absolute;
+    z-index: 0;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -52%);
+    width: min(124%, 560px);
+    max-width: none;
+    max-height: none;
+    opacity: 0.16;
+    pointer-events: none;
+    /* an oval of exposure, so the drawing has no edge of its own
+       and simply thins out into the white page */
+    mask-image: radial-gradient(
+      ellipse 62% 58% at 50% 50%,
+      #000 0,
+      rgba(0, 0, 0, 0.55) 62%,
+      transparent 86%
+    );
+    -webkit-mask-image: radial-gradient(
+      ellipse 62% 58% at 50% 50%,
+      #000 0,
+      rgba(0, 0, 0, 0.55) 62%,
+      transparent 86%
+    );
   }
   .caps__title {
     font-size: clamp(42px, 12vw, 64px);
@@ -4532,10 +4600,11 @@ section[id],
 
 /* on a phone the services run as a swipeable row, not a tall stack */
 @media (max-width: 760px) {
-  /* the head and the row compose to a single screen: the decorative
-     house steps aside, since every card already carries artwork */
+  /* the head and the row still compose to a single screen: the house
+     costs no height here, because it sits behind the headline */
   .caps__house {
-    display: none;
+    width: min(136%, 480px);
+    opacity: 0.15;
   }
 
   .caps > .section__inner {
@@ -4544,8 +4613,9 @@ section[id],
   }
 
   .caps__head {
-    gap: 14px;
-    margin-bottom: 14px;
+    gap: 10px;
+    margin-bottom: 10px;
+    padding: 14px 0 12px;
   }
 
   .caps__title {
@@ -5100,10 +5170,112 @@ section[id],
   gap: 18px 28px;
 }
 
-/* the divider is a registered property, so it can be animated */
+/* on a phone the company band and the figures behind it compose to a
+   single screen: the crew shot shrinks, the contact rows pair up, and
+   the empty page between the sentence and the numbers goes away */
+@media (max-width: 760px) {
+  /* the figures follow the band directly instead of across a gap */
+  .caps {
+    padding-bottom: 0;
+  }
+
+  .caps > .section__inner {
+    padding-bottom: 22px;
+  }
+
+  .caps__about {
+    margin-top: 18px;
+    padding-top: 16px;
+  }
+
+  .caps__crew {
+    max-height: 11vh;
+    max-width: 260px;
+    margin-bottom: 0;
+  }
+
+  .caps__abouttitle {
+    margin: 0 0 7px;
+    font-size: 21px;
+  }
+
+  .caps__pull {
+    margin: 0 0 9px;
+    padding-left: 12px;
+    font-size: 14.5px;
+    line-height: 1.35;
+  }
+
+  .caps__lede {
+    margin: 0 0 10px;
+    font-size: 13.5px;
+    line-height: 1.4;
+  }
+
+  /* one column: the address runs two lines and the email address is
+     longer than half a phone, so a two-up grid would break words */
+  .caps__facts {
+    grid-template-columns: 1fr;
+    gap: 8px;
+    padding-top: 12px;
+  }
+
+  .caps__facts dt {
+    margin: 0 0 1px;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+  }
+
+  .caps__facts dd {
+    font-size: 14.5px;
+    line-height: 1.35;
+  }
+
+  .caps__facts .facts__note {
+    margin-top: 2px;
+    font-size: 12px;
+  }
+
+  /* the numbers follow straight on, two by two */
+  .proofbar--stats .proofbar__inner {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    padding: 18px 20px 20px;
+    gap: 14px 16px;
+  }
+
+  .proofbar--stats .proof {
+    padding: 0 0 0 16px;
+    border-left: 1px solid var(--hairline);
+    border-bottom: 0;
+  }
+
+  .proofbar--stats .proof:nth-child(odd) {
+    padding-left: 0;
+    border-left: 0;
+  }
+
+  .proofbar--stats .proof__fig {
+    margin-bottom: 2px;
+    font-size: 26px;
+  }
+
+  .proofbar--stats .proof__fig--text {
+    font-size: 17px;
+    padding-top: 4px;
+  }
+
+  .proofbar--stats .proof__label {
+    font-size: 13px;
+    line-height: 1.35;
+  }
+}
+
+/* the divider is a registered property, so it can be animated. it has
+   to inherit: the animation runs on the frame, but the clip and the
+   handle that read the value are its children */
 @property --x {
   syntax: "<percentage>";
-  inherits: false;
+  inherits: true;
   initial-value: 50%;
 }
 
