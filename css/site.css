@@ -4359,6 +4359,72 @@ section[id],
   }
 }
 
+/* the tenth card is the invitation, not a service */
+.svc--cta {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 22px 20px;
+  border: 0;
+  border-radius: var(--card-r);
+  background:
+    radial-gradient(
+      420px 260px at 115% -15%,
+      rgba(255, 255, 255, 0.16),
+      transparent 60%
+    ),
+    var(--navy);
+  perspective: none;
+}
+
+.svc--cta .svc__kind {
+  margin: 0 0 8px;
+  color: #fff;
+  opacity: 0.6;
+}
+
+.svc--cta .svc__kind::after {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+.svc--cta .svc__title {
+  margin: 0 0 18px;
+  font-size: clamp(20px, 1.9vw, 26px);
+  color: #fff;
+  line-height: 1.1;
+}
+
+.svc__ctas {
+  display: grid;
+  gap: 10px;
+}
+
+.svc--cta .svc__btn {
+  margin: 0;
+}
+
+.svc__call {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  border-radius: 999px;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: border-color 0.2s ease;
+}
+
+.svc__call:hover {
+  border-color: #fff;
+}
+
+.svc--cta .tel-psi {
+  color: var(--accent);
+}
+
 /* on a phone the services run as a swipeable row, not a tall stack */
 @media (max-width: 760px) {
   /* the head and the row compose to a single screen: the decorative
