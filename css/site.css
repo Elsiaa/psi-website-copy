@@ -3852,23 +3852,21 @@ section[id],
   left: var(--px);
   top: var(--py);
   transform: translate(-50%, -50%);
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 9px 16px;
-  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  border-radius: 50%;
   background: rgba(255, 255, 255, 0.92);
   backdrop-filter: blur(3px);
   border: 1px solid var(--hairline);
-  color: var(--ink);
-  font-size: 13px;
-  font-weight: 700;
-  text-decoration: none;
-  white-space: nowrap;
+  cursor: pointer;
   box-shadow: 0 10px 24px -14px rgba(16, 18, 20, 0.4);
   transition:
     border-color 0.2s ease,
-    transform 0.2s ease;
+    transform 0.2s ease,
+    opacity 0.35s ease;
 }
 
 .heroo__pin:hover {
@@ -3901,12 +3899,13 @@ section[id],
 
 /* the headline: big, red into light grey into grey */
 .caps__title {
-  font-size: clamp(44px, 5.2vw, 76px);
-  font-weight: 800;
-  letter-spacing: -0.025em;
-  line-height: 1;
+  font-size: clamp(54px, 7.2vw, 112px);
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: -0.03em;
+  line-height: 0.95;
   display: flex;
-  gap: 0.28em;
+  gap: 0.24em;
   flex-wrap: wrap;
 }
 
@@ -4035,26 +4034,6 @@ section[id],
 
 .svc:hover .svc__art {
   transform: scale(1.045);
-}
-
-.svc__num {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin: 0 10px 8px;
-  font-family: var(--font-display);
-  font-size: 13px;
-  font-weight: 800;
-  letter-spacing: 0.08em;
-  color: var(--accent);
-  font-variant-numeric: tabular-nums;
-}
-
-.svc__num::after {
-  content: "";
-  flex: 1 1 auto;
-  height: 1px;
-  background: var(--hairline);
 }
 
 .svc__title {
@@ -4303,6 +4282,61 @@ section[id],
 @media (prefers-reduced-motion: reduce) {
   .rvw__stage {
     transition: none;
+  }
+}
+
+/* ---------------- desktop: before/after and the map share one page -------- */
+
+@media (min-width: 1100px) {
+  .worksplit {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: start;
+    max-width: 1680px;
+    margin: 0 auto;
+  }
+
+  .worksplit .section {
+    padding-top: clamp(48px, 7vh, 80px);
+    padding-bottom: clamp(48px, 7vh, 80px);
+  }
+
+  /* the before/after column compacts: slider over its notes */
+  .worksplit .tf__grid {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .worksplit .ba {
+    max-width: 480px;
+  }
+
+  /* the map column compacts: shorter map, jobs as one strip */
+  .worksplit #projectMap {
+    height: 38vh;
+    min-height: 300px;
+  }
+
+  .worksplit .projects__layout {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .worksplit .jobs {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    padding-bottom: 10px;
+    scrollbar-width: none;
+  }
+
+  .worksplit .jobs::-webkit-scrollbar {
+    display: none;
+  }
+
+  .worksplit .jobs .job {
+    flex: 0 0 240px;
+    scroll-snap-align: start;
   }
 }
 
