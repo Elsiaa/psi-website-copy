@@ -4712,44 +4712,55 @@ section[id],
 .rvw__controls {
   display: flex;
   align-items: center;
-  flex-wrap: wrap;
-  gap: 12px 14px;
+  flex-wrap: nowrap;
+  gap: 14px;
   margin-top: clamp(24px, 4vh, 40px);
 }
 
-/* the dots give way before the arrows do */
+/* the dots wrap inside their own box, so the arrows never break away */
 .rvw__controls .rvw__dots {
   flex: 1 1 auto;
   min-width: 0;
   flex-wrap: wrap;
 }
 
+/* Google's own button idiom: a white disc on its grey hairline,
+   the arrow in Google blue, so the control is unmistakable */
 .rvw__arrow {
-  width: 46px;
-  height: 46px;
+  width: 48px;
+  height: 48px;
   flex: 0 0 auto;
   display: grid;
   place-items: center;
-  border: 1px solid var(--hairline);
+  border: 1px solid #dadce0;
   border-radius: 50%;
   background: #fff;
-  color: var(--ink);
-  font-size: 17px;
+  color: #1a73e8;
+  font-size: 19px;
+  font-weight: 700;
+  line-height: 1;
   cursor: pointer;
+  box-shadow: 0 1px 3px rgba(60, 64, 67, 0.3);
   transition:
-    border-color 0.2s ease,
-    color 0.2s ease,
-    transform 0.2s ease;
+    background 0.2s ease,
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
 }
 
 .rvw__arrow:hover {
-  border-color: var(--accent);
-  color: var(--accent);
-  transform: translateY(-2px);
+  background: #f1f3f4;
+  border-color: #c6cacd;
+  box-shadow: 0 2px 6px rgba(60, 64, 67, 0.35);
 }
 
 .rvw__arrow:active {
-  transform: translateY(0);
+  background: #e8eaed;
+  box-shadow: 0 1px 2px rgba(60, 64, 67, 0.3);
+}
+
+.rvw__arrow:focus-visible {
+  outline: 2px solid #1a73e8;
+  outline-offset: 2px;
 }
 
 .rvw__dots {
