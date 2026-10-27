@@ -322,16 +322,26 @@
   );
   map.fitBounds(allBounds);
 
-  // If the map booted inside a hidden/zero-size container (collapsed panel,
-  // background tab), Leaflet's sizing is wrong — refit once real layout lands.
-  let fitted = mapEl.clientWidth > 0 && mapEl.clientHeight > 0;
+  // The container's size settles after fonts and the compact layout
+  // land, and Leaflet keeps the zoom it computed for the old box. Any
+  // meaningful size change refits the pins, until the visitor takes
+  // the wheel themselves.
+  let userDrove = false;
+  ["pointerdown", "wheel", "touchstart"].forEach((ev) =>
+    mapEl.addEventListener(ev, () => (userDrove = true), { passive: true }),
+  );
   if (window.ResizeObserver) {
+    let lastW = 0;
+    let lastH = 0;
     const ro = new ResizeObserver(() => {
+      const w = mapEl.clientWidth;
+      const h = mapEl.clientHeight;
+      if (!w || !h) return;
+      if (Math.abs(w - lastW) < 8 && Math.abs(h - lastH) < 8) return;
+      lastW = w;
+      lastH = h;
       map.invalidateSize();
-      if (!fitted && mapEl.clientWidth > 0 && mapEl.clientHeight > 0) {
-        fitted = true;
-        map.fitBounds(allBounds);
-      }
+      if (!userDrove) map.fitBounds(allBounds);
     });
     ro.observe(mapEl);
   }
