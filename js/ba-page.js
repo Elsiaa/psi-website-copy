@@ -92,13 +92,50 @@
       inner.appendChild(row);
     });
 
-  // every slider on the page, however it got here, answers the drag
+  // Every slider answers the drag, and sweeps on its own until it is
+  // touched: in view it reveals the after, then the before, then
+  // settles back to the middle. The first real interaction stops it
+  // for good and hands the divider to the visitor.
   document.querySelectorAll(".ba").forEach((frame) => {
     const range = frame.querySelector(".ba__range");
     if (!range || range.dataset.wired) return;
     range.dataset.wired = "1";
+
     const paint = () => frame.style.setProperty("--x", range.value + "%");
-    range.addEventListener("input", paint);
     paint();
+
+    let manual = false;
+    const takeOver = () => {
+      if (manual) return;
+      manual = true;
+      // start from wherever the sweep had reached, so nothing jumps
+      const at = getComputedStyle(frame).getPropertyValue("--x").trim();
+      const pct = parseFloat(at);
+      if (!Number.isNaN(pct)) range.value = String(Math.round(pct));
+      frame.classList.remove("ba--auto");
+      paint();
+    };
+
+    ["pointerdown", "touchstart", "keydown", "wheel"].forEach((ev) =>
+      range.addEventListener(ev, takeOver, { passive: true }),
+    );
+    range.addEventListener("input", () => {
+      takeOver();
+      paint();
+    });
+
+    if (window.IntersectionObserver) {
+      new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => {
+            if (manual) return;
+            frame.classList.toggle("ba--auto", e.isIntersecting);
+          });
+        },
+        { threshold: 0.35 },
+      ).observe(frame);
+    } else {
+      frame.classList.add("ba--auto");
+    }
   });
 })();

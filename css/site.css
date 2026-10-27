@@ -4969,6 +4969,43 @@ section[id],
   gap: 18px 28px;
 }
 
+/* the divider is a registered property, so it can be animated */
+@property --x {
+  syntax: "<percentage>";
+  inherits: false;
+  initial-value: 50%;
+}
+
+/* in view and untouched, the slider shows the job by itself */
+.ba--auto {
+  animation: baSweep 8s ease-in-out infinite;
+}
+
+@keyframes baSweep {
+  0%,
+  6% {
+    --x: 50%;
+  }
+  28%,
+  34% {
+    --x: 92%;
+  }
+  58%,
+  64% {
+    --x: 8%;
+  }
+  88%,
+  100% {
+    --x: 50%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ba--auto {
+    animation: none;
+  }
+}
+
 /* ---------------- before & after ---------------- */
 
 .tf__claim {
