@@ -2072,10 +2072,10 @@ section[id],
   display: flex;
   align-items: center;
   gap: 14px;
-  margin: 0 0 10px;
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 0.24em;
+  margin: 0 0 12px;
+  font-size: 15px;
+  font-weight: 800;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--accent);
   font-variant-numeric: tabular-nums;
@@ -2089,19 +2089,22 @@ section[id],
 }
 
 .ps-step h3 {
-  margin: 0 0 10px;
-  font-size: clamp(21px, 2.3vw, 30px);
-  line-height: 1.12;
-  letter-spacing: -0.022em;
+  margin: 0 0 12px;
+  font-size: clamp(26px, 2.8vw, 38px);
+  font-weight: 800;
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+  color: var(--ink);
   text-wrap: balance;
 }
 
 .ps-step__d {
   margin: 0;
-  max-width: 34ch;
-  color: var(--muted);
-  font-size: 16px;
-  line-height: 1.65;
+  max-width: 36ch;
+  color: #3c4148;
+  font-size: clamp(17px, 1.35vw, 19px);
+  font-weight: 500;
+  line-height: 1.6;
 }
 
 /* ---------------- stage rail ---------------- */
@@ -2208,7 +2211,8 @@ section[id],
     display: none; /* the scene says it faster than the sentence does */
   }
   .ps-copy .section__title {
-    font-size: clamp(24px, 6vw, 32px);
+    font-size: clamp(26px, 7vw, 34px);
+    font-weight: 800;
     margin-bottom: 14px;
   }
   .ps-inner {
@@ -2224,10 +2228,10 @@ section[id],
     margin-bottom: 18px;
   }
   .ps-step h3 {
-    font-size: clamp(19px, 5vw, 24px);
+    font-size: clamp(23px, 6.4vw, 30px);
   }
   .ps-step__d {
-    font-size: 15px;
+    font-size: 16px;
     max-width: none;
   }
 }
