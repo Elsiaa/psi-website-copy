@@ -10,10 +10,26 @@
   const projects = window.PSI_PROJECTS || [];
   const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  /* ---- hero: the build, cycling ---- */
+  /* ---- hero: the range of the work, shuffled ---- */
   const stage = document.getElementById("workStage");
   if (stage) {
-    const frames = [...stage.querySelectorAll("img")];
+    const SCENES = 15;
+    const order = Array.from({ length: SCENES }, (_, i) => i + 1);
+    for (let i = order.length - 1; i > 0; i--) {
+      const k = Math.floor(Math.random() * (i + 1));
+      [order[i], order[k]] = [order[k], order[i]];
+    }
+    const frames = order.map((n, i) => {
+      const img = document.createElement("img");
+      img.src =
+        "assets/work-hero/scene-" + String(n).padStart(2, "0") + ".webp";
+      img.alt = "";
+      // only the first two matter for the first paint
+      if (i > 1) img.loading = "lazy";
+      img.decoding = "async";
+      stage.appendChild(img);
+      return img;
+    });
     let f = 0;
     const show = (k) =>
       frames.forEach((img, i) => (img.style.opacity = i === k ? 1 : 0));
@@ -22,9 +38,7 @@
       setInterval(() => {
         f = (f + 1) % frames.length;
         show(f);
-      }, 1400);
-    } else {
-      show(frames.length - 1);
+      }, 3200);
     }
   }
 

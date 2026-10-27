@@ -56,7 +56,8 @@ img {
   align-items: center;
   justify-content: space-between;
   gap: 18px;
-  padding: 14px clamp(20px, 4vw, 48px);
+  padding: 12px clamp(24px, 3.4vw, 56px);
+  gap: clamp(20px, 3vw, 56px);
   color: var(--ink);
   /* no backdrop-filter here: it would become the containing block
      for the fixed mobile panel and trap it inside the bar */
@@ -74,6 +75,24 @@ img {
 .nav__links a {
   font-weight: 800;
   color: var(--ink);
+}
+
+.nav__links a:not(.nav__cta)::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -6px;
+  height: 2px;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.22s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.nav__links a:not(.nav__cta):hover::after,
+.nav__links a:not(.nav__cta):focus-visible::after {
+  transform: scaleX(1);
 }
 
 .nav__links a:hover {
@@ -152,14 +171,27 @@ img {
 .nav__links {
   display: flex;
   align-items: center;
-  gap: clamp(10px, 1.7vw, 22px);
-  flex-wrap: wrap;
+  gap: clamp(14px, 1.9vw, 30px);
+  flex-wrap: nowrap;
+  white-space: nowrap;
+}
+
+/* the phone and the quote button read as one decisive group,
+   set apart from the navigation by a hairline */
+.nav__end {
+  display: flex;
+  align-items: center;
+  gap: clamp(12px, 1.4vw, 20px);
+  margin-left: clamp(6px, 1vw, 16px);
+  padding-left: clamp(14px, 1.9vw, 26px);
+  border-left: 1px solid var(--hairline);
 }
 .nav__links a {
+  position: relative;
   color: inherit;
   text-decoration: none;
-  font-size: 14px;
-  letter-spacing: 0.08em;
+  font-size: clamp(12.5px, 1vw, 14px);
+  letter-spacing: 0.06em;
   text-transform: uppercase;
   opacity: 0.9;
 }
