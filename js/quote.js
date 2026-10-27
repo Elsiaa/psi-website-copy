@@ -211,7 +211,7 @@
         render();
       }),
     );
-    const submit = el("button", "btn", "Review & Send Request");
+    const submit = el("button", "btn btn--accent", "Review & send request");
     submit.type = "submit";
     controls.appendChild(submit);
     form.appendChild(controls);
@@ -299,14 +299,15 @@
     const btns = el("div");
     btns.style.display = "flex";
     btns.style.gap = "10px";
-    const copyBtn = el("button", "btn btn--ghost", "Copy Summary");
+    btns.style.flexWrap = "wrap";
+    const copyBtn = el("button", "btn btn--ghost", "Copy summary");
     copyBtn.type = "button";
     copyBtn.addEventListener("click", () => {
       navigator.clipboard.writeText(summary).then(() => {
         copyBtn.textContent = "Copied ✓";
       });
     });
-    const send = el("a", "btn", "Send to PSI");
+    const send = el("a", "btn btn--accent", "Send to PSI");
     send.href =
       "mailto:info@psiconstructionpa.com?subject=" +
       encodeURIComponent(subject) +
