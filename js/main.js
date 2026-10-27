@@ -629,3 +629,21 @@
   buildJobs();
   select(0, "init");
 })();
+
+/* ---- the service rail's progress line ---- */
+(() => {
+  const rail = document.getElementById("svcRail");
+  const bar = document.getElementById("svcBar");
+  if (!rail || !bar) return;
+  const paint = () => {
+    const span = rail.scrollWidth - rail.clientWidth;
+    const w = Math.max(0.12, rail.clientWidth / rail.scrollWidth);
+    bar.style.width = (w * 100).toFixed(1) + "%";
+    const x = span > 0 ? rail.scrollLeft / span : 0;
+    bar.style.transform =
+      "translateX(" + (x * (100 / w - 100)).toFixed(1) + "%)";
+  };
+  rail.addEventListener("scroll", paint, { passive: true });
+  addEventListener("resize", paint, { passive: true });
+  paint();
+})();

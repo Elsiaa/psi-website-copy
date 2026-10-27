@@ -19,19 +19,8 @@
       property="og:image"
       content="https://elsiaa.github.io/psi-website-copy/assets/keyframe-final-hero.png"
     />
-    <link
-      rel="preload"
-      as="image"
-      href="assets/hero/start-portrait.jpg"
-      media="(max-width: 760px) and (orientation: portrait)"
-    />
-    <link
-      rel="preload"
-      as="image"
-      href="assets/hero/start.webp"
-      media="(min-width: 761px), (orientation: landscape)"
-    />
-    <meta name="theme-color" content="#1d2733" />
+    <link rel="preload" as="image" href="assets/hero-cutaway.webp" />
+    <meta name="theme-color" content="#f7f6f3" />
     <link
       rel="stylesheet"
       href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
@@ -81,6 +70,14 @@
     </script>
   </head>
   <body>
+    <svg width="0" height="0" style="position: absolute" aria-hidden="true">
+      <filter id="clayWB" color-interpolation-filters="sRGB">
+        <feColorMatrix
+          type="matrix"
+          values="1.028 0 0 0 0  0 1.123 0 0 0  0 0 1.25 0 0  0 0 0 1 0"
+        />
+      </filter>
+    </svg>
     <nav class="nav" id="topNav" aria-label="Primary">
       <a
         class="nav__brand"
@@ -138,31 +135,14 @@
       <div class="nav__scrim" id="navScrim" hidden></div>
     </nav>
 
-    <!-- ===================== SCROLL-DRIVEN HERO: drone in, door open, walk through ===================== -->
+    <!-- ===================== HERO: the open house ===================== -->
     <section
-      class="hero hero--film"
+      class="hero hero--open"
       id="hero"
-      aria-label="Fly in to a PSI-built home and walk through the front door as you scroll"
+      aria-label="A PSI-built three-storey home shown in cutaway, every room finished"
     >
-      <div class="hero__viewport">
-        <img
-          class="hero__poster"
-          id="heroPoster"
-          src="assets/hero/start.webp"
-          alt="Aerial view of a modern white three-storey residence built by PSI on a landscaped corner lot in Kingston"
-          decoding="async"
-          fetchpriority="high"
-        />
-        <video
-          class="hero__video"
-          id="heroVideo"
-          muted
-          playsinline
-          preload="none"
-          aria-hidden="true"
-        ></video>
-
-        <div class="hero__overlay" id="heroOverlay">
+      <div class="heroo__inner">
+        <div class="heroo__copy">
           <p class="hero__eyebrow">
             PSI Construction Services &middot; Wilkes-Barre &amp; Kingston, PA
           </p>
@@ -172,70 +152,44 @@
           <p class="hero__tagline">
             Built With Attention. Managed With Precision.
           </p>
-          <div class="hero__scrollcue" aria-hidden="true">
-            <span class="hero__scrollcue-label">Scroll to walk in</span>
-            <span class="hero__scrollcue-line"></span>
+          <div class="heroo__ctas">
+            <a class="heroo__cta" href="contact.html"
+              >Get a quote <span aria-hidden="true">&rarr;</span></a
+            >
+            <a class="heroo__link" href="#projects">See the work</a>
           </div>
         </div>
-
-        <div class="hero__chapters">
-          <article class="hchap" data-from="0.2" data-to="0.33">
-            <p class="hchap__kicker"><b>Ground-up</b> Kingston, PA</p>
-            <h2 class="hchap__title">
-              4,752 square feet. Three storeys. One crew.
-            </h2>
-            <p class="hchap__body">
-              This corner-lot residence was built by PSI from footings to final
-              finishes, to the 2018 IRC/IBC.
-            </p>
-          </article>
-          <article class="hchap" data-from="0.42" data-to="0.55">
-            <p class="hchap__kicker">
-              <b>Step inside</b> Every door hung square
-            </p>
-            <h2 class="hchap__title">
-              The details you notice are the ones we planned.
-            </h2>
-            <p class="hchap__body">
-              Drawings, engineering and a budget are settled before anyone
-              breaks ground.
-            </p>
-          </article>
-          <article class="hchap" data-from="0.63" data-to="0.77">
-            <p class="hchap__kicker">
-              <b>Finishes</b> Floors, trim, drywall, light
-            </p>
-            <h2 class="hchap__title">Finished like we were moving in.</h2>
-            <p class="hchap__body">
-              Insulation, drywall, flooring and trim by the same team that
-              framed the walls.
-            </p>
-          </article>
-          <article class="hchap hchap--end" data-from="0.86" data-to="1">
-            <p class="hchap__kicker">
-              <b>Your project</b> New builds, additions, renovations
-            </p>
-            <h2 class="hchap__title">Tell us what you need built.</h2>
-            <p class="hchap__body">
-              Free consultation. One point of contact from the first drawing to
-              the final walkthrough.
-            </p>
-            <div class="hchap__ctas">
-              <a class="hchap__cta" href="contact.html"
-                >Get a quote <span aria-hidden="true">&rarr;</span></a
-              >
-              <a class="hchap__call" href="tel:5703388774"
-                >570-338-8<span class="tel-psi">PSI</span> (774)</a
-              >
-            </div>
-          </article>
-          <p class="hchap__note" aria-hidden="true">
-            Interior shown is a visualization of PSI finish standards
-          </p>
-        </div>
-
-        <div class="hero__loader" id="heroLoader" aria-hidden="true">
-          <span class="hero__loader-bar" id="heroLoaderBar"></span>
+        <div class="heroo__stagewrap">
+          <img
+            class="heroo__house"
+            src="assets/hero-cutaway.webp"
+            srcset="
+              assets/hero-cutaway-small.webp 1200w,
+              assets/hero-cutaway.webp       2400w
+            "
+            sizes="(max-width: 900px) 100vw, 72vw"
+            alt="Cutaway view of a PSI-built three-storey home: furnished kitchen, living room, bedrooms, baths, and loft office"
+            decoding="async"
+            fetchpriority="high"
+          />
+          <a
+            class="heroo__pin"
+            style="--px: 30%; --py: 79%"
+            href="#capabilities"
+            ><span class="heroo__pin-dot"></span>Kitchen &amp; Living</a
+          >
+          <a
+            class="heroo__pin"
+            style="--px: 68%; --py: 52%"
+            href="#transformations"
+            ><span class="heroo__pin-dot"></span>Bedrooms &amp; Baths</a
+          >
+          <a class="heroo__pin" style="--px: 62%; --py: 22%" href="#process"
+            ><span class="heroo__pin-dot"></span>Loft &amp; Office</a
+          >
+          <a class="heroo__pin" style="--px: 13%; --py: 68%" href="#projects"
+            ><span class="heroo__pin-dot"></span>Deck &amp; Yard</a
+          >
         </div>
       </div>
     </section>
@@ -321,169 +275,167 @@
     </section>
 
     <!-- ===================== WHAT WE BUILD ===================== -->
-    <section class="section section--navy caps" id="capabilities">
+    <section class="section caps" id="capabilities">
       <div class="section__inner">
         <div class="caps__head">
-          <div>
-            <h2 class="section__title">What We Build</h2>
-          </div>
+          <h2 class="section__title">What We Build</h2>
+          <a class="caps__cta" href="contact.html">Get a quote &rarr;</a>
         </div>
-        <ol class="caps__grid">
-          <li class="cap cap--featured">
+        <ol class="svc-rail" id="svcRail">
+          <li class="svc">
             <img
-              class="cap__img"
-              src="assets/services/svc-01.jpg"
-              alt="A newly completed two-storey home with finished landscaping and driveway"
-              loading="eager"
-              fetchpriority="high"
-              decoding="async"
-            />
-            <div class="cap__scrim"></div>
-            <div class="cap__body">
-              <span class="cap__num">1</span>
-              <h3>Ground-Up New Home Construction</h3>
-              <p>Single-family builds, foundation through final finishes.</p>
-            </div>
-          </li>
-          <li class="cap">
-            <img
-              class="cap__img"
-              src="assets/services/svc-02.jpg"
-              alt="A house with a newly built addition, siding complete and the grounds not yet finished"
+              class="svc__art"
+              src="assets/services-clay/svc-01.webp"
+              alt=""
               loading="lazy"
               decoding="async"
             />
-            <div class="cap__scrim"></div>
-            <div class="cap__body">
-              <span class="cap__num">2</span>
-              <h3>Home Additions</h3>
-              <p>Full additions including plumbing and electrical.</p>
-            </div>
+            <p class="svc__num">01</p>
+            <h3 class="svc__title">Ground-Up New Homes</h3>
+            <p class="svc__desc">
+              Single-family builds, foundation through final finishes.
+            </p>
+            <p class="svc__tags">
+              <span>Foundations</span><span>Full builds</span><span>Keys</span>
+            </p>
           </li>
-          <li class="cap">
+          <li class="svc">
             <img
-              class="cap__img"
-              src="assets/services/svc-03.jpg"
-              alt="A renovated open-plan living space with new wide-plank flooring and fresh trim"
+              class="svc__art"
+              src="assets/services-clay/svc-02.webp"
+              alt=""
               loading="lazy"
               decoding="async"
             />
-            <div class="cap__scrim"></div>
-            <div class="cap__body">
-              <span class="cap__num">3</span>
-              <h3>Whole-Home Renovations &amp; Remodels</h3>
-              <p>Gut and finish work on existing houses.</p>
-            </div>
+            <p class="svc__num">02</p>
+            <h3 class="svc__title">Home Additions</h3>
+            <p class="svc__desc">
+              Full additions including plumbing and electrical.
+            </p>
+            <p class="svc__tags">
+              <span>Plumbing</span><span>Electrical</span><span>Tie-ins</span>
+            </p>
           </li>
-          <li class="cap">
+          <li class="svc">
             <img
-              class="cap__img"
-              src="assets/services/svc-04.jpg"
-              alt="A finished basement family room with recessed lighting and an egress window"
+              class="svc__art"
+              src="assets/services-clay/svc-03.webp"
+              alt=""
               loading="lazy"
               decoding="async"
             />
-            <div class="cap__scrim"></div>
-            <div class="cap__body">
-              <span class="cap__num">4</span>
-              <h3>Basement Build-Outs &amp; Finishing</h3>
-              <p>
-                Converting unfinished lower levels into fully usable living
-                space.
-              </p>
-            </div>
+            <p class="svc__num">03</p>
+            <h3 class="svc__title">Whole-Home Renovations</h3>
+            <p class="svc__desc">Gut and finish work on existing houses.</p>
+            <p class="svc__tags">
+              <span>Gut renos</span><span>Layouts</span><span>Finishes</span>
+            </p>
           </li>
-          <li class="cap">
+          <li class="svc">
             <img
-              class="cap__img"
-              src="assets/services/svc-05.jpg"
-              alt="Concrete foundation walls with formwork panels and reinforcing steel in place"
+              class="svc__art"
+              src="assets/services-clay/svc-04.webp"
+              alt=""
               loading="lazy"
               decoding="async"
             />
-            <div class="cap__scrim"></div>
-            <div class="cap__body">
-              <span class="cap__num">5</span>
-              <h3>Concrete &amp; Foundation Work</h3>
-              <p>Footings, foundations, slabs, and flatwork.</p>
-            </div>
+            <p class="svc__num">04</p>
+            <h3 class="svc__title">Basement Build-Outs</h3>
+            <p class="svc__desc">
+              Converting unfinished lower levels into fully usable living space.
+            </p>
+            <p class="svc__tags">
+              <span>Egress</span><span>Framing</span><span>Flooring</span>
+            </p>
           </li>
-          <li class="cap">
+          <li class="svc">
             <img
-              class="cap__img"
-              src="assets/services/svc-06.jpg"
-              alt="The interior of a house at framing stage, new lumber studs and roof trusses overhead"
+              class="svc__art"
+              src="assets/services-clay/svc-05.webp"
+              alt=""
               loading="lazy"
               decoding="async"
             />
-            <div class="cap__scrim"></div>
-            <div class="cap__body">
-              <span class="cap__num">6</span>
-              <h3>Framing &amp; Structural Carpentry</h3>
-              <p>Including engineered floor and roof truss packages.</p>
-            </div>
+            <p class="svc__num">05</p>
+            <h3 class="svc__title">Concrete &amp; Foundations</h3>
+            <p class="svc__desc">Footings, foundations, slabs, and flatwork.</p>
+            <p class="svc__tags">
+              <span>Footings</span><span>Slabs</span><span>Flatwork</span>
+            </p>
           </li>
-          <li class="cap">
+          <li class="svc">
             <img
-              class="cap__img"
-              src="assets/services/svc-07.jpg"
-              alt="A finished bathroom with a tiled shower, stone vanity and matte black fixtures"
+              class="svc__art"
+              src="assets/services-clay/svc-06.webp"
+              alt=""
               loading="lazy"
               decoding="async"
             />
-            <div class="cap__scrim"></div>
-            <div class="cap__body">
-              <span class="cap__num">7</span>
-              <h3>Bathroom &amp; Interior Room Remodels</h3>
-              <p>
-                Complete renovations, relocations, and new builds within
-                existing space.
-              </p>
-            </div>
+            <p class="svc__num">06</p>
+            <h3 class="svc__title">Framing &amp; Carpentry</h3>
+            <p class="svc__desc">
+              Including engineered floor and roof truss packages.
+            </p>
+            <p class="svc__tags">
+              <span>Trusses</span><span>Decks</span><span>Structure</span>
+            </p>
           </li>
-          <li class="cap">
+          <li class="svc">
             <img
-              class="cap__img"
-              src="assets/services/svc-08.jpg"
-              alt="A tradesman patching and sanding drywall during a rental turnover"
+              class="svc__art"
+              src="assets/services-clay/svc-07.webp"
+              alt=""
               loading="lazy"
               decoding="async"
             />
-            <div class="cap__scrim"></div>
-            <div class="cap__body">
-              <span class="cap__num">8</span>
-              <h3>Repairs &amp; Property Maintenance</h3>
-              <p>
-                For landlords, property managers, and organizations with
-                multiple properties.
-              </p>
-            </div>
+            <p class="svc__num">07</p>
+            <h3 class="svc__title">Bathrooms &amp; Interiors</h3>
+            <p class="svc__desc">
+              Complete renovations, relocations, and new installations.
+            </p>
+            <p class="svc__tags">
+              <span>Tile</span><span>Fixtures</span><span>Trim</span>
+            </p>
           </li>
-          <li class="cap">
+          <li class="svc">
             <img
-              class="cap__img"
-              src="assets/services/svc-09.jpg"
-              alt="A commercial corridor under renovation with new ceiling grid and doors"
+              class="svc__art"
+              src="assets/services-clay/svc-08.webp"
+              alt=""
               loading="lazy"
               decoding="async"
             />
-            <div class="cap__scrim"></div>
-            <div class="cap__body">
-              <span class="cap__num">9</span>
-              <h3>Institutional &amp; Public Bid Work</h3>
-              <p>
-                PennBid and county vendor-list projects, plus architect bid
-                lists.
-              </p>
-            </div>
+            <p class="svc__num">08</p>
+            <h3 class="svc__title">Repairs &amp; Maintenance</h3>
+            <p class="svc__desc">
+              For landlords, property managers, and organizations with multiple
+              properties.
+            </p>
+            <p class="svc__tags">
+              <span>Turnovers</span><span>Repairs</span><span>Upkeep</span>
+            </p>
+          </li>
+          <li class="svc">
+            <img
+              class="svc__art"
+              src="assets/services-clay/svc-09.webp"
+              alt=""
+              loading="lazy"
+              decoding="async"
+            />
+            <p class="svc__num">09</p>
+            <h3 class="svc__title">Institutional &amp; Public Bid</h3>
+            <p class="svc__desc">
+              PennBid and county vendor-list projects, prevailing wage
+              compliant.
+            </p>
+            <p class="svc__tags">
+              <span>PennBid</span><span>Municipal</span><span>Compliance</span>
+            </p>
           </li>
         </ol>
-
-        <div class="caps__cta">
-          <a class="btn caps__btn" href="contact.html">Get a Quote</a>
-          <p class="caps__cta-note">
-            Free consultation. Tell us what you need built and we come prepared.
-          </p>
+        <div class="svc-progress" aria-hidden="true">
+          <span class="svc-progress__bar" id="svcBar"></span>
         </div>
       </div>
     </section>
@@ -664,13 +616,20 @@
                   data-f="5"
                   loading="lazy"
                 />
-                <img
-                  class="ps-frame"
-                  src="assets/process-clay/stage-7.jpg"
-                  alt=""
+                <video
+                  class="ps-frame ps-frame--live"
                   data-f="6"
-                  loading="lazy"
-                />
+                  muted
+                  loop
+                  playsinline
+                  preload="none"
+                  poster="assets/process-clay/stage-7.jpg"
+                >
+                  <source
+                    src="assets/process-clay/stage-7-live.mp4"
+                    type="video/mp4"
+                  />
+                </video>
               </figure>
             </div>
           </div>
