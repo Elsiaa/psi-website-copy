@@ -1433,6 +1433,15 @@ body.viewer-lock {
   background: #f4f5f7;
 }
 
+/* The figures belong to the company band above them, so they stand on
+   the same ground. White under them put a hard seam right between the
+   email address and the 4.9, which split one block into two. The
+   doubled class outranks the plain .proofbar rule further down. */
+.proofbar.proofbar--stats {
+  background: #f4f5f7;
+  border-bottom: 0;
+}
+
 .caps > .section__inner {
   width: 100%;
   padding-top: 76px;
