@@ -69,7 +69,9 @@
       "svh) scale(" +
       (1 - 0.16 * hand).toFixed(4) +
       ")";
-    stage.style.opacity = (1 - hand * 0.9).toFixed(3);
+    // the model only dims; it must still be there when What We Build
+    // slides over it, or the screen goes blank between the two
+    stage.style.opacity = (1 - hand * 0.28).toFixed(3);
     if (caps) caps.classList.toggle("caps--in", p >= 0.9);
   }
   addEventListener("scroll", paint, { passive: true });

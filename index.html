@@ -33,8 +33,8 @@
       href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="css/site.css?v=one1" />
-    <link rel="stylesheet" href="css/upgrade.css?v=one1" />
+    <link rel="stylesheet" href="css/site.css?v=tool1" />
+    <link rel="stylesheet" href="css/upgrade.css?v=tool1" />
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -236,6 +236,76 @@
     </section>
 
     <section class="section caps" id="capabilities">
+      <!-- the company, then its figures, then the work -->
+      <div class="caps__about" id="about">
+        <img
+          class="caps__crew"
+          src="assets/about-crew.webp"
+          alt="Clay model of a PSI crew reading blueprints beside a PSI-branded truck"
+          loading="lazy"
+          decoding="async"
+        />
+        <div class="caps__aboutcopy">
+          <h3 class="caps__abouttitle">PSI Construction Services</h3>
+          <p class="caps__pull">
+            From single rooms to ground-up builds, PSI self-performs the work
+            with our own in-house crews, so the same team is accountable from
+            the first day to the final walkthrough.
+          </p>
+          <p class="caps__lede">
+            We build and renovate homes, rental properties, and commercial
+            buildings around Wilkes-Barre and Kingston.
+          </p>
+          <dl class="facts facts--band caps__facts">
+            <div>
+              <dt>Office</dt>
+              <dd>
+                190 Wyoming St<br />Wilkes-Barre, PA 18705
+                <small class="facts__note">Visits available upon request</small>
+              </dd>
+            </div>
+            <div>
+              <dt>Phone</dt>
+              <dd>
+                <a href="tel:5703388774"
+                  >570-338-8<span class="tel-psi">PSI</span>&nbsp;(774)</a
+                >
+              </dd>
+            </div>
+            <div>
+              <dt>Email</dt>
+              <dd>
+                <a href="mailto:info@psiconstructionpa.com"
+                  >info@psiconstructionpa.com</a
+                >
+              </dd>
+            </div>
+          </dl>
+        </div>
+      </div>
+      <section class="proofbar proofbar--stats" aria-label="PSI at a glance">
+        <div class="proofbar__inner">
+          <div class="proof">
+            <p class="proof__fig">
+              <span data-count="4.9" data-dec="1">4.9</span>
+              <span class="proof__stars" aria-hidden="true"
+                >&#9733;&#9733;&#9733;&#9733;&#9733;</span
+              >
+            </p>
+            <p class="proof__label"><a href="#reviews">Google rating</a></p>
+          </div>
+          <div class="proof">
+            <p class="proof__fig"><span data-count="14">14</span></p>
+            <p class="proof__label">
+              <a href="#projects">Documented jobs on the map</a>
+            </p>
+          </div>
+          <div class="proof">
+            <p class="proof__fig proof__fig--text">Start to keys</p>
+            <p class="proof__label">One in-house crew on every job</p>
+          </div>
+        </div>
+      </section>
       <div class="section__inner">
         <div class="caps__head">
           <h2 class="section__title caps__title">
@@ -243,6 +313,32 @@
             <span class="caps__t2">We</span>
             <span class="caps__t3">Build</span>
           </h2>
+          <div class="caps__tools" aria-hidden="true">
+            <img
+              src="assets/tools/hammer.webp"
+              alt=""
+              width="720"
+              height="467"
+              loading="lazy"
+              decoding="async"
+            />
+            <img
+              src="assets/tools/drill.webp"
+              alt=""
+              width="681"
+              height="720"
+              loading="lazy"
+              decoding="async"
+            />
+            <img
+              src="assets/tools/saw.webp"
+              alt=""
+              width="720"
+              height="328"
+              loading="lazy"
+              decoding="async"
+            />
+          </div>
           <a class="caps__cta" href="contact.html">Get a quote &rarr;</a>
           <img
             class="caps__house"
@@ -606,83 +702,6 @@
           </li>
         </ol>
       </div>
-      <div class="caps__about" id="about">
-        <img
-          class="caps__crew"
-          src="assets/about-crew.webp"
-          alt="Clay model of a PSI crew reading blueprints beside a PSI-branded truck"
-          loading="lazy"
-          decoding="async"
-        />
-        <div class="caps__aboutcopy">
-          <h3 class="caps__abouttitle">PSI Construction Services</h3>
-          <p class="caps__pull">
-            From single rooms to ground-up builds, PSI self-performs the work
-            with our own in-house crews, so the same team is accountable from
-            the first day to the final walkthrough.
-          </p>
-          <p class="caps__lede">
-            We build and renovate homes, rental properties, and commercial
-            buildings around Wilkes-Barre and Kingston.
-          </p>
-          <dl class="facts facts--band caps__facts">
-            <div>
-              <dt>Office</dt>
-              <dd>
-                190 Wyoming St<br />Wilkes-Barre, PA 18705
-                <small class="facts__note">Visits available upon request</small>
-              </dd>
-            </div>
-            <div>
-              <dt>Phone</dt>
-              <dd>
-                <a href="tel:5703388774"
-                  >570-338-8<span class="tel-psi">PSI</span>&nbsp;(774)</a
-                >
-              </dd>
-            </div>
-            <div>
-              <dt>Email</dt>
-              <dd>
-                <a href="mailto:info@psiconstructionpa.com"
-                  >info@psiconstructionpa.com</a
-                >
-              </dd>
-            </div>
-          </dl>
-        </div>
-      </div>
-    </section>
-
-    <!-- ===================== PROOF STRIP ===================== -->
-    <section class="proofbar proofbar--stats" aria-label="PSI at a glance">
-      <div class="proofbar__inner">
-        <div class="proof">
-          <p class="proof__fig">
-            <span data-count="4.9" data-dec="1">4.9</span>
-            <span class="proof__stars" aria-hidden="true"
-              >&#9733;&#9733;&#9733;&#9733;&#9733;</span
-            >
-          </p>
-          <p class="proof__label"><a href="#reviews">Google rating</a></p>
-        </div>
-        <div class="proof">
-          <p class="proof__fig"><span data-count="14">14</span></p>
-          <p class="proof__label">
-            <a href="#projects">Documented jobs on the map</a>
-          </p>
-        </div>
-        <div class="proof">
-          <p class="proof__fig"><span data-count="248">248</span></p>
-          <p class="proof__label">
-            <a href="#projects">Job-site photographs</a>
-          </p>
-        </div>
-        <div class="proof">
-          <p class="proof__fig proof__fig--text">Start to keys</p>
-          <p class="proof__label">One in-house crew on every job</p>
-        </div>
-      </div>
     </section>
 
     <!-- ===================== INTRODUCTION ===================== -->
@@ -801,7 +820,6 @@
             >
           </p>
           <p class="rvw__factline">
-            on Google across eleven public reviews, unedited.
             <a
               href="https://www.google.com/maps/search/PSI+Construction+190+Wyoming+St+Wilkes-Barre+PA+reviews"
               target="_blank"
@@ -821,31 +839,20 @@
     </section>
 
     <!-- ===================== GET A QUOTE ===================== -->
-    <section class="section quote-cta" id="quote">
+    <section class="section quote-cta quote-cta--form" id="quote">
       <div class="section__inner">
         <div class="qcta">
-          <img
-            class="qcta__shot"
-            src="assets/brand/drill-framing.jpg"
-            alt="A PSI carpenter driving a screw into new framing"
-            width="1200"
-            height="675"
-            loading="lazy"
-            decoding="async"
-          />
           <div class="qcta__lead">
             <h2 class="section__title">Tell us what you need built.</h2>
             <p class="qcta__sub">
               Answer a few multiple-choice questions and we show up already
               knowing the job. Or just call and talk it through.
             </p>
-          </div>
-          <div class="qcta__actions">
-            <a class="btn qcta__btn" href="contact.html">Get a quote</a>
             <a class="qcta__phone" href="tel:5703388774"
               >570-338-8<span class="tel-psi">PSI</span> (774)</a
             >
           </div>
+          <div class="qcta__form" id="quoteApp"></div>
         </div>
       </div>
     </section>
@@ -1030,10 +1037,10 @@
       integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
       crossorigin=""
     ></script>
-    <script src="js/hero.js?v=one1" defer></script>
-    <script src="js/main.js?v=one1" defer></script>
-    <script src="js/ba-page.js?v=one1" defer></script>
-    <script src="js/upgrade.js?v=one1" defer></script>
+    <script src="js/hero.js?v=tool1" defer></script>
+    <script src="js/main.js?v=tool1" defer></script>
+    <script src="js/ba-page.js?v=tool1" defer></script>
+    <script src="js/upgrade.js?v=tool1" defer></script>
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -1106,6 +1113,8 @@
         ]
       }
     </script>
-    <script src="js/support.js?v=one1" defer></script>
+    <script src="js/quote-data.js?v=tool1"></script>
+    <script src="js/quote.js?v=tool1" defer></script>
+    <script src="js/support.js?v=tool1" defer></script>
   </body>
 </html>
