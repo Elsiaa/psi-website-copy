@@ -33,8 +33,8 @@
       href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="css/site.css?v=life1" />
-    <link rel="stylesheet" href="css/upgrade.css?v=life1" />
+    <link rel="stylesheet" href="css/site.css?v=split1" />
+    <link rel="stylesheet" href="css/upgrade.css?v=split1" />
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -122,7 +122,6 @@
         <span class="nav__bars" aria-hidden="true"><i></i><i></i><i></i></span>
       </button>
       <div class="nav__links" id="navLinks">
-        <a href="#process">Our Process</a>
         <a href="#capabilities">Services</a>
         <a href="#transformations">Before &amp; After</a>
         <a href="#projects">Previous Projects</a>
@@ -239,13 +238,13 @@
           <a class="caps__cta" href="contact.html">Get a quote &rarr;</a>
           <img
             class="caps__house"
-            src="assets/hero-cutaway.webp"
+            src="assets/caps-house.webp"
             srcset="
-              assets/hero-cutaway-small.webp 1200w,
-              assets/hero-cutaway.webp       2400w
+              assets/caps-house-small.webp 1200w,
+              assets/caps-house.webp       2400w
             "
             sizes="(max-width: 900px) 92vw, 46vw"
-            alt="Cutaway model of a PSI-built three-storey home, every floor furnished"
+            alt="A PSI build shown half as the architect's drawing and half as the finished, furnished home"
             loading="lazy"
             decoding="async"
           />
@@ -473,201 +472,6 @@
 
     <!-- ===================== WHAT WE BUILD ===================== -->
     <!-- ===================== OUR PROCESS ===================== -->
-    <section class="section process" id="process">
-      <div class="ps-runway" id="psRunway">
-        <div class="ps-stage">
-          <div class="ps-inner">
-            <div class="ps-copy">
-              <div class="ps-titlerow">
-                <h2 class="section__title">How We Build</h2>
-                <span class="ps-count" id="psCount" aria-hidden="true"
-                  >1 / 7</span
-                >
-              </div>
-              <p class="ps-sub">
-                Every project runs the same way, from empty lot to keys. Scroll
-                to build one.
-              </p>
-              <ol class="ps-steps" id="psSteps">
-                <li class="ps-step" data-step="0">
-                  <p class="ps-step__n">Stage 1</p>
-                  <h3>Plan &amp; Design</h3>
-                  <p class="ps-step__d">
-                    Drawings, engineering, and a budget settled before anyone
-                    breaks ground.
-                  </p>
-                </li>
-                <li class="ps-step" data-step="1">
-                  <p class="ps-step__n">Stage 2</p>
-                  <h3>Site Preparation</h3>
-                  <p class="ps-step__d">
-                    Lot cleared, elevations set, and the excavation dug to the
-                    drawings.
-                  </p>
-                </li>
-                <li class="ps-step" data-step="2">
-                  <p class="ps-step__n">Stage 3</p>
-                  <h3>Foundation</h3>
-                  <p class="ps-step__d">
-                    Footings poured below frost line, foundation walls up square
-                    and level, waterproofed before backfill.
-                  </p>
-                </li>
-                <li class="ps-step" data-step="3">
-                  <p class="ps-step__n">Stage 4</p>
-                  <h3>Framing</h3>
-                  <p class="ps-step__d">
-                    Floors, walls, and roof structure go up a storey at a time.
-                  </p>
-                </li>
-                <li class="ps-step" data-step="4">
-                  <p class="ps-step__n">Stage 5</p>
-                  <h3>Exterior &amp; Systems</h3>
-                  <p class="ps-step__d">
-                    Roofing, siding, windows and doors close the building in,
-                    rough-in inspected first.
-                  </p>
-                </li>
-                <li class="ps-step" data-step="5">
-                  <p class="ps-step__n">Stage 6</p>
-                  <h3>Interior &amp; Finishes</h3>
-                  <p class="ps-step__d">
-                    Insulated, boarded, then the finish work you actually touch.
-                  </p>
-                </li>
-                <li class="ps-step" data-step="6">
-                  <p class="ps-step__n">Stage 7</p>
-                  <h3>Final Walkthrough</h3>
-                  <p class="ps-step__d">
-                    Punch list closed, keys handed over, and our number still
-                    works.
-                  </p>
-                </li>
-              </ol>
-              <div
-                class="ps-rail"
-                id="psRail"
-                role="group"
-                aria-label="Jump to stage"
-              >
-                <button
-                  class="ps-tick-btn"
-                  type="button"
-                  data-go="0"
-                  aria-label="Stage 1"
-                >
-                  <span></span></button
-                ><button
-                  class="ps-tick-btn"
-                  type="button"
-                  data-go="1"
-                  aria-label="Stage 2"
-                >
-                  <span></span></button
-                ><button
-                  class="ps-tick-btn"
-                  type="button"
-                  data-go="2"
-                  aria-label="Stage 3"
-                >
-                  <span></span></button
-                ><button
-                  class="ps-tick-btn"
-                  type="button"
-                  data-go="3"
-                  aria-label="Stage 4"
-                >
-                  <span></span></button
-                ><button
-                  class="ps-tick-btn"
-                  type="button"
-                  data-go="4"
-                  aria-label="Stage 5"
-                >
-                  <span></span></button
-                ><button
-                  class="ps-tick-btn"
-                  type="button"
-                  data-go="5"
-                  aria-label="Stage 6"
-                >
-                  <span></span></button
-                ><button
-                  class="ps-tick-btn"
-                  type="button"
-                  data-go="6"
-                  aria-label="Stage 7"
-                >
-                  <span></span>
-                </button>
-              </div>
-            </div>
-            <div class="ps-art">
-              <figure
-                class="ps-build"
-                aria-label="A clay model of a PSI build, from staked lot to finished home, advancing as you scroll"
-              >
-                <img
-                  class="ps-frame"
-                  src="assets/process-clay/stage-1.jpg"
-                  alt=""
-                  data-f="0"
-                />
-                <img
-                  class="ps-frame"
-                  src="assets/process-clay/stage-2.jpg"
-                  alt=""
-                  data-f="1"
-                  loading="lazy"
-                />
-                <img
-                  class="ps-frame"
-                  src="assets/process-clay/stage-3.jpg"
-                  alt=""
-                  data-f="2"
-                  loading="lazy"
-                />
-                <img
-                  class="ps-frame"
-                  src="assets/process-clay/stage-4.jpg"
-                  alt=""
-                  data-f="3"
-                  loading="lazy"
-                />
-                <img
-                  class="ps-frame"
-                  src="assets/process-clay/stage-5.jpg"
-                  alt=""
-                  data-f="4"
-                  loading="lazy"
-                />
-                <img
-                  class="ps-frame"
-                  src="assets/process-clay/stage-6.jpg"
-                  alt=""
-                  data-f="5"
-                  loading="lazy"
-                />
-                <video
-                  class="ps-frame ps-frame--live"
-                  data-f="6"
-                  muted
-                  loop
-                  playsinline
-                  preload="none"
-                  poster="assets/process-clay/stage-7.jpg"
-                >
-                  <source
-                    src="assets/process-clay/stage-7-live.mp4"
-                    type="video/mp4"
-                  />
-                </video>
-              </figure>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
 
     <!-- ===================== PREVIOUS PROJECTS ===================== -->
     <!-- ===================== BEFORE & AFTER ===================== -->
@@ -1045,11 +849,10 @@
       integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
       crossorigin=""
     ></script>
-    <script src="js/hero.js?v=life1" defer></script>
-    <script src="js/main.js?v=life1" defer></script>
-    <script src="js/process.js?v=life1" defer></script>
-    <script src="js/transform.js?v=life1" defer></script>
-    <script src="js/upgrade.js?v=life1" defer></script>
+    <script src="js/hero.js?v=split1" defer></script>
+    <script src="js/main.js?v=split1" defer></script>
+    <script src="js/transform.js?v=split1" defer></script>
+    <script src="js/upgrade.js?v=split1" defer></script>
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -1122,6 +925,6 @@
         ]
       }
     </script>
-    <script src="js/support.js?v=life1" defer></script>
+    <script src="js/support.js?v=split1" defer></script>
   </body>
 </html>
