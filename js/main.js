@@ -248,11 +248,17 @@
   map.attributionControl.setPrefix(
     '<a href="https://leafletjs.com">Leaflet</a>',
   );
-  L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-    maxZoom: 19,
-    attribution:
-      '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-  }).addTo(map);
+  // CARTO's light basemap: quiet greys that sit on the white site,
+  // with the red pins carrying the color.
+  L.tileLayer(
+    "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",
+    {
+      maxZoom: 19,
+      subdomains: "abcd",
+      attribution:
+        '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>',
+    },
+  ).addTo(map);
 
   // A project is a "case study" once it has a photo gallery attached.
   // Those pins are styled differently and open a detail view.
@@ -354,9 +360,10 @@
         '" alt="' +
         (p.caption || p.type || "PSI project") +
         '">' +
-        '<span class="job__count">' +
+        '<span class="job__count"><b>' +
         count +
-        (count === 1 ? " photo" : " photos") +
+        "</b> " +
+        (count === 1 ? "photo" : "photos") +
         "</span>" +
         "</span>" +
         '<span class="job__body">' +
