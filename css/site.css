@@ -3849,6 +3849,170 @@ section[id],
   transition: transform 0.1s linear;
 }
 
+/* ---------------- reviews: one voice at a time ----------------
+   Editorial, not a card wall: a single large quotation holds the
+   room, rotating quietly; the score is a stated fact, not a badge. */
+
+.rvw__head {
+  max-width: 760px;
+  margin-bottom: clamp(28px, 5vh, 56px);
+}
+
+.rvw__fact {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  margin: 18px 0 0;
+}
+
+.rvw__score {
+  font-family: var(--font-display);
+  font-size: clamp(44px, 4.5vw, 64px);
+  font-weight: 800;
+  line-height: 1;
+  color: var(--ink);
+  letter-spacing: -0.02em;
+}
+
+.rvw__factline {
+  font-size: clamp(16px, 1.3vw, 18px);
+  color: var(--muted);
+  max-width: 34ch;
+  line-height: 1.5;
+}
+
+.rvw__factline a {
+  color: var(--accent);
+  font-weight: 700;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.rvw__stage {
+  margin: 0;
+  max-width: 920px;
+  min-height: clamp(220px, 32vh, 320px);
+  transition: opacity 0.24s ease;
+}
+
+.rvw__stage.is-out {
+  opacity: 0;
+}
+
+.rvw__quote {
+  margin: 0 0 26px;
+  font-family: var(--font-display);
+  font-size: clamp(22px, 2.6vw, 36px);
+  font-weight: 600;
+  line-height: 1.3;
+  letter-spacing: -0.015em;
+  color: var(--ink);
+  display: -webkit-box;
+  -webkit-line-clamp: 6;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.rvw__quote strong {
+  font-weight: 800;
+  color: var(--accent);
+}
+
+.rvw__by {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.rvw__avatar {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: var(--navy);
+  color: #fff;
+  display: grid;
+  place-items: center;
+  font-family: var(--font-display);
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  flex: 0 0 auto;
+}
+
+.rvw__who {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.rvw__who b {
+  font-family: var(--font-display);
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.rvw__who i {
+  font-style: normal;
+  font-size: 13px;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+}
+
+.rvw__dots {
+  display: flex;
+  gap: 8px;
+  margin-top: clamp(26px, 4vh, 44px);
+}
+
+.rvw__dot {
+  width: 26px;
+  height: 20px;
+  padding: 9px 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+}
+
+.rvw__dot::before {
+  content: "";
+  display: block;
+  height: 2px;
+  background: #d8d4cb;
+  border-radius: 999px;
+  transition:
+    background 0.25s ease,
+    transform 0.25s ease;
+}
+
+.rvw__dot:hover::before {
+  background: var(--muted);
+}
+
+.rvw__dot.is-on::before {
+  background: var(--accent);
+  transform: scaleY(1.8);
+}
+
+@media (max-width: 760px) {
+  .rvw__fact {
+    flex-direction: column;
+    gap: 6px;
+  }
+  .rvw__quote {
+    -webkit-line-clamp: 8;
+  }
+  .rvw__stage {
+    min-height: 300px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rvw__stage {
+    transition: none;
+  }
+}
+
 /* ---------------- Support assistant ---------------- */
 /* Mirrors the elsiaa.com support widget: labeled white pill launcher
    (a 52px circle on phones) with a fade-up entrance, a navy quote pill

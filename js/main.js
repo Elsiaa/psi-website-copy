@@ -97,31 +97,72 @@
     },
   ];
 
-  const rTrack = document.getElementById("reviewsTrack");
-  reviews.forEach((r) => {
-    const card = document.createElement("article");
-    card.className = "review-card";
-    const initials = r.author
-      .split(/\s+/)
-      .slice(0, 2)
-      .map((w) => w[0])
-      .join("")
-      .toUpperCase();
-    card.innerHTML = `
-      <div class="review-card__head">
-        <span class="review-card__avatar" aria-hidden="true">${initials}</span>
-        <p class="review-card__author">${r.author}<small>Google review</small></p>
-        <svg class="review-card__gmark" viewBox="0 0 48 48" role="img" aria-label="Posted on Google">
-          <path fill="#4285F4" d="M45.12 24.5c0-1.56-.14-3.06-.4-4.5H24v8.51h11.84c-.51 2.75-2.06 5.08-4.39 6.64v5.52h7.11c4.16-3.83 6.56-9.47 6.56-16.17z"/>
-          <path fill="#34A853" d="M24 46c5.94 0 10.92-1.97 14.56-5.33l-7.11-5.52c-1.97 1.32-4.49 2.1-7.45 2.1-5.73 0-10.58-3.87-12.31-9.07H4.34v5.7C7.96 41.07 15.4 46 24 46z"/>
-          <path fill="#FBBC05" d="M11.69 28.18C11.25 26.86 11 25.45 11 24s.25-2.86.69-4.18v-5.7H4.34C2.85 17.09 2 20.45 2 24s.85 6.91 2.34 9.88l7.35-5.7z"/>
-          <path fill="#EA4335" d="M24 10.75c3.23 0 6.13 1.11 8.41 3.29l6.31-6.31C34.91 4.18 29.93 2 24 2 15.4 2 7.96 6.93 4.34 14.12l7.35 5.7c1.73-5.2 6.58-9.07 12.31-9.07z"/>
-        </svg>
-      </div>
-      <div class="review-card__stars" aria-label="${r.stars} out of 5 stars">${"★".repeat(r.stars)}${"☆".repeat(5 - r.stars)}</div>
-      <p class="review-card__text">&ldquo;${r.html}&rdquo;</p>`;
-    rTrack.appendChild(card);
-  });
+  // ---- the review stage: one voice at a time ----
+  const rQuote = document.getElementById("rvwQuote");
+  const rName = document.getElementById("rvwName");
+  const rAvatar = document.getElementById("rvwAvatar");
+  const rMeta = document.getElementById("rvwMeta");
+  const rDots = document.getElementById("rvwDots");
+  const rStage = document.getElementById("rvwStage");
+  let rIdx = 0;
+  let rTimer = null;
+  const rReduce = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+  function showReview(i, instant) {
+    rIdx = ((i % reviews.length) + reviews.length) % reviews.length;
+    const r = reviews[rIdx];
+    const paint = () => {
+      rQuote.innerHTML = "\u201C" + r.html + "\u201D";
+      rName.textContent = r.author;
+      rMeta.textContent = "Google review \u00B7 " + "\u2605".repeat(r.stars);
+      rAvatar.textContent = r.author
+        .split(/\s+/)
+        .map((w) => w[0])
+        .slice(0, 2)
+        .join("");
+      [...rDots.children].forEach((d, k) => {
+        d.classList.toggle("is-on", k === rIdx);
+        d.setAttribute("aria-selected", k === rIdx ? "true" : "false");
+      });
+    };
+    if (instant || rReduce.matches) {
+      paint();
+      return;
+    }
+    rStage.classList.add("is-out");
+    setTimeout(() => {
+      paint();
+      rStage.classList.remove("is-out");
+    }, 240);
+  }
+
+  function rRestart() {
+    if (rTimer) clearInterval(rTimer);
+    if (rReduce.matches) return;
+    rTimer = setInterval(() => showReview(rIdx + 1), 7000);
+  }
+
+  if (rQuote && rDots) {
+    reviews.forEach((r, k) => {
+      const d = document.createElement("button");
+      d.type = "button";
+      d.role = "tab";
+      d.className = "rvw__dot";
+      d.setAttribute("aria-label", "Review by " + r.author);
+      d.addEventListener("click", () => {
+        showReview(k);
+        rRestart();
+      });
+      rDots.appendChild(d);
+    });
+    showReview(0, true);
+    rRestart();
+    rStage.addEventListener(
+      "pointerenter",
+      () => rTimer && clearInterval(rTimer),
+    );
+    rStage.addEventListener("pointerleave", rRestart);
+  }
 
   // Aggregate score in the badge, computed from the cards themselves.
   const gAvg = reviews.reduce((t, r) => t + r.stars, 0) / reviews.length;
