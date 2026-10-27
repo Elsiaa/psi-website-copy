@@ -123,7 +123,7 @@
       </button>
       <div class="nav__links" id="navLinks">
         <a href="#capabilities">Services</a>
-        <a href="#transformations">Before &amp; After</a>
+        <a href="before-after.html">Before &amp; After</a>
         <a href="#projects">Previous Projects</a>
         <a href="#reviews">Reviews</a>
         <a href="tel:5703388774"
@@ -489,62 +489,84 @@
             <div>
               <p class="eyebrow eyebrow--accent">Before &amp; after</p>
               <h2 class="section__title" id="tfHead">
-                Same room. Our crew. Drag to see the difference.
+                Same room. <b>Our crew.</b>
               </h2>
             </div>
             <p class="tf__lede">
-              Real PSI jobs. Each pair is re-staged from our own on-site
-              photography of the same project.
+              Drag either slider. Both are PSI jobs, re-staged from our own
+              on-site photography of the same project.
             </p>
           </div>
-          <div class="tf__grid">
-            <div class="ba" style="--x: 50%">
-              <img class="ba__before" alt="" decoding="async" />
-              <img class="ba__after" alt="" decoding="async" />
-              <span class="ba__tag ba__tag--before">Before</span>
-              <span class="ba__tag ba__tag--after">After</span>
-              <input
-                class="ba__range"
-                type="range"
-                min="0"
-                max="100"
-                value="50"
-                step="0.5"
-                aria-label="Before and after: move to compare"
-              />
-              <span class="ba__handle" aria-hidden="true"></span>
-            </div>
-            <div class="tf__info">
-              <div
-                class="tf__tabs"
-                role="tablist"
-                aria-label="Choose a job"
-              ></div>
-              <div class="tf__meta" aria-live="polite">
-                <p class="tf__span"></p>
-                <h3 class="tf__title"></h3>
-                <p class="tf__place"></p>
-                <dl class="tf__caps">
-                  <div>
-                    <dt>Before</dt>
-                    <dd class="tf__cap tf__cap--before"></dd>
-                  </div>
-                  <div>
-                    <dt>After</dt>
-                    <dd class="tf__cap tf__cap--after"></dd>
-                  </div>
-                </dl>
-                <button
-                  class="tf__open"
-                  type="button"
-                  data-project="16"
-                  data-open="16"
-                >
-                  See all photos from this job &rarr;
-                </button>
+          <div class="tfx">
+            <figure class="tfx__item">
+              <div class="ba" style="--x: 50%">
+                <img
+                  class="ba__before"
+                  src="assets/transform/bath-marble-before.jpg"
+                  alt="Before: Original 1960s yellow tile and a cast tub"
+                  loading="lazy"
+                  decoding="async"
+                />
+                <img
+                  class="ba__after"
+                  src="assets/transform/bath-marble-after.jpg"
+                  alt="After: Floor-to-ceiling marble-look porcelain and a glass shower"
+                  loading="lazy"
+                  decoding="async"
+                />
+                <span class="ba__tag ba__tag--before">Before</span>
+                <span class="ba__tag ba__tag--after">After</span>
+                <input
+                  class="ba__range"
+                  type="range"
+                  min="0"
+                  max="100"
+                  value="50"
+                  step="0.5"
+                  aria-label="Yellow tile to marble: move to compare before and after"
+                />
+                <span class="ba__handle" aria-hidden="true"></span>
               </div>
-            </div>
+              <figcaption class="tfx__cap">Yellow tile to marble</figcaption>
+            </figure>
+            <figure class="tfx__item">
+              <div class="ba" style="--x: 50%">
+                <img
+                  class="ba__before"
+                  src="assets/transform/basement-before.jpg"
+                  alt="Before: Open joists, bare block walls and a dirt-stained slab"
+                  loading="lazy"
+                  decoding="async"
+                />
+                <img
+                  class="ba__after"
+                  src="assets/transform/basement-after.jpg"
+                  alt="After: A finished lower level with a full bathroom"
+                  loading="lazy"
+                  decoding="async"
+                />
+                <span class="ba__tag ba__tag--before">Before</span>
+                <span class="ba__tag ba__tag--after">After</span>
+                <input
+                  class="ba__range"
+                  type="range"
+                  min="0"
+                  max="100"
+                  value="50"
+                  step="0.5"
+                  aria-label="Bare basement to finished level: move to compare before and after"
+                />
+                <span class="ba__handle" aria-hidden="true"></span>
+              </div>
+              <figcaption class="tfx__cap">
+                Bare basement to finished level
+              </figcaption>
+            </figure>
           </div>
+          <a class="tfx__more" href="before-after.html"
+            >See all six transformations
+            <span aria-hidden="true">&rarr;</span></a
+          >
         </div>
       </section>
 
@@ -858,7 +880,7 @@
     ></script>
     <script src="js/hero.js?v=about1" defer></script>
     <script src="js/main.js?v=about1" defer></script>
-    <script src="js/transform.js?v=about1" defer></script>
+    <script src="js/ba-page.js?v=ba1" defer></script>
     <script src="js/upgrade.js?v=about1" defer></script>
     <script type="application/ld+json">
       {
