@@ -13,9 +13,8 @@
   if (!runway) return;
 
   const frames = [...runway.querySelectorAll(".ps-frame")];
-  const steps = [...runway.querySelectorAll(".ps-step")];
-  const ticks = [...runway.querySelectorAll(".ps-tick-btn")];
-  const count = document.getElementById("psCount");
+  const items = [...runway.querySelectorAll(".ps-item")];
+  const jumps = [...runway.querySelectorAll(".ps-item__btn")];
   const N = frames.length;
   if (!N) return;
 
@@ -50,9 +49,10 @@
       }
     });
     const active = e > 0.5 ? hi : lo;
-    steps.forEach((st, k) => st.classList.toggle("is-on", k === active));
-    ticks.forEach((b, k) => b.classList.toggle("is-on", k === active));
-    if (count) count.textContent = active + 1 + " / " + N;
+    items.forEach((it, k) => {
+      it.classList.toggle("is-on", k === active);
+      it.classList.toggle("is-done", k < active);
+    });
   }
 
   if (reduce.matches) {
@@ -75,8 +75,8 @@
   addEventListener("scroll", onScroll, { passive: true });
   addEventListener("resize", onScroll, { passive: true });
 
-  // tick rail: jump the scroll to a stage
-  ticks.forEach((b) => {
+  // the index is the navigation: click a stage to scroll to it
+  jumps.forEach((b) => {
     b.addEventListener("click", () => {
       const k = +b.dataset.go;
       const r = runway.getBoundingClientRect();

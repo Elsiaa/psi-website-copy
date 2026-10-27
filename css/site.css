@@ -2009,139 +2009,98 @@ section[id],
   margin-bottom: 10px;
 }
 
-.ps-titlerow {
+/* ---------------- the stage index ----------------
+   The whole life cycle stays on screen: seven stages stacked, the
+   active one big in black with a red number and its description
+   open, the rest quiet. Strong letters, no whisper type. */
+
+.ps-copy .section__title {
+  font-size: clamp(30px, 2.6vw, 40px);
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  margin-bottom: clamp(18px, 2.6vh, 34px);
+}
+
+.ps-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: clamp(8px, 1.4vh, 14px);
+}
+
+.ps-item__btn {
   display: flex;
   align-items: baseline;
-  justify-content: space-between;
-  gap: 16px;
-  margin-bottom: 14px;
+  gap: 14px;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  text-align: left;
+  font: inherit;
 }
 
-.ps-titlerow .section__title {
-  margin-bottom: 0;
-}
-
-.ps-count {
+.ps-item__n {
   font-family: var(--font-display);
   font-size: 15px;
-  font-weight: 700;
-  color: var(--muted);
+  font-weight: 800;
+  color: #c9c4ba;
   font-variant-numeric: tabular-nums;
-  white-space: nowrap;
+  transition: color 0.25s ease;
 }
 
-.ps-sub {
-  margin: 0 0 30px;
-  max-width: 34ch;
-  color: var(--muted);
-  font-size: 16px;
-  line-height: 1.6;
-}
-
-/* stages crossfade in place, so the column never jumps height */
-.ps-steps {
-  position: relative;
-  list-style: none;
-  margin: 0 0 28px;
-  padding: 0;
-  min-height: 172px;
-}
-
-.ps-step {
-  position: absolute;
-  inset: 0;
-  opacity: 0;
-  transform: translateY(12px);
-  /* leaving: clear out quickly, so two captions are never legible at once */
-  transition:
-    opacity 0.16s ease,
-    transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
-  pointer-events: none;
-}
-
-.ps-step.is-on {
-  opacity: 1;
-  transform: none;
-  /* arriving: wait for the old one to go, then come in */
-  transition:
-    opacity 0.34s ease 0.13s,
-    transform 0.46s cubic-bezier(0.2, 0.8, 0.2, 1) 0.13s;
-}
-
-.ps-step__n {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  margin: 0 0 10px;
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 0.24em;
+.ps-item__t {
+  font-family: var(--font-display);
+  font-size: clamp(17px, 1.5vw, 21px);
+  font-weight: 800;
   text-transform: uppercase;
-  color: var(--accent);
-  font-variant-numeric: tabular-nums;
-}
-
-.ps-step__n::after {
-  content: "";
-  flex: 1 1 auto;
-  height: 1px;
-  background: var(--hairline);
-}
-
-.ps-step h3 {
-  margin: 0 0 10px;
-  font-size: clamp(21px, 2.3vw, 30px);
-  line-height: 1.12;
-  letter-spacing: -0.022em;
-  text-wrap: balance;
-}
-
-.ps-step__d {
-  margin: 0;
-  max-width: 34ch;
-  color: var(--muted);
-  font-size: 16px;
-  line-height: 1.65;
-}
-
-/* ---------------- stage rail ---------------- */
-
-.ps-rail {
-  display: flex;
-  align-items: center;
-  gap: 7px;
-}
-
-.ps-tick-btn {
-  padding: 10px 0;
-  background: none;
-  border: 0;
-  cursor: pointer;
-  flex: 1 1 auto;
-}
-
-.ps-tick-btn span {
-  display: block;
-  height: 2px;
-  border-radius: 2px;
-  background: rgba(16, 18, 20, 0.16);
+  letter-spacing: 0.015em;
+  color: #b6b1a7;
   transition:
-    background 0.35s ease,
-    transform 0.35s ease;
-  transform-origin: left;
+    color 0.25s ease,
+    font-size 0.25s ease;
 }
 
-.ps-tick-btn:hover span {
-  background: rgba(16, 18, 20, 0.4);
+.ps-item.is-done .ps-item__n,
+.ps-item.is-done .ps-item__t {
+  color: var(--muted);
 }
 
-.ps-tick-btn.is-done span {
-  background: rgba(214, 0, 0, 0.32);
+.ps-item.is-on .ps-item__n {
+  color: var(--accent);
 }
 
-.ps-tick-btn.is-on span {
-  background: var(--accent);
-  transform: scaleY(2);
+.ps-item.is-on .ps-item__t {
+  color: var(--ink);
+  font-size: clamp(22px, 2vw, 28px);
+}
+
+.ps-item__btn:hover .ps-item__t {
+  color: var(--ink);
+}
+
+.ps-item__d {
+  overflow: hidden;
+  max-height: 0;
+  opacity: 0;
+  margin: 0;
+  padding-left: 36px;
+  font-size: clamp(16px, 1.3vw, 18px);
+  font-weight: 500;
+  line-height: 1.55;
+  color: #3c4148;
+  transition:
+    max-height 0.35s cubic-bezier(0.2, 0.8, 0.2, 1),
+    opacity 0.25s ease,
+    margin 0.35s ease;
+}
+
+.ps-item.is-on .ps-item__d {
+  max-height: 120px;
+  opacity: 1;
+  margin: 6px 0 4px;
 }
 
 /* ---------------- the scene ---------------- */
@@ -2204,11 +2163,8 @@ section[id],
   .ps-build {
     max-height: 42vh;
   }
-  .ps-sub {
-    display: none; /* the scene says it faster than the sentence does */
-  }
   .ps-copy .section__title {
-    font-size: clamp(24px, 6vw, 32px);
+    font-size: clamp(26px, 7vw, 34px);
     margin-bottom: 14px;
   }
   .ps-inner {
@@ -2218,17 +2174,18 @@ section[id],
     align-items: center;
     padding-top: 54px;
   }
-  .ps-steps {
-    margin-bottom: 16px;
-    min-height: 132px;
-    margin-bottom: 18px;
+  .ps-list {
+    gap: 7px;
   }
-  .ps-step h3 {
-    font-size: clamp(19px, 5vw, 24px);
+  .ps-item__t {
+    font-size: 16px;
   }
-  .ps-step__d {
+  .ps-item.is-on .ps-item__t {
+    font-size: 21px;
+  }
+  .ps-item__d {
     font-size: 15px;
-    max-width: none;
+    padding-left: 32px;
   }
 }
 
@@ -2238,9 +2195,6 @@ section[id],
   }
   .ps-build {
     max-height: 38vh;
-  }
-  .ps-steps {
-    min-height: 160px;
   }
 }
 
@@ -2257,21 +2211,18 @@ section[id],
   padding: clamp(64px, 10vh, 120px) 0;
 }
 
-.ps-runway:not(.is-pinned) .ps-steps {
-  position: static;
-  min-height: 0;
-  display: grid;
-  gap: 24px;
-}
-
-.ps-runway:not(.is-pinned) .ps-step {
-  position: static;
+.ps-runway:not(.is-pinned) .ps-item__d {
+  max-height: none;
   opacity: 1;
-  transform: none;
+  margin: 6px 0 4px;
 }
 
-.ps-runway:not(.is-pinned) .ps-rail {
-  display: none;
+.ps-runway:not(.is-pinned) .ps-item__t {
+  color: var(--ink);
+}
+
+.ps-runway:not(.is-pinned) .ps-item__n {
+  color: var(--accent);
 }
 
 /* ---------------- the excavator ---------------- */
@@ -3380,7 +3331,6 @@ section[id],
 .facts__note,
 .review-card__author small,
 .proof__label,
-.ps-sub,
 .qcta__sub,
 .faq__note,
 .caps__cta-note,
@@ -3413,7 +3363,6 @@ section[id],
   font-size: 15px;
 }
 
-.ps-sub,
 .qcta__sub,
 .faq__note,
 .caps__cta-note {

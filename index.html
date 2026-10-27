@@ -44,7 +44,7 @@
       href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="css/site.css?v=clay3" />
+    <link rel="stylesheet" href="css/site.css?v=clay4" />
     <link rel="stylesheet" href="css/upgrade.css?v=up1" />
     <script type="application/ld+json">
       {
@@ -494,129 +494,77 @@
         <div class="ps-stage">
           <div class="ps-inner">
             <div class="ps-copy">
-              <div class="ps-titlerow">
-                <h2 class="section__title">How We Build</h2>
-                <span class="ps-count" id="psCount" aria-hidden="true"
-                  >1 / 7</span
-                >
-              </div>
-              <p class="ps-sub">
-                Every project runs the same way, from empty lot to keys. Scroll
-                to build one.
-              </p>
-              <ol class="ps-steps" id="psSteps">
-                <li class="ps-step" data-step="0">
-                  <p class="ps-step__n">Stage 1</p>
-                  <h3>Plan &amp; Design</h3>
-                  <p class="ps-step__d">
+              <h2 class="section__title">How We Build</h2>
+              <ol class="ps-list" id="psList">
+                <li class="ps-item" data-step="0">
+                  <button type="button" class="ps-item__btn" data-go="0">
+                    <span class="ps-item__n">01</span>
+                    <span class="ps-item__t">Plan &amp; Design</span>
+                  </button>
+                  <p class="ps-item__d">
                     Drawings, engineering, and a budget settled before anyone
                     breaks ground.
                   </p>
                 </li>
-                <li class="ps-step" data-step="1">
-                  <p class="ps-step__n">Stage 2</p>
-                  <h3>Site Preparation</h3>
-                  <p class="ps-step__d">
+                <li class="ps-item" data-step="1">
+                  <button type="button" class="ps-item__btn" data-go="1">
+                    <span class="ps-item__n">02</span>
+                    <span class="ps-item__t">Site Preparation</span>
+                  </button>
+                  <p class="ps-item__d">
                     Lot cleared, elevations set, and the excavation dug to the
                     drawings.
                   </p>
                 </li>
-                <li class="ps-step" data-step="2">
-                  <p class="ps-step__n">Stage 3</p>
-                  <h3>Foundation</h3>
-                  <p class="ps-step__d">
-                    Footings poured below frost line, foundation walls up square
-                    and level, waterproofed before backfill.
+                <li class="ps-item" data-step="2">
+                  <button type="button" class="ps-item__btn" data-go="2">
+                    <span class="ps-item__n">03</span>
+                    <span class="ps-item__t">Foundation</span>
+                  </button>
+                  <p class="ps-item__d">
+                    Footings poured below frost line, walls up square and level,
+                    waterproofed before backfill.
                   </p>
                 </li>
-                <li class="ps-step" data-step="3">
-                  <p class="ps-step__n">Stage 4</p>
-                  <h3>Framing</h3>
-                  <p class="ps-step__d">
+                <li class="ps-item" data-step="3">
+                  <button type="button" class="ps-item__btn" data-go="3">
+                    <span class="ps-item__n">04</span>
+                    <span class="ps-item__t">Framing</span>
+                  </button>
+                  <p class="ps-item__d">
                     Floors, walls, and roof structure go up a storey at a time.
                   </p>
                 </li>
-                <li class="ps-step" data-step="4">
-                  <p class="ps-step__n">Stage 5</p>
-                  <h3>Exterior &amp; Systems</h3>
-                  <p class="ps-step__d">
+                <li class="ps-item" data-step="4">
+                  <button type="button" class="ps-item__btn" data-go="4">
+                    <span class="ps-item__n">05</span>
+                    <span class="ps-item__t">Exterior &amp; Systems</span>
+                  </button>
+                  <p class="ps-item__d">
                     Roofing, siding, windows and doors close the building in,
                     rough-in inspected first.
                   </p>
                 </li>
-                <li class="ps-step" data-step="5">
-                  <p class="ps-step__n">Stage 6</p>
-                  <h3>Interior &amp; Finishes</h3>
-                  <p class="ps-step__d">
+                <li class="ps-item" data-step="5">
+                  <button type="button" class="ps-item__btn" data-go="5">
+                    <span class="ps-item__n">06</span>
+                    <span class="ps-item__t">Interior &amp; Finishes</span>
+                  </button>
+                  <p class="ps-item__d">
                     Insulated, boarded, then the finish work you actually touch.
                   </p>
                 </li>
-                <li class="ps-step" data-step="6">
-                  <p class="ps-step__n">Stage 7</p>
-                  <h3>Final Walkthrough</h3>
-                  <p class="ps-step__d">
+                <li class="ps-item" data-step="6">
+                  <button type="button" class="ps-item__btn" data-go="6">
+                    <span class="ps-item__n">07</span>
+                    <span class="ps-item__t">Final Walkthrough</span>
+                  </button>
+                  <p class="ps-item__d">
                     Punch list closed, keys handed over, and our number still
                     works.
                   </p>
                 </li>
               </ol>
-              <div
-                class="ps-rail"
-                id="psRail"
-                role="group"
-                aria-label="Jump to stage"
-              >
-                <button
-                  class="ps-tick-btn"
-                  type="button"
-                  data-go="0"
-                  aria-label="Stage 1"
-                >
-                  <span></span></button
-                ><button
-                  class="ps-tick-btn"
-                  type="button"
-                  data-go="1"
-                  aria-label="Stage 2"
-                >
-                  <span></span></button
-                ><button
-                  class="ps-tick-btn"
-                  type="button"
-                  data-go="2"
-                  aria-label="Stage 3"
-                >
-                  <span></span></button
-                ><button
-                  class="ps-tick-btn"
-                  type="button"
-                  data-go="3"
-                  aria-label="Stage 4"
-                >
-                  <span></span></button
-                ><button
-                  class="ps-tick-btn"
-                  type="button"
-                  data-go="4"
-                  aria-label="Stage 5"
-                >
-                  <span></span></button
-                ><button
-                  class="ps-tick-btn"
-                  type="button"
-                  data-go="5"
-                  aria-label="Stage 6"
-                >
-                  <span></span></button
-                ><button
-                  class="ps-tick-btn"
-                  type="button"
-                  data-go="6"
-                  aria-label="Stage 7"
-                >
-                  <span></span>
-                </button>
-              </div>
             </div>
             <div class="ps-art">
               <figure
@@ -1069,7 +1017,7 @@
       integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
       crossorigin=""
     ></script>
-    <script src="js/main.js?v=clay3" defer></script>
+    <script src="js/main.js?v=clay4" defer></script>
     <script src="js/process.js?v=c8015468" defer></script>
     <script src="js/transform.js?v=up1" defer></script>
     <script src="js/upgrade.js?v=up1" defer></script>
@@ -1145,6 +1093,6 @@
         ]
       }
     </script>
-    <script src="js/support.js?v=clay3" defer></script>
+    <script src="js/support.js?v=clay4" defer></script>
   </body>
 </html>
