@@ -38,11 +38,104 @@
 
   function render() {
     root.innerHTML = "";
-    if (state.stage === "gateway") return renderGateway();
-    if (state.stage === "flow") return renderQuestion();
-    if (state.stage === "intake") return renderIntake();
-    if (state.stage === "done") return renderDone();
+    const stages = {
+      gateway: renderGateway,
+      flow: renderQuestion,
+      intake: renderIntake,
+      done: renderDone,
+    };
+    (stages[state.stage] || renderGateway)();
+    save();
   }
+
+  // ---------------- Saving where you got to ----------------
+  // Every render is written down, so closing the tab, or coming here
+  // from a card on the home page, picks up at the same question. A
+  // sent request clears it: the next visit starts fresh.
+  const STORE = "psi-quote-progress";
+  function save() {
+    try {
+      if (state.stage === "done") return localStorage.removeItem(STORE);
+      localStorage.setItem(
+        STORE,
+        JSON.stringify({
+          stage: state.stage,
+          flowKey: state.flowKey,
+          gatewayChoice: state.gatewayChoice,
+          group: state.group ? state.group.label : null,
+          qIndex: state.qIndex,
+          answers: state.answers,
+          keyed: state.keyed,
+          intake: state.intake,
+        }),
+      );
+    } catch (e) {
+      /* private mode: it just will not remember */
+    }
+  }
+  function load() {
+    try {
+      const raw = localStorage.getItem(STORE);
+      if (!raw) return false;
+      const d = JSON.parse(raw);
+      if (!d || !d.stage || d.stage === "done") return false;
+      if (d.flowKey && !DATA.flows[d.flowKey]) return false;
+      Object.assign(state, {
+        stage: d.stage,
+        flowKey: d.flowKey || null,
+        gatewayChoice: d.gatewayChoice || null,
+        group:
+          (DATA.gateway.groups || []).find((g) => g.label === d.group) || null,
+        qIndex: d.qIndex || 0,
+        answers: Array.isArray(d.answers) ? d.answers : [],
+        keyed: d.keyed || {},
+        intake: d.intake || {},
+      });
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+  function reset() {
+    Object.assign(state, {
+      stage: "gateway",
+      flowKey: null,
+      gatewayChoice: null,
+      group: null,
+      qIndex: 0,
+      answers: [],
+      keyed: {},
+      intake: {},
+    });
+    render();
+  }
+
+  // ---------------- Starting from somewhere else ----------------
+  // A service card hands over its job: the gateway is answered with
+  // the card's own label and the matching flow opens at question one.
+  // A card with no flow of its own goes to the intake with the label.
+  function startWith(label, flowKey) {
+    const flow = flowKey && DATA.flows[flowKey] ? flowKey : null;
+    Object.assign(state, {
+      stage: flow ? "flow" : "intake",
+      flowKey: flow,
+      gatewayChoice: label,
+      group: null,
+      qIndex: 0,
+      answers: [{ q: DATA.gateway.q, a: label }],
+      keyed: {},
+      intake: state.intake || {},
+    });
+    render();
+  }
+  window.PSI_QUOTE_START = startWith;
+  // the service cards' Get a quote buttons link to #quote and carry the
+  // job; the link still scrolls there on its own
+  document.addEventListener("click", (e) => {
+    const a = e.target.closest("a[data-job]");
+    if (!a) return;
+    startWith(a.dataset.job, a.dataset.flow || null);
+  });
 
   function progressBlock(stepNum, total, label) {
     const wrap = el("div", "quote__progress");
@@ -53,6 +146,12 @@
     fill.style.width = Math.round((stepNum / total) * 100) + "%";
     bar.appendChild(fill);
     wrap.append(lab, bar);
+    if (state.stage !== "gateway" || state.group) {
+      const again = el("button", "quote__restart", "Start over");
+      again.type = "button";
+      again.addEventListener("click", reset);
+      wrap.appendChild(again);
+    }
     return wrap;
   }
 
@@ -225,6 +324,15 @@
       }
       input.id = "qf_" + f.key;
       if (f.required) input.required = true;
+      if (f.type !== "file" && state.intake[f.key] != null) {
+        input.value = state.intake[f.key];
+      }
+      if (f.type !== "file") {
+        input.addEventListener("input", () => {
+          state.intake[f.key] = input.value;
+          save();
+        });
+      }
       field.appendChild(input);
       form.appendChild(field);
     });
@@ -350,5 +458,11 @@
     root.appendChild(controls);
   }
 
-  render();
+  const params = new URLSearchParams(location.search);
+  if (params.get("flow") || params.get("job")) {
+    startWith(params.get("job") || params.get("flow"), params.get("flow"));
+  } else {
+    load();
+    render();
+  }
 })();

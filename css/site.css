@@ -1164,6 +1164,32 @@ body.viewer-lock {
   opacity: 0.8;
 }
 
+/* once there is progress, a quiet way to throw it away */
+.quote__progress {
+  position: relative;
+}
+
+.quote__restart {
+  position: absolute;
+  right: 0;
+  top: -2px;
+  padding: 4px 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  font-size: 12.5px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--muted);
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.quote__restart:hover {
+  color: var(--accent);
+}
+
 .quote__controls {
   display: flex;
   justify-content: space-between;
@@ -4243,15 +4269,14 @@ section[id],
 @media (max-width: 900px) {
   /* a shorter runway: 3.3 screens of thumb to get through the opening
      is a long wait on a phone. the same seven frames, less scrolling */
+  /* no runway on a phone: the hero is one screen and the build plays
+     itself, so scrolling is never pinned */
   .hero--open {
-    height: 215svh;
+    height: auto;
   }
 
-  /* the handoff overlaps instead of queuing: What We Build is already
-     rising while the model fades, so the empty screen between them --
-     a third of a phone's worth of white -- never appears */
-  .heroo-js ~ .caps {
-    margin-top: -18svh;
+  .heroo-auto .hb__frame {
+    transition: opacity 0.95s ease;
   }
 
   /* no padding on the section: it would push the sticky screen 84px
