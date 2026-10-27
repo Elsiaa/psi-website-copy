@@ -4280,6 +4280,53 @@ section[id],
 
 /* on a phone the services run as a swipeable row, not a tall stack */
 @media (max-width: 760px) {
+  /* the head and the row compose to a single screen: the decorative
+     house steps aside, since every card already carries artwork */
+  .caps__house {
+    display: none;
+  }
+
+  .caps > .section__inner {
+    padding-top: 72px;
+    padding-bottom: 16px;
+  }
+
+  .caps__head {
+    gap: 14px;
+    margin-bottom: 14px;
+  }
+
+  .caps__title {
+    font-size: clamp(38px, 11vw, 54px);
+  }
+
+  .svc {
+    min-height: min(56svh, 410px);
+  }
+
+  .svc__art {
+    aspect-ratio: 16 / 11;
+    margin-bottom: 8px;
+  }
+
+  .svc__title {
+    font-size: 18px;
+  }
+
+  .svc__desc {
+    font-size: 13.5px;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  /* the company band opens the next screen rather than crowding this one */
+  .caps__about {
+    margin-top: 30px;
+    padding-top: 26px;
+  }
+
   .svc-rail {
     display: flex;
     grid-template-columns: none;
@@ -4298,7 +4345,6 @@ section[id],
   .svc {
     flex: 0 0 min(300px, 82vw);
     scroll-snap-align: start;
-    min-height: 430px;
   }
 }
 
