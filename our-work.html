@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Our Work · PSI Construction</title>
+    <meta
+      name="description"
+      content="Every documented PSI job: where we have built across Kingston, Wilkes-Barre, West Pittston and Exeter, and the full photograph gallery from each project."
+    />
+    <link rel="icon" type="image/png" href="assets/logo/favicon.png" />
+    <link rel="apple-touch-icon" href="assets/logo/favicon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    />
+    <link rel="stylesheet" href="css/site.css?v=work1" />
+  </head>
+  <body>
+    <nav class="nav nav--solid" aria-label="Primary">
+      <a
+        class="nav__brand"
+        href="index.html"
+        aria-label="PSI Construction home"
+      >
+        <img
+          class="nav__logo nav__logo--onhero"
+          src="assets/logo/psi-logo-white.png"
+          alt="PSI Construction"
+          width="900"
+          height="456"
+        />
+        <img
+          class="nav__logo nav__logo--onsolid"
+          src="assets/logo/psi-logo.png"
+          alt=""
+          aria-hidden="true"
+          width="900"
+          height="456"
+        />
+      </a>
+      <div class="nav__links">
+        <a href="index.html#capabilities">Services</a>
+        <a href="before-after.html">Before &amp; After</a>
+        <a href="our-work.html">Our Work</a>
+        <a href="index.html#reviews">Reviews</a>
+        <a href="tel:5703388774"
+          >570-338-8<span class="tel-psi">PSI</span> (774)</a
+        >
+        <a class="nav__cta" href="contact.html">Get a Quote</a>
+      </div>
+    </nav>
+
+    <!-- hero: the build, cycling. Swap this figure for a video when
+         the finished animation lands; the markup below is the stand-in. -->
+    <header class="work-hero" id="workHero">
+      <div class="section__inner work-hero__inner">
+        <h1 class="work-hero__title"><span>Our</span> <b>work.</b></h1>
+        <p class="work-hero__lede">
+          Every job below was built by PSI crews and photographed on site.
+        </p>
+        <figure class="work-hero__stage" id="workStage" aria-hidden="true">
+          <img src="assets/hero-build/stage-1.webp" alt="" data-f="0" />
+          <img src="assets/hero-build/stage-2.webp" alt="" data-f="1" />
+          <img src="assets/hero-build/stage-3.webp" alt="" data-f="2" />
+          <img src="assets/hero-build/stage-4.webp" alt="" data-f="3" />
+          <img src="assets/hero-build/stage-5.webp" alt="" data-f="4" />
+          <img src="assets/hero-build/stage-6.webp" alt="" data-f="5" />
+          <img src="assets/hero-build/stage-7.webp" alt="" data-f="6" />
+        </figure>
+      </div>
+    </header>
+
+    <section class="section work-map" id="where">
+      <div class="section__inner">
+        <h2 class="section__title pj__title">
+          <span>Where We&rsquo;ve</span> <b>Built</b>
+        </h2>
+        <p class="lede">
+          Kingston, Wilkes-Barre, West Pittston and Exeter, PA. Click a pin to
+          jump to that job below.
+        </p>
+        <div id="projectMap" aria-label="Map of PSI project locations"></div>
+      </div>
+    </section>
+
+    <main class="section work-gallery" id="gallery">
+      <div class="section__inner">
+        <h2 class="section__title pj__title">
+          <span>Every</span> <b>photograph.</b>
+        </h2>
+        <div id="workJobs"></div>
+      </div>
+    </main>
+
+    <section class="section quote-cta" id="quote">
+      <div class="section__inner qcta">
+        <h2 class="section__title">Tell us what you need built.</h2>
+        <p class="qcta__sub">
+          Free consultation. One point of contact from the first drawing to the
+          final walkthrough.
+        </p>
+        <div class="qcta__row">
+          <a class="btn btn--accent" href="contact.html">Get a Quote</a>
+          <a class="btn" href="tel:5703388774"
+            >570-338-8<span class="tel-psi">PSI</span> (774)</a
+          >
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div class="footer__inner">
+        <div>
+          <img
+            class="footer__logo"
+            src="assets/logo/psi-logo-white.png"
+            alt="PSI Construction"
+            width="900"
+            height="456"
+          />
+          <p class="footer__tagline">
+            Built With Attention. Managed With Precision.
+          </p>
+        </div>
+        <div class="footer__col">
+          <p class="eyebrow">Office</p>
+          190 Wyoming St, Wilkes-Barre, PA 18705<br />
+          Visits available upon request
+        </div>
+        <div class="footer__col">
+          <p class="eyebrow">Contact</p>
+          <a href="tel:5703388774"
+            >570-338-8<span class="tel-psi">PSI</span> (774)</a
+          ><br />
+          <a href="mailto:info@psiconstructionpa.com"
+            >info@psiconstructionpa.com</a
+          >
+        </div>
+      </div>
+    </footer>
+
+    <div class="wlb" id="wlb" hidden>
+      <button class="wlb__close" type="button" aria-label="Close">
+        &times;
+      </button>
+      <button
+        class="wlb__nav wlb__nav--prev"
+        type="button"
+        aria-label="Previous photo"
+      >
+        &larr;
+      </button>
+      <img class="wlb__img" id="wlbImg" alt="" />
+      <button
+        class="wlb__nav wlb__nav--next"
+        type="button"
+        aria-label="Next photo"
+      >
+        &rarr;
+      </button>
+      <p class="wlb__cap" id="wlbCap"></p>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="data/projects.js?v=pab42706"></script>
+    <script src="js/work.js?v=work1" defer></script>
+    <script src="js/support.js?v=work1" defer></script>
+  </body>
+</html>
