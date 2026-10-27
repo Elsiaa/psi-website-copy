@@ -28,40 +28,7 @@
   }
   hero.classList.add("heroo-js");
 
-  // On a phone a pinned, scroll-scrubbed hero feels like the page is
-  // stuck: you flick and nothing moves for two screens. So there the
-  // hero is one ordinary screen and the seven frames crossfade on
-  // their own, lot to finished house, then hold.
   const caps = document.getElementById("capabilities");
-  if (window.matchMedia("(max-width: 900px)").matches) {
-    hero.classList.add("heroo-auto");
-    if (caps) caps.classList.add("caps--in");
-    frames.forEach((f, i) => {
-      f.style.opacity = i === 0 ? 1 : 0;
-      f.style.zIndex = i === 0 ? 1 : 0;
-    });
-    let k = 0;
-    let timer = null;
-    const step = () => {
-      if (k >= N - 1) return;
-      const prev = frames[k];
-      const next = frames[++k];
-      next.style.zIndex = 2;
-      next.style.opacity = 1;
-      setTimeout(() => {
-        prev.style.opacity = 0;
-        prev.style.zIndex = 0;
-        next.style.zIndex = 1;
-      }, 950);
-      if (k < N - 1) timer = setTimeout(step, 1500);
-    };
-    timer = setTimeout(step, 1100);
-    document.addEventListener("visibilitychange", () => {
-      clearTimeout(timer);
-      if (!document.hidden && k < N - 1) timer = setTimeout(step, 600);
-    });
-    return;
-  }
 
   let lastP = -1;
   let lastLo = -1;

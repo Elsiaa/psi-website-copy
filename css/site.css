@@ -4273,14 +4273,16 @@ section[id],
 @media (max-width: 900px) {
   /* a shorter runway: 3.3 screens of thumb to get through the opening
      is a long wait on a phone. the same seven frames, less scrolling */
-  /* no runway on a phone: the hero is one screen and the build plays
-     itself, so scrolling is never pinned */
+  /* a shorter runway than the desktop's: the same seven frames, less
+     thumb to get through them */
   .hero--open {
-    height: auto;
+    height: 215svh;
   }
 
-  .heroo-auto .hb__frame {
-    transition: opacity 0.95s ease;
+  /* the handoff overlaps instead of queuing: What We Build is already
+     rising while the model dims, so no empty screen between them */
+  .heroo-js ~ .caps {
+    margin-top: -18svh;
   }
 
   /* no padding on the section: it would push the sticky screen 84px
