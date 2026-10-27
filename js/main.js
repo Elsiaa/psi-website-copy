@@ -114,7 +114,10 @@
     const paint = () => {
       rQuote.innerHTML = "\u201C" + r.html + "\u201D";
       rName.textContent = r.author;
-      rMeta.textContent = "Google review \u00B7 " + "\u2605".repeat(r.stars);
+      rMeta.innerHTML =
+        'Google review \u00B7 <span class="rvw__meta-stars">' +
+        "\u2605".repeat(r.stars) +
+        "</span>";
       rAvatar.textContent = r.author
         .split(/\s+/)
         .map((w) => w[0])

@@ -3860,9 +3860,23 @@ section[id],
 
 .rvw__fact {
   display: flex;
-  align-items: baseline;
+  align-items: center;
   gap: 14px;
   margin: 18px 0 0;
+  flex-wrap: wrap;
+}
+
+.rvw__g {
+  width: 34px;
+  height: 34px;
+  flex: 0 0 auto;
+}
+
+.rvw__stars {
+  font-size: clamp(20px, 2vw, 26px);
+  letter-spacing: 3px;
+  color: #fbbc05;
+  line-height: 1;
 }
 
 .rvw__score {
@@ -3957,6 +3971,12 @@ section[id],
   font-size: 13px;
   letter-spacing: 0.04em;
   color: var(--muted);
+}
+
+/* the byline's stars in Google amber */
+.rvw__meta-stars {
+  color: #fbbc05;
+  letter-spacing: 1px;
 }
 
 .rvw__dots {
