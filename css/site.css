@@ -4507,6 +4507,23 @@ section[id],
    Editorial, not a card wall: a single large quotation holds the
    room, rotating quietly; the score is a stated fact, not a badge. */
 
+.rvw__title {
+  font-size: clamp(40px, 5.2vw, 78px);
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: -0.03em;
+  line-height: 0.98;
+  margin-bottom: 18px;
+}
+
+.rvw__title span {
+  color: var(--ink);
+}
+
+.rvw__title b {
+  color: var(--accent);
+}
+
 .rvw__head {
   max-width: 760px;
   margin-bottom: clamp(28px, 5vh, 56px);
