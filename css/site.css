@@ -4479,6 +4479,24 @@ section[id],
 
 /* ---------------- before & after: the pair on the home page ------------- */
 
+.tf__claim {
+  font-size: clamp(32px, 3.6vw, 56px);
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  line-height: 1.04;
+  margin-bottom: clamp(20px, 3vh, 34px);
+  max-width: 20ch;
+}
+
+.tf__claim span {
+  color: var(--muted);
+}
+
+.tf__claim b {
+  color: var(--accent);
+  font-weight: 800;
+}
+
 .tfx {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr));
