@@ -13,7 +13,7 @@
 :root {
   --ink: #101214;
   --navy: #1d2733;
-  --paper: #f7f6f3;
+  --paper: #ffffff;
   --muted: #6b7075;
   --accent: #d60000; /* PSI logo red, sampled from PSI MAIN Logo.png */
   --hairline: rgba(16, 18, 20, 0.14);
@@ -4224,7 +4224,7 @@ section[id],
 
 .sbot__msg--psi {
   align-self: flex-start;
-  background: #f2f1ee;
+  background: #f2f3f4;
 }
 
 .sbot__msg--you {
@@ -4327,7 +4327,7 @@ section[id],
   padding: 0 20px;
   border: 0;
   border-radius: 999px;
-  background: #f2f1ee;
+  background: #f2f3f4;
   font: inherit;
   font-size: 16px;
 }
