@@ -4036,6 +4036,25 @@ section[id],
   transform: scale(1.045);
 }
 
+.svc__kind {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 0 10px 8px;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.svc__kind::after {
+  content: "";
+  flex: 1 1 auto;
+  height: 1px;
+  background: var(--hairline);
+}
+
 .svc__title {
   margin: 0 10px 8px;
   font-family: var(--font-display);
