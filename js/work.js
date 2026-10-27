@@ -38,7 +38,7 @@
       setInterval(() => {
         f = (f + 1) % frames.length;
         show(f);
-      }, 3200);
+      }, 1700);
     }
   }
 
