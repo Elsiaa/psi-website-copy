@@ -259,8 +259,7 @@ img {
 
 .hero__tagline {
   margin: 14px 0 0;
-  font-family: Georgia, "Times New Roman", serif;
-  font-style: italic;
+  font-weight: 600;
   font-size: clamp(15px, 1.4vw, 20px);
   opacity: 0.9;
   text-shadow: 0 1px 18px rgba(0, 0, 0, 0.4);
@@ -387,11 +386,10 @@ h4 {
 
 .lede {
   margin: 0 0 20px;
-  font-family: Georgia, "Times New Roman", serif;
-  font-style: italic;
-  font-size: clamp(16px, 1.4vw, 20px);
+  font-size: clamp(16px, 1.3vw, 19px);
+  font-weight: 500;
   line-height: 1.6;
-  color: #4a5058;
+  color: #3c4148;
 }
 .section--navy .lede {
   color: rgba(255, 255, 255, 0.8);
@@ -1036,7 +1034,6 @@ body.viewer-lock {
   margin: -10px 0 16px;
   font-size: 15px;
   color: var(--muted);
-  font-style: italic;
 }
 
 .quote__opts {
@@ -1169,9 +1166,8 @@ body.viewer-lock {
   width: auto;
 }
 .footer__tagline {
-  font-family: Georgia, serif;
-  font-style: italic;
-  opacity: 0.75;
+  font-weight: 600;
+  opacity: 0.8;
   margin-top: 14px;
   font-size: 15px;
 }
@@ -3430,9 +3426,8 @@ section[id],
 .faq__note,
 .caps__cta-note,
 .pflow-head__lede {
-  font-family: var(--font-serif);
-  font-style: italic;
-  letter-spacing: 0.01em;
+  font-weight: 500;
+  letter-spacing: 0;
 }
 
 /* sized per role, none of them squinting-small */
@@ -3655,10 +3650,9 @@ section[id],
 }
 
 .hero--open .hero__tagline {
-  color: var(--muted);
-  font-family: var(--font-serif);
-  font-style: italic;
-  font-size: clamp(17px, 1.4vw, 20px);
+  color: #4c525a;
+  font-size: clamp(16px, 1.3vw, 19px);
+  font-weight: 600;
   margin: 0 0 22px;
 }
 
