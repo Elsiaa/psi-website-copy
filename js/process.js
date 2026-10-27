@@ -23,36 +23,19 @@
   const reduce = window.matchMedia("(prefers-reduced-motion: reduce)");
 
   function setStage(f) {
-    // f is a float 0..N-1. Stages dwell, then hand over by fading
-    // through the page itself: the outgoing photograph dissolves
-    // fully before the incoming one rises, so two frames never
-    // ghost over each other and the motion stays silky.
-    const DWELL = 0.22;
+    // The original journey: a plain continuous crossfade. f is a
+    // float 0..N-1; the next frame rises linearly over the current
+    // one, so the model builds steadily as you scroll.
     const i = Math.max(0, Math.min(N - 1, f));
     const lo = Math.floor(i);
     const hi = Math.min(N - 1, lo + 1);
     const t = i - lo;
-    let e = t <= DWELL ? 0 : t >= 1 - DWELL ? 1 : (t - DWELL) / (1 - 2 * DWELL);
-    e = e * e * (3 - 2 * e); // smoothstep
-    const out = Math.min(1, e * 2); // first half: outgoing leaves
-    const inn = Math.max(0, e * 2 - 1); // second half: incoming arrives
     frames.forEach((img, k) => {
-      if (k === lo) {
-        img.style.opacity = (1 - out).toFixed(3);
-        img.style.zIndex = 1;
-        img.style.transform =
-          out > 0 ? "scale(" + (1 + 0.012 * out).toFixed(4) + ")" : "none";
-      } else if (k === hi) {
-        img.style.opacity = inn.toFixed(3);
-        img.style.zIndex = 2;
-        img.style.transform =
-          inn < 1 ? "scale(" + (1.018 - 0.018 * inn).toFixed(4) + ")" : "none";
-      } else {
-        img.style.opacity = 0;
-        img.style.zIndex = 0;
-      }
+      img.style.opacity = k === lo ? 1 : k === hi ? t : 0;
+      img.style.zIndex = k === lo ? 1 : k === hi ? 2 : 0;
+      img.style.transform = "none";
     });
-    const active = e > 0.5 ? hi : lo;
+    const active = t > 0.5 ? hi : lo;
     const live = frames[N - 1];
     if (live && live.tagName === "VIDEO") {
       if (active === N - 1 && live.paused) {

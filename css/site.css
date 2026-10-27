@@ -1972,7 +1972,7 @@ section[id],
 
 .ps-runway {
   position: relative;
-  height: 500vh; /* seven stages, held crisp with quick dissolves */
+  height: 460vh; /* the original runway */
 }
 
 .ps-stage {
