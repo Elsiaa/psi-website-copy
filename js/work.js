@@ -81,10 +81,7 @@
         `<strong>${p.type || "Previous project"}</strong><br>${p.city}`,
       );
       if (!isOffice) {
-        m.on("click", () => {
-          const row = document.getElementById("job-" + p.id);
-          if (row) row.scrollIntoView({ behavior: "smooth", block: "start" });
-        });
+        m.on("click", () => openJob(p.id));
       }
       markers.push(m);
     });
@@ -113,41 +110,95 @@
     }
   }
 
-  /* ---- the gallery: every photograph, grouped by job ---- */
+  /* ---- the gallery: one card per job, searchable ---- */
   const host = document.getElementById("workJobs");
-  const flat = [];
+  const search = document.getElementById("workSearch");
+  const count = document.getElementById("workCount");
+  const empty = document.getElementById("workEmpty");
+  const cards = [];
+  let flat = [];
+  let scope = null; // the job the lightbox is walking, or null for all
+
   if (host) {
     jobs.forEach(({ p }) => {
       const shots = p.gallery;
-      const sec = document.createElement("section");
-      sec.className = "wjob";
-      sec.id = "job-" + p.id;
-      const head = document.createElement("div");
+      const card = document.createElement("section");
+      card.className = "wjob";
+      card.id = "job-" + p.id;
+
+      const head = document.createElement("button");
+      head.type = "button";
       head.className = "wjob__head";
+      head.setAttribute("aria-expanded", "false");
       head.innerHTML =
-        `<h3 class="wjob__name">${p.type || "Previous project"}</h3>` +
-        `<p class="wjob__meta">${p.city} &middot; ${shots.length} photograph${shots.length === 1 ? "" : "s"}</p>` +
-        (p.desc ? `<p class="wjob__desc">${p.desc}</p>` : "");
-      sec.appendChild(head);
+        `<img class="wjob__cover" src="${shots[0].src}" alt="" loading="lazy" decoding="async">` +
+        `<span class="wjob__text">` +
+        `<span class="wjob__name">${p.type || "Previous project"}</span>` +
+        `<span class="wjob__meta">${p.city} &middot; ${shots.length} photograph${shots.length === 1 ? "" : "s"}</span>` +
+        (p.desc ? `<span class="wjob__desc">${p.desc}</span>` : "") +
+        `</span>` +
+        `<span class="wjob__chev" aria-hidden="true"></span>`;
+      card.appendChild(head);
 
       const grid = document.createElement("div");
       grid.className = "wjob__grid";
+      grid.hidden = true;
       shots.forEach((g) => {
-        const k = flat.length;
-        flat.push({ src: g.src, cap: g.cap || p.type || "" });
         const b = document.createElement("button");
         b.type = "button";
         b.className = "wshot";
-        b.dataset.k = k;
+        b.dataset.job = p.id;
+        b.dataset.src = g.src;
+        b.dataset.cap = g.cap || p.type || "";
         b.innerHTML = `<img src="${g.src}" alt="${(g.cap || p.type || "PSI project").replace(/"/g, "&quot;")}" loading="lazy" decoding="async">`;
         grid.appendChild(b);
       });
-      sec.appendChild(grid);
-      host.appendChild(sec);
+      card.appendChild(grid);
+      host.appendChild(card);
+
+      head.addEventListener("click", () => {
+        const open = grid.hidden;
+        grid.hidden = !open;
+        head.setAttribute("aria-expanded", String(open));
+        card.classList.toggle("is-open", open);
+      });
+
+      cards.push({
+        p,
+        card,
+        grid,
+        head,
+        hay: [p.type, p.city, p.desc, ...shots.map((g) => g.cap || "")]
+          .join(" ")
+          .toLowerCase(),
+      });
     });
   }
 
-  /* ---- lightbox ---- */
+  function openJob(id) {
+    const c = cards.find((x) => x.p.id === id);
+    if (!c) return;
+    if (c.grid.hidden) c.head.click();
+    c.card.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+
+  function filter() {
+    const q = (search ? search.value : "").trim().toLowerCase();
+    let shown = 0;
+    cards.forEach((c) => {
+      const hit = !q || c.hay.includes(q);
+      c.card.hidden = !hit;
+      if (hit) shown += 1;
+    });
+    if (count)
+      count.textContent =
+        shown + (shown === 1 ? " job" : " jobs") + (q ? " matching" : "");
+    if (empty) empty.hidden = shown > 0;
+  }
+  if (search) search.addEventListener("input", filter);
+  filter();
+
+  /* ---- lightbox: walks the job it was opened from ---- */
   const box = document.getElementById("wlb");
   const bImg = document.getElementById("wlbImg");
   const bCap = document.getElementById("wlbCap");
@@ -157,10 +208,17 @@
     if (!s) return;
     bImg.src = s.src;
     bImg.alt = s.cap;
-    bCap.textContent = s.cap;
+    bCap.textContent = s.cap + "  \u00B7  " + (at + 1) + " / " + flat.length;
   }
-  function openAt(k) {
-    at = ((k % flat.length) + flat.length) % flat.length;
+  function openFrom(btn) {
+    const c = cards.find((x) => x.p.id === btn.dataset.job);
+    if (!c) return;
+    flat = [...c.grid.children].map((b) => ({
+      src: b.dataset.src,
+      cap: b.dataset.cap,
+    }));
+    at = [...c.grid.children].indexOf(btn);
+    scope = c.p.id;
     paint();
     box.hidden = false;
     document.body.style.overflow = "hidden";
@@ -169,34 +227,31 @@
     box.hidden = true;
     document.body.style.overflow = "";
   }
+  const step = (d) => {
+    if (!flat.length) return;
+    at = (at + d + flat.length) % flat.length;
+    paint();
+  };
   if (host && box) {
     host.addEventListener("click", (e) => {
       const b = e.target.closest(".wshot");
-      if (b) openAt(+b.dataset.k);
+      if (b) openFrom(b);
     });
     box.querySelector(".wlb__close").addEventListener("click", close);
-    box.querySelector(".wlb__nav--prev").addEventListener("click", () => {
-      at = (at - 1 + flat.length) % flat.length;
-      paint();
-    });
-    box.querySelector(".wlb__nav--next").addEventListener("click", () => {
-      at = (at + 1) % flat.length;
-      paint();
-    });
+    box
+      .querySelector(".wlb__nav--prev")
+      .addEventListener("click", () => step(-1));
+    box
+      .querySelector(".wlb__nav--next")
+      .addEventListener("click", () => step(1));
     box.addEventListener("click", (e) => {
       if (e.target === box) close();
     });
     document.addEventListener("keydown", (e) => {
       if (box.hidden) return;
       if (e.key === "Escape") close();
-      if (e.key === "ArrowLeft") {
-        at = (at - 1 + flat.length) % flat.length;
-        paint();
-      }
-      if (e.key === "ArrowRight") {
-        at = (at + 1) % flat.length;
-        paint();
-      }
+      if (e.key === "ArrowLeft") step(-1);
+      if (e.key === "ArrowRight") step(1);
     });
   }
 })();

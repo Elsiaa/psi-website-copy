@@ -20,7 +20,7 @@
       rel="stylesheet"
       href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
     />
-    <link rel="stylesheet" href="css/site.css?v=scenes2" />
+    <link rel="stylesheet" href="css/site.css?v=gal1" />
   </head>
   <body>
     <nav class="nav nav--solid" aria-label="Primary">
@@ -88,10 +88,24 @@
 
     <main class="section work-gallery" id="gallery">
       <div class="section__inner">
-        <h2 class="section__title pj__title">
-          <span>Every</span> <b>photograph.</b>
-        </h2>
+        <h2 class="section__title pj__title"><span>Every</span> <b>job.</b></h2>
+        <div class="wsearch">
+          <label class="wsearch__field">
+            <span class="wsearch__icon" aria-hidden="true">&#9906;</span>
+            <input
+              id="workSearch"
+              type="search"
+              placeholder="Search jobs: bathroom, basement, Kingston&hellip;"
+              aria-label="Search jobs"
+              autocomplete="off"
+            />
+          </label>
+          <p class="wsearch__count" id="workCount" aria-live="polite"></p>
+        </div>
         <div id="workJobs"></div>
+        <p class="wsearch__empty" id="workEmpty" hidden>
+          Nothing matches that. Try a room, a job type, or a town.
+        </p>
       </div>
     </main>
 
@@ -166,7 +180,7 @@
 
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script src="data/projects.js?v=pab42706"></script>
-    <script src="js/work.js?v=scenes2" defer></script>
-    <script src="js/support.js?v=scenes2" defer></script>
+    <script src="js/work.js?v=gal1" defer></script>
+    <script src="js/support.js?v=gal1" defer></script>
   </body>
 </html>

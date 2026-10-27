@@ -4741,48 +4741,183 @@ section[id],
   height: clamp(340px, 52vh, 560px);
 }
 
-.wjob {
-  padding-top: clamp(26px, 4vh, 44px);
-  margin-top: clamp(26px, 4vh, 44px);
-  border-top: 1px solid var(--hairline);
+/* the search bar */
+.wsearch {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px 20px;
+  margin-bottom: clamp(18px, 3vh, 28px);
 }
 
-.wjob:first-child {
-  border-top: 0;
-  margin-top: 0;
+.wsearch__field {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1 1 320px;
+  max-width: 460px;
+  padding: 0 18px;
+  border: 1px solid var(--hairline);
+  border-radius: 999px;
+  background: #fff;
+  transition: border-color 0.2s ease;
+}
+
+.wsearch__field:focus-within {
+  border-color: var(--accent);
+}
+
+.wsearch__icon {
+  color: var(--muted);
+  font-size: 15px;
+  transform: rotate(-45deg);
+}
+
+.wsearch__field input {
+  flex: 1 1 auto;
+  min-width: 0;
+  height: 50px;
+  border: 0;
+  background: none;
+  font: inherit;
+  font-size: 16px;
+  outline: 0;
+}
+
+.wsearch__count {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.wsearch__empty {
+  margin: 28px 0 0;
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--muted);
+}
+
+/* one card per job */
+.wjob {
+  border: 1px solid var(--hairline);
+  border-radius: 16px;
+  background: #fff;
+  overflow: hidden;
+  margin-bottom: 14px;
+  transition: border-color 0.2s ease;
+}
+
+.wjob:hover {
+  border-color: rgba(214, 0, 0, 0.3);
+}
+
+.wjob.is-open {
+  border-color: var(--accent);
+}
+
+.wjob[hidden] {
+  display: none;
+}
+
+.wjob__head {
+  display: grid;
+  grid-template-columns: 112px minmax(0, 1fr) 36px;
+  align-items: center;
+  gap: 18px;
+  width: 100%;
+  padding: 12px 18px 12px 12px;
+  border: 0;
+  background: none;
+  text-align: left;
+  font: inherit;
+  cursor: pointer;
+}
+
+.wjob__cover {
+  width: 112px;
+  height: 84px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.wjob__text {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
 }
 
 .wjob__name {
-  margin: 0 0 4px;
   font-family: var(--font-display);
-  font-size: clamp(21px, 2.1vw, 30px);
+  font-size: clamp(17px, 1.6vw, 21px);
   font-weight: 800;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.01em;
   color: var(--ink);
 }
 
 .wjob__meta {
-  margin: 0 0 8px;
-  font-size: 14px;
-  font-weight: 700;
-  letter-spacing: 0.04em;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--accent);
 }
 
 .wjob__desc {
-  margin: 0 0 18px;
-  max-width: 68ch;
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 500;
-  line-height: 1.6;
+  line-height: 1.5;
   color: #3c4148;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.wjob__chev {
+  justify-self: end;
+  width: 11px;
+  height: 11px;
+  border-right: 2px solid var(--muted);
+  border-bottom: 2px solid var(--muted);
+  transform: rotate(45deg) translate(-2px, -2px);
+  transition:
+    transform 0.25s ease,
+    border-color 0.2s ease;
+}
+
+.wjob.is-open .wjob__chev {
+  border-color: var(--accent);
+  transform: rotate(-135deg) translate(-3px, -3px);
 }
 
 .wjob__grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(min(220px, 100%), 1fr));
-  gap: 10px;
+  grid-template-columns: repeat(auto-fill, minmax(min(180px, 100%), 1fr));
+  gap: 8px;
+  padding: 0 12px 14px;
+}
+
+.wjob__grid[hidden] {
+  display: none;
+}
+
+@media (max-width: 620px) {
+  .wjob__head {
+    grid-template-columns: 76px minmax(0, 1fr) 24px;
+    gap: 12px;
+  }
+  .wjob__cover {
+    width: 76px;
+    height: 64px;
+  }
+  .wjob__desc {
+    display: none;
+  }
 }
 
 .wshot {
