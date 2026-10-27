@@ -158,6 +158,12 @@
                 >Get a quote <span aria-hidden="true">&rarr;</span></a
               >
               <a class="heroo__link" href="our-work.html">See the work</a>
+              <a class="heroo__reviews" href="#reviews">
+                <span class="heroo__stars" aria-hidden="true"
+                  >&#9733;&#9733;&#9733;&#9733;&#9733;</span
+                >
+                <b>4.9</b> reviews
+              </a>
             </div>
           </div>
           <div class="heroo__stagewrap">
@@ -813,12 +819,30 @@
             </span>
           </figcaption>
         </figure>
-        <div
-          class="rvw__dots"
-          id="rvwDots"
-          role="tablist"
-          aria-label="Choose a review"
-        ></div>
+        <div class="rvw__controls">
+          <button
+            class="rvw__arrow"
+            id="rvwPrev"
+            type="button"
+            aria-label="Previous review"
+          >
+            &larr;
+          </button>
+          <div
+            class="rvw__dots"
+            id="rvwDots"
+            role="tablist"
+            aria-label="Choose a review"
+          ></div>
+          <button
+            class="rvw__arrow"
+            id="rvwNext"
+            type="button"
+            aria-label="Next review"
+          >
+            &rarr;
+          </button>
+        </div>
       </div>
     </section>
 
@@ -1034,7 +1058,7 @@
     ></script>
     <script src="js/hero.js?v=about1" defer></script>
     <script src="js/main.js?v=about1" defer></script>
-    <script src="js/ba-page.js?v=sweep1" defer></script>
+    <script src="js/ba-page.js?v=rev4" defer></script>
     <script src="js/upgrade.js?v=about1" defer></script>
     <script type="application/ld+json">
       {

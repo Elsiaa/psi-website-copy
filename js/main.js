@@ -103,6 +103,8 @@
   const rAvatar = document.getElementById("rvwAvatar");
   const rMeta = document.getElementById("rvwMeta");
   const rDots = document.getElementById("rvwDots");
+  const rPrev = document.getElementById("rvwPrev");
+  const rNext = document.getElementById("rvwNext");
   const rStage = document.getElementById("rvwStage");
   let rIdx = 0;
   let rTimer = null;
@@ -158,6 +160,16 @@
       });
       rDots.appendChild(d);
     });
+    if (rPrev)
+      rPrev.addEventListener("click", () => {
+        showReview(rIdx - 1);
+        rRestart();
+      });
+    if (rNext)
+      rNext.addEventListener("click", () => {
+        showReview(rIdx + 1);
+        rRestart();
+      });
     showReview(0, true);
     rRestart();
     rStage.addEventListener(
