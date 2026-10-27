@@ -1343,7 +1343,8 @@ body.viewer-lock {
    as the anchor; the rest sit on a strict three-up grid. */
 
 .caps {
-  background: var(--paper);
+  /* page two sits a half-step off the hero's white */
+  background: #f4f5f7;
   min-height: 100svh;
   display: flex;
   align-items: center;
